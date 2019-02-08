@@ -9,24 +9,13 @@ const sprintf = require('i18next-sprintf-postprocessor');
 
 // We create a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME')
+// e.g. requestAttributes.t('WELCOME_MESSAGE')
 const languageStrings = {
-  en: {
-    translation: {
-      WELCOME_MESSAGE: 'Welcome, you can say Hello or Help. Which would you like to try?',
-      HELLO_MESSAGE: 'Hello World!',
-      HELP_MESSAGE: 'You can say hello to me! How can I help?',
-      GOODBYE_MESSAGE: 'Goodbye!',
-      REFLECTOR_MESSAGE: 'You just triggered %s',
-      FALLBACK_MESSAGE: 'Sorry, I don\'t know about that. Please try again.',
-      ERROR_MESSAGE: 'Sorry, there was an error. Please try again.'
-    }
-  },
   es:{
     translation: {
-      WELCOME_MESSAGE: 'Bienvenido, puedes decir Hola o Ayuda. Cual prefieres?',
-      HELLO_MESSAGE: 'Hola Mundo!',
-      HELP_MESSAGE: 'Puedes decirme hola. Cómo te puedo ayudar?',
+      WELCOME_MESSAGE: 'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
+      BIRTHDAY_MESSAGE: 'Tu fecha de cumpleaños es el %s de %s de %s',
+      HELP_MESSAGE: 'Por favor dime el día, mes y año de tu nacimiento',
       GOODBYE_MESSAGE: 'Hasta luego!',
       REFLECTOR_MESSAGE: 'Acabas de activar %s',
       FALLBACK_MESSAGE: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
@@ -40,9 +29,10 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('WELCOME_MESSAGE');
-                          
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -50,18 +40,24 @@ const LaunchRequestHandler = {
     }
 };
 
-const HelloWorldIntentHandler = {
+const RegisterBirthdayIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
+            && handlerInput.requestEnvelope.request.intent.name === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELLO_MESSAGE');
-      
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+
+        const day = intent.slots.day.value;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        const year = intent.slots.year.value;
+
+        const speechText = requestAttributes.t('BIRTHDAY_MESSAGE', day, month, year);
+
         return handlerInput.responseBuilder
             .speak(speechText)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
@@ -72,7 +68,8 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('HELP_MESSAGE');
 
         return handlerInput.responseBuilder
@@ -89,9 +86,10 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('GOODBYE_MESSAGE');
-      
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .getResponse();
@@ -104,7 +102,8 @@ const FallbackIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('FALLBACK_MESSAGE');
 
         return handlerInput.responseBuilder
@@ -133,8 +132,9 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('REFLECTOR_MESSAGE', intentName);
 
         return handlerInput.responseBuilder
@@ -152,9 +152,11 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        console.log(`~~~~ Error handled: ${error.message}`);
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('ERROR_MESSAGE');
+
+        console.log(`~~~~ Error handled: ${error.message}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -178,7 +180,7 @@ const LoggingResponseInterceptor = {
 };
 
 // This request interceptor will bind a translation function 't' to the requestAttributes.
-const LocalizationInterceptor = {
+const LocalizationRequestInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
       lng: handlerInput.requestEnvelope.request.locale,
@@ -201,16 +203,15 @@ const LocalizationInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        HelloWorldIntentHandler,
+        RegisterBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
-        FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(
-        LocalizationInterceptor,
+        LocalizationRequestInterceptor,
         LoggingRequestInterceptor)
     .addResponseInterceptors(
         LoggingResponseInterceptor)
