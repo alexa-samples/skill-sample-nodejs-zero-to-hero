@@ -2,7 +2,7 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
-var persistenceAdapter;
+var persistenceAdapter = getPersistenceAdapter();
 const moment = require('moment-timezone'); // will help us do all the birthday math
 
 // i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
@@ -31,23 +31,25 @@ const languageStrings = {
   }
 }
 
-if(isAlexaHosted()) {
-    const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
-    persistenceAdapter = new S3PersistenceAdapter({ 
-        bucketName: process.env.S3_PERSISTENCE_BUCKET
-    });
-} else {
-    // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
-    const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
-    persistenceAdapter = new DynamoDbPersistenceAdapter({ 
-        tableName: 'happy_birthday_table',
-        createTable: true
-    });
-}
-
-// This function is an indirect way to detect if this is part of an Alexa-Hosted skill
-function isAlexaHosted() {
-    return process.env.S3_PERSISTENCE_BUCKET ? true : false;
+function getPersistenceAdapter() {
+    // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
+    function isAlexaHosted() {
+        return process.env.S3_PERSISTENCE_BUCKET ? true : false;
+    }
+    const tableName = 'happy_birthday_table';
+    if(isAlexaHosted()) {
+        const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
+        return new S3PersistenceAdapter({ 
+            bucketName: process.env.S3_PERSISTENCE_BUCKET
+        });
+    } else {
+        // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
+        const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
+        return new DynamoDbPersistenceAdapter({ 
+            tableName: tableName,
+            createTable: true
+        });
+    }
 }
 
 const LaunchRequestHandler = {
