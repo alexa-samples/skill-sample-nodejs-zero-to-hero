@@ -8,7 +8,8 @@
 4. **Code Tab**: add persistence adapter to skill builder
 5. **Code Tab**: save birthday in RegisterBirthdayIntent
 6. **Code Tab**: load persistent attributes to session attributes via interceptor, add interceptor to skill builder
-7. **Code Tab**: show birthday in TellBirthdayLaunchRequestHandler, call it from LaunchRequest, use Moments.js
+7. **Code Tab**: save session attributes to persistent attributes via interceptor, add interceptor to skill builder
+8. **Code Tab**: show birthday in TellBirthdayLaunchRequestHandler, call it from LaunchRequest, use Moments.js
 
 ## Concepts
 

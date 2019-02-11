@@ -2,63 +2,61 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
-var persistenceAdapter = getPersistenceAdapter();
-
+const persistenceAdapter = require('./persistence').getPersistenceAdapter();
+const interceptors = require('./interceptors');
 const moment = require('moment-timezone'); // will help us do all the birthday math
 
-// i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
-const i18n = require('i18next');
-const sprintf = require('i18next-sprintf-postprocessor');
-
-// We import language strings object containing all of our strings. 
-// The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME_MESSAGE')
-const languageStrings = require('./i18n');
-
-function getPersistenceAdapter() {
-    // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
-    function isAlexaHosted() {
-        return process.env.S3_PERSISTENCE_BUCKET ? true : false;
-    }
-    const tableName = 'happy_birthday_table';
-    if(isAlexaHosted()) {
-        const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
-        return new S3PersistenceAdapter({ 
-            bucketName: process.env.S3_PERSISTENCE_BUCKET
-        });
-    } else {
-        // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
-        const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
-        return new DynamoDbPersistenceAdapter({ 
-            tableName: tableName,
-            createTable: true
-        });
-    }
-}
+// these are the permissions needed to get the first name
+const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
+// these are the permissions needed to send reminders
+const REMINDERS_PERMISSION = ['alexa::alerts:reminders:skill:readwrite'];
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
-    handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+    async handle(handlerInput) {
+        const {attributesManager, serviceClientFactory} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        
+
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
         const year = sessionAttributes['year'];
-        
-        let speechText = requestAttributes.t('WELCOME_MESSAGE');
+        const name = sessionAttributes['name'];
+
+        let speechText = requestAttributes.t('WELCOME_MESSAGE', '');
+
+        if(!name){
+            // let's try to get the given name via the Customer Profile API
+            // don't forget to enable the Given Name permission in your skill configuration (Build tab -> Permissions)
+            try {
+
+                const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+                const profileName = await upsServiceClient.getProfileGivenName();
+                if (profileName) { // the user might not have set the name
+                  //save to session and persisten attributes
+                  sessionAttributes['name'] = profileName;
+                }
+
+            } catch (error) {
+                if (error.statusCode === 403) {
+                    // the user has to enable the permissions for given name, let's send a silent permissions card
+                  handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
+                }
+            }
+        } else {
+            speechText = requestAttributes.t('WELCOME_MESSAGE', name);
+        }
 
         if(day && month && year){
             return TellBirthdayIntentHandler.handle(handlerInput);
+        } else {
+            return handlerInput.responseBuilder
+                    .speak(speechText)
+                    .reprompt(speechText)
+                    .getResponse();
         }
-        
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
-            .getResponse();
     }
 };
 
@@ -104,10 +102,24 @@ const TellBirthdayIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
         const year = sessionAttributes['year'];
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
         let speechText;
-        if(day && month && year){    
-            const timezone = 'Europe/Madrid'; // we'll change this later to retrieve the timezone of the device
+        if(day && month && year){
+            const serviceClientFactory = handlerInput.serviceClientFactory;
+            const deviceId = handlerInput.requestEnvelope.context.System.device.deviceId;
+    
+            let timezone;
+            try {
+                const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+                timezone = await upsServiceClient.getSystemTimeZone(deviceId);
+            } catch (error) {
+                if (error.name !== 'ServiceError') {
+                    return handlerInput.responseBuilder.speak("No he podido determinar tu zona horaria. Inténtalo otra vez.").getResponse();
+                }
+            }
+            console.log('Got timezone: ' + timezone);
+            timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with line above once done with testing
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
@@ -116,9 +128,9 @@ const TellBirthdayIntentHandler = {
             }
             const yearsOld = today.diff(wasBorn, 'years');
             const days = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('TELL_MESSAGE', days, yearsOld + 1);
+            speechText = requestAttributes.t('TELL_MESSAGE', name, days, yearsOld + 1);
             if(days === 0) {
-                speechText = requestAttributes.t('GREET_MESSAGE', yearsOld);
+                speechText = requestAttributes.t('GREET_MESSAGE', name, yearsOld);
             }
             speechText += requestAttributes.t('OVERWRITE_MESSAGE');
         } else {
@@ -157,7 +169,11 @@ const CancelAndStopIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('GOODBYE_MESSAGE');
+        const sessionAttributes = attributesManager.getSessionAttributes();
+
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+
+        const speechText = requestAttributes.t('GOODBYE_MESSAGE', name);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -234,60 +250,6 @@ const ErrorHandler = {
     }
 };
 
-// This request interceptor will log all incoming requests to this lambda
-const LoggingRequestInterceptor = {
-    process(handlerInput) {
-        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope.request)}`);
-    }
-};
-
-// This response interceptor will log all outgoing responses of this lambda
-const LoggingResponseInterceptor = {
-    process(handlerInput, response) {
-      console.log(`Outgoing response: ${JSON.stringify(response)}`);
-    }
-};
-
-// This request interceptor will bind a translation function 't' to the requestAttributes.
-const LocalizationRequestInterceptor = {
-  process(handlerInput) {
-    const localizationClient = i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageStrings,
-      returnObjects: true
-    });
-
-    const attributes = handlerInput.attributesManager.getRequestAttributes();
-    attributes.t = function (...args) {
-      return localizationClient.t(...args);
-    }
-  }
-};
-
-const LoadAttributesRequestInterceptor = {
-    async process(handlerInput) {
-        if(handlerInput.requestEnvelope.session['new']){ //is this a new session?
-            const {attributesManager} = handlerInput;
-            const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
-            //copy persistent attribute to session attributes
-            handlerInput.attributesManager.setSessionAttributes(persistentAttributes);
-        }
-    }
-};
-
-const SaveAttributesResponseInterceptor = {
-    async process(handlerInput, response) {
-        const {attributesManager} = handlerInput;
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession);//is this a session end?
-        if(shouldEndSession || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out            
-            attributesManager.setPersistentAttributes(sessionAttributes);
-            await attributesManager.savePersistentAttributes();
-        }
-    }
-};
-
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
@@ -301,11 +263,12 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
         .addRequestInterceptors(
-            LocalizationRequestInterceptor,
-            LoggingRequestInterceptor,
-            LoadAttributesRequestInterceptor)
+            interceptors.LocalizationRequestInterceptor,
+            interceptors.LoggingRequestInterceptor,
+            interceptors.LoadAttributesRequestInterceptor)
         .addResponseInterceptors(
-            LoggingResponseInterceptor,
-            SaveAttributesResponseInterceptor)
+            interceptors.LoggingResponseInterceptor,
+            interceptors.SaveAttributesResponseInterceptor)
         .withPersistenceAdapter(persistenceAdapter)
+        .withApiClient(new Alexa.DefaultApiClient())
         .lambda();

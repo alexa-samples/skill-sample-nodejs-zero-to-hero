@@ -13,7 +13,7 @@ const sprintf = require('i18next-sprintf-postprocessor');
 const languageStrings = {
   es:{
     translation: {
-      WELCOME_MESSAGE: 'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
+      WELCOME_MESSAGE:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
       BIRTHDAY_MESSAGE: 'Tu fecha de cumpleaños es el %s de %s de %s',
       HELP_MESSAGE: 'Por favor dime el día, mes y año de tu nacimiento',
       GOODBYE_MESSAGE: 'Hasta luego!',
@@ -184,7 +184,6 @@ const LocalizationRequestInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
       lng: handlerInput.requestEnvelope.request.locale,
-      fallbackLng: 'es',
       overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
       resources: languageStrings,
       returnObjects: true
@@ -195,7 +194,7 @@ const LocalizationRequestInterceptor = {
       return localizationClient.t(...args);
     }
   }
-}
+};
 
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
