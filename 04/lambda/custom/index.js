@@ -13,7 +13,7 @@ const sprintf = require('i18next-sprintf-postprocessor');
 // We import language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
 // e.g. requestAttributes.t('WELCOME_MESSAGE')
-const languageStrings = require('./i18n');
+const languageStrings = require('./localisation');
 
 function getPersistenceAdapter() {
     // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
@@ -52,13 +52,13 @@ const LaunchRequestHandler = {
         let speechText = requestAttributes.t('WELCOME_MESSAGE');
 
         if(day && month && year){
-            return TellBirthdayIntentHandler.handle(handlerInput);
-        }
-        
-        return handlerInput.responseBuilder
+            return SayBirthdayIntentHandler.handle(handlerInput);
+        } else {
+            return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
+        } 
     }
 };
 
@@ -83,18 +83,17 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
 
-        const speechText = requestAttributes.t('REGISTER_MESSAGE', day, monthName, year) + requestAttributes.t('CONTINUE_MESSAGE');
         return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
+            .speak(requestAttributes.t('REGISTER_MESSAGE', day, monthName, year) + requestAttributes.t('HELP_MESSAGE'))
+            .reprompt(requestAttributes.t('HELP_MESSAGE'))
             .getResponse();
     }
 };
 
-const TellBirthdayIntentHandler = {
+const SayBirthdayIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'TellBirthdayIntent';
+            && handlerInput.requestEnvelope.request.intent.name === 'SayBirthdayIntent';
     },
     async handle(handlerInput) {
         const {attributesManager} = handlerInput;
@@ -107,23 +106,24 @@ const TellBirthdayIntentHandler = {
         
         let speechText;
         if(day && month && year){    
-            const timezone = 'Europe/Madrid'; // we'll change this later to retrieve the timezone of the device
+            const timezone = 'Europe/Madrid'; // we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             if(today.isAfter(nextBirthday)){
                 nextBirthday.add('years', 1);
             }
-            const yearsOld = today.diff(wasBorn, 'years');
-            const days = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('TELL_MESSAGE', days, yearsOld + 1);
-            if(days === 0) {
-                speechText = requestAttributes.t('GREET_MESSAGE', yearsOld);
+            const age = today.diff(wasBorn, 'years');
+            const daysLeft = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
+            speechText = requestAttributes.t('SAY_MESSAGE', daysLeft, age + 1);
+            if(daysLeft === 0) {
+                speechText = requestAttributes.t('GREET_MESSAGE', age);
             }
             speechText += requestAttributes.t('OVERWRITE_MESSAGE');
         } else {
             speechText = requestAttributes.t('MISSING_MESSAGE');
         }
+        
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -295,7 +295,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         RegisterBirthdayIntentHandler,
-        TellBirthdayIntentHandler,
+        SayBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,

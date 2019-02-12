@@ -79,7 +79,7 @@
                     "samples": []
                 },
                 {
-                    "name": "TellBirthdayIntent",
+                    "name": "SayBirthdayIntent",
                     "slots": [],
                     "samples": [
                         "cuando cumplo años",
@@ -97,6 +97,40 @@
                         "cuando es mi cumple",
                         "dime mi cumpleaños",
                         "dime mi cumple"
+                    ]
+                },
+                {
+                    "name": "RemindBirthdayIntent",
+                    "slots": [
+                        {
+                            "name": "message",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{message}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "recordatorio",
+                        "configura un recordatorio",
+                        "pon un recordatorio",
+                        "crea un recordatorio",
+                        "recordatorio con el texto {message}",
+                        "configura un recordatorio con el texto {message}",
+                        "pon un recordatorio con el texto {message}",
+                        "crea un recordatorio con el texto {message}",
+                        "recordatorio con el mensaje {message}",
+                        "configura un recordatorio con el mensaje {message}",
+                        "pon un recordatorio con el mensaje {message}",
+                        "crea un recordatorio con el mensaje {message}",
+                        "recordatorio con texto {message}",
+                        "configura un recordatorio con texto {message}",
+                        "pon un recordatorio con texto {message}",
+                        "crea un recordatorio con texto {message}",
+                        "recordatorio con mensaje {message}",
+                        "configura un recordatorio con mensaje {message}",
+                        "pon un recordatorio con mensaje {message}",
+                        "crea un recordatorio con mensaje {message}"
                     ]
                 }
             ],
@@ -249,6 +283,24 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "RemindBirthdayIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.556115415325"
+                    },
+                    "slots": [
+                        {
+                            "name": "message",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.556115415325.557149889298"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -363,6 +415,36 @@
                     {
                         "type": "PlainText",
                         "value": "No creo que tengas tan pocos años. Inténtalo otra vez"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.556115415325.557149889298",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Cual es el mensaje para el recordatorio?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Genial. Ahora dime el mensaje a leer cuando se active el recordatorio"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Vale. Dime por favor el mensaje para el recordatorio"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.556115415325",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "El mensaje. {message} .Será enviado cuando cumplas años. Lo confirmas?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Te enviaré el siguiente mensaje cuando cumplas años. {message} . De acuerdo?"
                     }
                 ]
             }

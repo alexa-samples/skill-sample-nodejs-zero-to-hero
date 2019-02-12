@@ -79,7 +79,7 @@
                     "samples": []
                 },
                 {
-                    "name": "TellBirthdayIntent",
+                    "name": "SayBirthdayIntent",
                     "slots": [],
                     "samples": [
                         "cuando cumplo años",

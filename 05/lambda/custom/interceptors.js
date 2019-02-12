@@ -23,7 +23,7 @@ module.exports = {
             const localizationClient = i18n.use(sprintf).init({
             lng: handlerInput.requestEnvelope.request.locale,
             overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-            resources: require('./i18n'),
+            resources: require('./localisation'),
             returnObjects: true
             });
 
