@@ -14,7 +14,7 @@ module.exports = {
             MISSING_PERMISSION_MSG: 'Parece que no has autorizado a la skill para enviar recordatorios. Te he enviado una tarjeta a la app Alexa para que lo habilites. ',
             NO_TIMEZONE_MSG: 'No he podido determinar tu zona horaria. Verifíca la configuración de tu dispositivo e inténtalo otra vez.',
             HELP_MSG: 'Puedes decir, cuanto falta para mi cumpleaños? . Volver a registar la fecha diciendo, registra mi cumpleaños. O puedes crear un recordatorio diciendo, crea un recordatorio',
-            GOODBYE_MSG: 'Hasta luego %s! ',
+            GOODBYE_MSG: ['Hasta luego %s! ', 'Adios %s! ', 'Hasta pronto %s! ', 'Nos vemos %s! '],
             REFLECTOR_MSG: 'Acabas de activar %s ',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
             ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. '

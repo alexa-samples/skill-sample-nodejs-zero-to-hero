@@ -18,18 +18,32 @@ module.exports = {
     },
 
     // This request interceptor will bind a translation function 't' to the requestAttributes.
+    // Additionally it will handle picking a random value if instead of a string it receives an array
     LocalizationRequestInterceptor: {
         process(handlerInput) {
             const localizationClient = i18n.use(sprintf).init({
-            lng: handlerInput.requestEnvelope.request.locale,
-            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-            resources: require('./localisation'),
-            returnObjects: true
+                lng: handlerInput.requestEnvelope.request.locale,
+                resources: require('./localisation'),
             });
-
+            localizationClient.localize = function localize() {
+                const args = arguments;
+                const values = [];
+                for (let i = 1; i < args.length; i += 1) {
+                    values.push(args[i]);
+                }
+                const value = i18n.t(args[0], {
+                    returnObjects: true,
+                    postProcess: 'sprintf',
+                    sprintf: values,
+                });
+                if (Array.isArray(value)) {
+                    return value[Math.floor(Math.random() * value.length)];
+                }
+                return value;
+            };
             const attributes = handlerInput.attributesManager.getRequestAttributes();
-            attributes.t = function (...args) {
-            return localizationClient.t(...args);
+            attributes.t = function translate(...args) {
+                return localizationClient.localize(...args);
             }
         }
     },

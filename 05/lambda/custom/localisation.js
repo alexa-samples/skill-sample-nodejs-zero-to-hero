@@ -9,7 +9,7 @@ module.exports = {
             OVERWRITE_MSG: 'Si quieres cambiar la fecha solo di, registra mi cumpleaños',
             NO_TIMEZONE_MSG: 'No he podido determinar tu zona horaria. Verifíca la configuración de tu dispositivo e inténtalo otra vez.',
             HELP_MSG: 'Puedes preguntarme, cuanto falta para mi cumpleaños? . O registar la fecha diciendo, registra mi cumpleaños. ',
-            GOODBYE_MSG: 'Hasta luego %s! ',
+            GOODBYE_MSG: ['Hasta luego %s! ', 'Adios %s! ', 'Hasta pronto %s! ', 'Nos vemos %s! '],
             REFLECTOR_MSG: 'Acabas de activar %s ',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
             ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. '
