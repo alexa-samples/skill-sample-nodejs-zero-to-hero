@@ -31,7 +31,7 @@ const LaunchRequestHandler = {
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
-                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
+                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions in the skill, no point in intializing the API
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
                 if (profileName) { // the user might not have set the name
@@ -54,8 +54,8 @@ const LaunchRequestHandler = {
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
             return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('WELCOME_MESSAGE', name))
-                    .reprompt(requestAttributes.t('HELP_MESSAGE'))
+                    .speak(requestAttributes.t('WELCOME_MSG', name))
+                    .reprompt(requestAttributes.t('HELP_MSG'))
                     .getResponse();
         }
     }
@@ -83,8 +83,8 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['year'] = year;
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MESSAGE', day, monthName, year) + requestAttributes.t('HELP_MESSAGE'))
-            .reprompt(requestAttributes.t('HELP_MESSAGE'))
+            .speak(requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -116,27 +116,26 @@ const SayBirthdayIntentHandler = {
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 timezone = await upsServiceClient.getSystemTimeZone(deviceId);
             } catch (error) {
-                console.log(JSON.stringify(error));
-                if (error.name !== 'ServiceError') {// acomodar para avisar si no está seteada la zona
-                    return handlerInput.responseBuilder.speak("No he podido determinar tu zona horaria. Inténtalo otra vez.").getResponse();
-                }
+                return handlerInput.responseBuilder
+                    .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                    .getResponse();
             }
             console.log('Got timezone: ' + timezone);
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
-            speechText = requestAttributes.t('SAY_MESSAGE', name, birthdayData.daysLeft, birthdayData.age + 1);
+            speechText = requestAttributes.t('SAY_MSG', name, birthdayData.daysLeft, birthdayData.age + 1);
             if(birthdayData.daysLeft === 0) {
-                speechText = requestAttributes.t('GREET_MESSAGE', name, birthdayData.age);
+                speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
             }
-            speechText += requestAttributes.t('OVERWRITE_MESSAGE');
+            speechText += requestAttributes.t('OVERWRITE_MSG');
         } else {
-            speechText = requestAttributes.t('MISSING_MESSAGE');
+            speechText = requestAttributes.t('MISSING_MSG');
         }
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -160,8 +159,8 @@ const RemindBirthdayIntentHandler = {
 
         if(intent.confirmationStatus !== 'CONFIRMED') {
             return handlerInput.responseBuilder
-                .speak(requestAttributes.t('CANCEL_MESSAGE') + requestAttributes.t('HELP_MESSAGE'))
-                .reprompt(requestAttributes.t('HELP_MESSAGE'))
+                .speak(requestAttributes.t('CANCEL_MSG') + requestAttributes.t('HELP_MSG'))
+                .reprompt(requestAttributes.t('HELP_MSG'))
                 .getResponse();
         }
         
@@ -175,10 +174,9 @@ const RemindBirthdayIntentHandler = {
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 timezone = await upsServiceClient.getSystemTimeZone(deviceId);
             } catch (error) {
-                console.log(JSON.stringify(error));
-                if (error.name !== 'ServiceError') {// acomodar para avisar si no está seteada la zona
-                    return handlerInput.responseBuilder.speak("No he podido determinar tu zona horaria. Inténtalo otra vez.").getResponse();
-                }
+                return handlerInput.responseBuilder
+                    .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                    .getResponse();
             }
             console.log('Got timezone: ' + timezone);
 
@@ -190,39 +188,49 @@ const RemindBirthdayIntentHandler = {
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
-                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
-                const reminderServiceclient = serviceClientFactory.getReminderManagementServiceClient();
+                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions in the skill, no point in intializing the API
+                const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
+                // reminders are retained for 3 days after they 'remind' the customer before being deleted
+                const remindersList = await reminderServiceClient.getReminders();
+                console.log(JSON.stringify(remindersList));
+                const remindersCount = remindersList.totalCount;
+                // delete previous reminder if present
+                if(sessionAttributes['reminderId']){
+                    await reminderServiceClient.deleteReminder(sessionAttributes['reminderId']);
+                    delete sessionAttributes['reminderId'];
+                }
+                // create reminder structure
                 const reminder = logic.createReminderData(
                     birthdayData.daysLeft,
                     timezone,
                     requestEnvelope.request.locale,
                     message); 
-                
-                const reminderResponse = await reminderServiceclient.createReminder(reminder);
-                console.log(JSON.stringify(reminderResponse));
-                
-                return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('REMINDER_CREATED') + requestAttributes.t('HELP_MESSAGE'))
-                    .reprompt(requestAttributes.t('HELP_MESSAGE'))
-                    .getResponse();
+                const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
+                // save reminder id in session attributes
+                sessionAttributes['reminderId'] = reminderResponse.alertToken;
+
+                speechText = requestAttributes.t('REMINDER_CREATED_MSG') + requestAttributes.t('HELP_MSG');
 
             } catch (error) {
                 console.log(JSON.stringify(error));
-                // the user has to enable the permissions for reminders, let's send a permissions card and notify the user.
-                if (error.statusCode === 401 || error.statusCode === 403) {
-                    return handlerInput.responseBuilder
-                        .speak(requestAttributes.t('MISSING_PERMISSION') + requestAttributes.t('HELP_MESSAGE'))
-                        .reprompt(requestAttributes.t('HELP_MESSAGE'))
-                        .withAskForPermissionsConsentCard(REMINDERS_PERMISSION)
-                        .getResponse();
-                } else {
-                    return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('REMINDER_ERROR') + requestAttributes.t('HELP_MESSAGE'))
-                    .reprompt(requestAttributes.t('HELP_MESSAGE'))
-                    .getResponse();
+                switch (error.statusCode) {
+                    case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
+                        handlerInput.responseBuilder.withAskForPermissionsConsentCard(REMINDERS_PERMISSION);
+                        speechText = requestAttributes.t('MISSING_PERMISSION_MSG') + requestAttributes.t('HELP_MSG');
+                        break;
+                    case 403: // devices such as the simulator do not support reminder management
+                        speechText = requestAttributes.t('UNSUPPORTED_DEVICE_MSG') + requestAttributes.t('HELP_MSG');
+                        break;
+                    default:
+                        speechText = requestAttributes.t('REMINDER_ERROR_MSG') + requestAttributes.t('HELP_MSG');
                 }
             }
         }
+        
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(requestAttributes.t('HELP_MSG'))
+            .getResponse();
     }
 };
 
@@ -234,7 +242,7 @@ const HelpIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MESSAGE');
+        const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -256,7 +264,7 @@ const CancelAndStopIntentHandler = {
 
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
-        const speechText = requestAttributes.t('GOODBYE_MESSAGE', name);
+        const speechText = requestAttributes.t('GOODBYE_MSG', name);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -272,7 +280,7 @@ const FallbackIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MESSAGE');
+        const speechText = requestAttributes.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -303,7 +311,7 @@ const IntentReflectorHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MESSAGE', intentName);
+        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -322,7 +330,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MESSAGE');
+        const speechText = requestAttributes.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 

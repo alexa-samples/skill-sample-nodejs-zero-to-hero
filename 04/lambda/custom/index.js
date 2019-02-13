@@ -12,7 +12,7 @@ const sprintf = require('i18next-sprintf-postprocessor');
 
 // We import language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME_MESSAGE')
+// e.g. requestAttributes.t('WELCOME_MSG')
 const languageStrings = require('./localisation');
 
 function getPersistenceAdapter() {
@@ -49,7 +49,7 @@ const LaunchRequestHandler = {
         const month = sessionAttributes['month'];
         const year = sessionAttributes['year'];
         
-        let speechText = requestAttributes.t('WELCOME_MESSAGE');
+        let speechText = requestAttributes.t('WELCOME_MSG');
 
         if(day && month && year){
             return SayBirthdayIntentHandler.handle(handlerInput);
@@ -84,8 +84,8 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['year'] = year;
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MESSAGE', day, monthName, year) + requestAttributes.t('HELP_MESSAGE'))
-            .reprompt(requestAttributes.t('HELP_MESSAGE'))
+            .speak(requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -115,18 +115,18 @@ const SayBirthdayIntentHandler = {
             }
             const age = today.diff(wasBorn, 'years');
             const daysLeft = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('SAY_MESSAGE', daysLeft, age + 1);
+            speechText = requestAttributes.t('SAY_MSG', daysLeft, age + 1);
             if(daysLeft === 0) {
-                speechText = requestAttributes.t('GREET_MESSAGE', age);
+                speechText = requestAttributes.t('GREET_MSG', age);
             }
-            speechText += requestAttributes.t('OVERWRITE_MESSAGE');
+            speechText += requestAttributes.t('OVERWRITE_MSG');
         } else {
-            speechText = requestAttributes.t('MISSING_MESSAGE');
+            speechText = requestAttributes.t('MISSING_MSG');
         }
         
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -139,7 +139,7 @@ const HelpIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MESSAGE');
+        const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -157,7 +157,7 @@ const CancelAndStopIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('GOODBYE_MESSAGE');
+        const speechText = requestAttributes.t('GOODBYE_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -173,7 +173,7 @@ const FallbackIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MESSAGE');
+        const speechText = requestAttributes.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -204,7 +204,7 @@ const IntentReflectorHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MESSAGE', intentName);
+        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -223,7 +223,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MESSAGE');
+        const speechText = requestAttributes.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 

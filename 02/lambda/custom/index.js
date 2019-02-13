@@ -13,24 +13,24 @@ const sprintf = require('i18next-sprintf-postprocessor');
 const languageStrings = {
   en: {
     translation: {
-      WELCOME_MESSAGE: 'Welcome, you can say Hello or Help. Which would you like to try?',
-      HELLO_MESSAGE: 'Hello World!',
-      HELP_MESSAGE: 'You can say hello to me! How can I help?',
-      GOODBYE_MESSAGE: 'Goodbye!',
-      REFLECTOR_MESSAGE: 'You just triggered %s',
-      FALLBACK_MESSAGE: 'Sorry, I don\'t know about that. Please try again.',
-      ERROR_MESSAGE: 'Sorry, there was an error. Please try again.'
+      WELCOME_MSG: 'Welcome, you can say Hello or Help. Which would you like to try?',
+      HELLO_MSG: 'Hello World!',
+      HELP_MSG: 'You can say hello to me! How can I help?',
+      GOODBYE_MSG: 'Goodbye!',
+      REFLECTOR_MSG: 'You just triggered %s',
+      FALLBACK_MSG: 'Sorry, I don\'t know about that. Please try again.',
+      ERROR_MSG: 'Sorry, there was an error. Please try again.'
     }
   },
   es:{
     translation: {
-      WELCOME_MESSAGE: 'Bienvenido, puedes decir Hola o Ayuda. Cual prefieres?',
-      HELLO_MESSAGE: 'Hola Mundo!',
-      HELP_MESSAGE: 'Puedes decirme hola. Cómo te puedo ayudar?',
-      GOODBYE_MESSAGE: 'Hasta luego!',
-      REFLECTOR_MESSAGE: 'Acabas de activar %s',
-      FALLBACK_MESSAGE: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
-      ERROR_MESSAGE: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+      WELCOME_MSG: 'Bienvenido, puedes decir Hola o Ayuda. Cual prefieres?',
+      HELLO_MSG: 'Hola Mundo!',
+      HELP_MSG: 'Puedes decirme hola. Cómo te puedo ayudar?',
+      GOODBYE_MSG: 'Hasta luego!',
+      REFLECTOR_MSG: 'Acabas de activar %s',
+      FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
     }
   }
 }
@@ -41,7 +41,7 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('WELCOME_MESSAGE');
+        const speechText = requestAttributes.t('WELCOME_MSG');
                           
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -57,7 +57,7 @@ const HelloWorldIntentHandler = {
     },
     handle(handlerInput) {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELLO_MESSAGE');
+        const speechText = requestAttributes.t('HELLO_MSG');
       
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -73,7 +73,7 @@ const HelpIntentHandler = {
     },
     handle(handlerInput) {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MESSAGE');
+        const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -90,7 +90,7 @@ const CancelAndStopIntentHandler = {
     },
     handle(handlerInput) {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('GOODBYE_MESSAGE');
+        const speechText = requestAttributes.t('GOODBYE_MSG');
       
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -105,7 +105,7 @@ const FallbackIntentHandler = {
     },
     handle(handlerInput) {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MESSAGE');
+        const speechText = requestAttributes.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -135,7 +135,7 @@ const IntentReflectorHandler = {
     handle(handlerInput) {
         const intentName = handlerInput.requestEnvelope.request.intent.name;
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('REFLECTOR_MESSAGE', intentName);
+        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -154,7 +154,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.message}`);
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MESSAGE');
+        const speechText = requestAttributes.t('ERROR_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)

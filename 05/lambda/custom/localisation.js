@@ -1,17 +1,18 @@
 module.exports = {
     es: {
         translation: {
-            WELCOME_MESSAGE: 'Hola %s! Dime. Cuando es tu fecha de cumpleaños? ',
-            REGISTER_MESSAGE: 'Recordaré que tu fecha de cumpleaños es el %s de %s de %s. ',
-            SAY_MESSAGE: '%s Quedan %s días para que cumplas %s años. ',
-            GREET_MESSAGE: 'Feliz cumpleaños %s! Hoy cumples %s! ',
-            MISSING_MESSAGE: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. ',
-            OVERWRITE_MESSAGE: 'Si quieres cambiar la fecha solo di, registra mi cumpleaños',
-            HELP_MESSAGE: 'Puedes preguntarme, cuanto falta para mi cumpleaños? . O registar la fecha diciendo, registra mi cumpleaños. ',
-            GOODBYE_MESSAGE: 'Hasta luego %s! ',
-            REFLECTOR_MESSAGE: 'Acabas de activar %s ',
-            FALLBACK_MESSAGE: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
-            ERROR_MESSAGE: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. '
+            WELCOME_MSG: 'Hola %s! Dime. Cuando es tu fecha de cumpleaños? ',
+            REGISTER_MSG: 'Recordaré que tu fecha de cumpleaños es el %s de %s de %s. ',
+            SAY_MSG: '%s Quedan %s días para que cumplas %s años. ',
+            GREET_MSG: 'Feliz cumpleaños %s! Hoy cumples %s! ',
+            MISSING_MSG: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. ',
+            OVERWRITE_MSG: 'Si quieres cambiar la fecha solo di, registra mi cumpleaños',
+            NO_TIMEZONE_MSG: 'No he podido determinar tu zona horaria. Verifíca la configuración de tu dispositivo e inténtalo otra vez.',
+            HELP_MSG: 'Puedes preguntarme, cuanto falta para mi cumpleaños? . O registar la fecha diciendo, registra mi cumpleaños. ',
+            GOODBYE_MSG: 'Hasta luego %s! ',
+            REFLECTOR_MSG: 'Acabas de activar %s ',
+            FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
+            ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. '
         }
     }   
 }

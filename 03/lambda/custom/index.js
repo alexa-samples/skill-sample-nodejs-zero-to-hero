@@ -9,17 +9,17 @@ const sprintf = require('i18next-sprintf-postprocessor');
 
 // We create a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME_MESSAGE')
+// e.g. requestAttributes.t('WELCOME_MSG')
 const languageStrings = {
   es:{
     translation: {
-      WELCOME_MESSAGE:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
-      BIRTHDAY_MESSAGE: 'Tu fecha de cumpleaños es el %s de %s de %s',
-      HELP_MESSAGE: 'Por favor dime el día, mes y año de tu nacimiento',
-      GOODBYE_MESSAGE: 'Hasta luego!',
-      REFLECTOR_MESSAGE: 'Acabas de activar %s',
-      FALLBACK_MESSAGE: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
-      ERROR_MESSAGE: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+      WELCOME_MSG:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
+      BIRTHDAY_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
+      HELP_MSG: 'Por favor dime el día, mes y año de tu nacimiento',
+      GOODBYE_MSG: 'Hasta luego!',
+      REFLECTOR_MSG: 'Acabas de activar %s',
+      FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
     }
   }
 }
@@ -31,7 +31,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('WELCOME_MESSAGE');
+        const speechText = requestAttributes.t('WELCOME_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -54,7 +54,7 @@ const RegisterBirthdayIntentHandler = {
         const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
 
-        const speechText = requestAttributes.t('BIRTHDAY_MESSAGE', day, month, year);
+        const speechText = requestAttributes.t('BIRTHDAY_MSG', day, month, year);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -70,7 +70,7 @@ const HelpIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MESSAGE');
+        const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -88,7 +88,7 @@ const CancelAndStopIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('GOODBYE_MESSAGE');
+        const speechText = requestAttributes.t('GOODBYE_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -104,7 +104,7 @@ const FallbackIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MESSAGE');
+        const speechText = requestAttributes.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -135,7 +135,7 @@ const IntentReflectorHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MESSAGE', intentName);
+        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -154,7 +154,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MESSAGE');
+        const speechText = requestAttributes.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 

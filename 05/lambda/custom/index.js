@@ -52,8 +52,8 @@ const LaunchRequestHandler = {
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
             return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('WELCOME_MESSAGE', name))
-                    .reprompt(requestAttributes.t('HELP_MESSAGE'))
+                    .speak(requestAttributes.t('WELCOME_MSG', name))
+                    .reprompt(requestAttributes.t('HELP_MSG'))
                     .getResponse();
         }
     }
@@ -81,8 +81,8 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['year'] = year;
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MESSAGE', day, monthName, year) + requestAttributes.t('HELP_MESSAGE'))
-            .reprompt(requestAttributes.t('HELP_MESSAGE'))
+            .speak(requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -114,9 +114,9 @@ const SayBirthdayIntentHandler = {
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 timezone = await upsServiceClient.getSystemTimeZone(deviceId);
             } catch (error) {
-                if (error.name !== 'ServiceError') {
-                    return handlerInput.responseBuilder.speak("No he podido determinar tu zona horaria. Inténtalo otra vez.").getResponse();
-                }
+                return handlerInput.responseBuilder
+                    .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                    .getResponse();
             }
             console.log('Got timezone: ' + timezone);
             timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your time zone
@@ -128,18 +128,18 @@ const SayBirthdayIntentHandler = {
             }
             const age = today.diff(wasBorn, 'years');
             const daysLeft = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('SAY_MESSAGE', name, daysLeft, age + 1);
+            speechText = requestAttributes.t('SAY_MSG', name, daysLeft, age + 1);
             if(daysLeft === 0) {
-                speechText = requestAttributes.t('GREET_MESSAGE', name, age);
+                speechText = requestAttributes.t('GREET_MSG', name, age);
             }
-            speechText += requestAttributes.t('OVERWRITE_MESSAGE');
+            speechText += requestAttributes.t('OVERWRITE_MSG');
         } else {
-            speechText = requestAttributes.t('MISSING_MESSAGE');
+            speechText = requestAttributes.t('MISSING_MSG');
         }
         
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -152,7 +152,7 @@ const HelpIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MESSAGE');
+        const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -174,7 +174,7 @@ const CancelAndStopIntentHandler = {
 
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
-        const speechText = requestAttributes.t('GOODBYE_MESSAGE', name);
+        const speechText = requestAttributes.t('GOODBYE_MSG', name);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -190,7 +190,7 @@ const FallbackIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MESSAGE');
+        const speechText = requestAttributes.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -221,7 +221,7 @@ const IntentReflectorHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MESSAGE', intentName);
+        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -240,7 +240,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MESSAGE');
+        const speechText = requestAttributes.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 

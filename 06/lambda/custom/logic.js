@@ -2,7 +2,7 @@ const moment = require('moment-timezone'); // will help us do all the birthday m
 
 module.exports = {
     getBirthdayData(day, month, year, timezone) {
-        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with line above once done with testing
+        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your timezone and remove if testing on a real device
         const today = moment().tz(timezone).startOf('day');
         const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
         const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
@@ -17,7 +17,7 @@ module.exports = {
         }
     },
     createReminderData(daysLeft, timezone, locale, message) {
-        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your time zone
+        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your timezone and remove if testing on a real device
         moment.locale(locale);
         const now = moment().tz(timezone);
         const scheduled = now.startOf('day').add(daysLeft, 'days');

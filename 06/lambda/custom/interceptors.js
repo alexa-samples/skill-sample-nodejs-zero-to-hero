@@ -26,7 +26,6 @@ module.exports = {
             resources: require('./localisation'),
             returnObjects: true
             });
-
             const attributes = handlerInput.attributesManager.getRequestAttributes();
             attributes.t = function (...args) {
             return localizationClient.t(...args);
@@ -47,9 +46,10 @@ module.exports = {
 
     SaveAttributesResponseInterceptor: {
         async process(handlerInput, response) {
+            if(!response) return; // avoid intercepting calls that have no outgoing response
             const {attributesManager} = handlerInput;
             const sessionAttributes = attributesManager.getSessionAttributes();
-            const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession);//is this a session end?
+            const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
             if(shouldEndSession || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out            
                 attributesManager.setPersistentAttributes(sessionAttributes);
                 await attributesManager.savePersistentAttributes();
