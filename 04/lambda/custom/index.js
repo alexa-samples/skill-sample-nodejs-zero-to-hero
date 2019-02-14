@@ -52,13 +52,13 @@ const LaunchRequestHandler = {
         let speechText = requestAttributes.t('WELCOME_MSG');
 
         if(day && month && year){
-            return SayBirthdayIntentHandler.handle(handlerInput);
-        } else {
-            return handlerInput.responseBuilder
+            speechText = requestAttributes.t('REGISTER_MSG', day, month, year)
+        }
+        
+        return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
-        } 
     }
 };
 

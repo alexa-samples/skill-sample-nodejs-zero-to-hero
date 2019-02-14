@@ -14,7 +14,7 @@ const languageStrings = {
   es:{
     translation: {
       WELCOME_MSG:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
-      BIRTHDAY_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
+      REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
       HELP_MSG: 'Por favor dime el día, mes y año de tu nacimiento',
       GOODBYE_MSG: 'Hasta luego!',
       REFLECTOR_MSG: 'Acabas de activar %s',
@@ -54,7 +54,7 @@ const RegisterBirthdayIntentHandler = {
         const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
 
-        const speechText = requestAttributes.t('BIRTHDAY_MSG', day, month, year);
+        const speechText = requestAttributes.t('REGISTER_MSG', day, month, year); // we'll save these values later
 
         return handlerInput.responseBuilder
             .speak(speechText)

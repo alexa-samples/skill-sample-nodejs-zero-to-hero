@@ -4,10 +4,8 @@
 const Alexa = require('ask-sdk-core');
 const persistence = require('./persistence');
 const interceptors = require('./interceptors');
-const moment = require('moment-timezone'); // will help us do all the birthday math
-
-// these are the permissions needed to get the first name
-const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
+const logic = require('./logic');
+const constants = require('./constants');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -29,7 +27,7 @@ const LaunchRequestHandler = {
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
-                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
+                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions in the skill, no point in intializing the API
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
                 if (profileName) { // the user might not have set the name
@@ -41,7 +39,7 @@ const LaunchRequestHandler = {
                 console.log(JSON.stringify(error));
                 if (error.statusCode === 401 || error.statusCode === 403) {
                     // the user needs to enable the permissions for given name, let's send a silent permissions card.
-                  handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
+                  handlerInput.responseBuilder.withAskForPermissionsConsentCard(constants.GIVEN_NAME_PERMISSION);
                 }
             }
         }
@@ -112,6 +110,64 @@ const SayBirthdayIntentHandler = {
     
             // let's try to get the timezone via the UPS API
             // (no permissions required but it might not be set up)
+           let timezone;
+            try {
+                const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+                timezone = await upsServiceClient.getSystemTimeZone(deviceId);
+            } catch (error) {
+                return handlerInput.responseBuilder
+                    .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                    .getResponse();
+            }
+            console.log('Got timezone: ' + timezone);
+
+            const birthdayData = logic.getBirthdayData(day, month, year, timezone);
+
+            speechText = requestAttributes.t('SAY_MSG', name, birthdayData.daysLeft, birthdayData.age + 1);
+            if(birthdayData.daysLeft === 0) {
+                speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
+            }
+            speechText += requestAttributes.t('OVERWRITE_MSG');
+        } else {
+            speechText = requestAttributes.t('MISSING_MSG');
+        }
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(requestAttributes.t('HELP_MSG'))
+            .getResponse();
+    }
+};
+
+const RemindBirthdayIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'RemindBirthdayIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = handlerInput.requestEnvelope.request;
+
+        const day = sessionAttributes['day'];
+        const month = sessionAttributes['month'];
+        const year = sessionAttributes['year'];
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const message = intent.slots.message.value;
+
+        if(intent.confirmationStatus !== 'CONFIRMED') {
+            return handlerInput.responseBuilder
+                .speak(requestAttributes.t('CANCEL_MSG') + requestAttributes.t('HELP_MSG'))
+                .reprompt(requestAttributes.t('HELP_MSG'))
+                .getResponse();
+        }
+        
+        let speechText;
+        if(day && month && year){
+            const deviceId = handlerInput.requestEnvelope.context.System.device.deviceId;
+            // let's try to get the timezone via the UPS API
+            // (no permissions required but it might not be set up)
             let timezone;
             try {
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
@@ -122,22 +178,52 @@ const SayBirthdayIntentHandler = {
                     .getResponse();
             }
             console.log('Got timezone: ' + timezone);
-            timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your time zone
-            const today = moment().tz(timezone).startOf('day');
-            const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-            const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-            if(today.isAfter(nextBirthday)){
-                nextBirthday.add('years', 1);
+
+            const birthdayData = logic.getBirthdayData(day, month, year, timezone);
+
+            // let's try to create a reminder via the Reminders API
+            // don't forget to enable this permission in your skill configuratiuon (Build tab -> Permissions)
+            // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
+            try {
+                const {permissions} = requestEnvelope.context.System.user;
+                if(!permissions)
+                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions in the skill, no point in intializing the API
+                const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
+                // reminders are retained for 3 days after they 'remind' the customer before being deleted
+                const remindersList = await reminderServiceClient.getReminders();
+                console.log(JSON.stringify(remindersList));
+                const remindersCount = remindersList.totalCount;
+                // delete previous reminder if present
+                if(sessionAttributes['reminderId']){
+                    await reminderServiceClient.deleteReminder(sessionAttributes['reminderId']);
+                    delete sessionAttributes['reminderId'];
+                }
+                // create reminder structure
+                const reminder = logic.createReminderData(
+                    birthdayData.daysLeft,
+                    timezone,
+                    requestEnvelope.request.locale,
+                    message); 
+                const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
+                // save reminder id in session attributes
+                sessionAttributes['reminderId'] = reminderResponse.alertToken;
+
+                speechText = requestAttributes.t('REMINDER_CREATED_MSG') + requestAttributes.t('HELP_MSG');
+
+            } catch (error) {
+                console.log(JSON.stringify(error));
+                switch (error.statusCode) {
+                    case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
+                        handlerInput.responseBuilder.withAskForPermissionsConsentCard(constants.REMINDERS_PERMISSION);
+                        speechText = requestAttributes.t('MISSING_PERMISSION_MSG') + requestAttributes.t('HELP_MSG');
+                        break;
+                    case 403: // devices such as the simulator do not support reminder management
+                        speechText = requestAttributes.t('UNSUPPORTED_DEVICE_MSG') + requestAttributes.t('HELP_MSG');
+                        break;
+                    default:
+                        speechText = requestAttributes.t('REMINDER_ERROR_MSG') + requestAttributes.t('HELP_MSG');
+                }
             }
-            const age = today.diff(wasBorn, 'years');
-            const daysLeft = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('SAY_MSG', name, daysLeft, age + 1);
-            if(daysLeft === 0) {
-                speechText = requestAttributes.t('GREET_MSG', name, age);
-            }
-            speechText += requestAttributes.t('OVERWRITE_MSG');
-        } else {
-            speechText = requestAttributes.t('MISSING_MSG');
         }
         
         return handlerInput.responseBuilder
@@ -262,6 +348,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         RegisterBirthdayIntentHandler,
         SayBirthdayIntentHandler,
+        RemindBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,

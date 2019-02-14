@@ -71,7 +71,7 @@
                         "recuerda mi cumple",
                         "registra mi cumpleaños",
                         "graba mi cumpleaños",
-                        "recuerda mi cumplaños"
+                        "recuerda mi cumpleaños"
                     ]
                 },
                 {
@@ -246,11 +246,11 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "que día?"
+                        "value": "en que día es?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "dime que día del mes"
+                        "value": "dime en que día del mes es"
                     }
                 ]
             },
@@ -259,7 +259,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "dime ahora el mes"
+                        "value": "dime ahora el mes en que cumples"
                     },
                     {
                         "type": "PlainText",
@@ -267,11 +267,11 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "que mes?"
+                        "value": "en que mes es?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "vale, el día {day} pero en que mes?"
+                        "value": "vale, el día {day} .pero en que mes?"
                     },
                     {
                         "type": "PlainText",
@@ -315,7 +315,7 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "vale. el {day} de {month} . pero de que año?"
+                        "value": "vale. el {day} de {month} . de que año?"
                     },
                     {
                         "type": "PlainText",

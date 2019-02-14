@@ -50,14 +50,16 @@ const LaunchRequestHandler = {
 
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
+        let speechText = requestAttributes.t('WELCOME_MSG', name);
+
         if(day && month && year){
-            return SayBirthdayIntentHandler.handle(handlerInput);
-        } else {
-            return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('WELCOME_MSG', name))
-                    .reprompt(requestAttributes.t('HELP_MSG'))
-                    .getResponse();
+            speechText = requestAttributes.t('REGISTER_MSG', name, day, month, year)
         }
+        
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
     }
 };
 
@@ -81,9 +83,10 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['month'] = month;
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .speak(requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG'))
             .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
