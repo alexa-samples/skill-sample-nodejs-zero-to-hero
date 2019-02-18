@@ -128,8 +128,8 @@ const SayBirthdayIntentHandler = {
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
-            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysLeft, birthdayData.age + 1);
-            if(birthdayData.daysLeft === 0) {
+            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysUntilBirthday, birthdayData.age + 1);
+            if(birthdayData.daysUntilBirthday === 0) {
                 speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
             }
             speechText += requestAttributes.t('OVERWRITE_MSG');
@@ -205,7 +205,7 @@ const RemindBirthdayIntentHandler = {
                 }
                 // create reminder structure
                 const reminder = logic.createReminderData(
-                    birthdayData.daysLeft,
+                    birthdayData.daysUntilBirthday,
                     timezone,
                     requestEnvelope.request.locale,
                     message); 

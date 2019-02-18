@@ -98,28 +98,44 @@ const CelebrityBirthdayIntentHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
+        /*const {intent} = handlerInput.requestEnvelope.request;
 
         const day = intent.slots.day.value;
         const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;*/
         
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
-        
-        const response = await logic.fetchBirthdayData(day, month);
+
+        const serviceClientFactory = handlerInput.serviceClientFactory;
+        const deviceId = handlerInput.requestEnvelope.context.System.device.deviceId;
+
+        // let's try to get the timezone via the UPS API
+        // (no permissions required but it might not be set up)
+        let timezone;
+        try {
+            const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+            timezone = await upsServiceClient.getSystemTimeZone(deviceId);
+        } catch (error) {
+            return handlerInput.responseBuilder
+                .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                .getResponse();
+        }
+        console.log('Got timezone: ' + timezone);
+
+        const dateData = logic.getAdjustedDateData(timezone);
+        const response = await logic.fetchBirthdayData(dateData.day, dateData.month, 5);
 
         let speechText = requestAttributes.t('API_ERROR_MSG');
         if(response) {
             console.log(JSON.stringify(response));
-            const persons = response.results.bindings;
-
-            persons.forEach((person) => {
+            const results = response.results.bindings;
+            speechText = 'Hoy cumplen años: ';
+            results.forEach((person) => {
                 console.log(person);
+                speechText += person.humanLabel.value + '. '
             });
-
             //response.results.bindings
             //human, picture, date_of_birth, humanLabel
-            speechText = 'Recorrido con éxito. ';
         }
 
         return handlerInput.responseBuilder
@@ -164,8 +180,8 @@ const SayBirthdayIntentHandler = {
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
-            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysLeft, birthdayData.age + 1);
-            if(birthdayData.daysLeft === 0) {
+            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysUntilBirthday, birthdayData.age + 1);
+            if(birthdayData.daysUntilBirthday === 0) {
                 speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
             }
             speechText += requestAttributes.t('OVERWRITE_MSG');
@@ -241,7 +257,7 @@ const RemindBirthdayIntentHandler = {
                 }
                 // create reminder structure
                 const reminder = logic.createReminderData(
-                    birthdayData.daysLeft,
+                    birthdayData.daysUntilBirthday,
                     timezone,
                     requestEnvelope.request.locale,
                     message); 

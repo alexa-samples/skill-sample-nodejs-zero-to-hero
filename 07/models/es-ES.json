@@ -139,37 +139,24 @@
                 },
                 {
                     "name": "CelebrityBirthdayIntent",
-                    "slots": [
-                        {
-                            "name": "day",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "el {day}",
-                                "{day}"
-                            ]
-                        },
-                        {
-                            "name": "month",
-                            "type": "TipoMes",
-                            "samples": [
-                                "en {month}",
-                                "{month}"
-                            ]
-                        }
-                    ],
+                    "slots": [],
                     "samples": [
+                        "cumples de hoy",
+                        "cumples del día",
+                        "cumpleaños de hoy",
+                        "cumpleaños del día",
                         "cumpleaños de celebridades",
                         "cumples de celebridades",
                         "cumpleaños de famosos",
                         "cumples de famosos",
-                        "cumpleaños del {day}",
-                        "cumpleaños de {month}",
-                        "cumples del {day}",
-                        "cumples de {month}",
-                        "cumpleaños del {day} de {month}",
-                        "cumples del {day} de {month}",
-                        "cumpleaños de {month} {day}",
-                        "cumples de {month} {day}"
+                        "dime quienes cumplen años hoy",
+                        "dime quien cumple años hoy",
+                        "quienes cumplen años hoy",
+                        "quien cumple años hoy",
+                        "dime cumpleaños de celebridades",
+                        "dime cumples de celebridades",
+                        "dime cumpleaños de famosos",
+                        "dime cumples de famosos"
                     ]
                 }
             ],
@@ -340,31 +327,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "name": "CelebrityBirthdayIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "day",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.769771731666.1421026122767"
-                            }
-                        },
-                        {
-                            "name": "month",
-                            "type": "TipoMes",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.769771731666.1217251464024"
-                            }
-                        }
-                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -509,32 +471,6 @@
                     {
                         "type": "PlainText",
                         "value": "Te enviaré el siguiente mensaje cuando cumplas años. {message} . De acuerdo?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.769771731666.1421026122767",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Genial. Dime que día del mes"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "Vale. Para cumpleaños de que día?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.769771731666.1217251464024",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Qué mes te interesa?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "Vale. Cumpleaños de que mes?"
                     }
                 ]
             }
