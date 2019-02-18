@@ -1,4 +1,5 @@
 const moment = require('moment-timezone'); // will help us do all the birthday math
+const fetch = require('node-fetch');
 
 module.exports = {
     getBirthdayData(day, month, year, timezone) {
@@ -40,7 +41,38 @@ module.exports = {
             },
             pushNotification: {
               status: 'ENABLED',
-            },
-          };
+            }
+        }
+    },
+    fetchBirthdayData(day, month){
+        const endpoint = 'https://query.wikidata.org/sparql';
+        // List of actors with pictures and date of birth
+        const maxItems = 10;
+        const sparqlQuery = 
+        `SELECT ?human ?humanLabel ?picture ?date_of_birth WHERE {
+        ?human wdt:P31 wd:Q5.
+        ?human wdt:P106 wd:Q33999.
+        ?human wdt:P18 ?picture.
+        FILTER((DATATYPE(?date_of_birth)) = xsd:dateTime)
+        FILTER((MONTH(?date_of_birth)) = ${day})
+        FILTER((DAY(?date_of_birth)) = ${month})
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+        OPTIONAL { ?human wdt:P569 ?date_of_birth. }
+        }
+        LIMIT ${maxItems}`;
+        const url = endpoint + '?query=' + encodeURIComponent( sparqlQuery );
+        const headers = {'Accept': 'application/sparql-results+json'};
+        console.log(url);
+
+        async function getJsonResponse(url, headers){
+            const res = await fetch(url, {headers});
+            return await res.json();
+        }
+        
+        return getJsonResponse(url, headers).then((result) => {
+            return result;
+        }).catch((error) => {
+            return null;
+        });
     }
 }

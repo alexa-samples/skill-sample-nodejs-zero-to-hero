@@ -178,20 +178,18 @@ const LoggingResponseInterceptor = {
 };
 
 // This request interceptor will bind a translation function 't' to the requestAttributes.
-const LocalizationInterceptor = {
-  process(handlerInput) {
-    const localizationClient = i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageStrings,
-      returnObjects: true
-    });
-    const attributes = handlerInput.attributesManager.getRequestAttributes();
-    attributes.t = function (...args) {
-      return localizationClient.t(...args);
-    }
-  }
-}
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.use(sprintf).init({
+            lng: handlerInput.requestEnvelope.request.locale,
+            resources: languageStrings,
+            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+        }).then((t) => {
+            const attributes = handlerInput.attributesManager.getRequestAttributes();
+            attributes.t = (...args) => t(...args);
+        });
+    },
+};
 
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -208,7 +206,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(
-        LocalizationInterceptor,
+        LocalisationRequestInterceptor,
         LoggingRequestInterceptor)
     .addResponseInterceptors(
         LoggingResponseInterceptor)

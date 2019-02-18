@@ -52,6 +52,10 @@
                         }
                     ],
                     "samples": [
+                        "{day}",
+                        "{month}",
+                        "{month} del {year}",
+                        "{month} de {year}",
                         "{day} del {month}",
                         "en el año {year}",
                         "he nacido en {year}",
@@ -259,7 +263,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "vale. me has dicho que cumples en el mes de {month} pero que día?"
+                        "value": "vale. me has dicho que cumples en {month} pero que día?"
                     },
                     {
                         "type": "PlainText",

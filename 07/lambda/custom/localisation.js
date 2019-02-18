@@ -2,7 +2,7 @@ module.exports = {
     es: {
         translation: {
             WELCOME_MSG: 'Hola %s! Dime. Cuando es tu fecha de cumpleaños? ',
-            REGISTER_MSG: '%s Recordaré que tu fecha de cumpleaños es el %s de %s de %s. ',
+            REGISTER_MSG: '%s Tu fecha de cumpleaños es el %s de %s de %s. ',
             SAY_MSG: '%s Quedan %s días para que cumplas %s años. ',
             GREET_MSG: 'Feliz cumpleaños %s! Hoy cumples %s! ',
             MISSING_MSG: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. ',
@@ -17,7 +17,8 @@ module.exports = {
             GOODBYE_MSG: ['Hasta luego %s! ', 'Adios %s! ', 'Hasta pronto %s! ', 'Nos vemos %s! '],
             REFLECTOR_MSG: 'Acabas de activar %s ',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
-            ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. '
+            ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. ',
+            API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a API externa. Por favor inténtalo otra vez. '
         }
     }
 }

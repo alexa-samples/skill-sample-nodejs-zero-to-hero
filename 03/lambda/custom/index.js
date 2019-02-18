@@ -51,10 +51,11 @@ const RegisterBirthdayIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
 
         const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
 
-        const speechText = requestAttributes.t('REGISTER_MSG', day, month, year); // we'll save these values later
+        const speechText = requestAttributes.t('REGISTER_MSG', day, monthName, year); // we'll save these values later
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -180,19 +181,17 @@ const LoggingResponseInterceptor = {
 };
 
 // This request interceptor will bind a translation function 't' to the requestAttributes.
-const LocalizationRequestInterceptor = {
-  process(handlerInput) {
-    const localizationClient = i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageStrings,
-      returnObjects: true
-    });
-    const attributes = handlerInput.attributesManager.getRequestAttributes();
-    attributes.t = function (...args) {
-      return localizationClient.t(...args);
-    }
-  }
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.use(sprintf).init({
+            lng: handlerInput.requestEnvelope.request.locale,
+            resources: languageStrings,
+            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+        }).then((t) => {
+            const attributes = handlerInput.attributesManager.getRequestAttributes();
+            attributes.t = (...args) => t(...args);
+        });
+    },
 };
 
 // This handler acts as the entry point for your skill, routing all request and response
@@ -209,7 +208,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(
-        LocalizationRequestInterceptor,
+        LocalisationRequestInterceptor,
         LoggingRequestInterceptor)
     .addResponseInterceptors(
         LoggingResponseInterceptor)

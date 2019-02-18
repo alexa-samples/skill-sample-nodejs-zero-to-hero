@@ -40,7 +40,7 @@ module.exports = {
             },
             pushNotification: {
               status: 'ENABLED',
-            },
-          };
+            }
+        }
     }
 }

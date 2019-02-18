@@ -20,6 +20,7 @@ const LaunchRequestHandler = {
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
+        const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
 
         if(!sessionAttributes['name']){
@@ -51,7 +52,7 @@ const LaunchRequestHandler = {
         let speechText = requestAttributes.t('WELCOME_MSG', name);
 
         if(day && month && year){
-            speechText = requestAttributes.t('REGISTER_MSG', name, day, month, year)
+            speechText = requestAttributes.t('REGISTER_MSG', name?name+'.':'', day, monthName, year) + requestAttributes.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
@@ -84,7 +85,7 @@ const RegisterBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .speak(requestAttributes.t('REGISTER_MSG', name?name+'.':'', day, monthName, year) + requestAttributes.t('HELP_MSG'))
             .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
@@ -131,7 +132,7 @@ const SayBirthdayIntentHandler = {
             }
             const age = today.diff(wasBorn, 'years');
             const daysLeft = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('SAY_MSG', name, daysLeft, age + 1);
+            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', daysLeft, age + 1);
             if(daysLeft === 0) {
                 speechText = requestAttributes.t('GREET_MSG', name, age);
             }
@@ -267,7 +268,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
         .addRequestInterceptors(
-            interceptors.LocalizationRequestInterceptor,
+            interceptors.LocalisationRequestInterceptor,
             interceptors.LoggingRequestInterceptor,
             interceptors.LoadAttributesRequestInterceptor)
         .addResponseInterceptors(

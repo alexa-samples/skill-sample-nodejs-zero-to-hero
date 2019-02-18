@@ -18,6 +18,7 @@ const LaunchRequestHandler = {
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
+        const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
 
         if(!sessionAttributes['name']){
@@ -49,7 +50,7 @@ const LaunchRequestHandler = {
         let speechText = requestAttributes.t('WELCOME_MSG', name);
 
         if(day && month && year){
-            speechText = requestAttributes.t('REGISTER_MSG', name, day, month, year)
+            speechText = requestAttributes.t('REGISTER_MSG', name?name+'.':'', day, monthName, year) + requestAttributes.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
@@ -82,7 +83,47 @@ const RegisterBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .speak(requestAttributes.t('REGISTER_MSG', name?name+'.':'', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .reprompt(requestAttributes.t('HELP_MSG'))
+            .getResponse();
+    }
+};
+
+const CelebrityBirthdayIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'CelebrityBirthdayIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = handlerInput.requestEnvelope.request;
+
+        const day = intent.slots.day.value;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        
+        const response = await logic.fetchBirthdayData(day, month);
+
+        let speechText = requestAttributes.t('API_ERROR_MSG');
+        if(response) {
+            console.log(JSON.stringify(response));
+            const persons = response.results.bindings;
+
+            persons.forEach((person) => {
+                console.log(person);
+            });
+
+            //response.results.bindings
+            //human, picture, date_of_birth, humanLabel
+            speechText = 'Recorrido con éxito. ';
+        }
+
+        return handlerInput.responseBuilder
+            .speak(speechText + requestAttributes.t('HELP_MSG'))
             .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
@@ -123,7 +164,7 @@ const SayBirthdayIntentHandler = {
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
-            speechText = requestAttributes.t('SAY_MSG', name, birthdayData.daysLeft, birthdayData.age + 1);
+            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysLeft, birthdayData.age + 1);
             if(birthdayData.daysLeft === 0) {
                 speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
             }
@@ -349,12 +390,13 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegisterBirthdayIntentHandler,
         SayBirthdayIntentHandler,
         RemindBirthdayIntentHandler,
+        CelebrityBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
         .addRequestInterceptors(
-            interceptors.LocalizationRequestInterceptor,
+            interceptors.LocalisationRequestInterceptor,
             interceptors.LoggingRequestInterceptor,
             interceptors.LoadAttributesRequestInterceptor)
         .addResponseInterceptors(

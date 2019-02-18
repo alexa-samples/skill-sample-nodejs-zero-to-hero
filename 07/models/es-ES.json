@@ -52,6 +52,10 @@
                         }
                     ],
                     "samples": [
+                        "{day}",
+                        "{month}",
+                        "{month} del {year}",
+                        "{month} de {year}",
                         "{day} del {month}",
                         "en el año {year}",
                         "he nacido en {year}",
@@ -131,6 +135,41 @@
                         "configura un recordatorio con mensaje {message}",
                         "pon un recordatorio con mensaje {message}",
                         "crea un recordatorio con mensaje {message}"
+                    ]
+                },
+                {
+                    "name": "CelebrityBirthdayIntent",
+                    "slots": [
+                        {
+                            "name": "day",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "el {day}",
+                                "{day}"
+                            ]
+                        },
+                        {
+                            "name": "month",
+                            "type": "TipoMes",
+                            "samples": [
+                                "en {month}",
+                                "{month}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "cumpleaños de celebridades",
+                        "cumples de celebridades",
+                        "cumpleaños de famosos",
+                        "cumples de famosos",
+                        "cumpleaños del {day}",
+                        "cumpleaños de {month}",
+                        "cumples del {day}",
+                        "cumples de {month}",
+                        "cumpleaños del {day} de {month}",
+                        "cumples del {day} de {month}",
+                        "cumpleaños de {month} {day}",
+                        "cumples de {month} {day}"
                     ]
                 }
             ],
@@ -301,6 +340,31 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "CelebrityBirthdayIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "day",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.769771731666.1421026122767"
+                            }
+                        },
+                        {
+                            "name": "month",
+                            "type": "TipoMes",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.769771731666.1217251464024"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -311,7 +375,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "vale. me has dicho que cumples en el mes de {month} pero que día?"
+                        "value": "vale. me has dicho que cumples en {month} pero que día?"
                     },
                     {
                         "type": "PlainText",
@@ -445,6 +509,32 @@
                     {
                         "type": "PlainText",
                         "value": "Te enviaré el siguiente mensaje cuando cumplas años. {message} . De acuerdo?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.769771731666.1421026122767",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Genial. Dime que día del mes"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Vale. Para cumpleaños de que día?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.769771731666.1217251464024",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Qué mes te interesa?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Vale. Cumpleaños de que mes?"
                     }
                 ]
             }

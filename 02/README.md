@@ -4,7 +4,7 @@
 
 1. **Developer Console**: adding an extra locale (es-ES, translated from en-US)
 2. **Code Tab**: i18next dependency, sprintf, languageStrings (embedded for now)
-3. **Code Tab**: Request and Response Interceptors (loggers), Localization Interceptor (simplest, sprintf but no arrays)
+3. **Code Tab**: Request and Response Interceptors (loggers), Localisation Interceptor (simplest, sprintf but no arrays)
 4. **Code Tab**: Attributes Manager, Request Attributes, requestAttributes.t and requestAttributes.t with parameters (sprintf)
 
 ## Concepts

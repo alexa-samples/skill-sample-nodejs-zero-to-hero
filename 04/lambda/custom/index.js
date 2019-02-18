@@ -47,12 +47,13 @@ const LaunchRequestHandler = {
         
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
+        const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
         
         let speechText = requestAttributes.t('WELCOME_MSG');
 
         if(day && month && year){
-            speechText = requestAttributes.t('REGISTER_MSG', day, month, year)
+            speechText = requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
@@ -249,19 +250,17 @@ const LoggingResponseInterceptor = {
 };
 
 // This request interceptor will bind a translation function 't' to the requestAttributes.
-const LocalizationRequestInterceptor = {
-  process(handlerInput) {
-    const localizationClient = i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageStrings,
-      returnObjects: true
-    });
-    const attributes = handlerInput.attributesManager.getRequestAttributes();
-    attributes.t = function (...args) {
-      return localizationClient.t(...args);
-    }
-  }
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.use(sprintf).init({
+            lng: handlerInput.requestEnvelope.request.locale,
+            resources: languageStrings,
+            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+        }).then((t) => {
+            const attributes = handlerInput.attributesManager.getRequestAttributes();
+            attributes.t = (...args) => t(...args);
+        });
+    },
 };
 
 const LoadAttributesRequestInterceptor = {
@@ -300,7 +299,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
         .addRequestInterceptors(
-            LocalizationRequestInterceptor,
+            LocalisationRequestInterceptor,
             LoggingRequestInterceptor,
             LoadAttributesRequestInterceptor)
         .addResponseInterceptors(

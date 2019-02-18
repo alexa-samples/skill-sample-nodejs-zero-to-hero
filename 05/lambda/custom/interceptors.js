@@ -19,13 +19,13 @@ module.exports = {
 
     // This request interceptor will bind a translation function 't' to the requestAttributes.
     // Additionally it will handle picking a random value if instead of a string it receives an array
-    LocalizationRequestInterceptor: {
+    LocalisationRequestInterceptor: {
         process(handlerInput) {
-            const localizationClient = i18n.use(sprintf).init({
+            const localisationClient = i18n.use(sprintf).init({
                 lng: handlerInput.requestEnvelope.request.locale,
                 resources: require('./localisation'),
             });
-            localizationClient.localize = function localize() {
+            localisationClient.localise = function localise() {
                 const args = arguments;
                 const values = [];
                 for (let i = 1; i < args.length; i += 1) {
@@ -43,7 +43,7 @@ module.exports = {
             };
             const attributes = handlerInput.attributesManager.getRequestAttributes();
             attributes.t = function translate(...args) {
-                return localizationClient.localize(...args);
+                return localisationClient.localise(...args);
             }
         }
     },
