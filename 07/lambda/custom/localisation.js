@@ -18,7 +18,8 @@ module.exports = {
             REFLECTOR_MSG: 'Acabas de activar %s ',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
             ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. ',
-            API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a API externa. Por favor inténtalo otra vez. '
+            API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a API externa. Por favor inténtalo otra vez. ',
+            CONJUNCTION_MSG: ' y '
         }
     }
 }

@@ -98,11 +98,6 @@ const CelebrityBirthdayIntentHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        /*const {intent} = handlerInput.requestEnvelope.request;
-
-        const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;*/
         
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
@@ -129,10 +124,13 @@ const CelebrityBirthdayIntentHandler = {
         if(response) {
             console.log(JSON.stringify(response));
             const results = response.results.bindings;
-            speechText = 'Hoy cumplen años: ';
-            results.forEach((person) => {
+            speechText = `Hoy ${dateData.day} del ${dateData.month} cumplen años: `;
+            results.forEach((person, index) => {
                 console.log(person);
-                speechText += person.humanLabel.value + '. '
+                if(index === Object.keys(results).length - 2)
+                    speechText += person.humanLabel.value + requestAttributes.t('CONJUNCTION_MSG');
+                else
+                    speechText += person.humanLabel.value + '. '
             });
             //response.results.bindings
             //human, picture, date_of_birth, humanLabel
