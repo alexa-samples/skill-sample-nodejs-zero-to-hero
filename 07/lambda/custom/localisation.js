@@ -10,18 +10,19 @@ module.exports = {
             REMINDER_ERROR_MSG: 'Ha habido un error al crear el recordatorio. ',
             UNSUPPORTED_DEVICE_MSG: 'Este dispositivo no soporta la operación que estás intentando realizar. ',
             OVERWRITE_MSG: 'Si quieres cambiar la fecha solo di, registra mi cumpleaños. ',
-            CANCEL_MSG: 'Okey. Lo cancelamos. ',
-            MISSING_PERMISSION_MSG: 'Parece que no has autorizado a la skill para enviar recordatorios. Te he enviado una tarjeta a la app Alexa para que lo habilites. ',
+            CANCEL_MSG: 'Vale. Lo cancelamos. ',
+            MISSING_PERMISSION_MSG: 'Parece que no has autorizado el envío de recordatorios. Te he enviado una tarjeta a la app Alexa para que lo habilites. ',
             NO_TIMEZONE_MSG: 'No he podido determinar tu zona horaria. Verifíca la configuración de tu dispositivo e inténtalo otra vez.',
-            HELP_MSG: 'Puedes decir, cuanto falta para mi cumpleaños? . Volver a registar la fecha diciendo, registra mi cumpleaños. O puedes crear un recordatorio diciendo, crea un recordatorio',
+            HELP_MSG: 'Puedes decir, cuanto falta para mi cumpleaños? . Volver a registar la fecha diciendo, registra mi cumpleaños. También puedes crear un recordatorio diciendo, crea un recordatorio. O puedes ver quién cumple años hoy diciendo, cumpleaños de celebridades',
             GOODBYE_MSG: ['Hasta luego %s! ', 'Adios %s! ', 'Hasta pronto %s! ', 'Nos vemos %s! '],
             REFLECTOR_MSG: 'Acabas de activar %s ',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
             ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. ',
             API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a API externa. Por favor inténtalo otra vez. ',
-            PROGRESSIVE_MSG: 'Espera un momento mientras busco cumpleaños de celebridades en esa fecha. ',
+            PROGRESSIVE_MSG: 'Espera un momento mientras busco cumpleaños de celebridades. ',
             CONJUNCTION_MSG: ' y ',
-            TODAY_BIRTHDAYS_MSG: 'Hoy cumplen años: '
+            TODAY_BIRTHDAYS_MSG: 'Hoy cumplen años: ',
+            ALSO_TODAY_MSG: 'También hoy cumplen: '
         }
     }
 }

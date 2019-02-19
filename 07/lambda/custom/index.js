@@ -89,10 +89,10 @@ const RegisterBirthdayIntentHandler = {
     }
 };
 
-const CelebrityBirthdayIntentHandler = {
+const TodayBirthdaysIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'CelebrityBirthdayIntent';
+            && handlerInput.requestEnvelope.request.intent.name === 'TodayBirthdaysIntent';
     },
     async handle(handlerInput) {
         const {attributesManager} = handlerInput;
@@ -187,8 +187,24 @@ const SayBirthdayIntentHandler = {
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
             speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysUntilBirthday, birthdayData.age + 1);
-            if(birthdayData.daysUntilBirthday === 0) {
+            if(birthdayData.daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
+
+                const dateData = logic.getAdjustedDateData(timezone);
+                const response = await logic.fetchBirthdayData(dateData.day, dateData.month, 3);
+
+                if(response) { // if the API call fails we just don't append today's birthdays
+                    console.log(JSON.stringify(response));
+                    const results = response.results.bindings;
+                    speechText += requestAttributes.t('ALSO_TODAY_MSG');
+                    results.forEach((person, index) => {
+                        console.log(person);
+                        if(index === Object.keys(results).length - 2)
+                            speechText += person.humanLabel.value + requestAttributes.t('CONJUNCTION_MSG');
+                        else
+                            speechText += person.humanLabel.value + '. '
+                    });
+                }
             }
             speechText += requestAttributes.t('OVERWRITE_MSG');
         } else {
@@ -270,9 +286,7 @@ const RemindBirthdayIntentHandler = {
                 const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
                 // save reminder id in session attributes
                 sessionAttributes['reminderId'] = reminderResponse.alertToken;
-
                 speechText = requestAttributes.t('REMINDER_CREATED_MSG') + requestAttributes.t('HELP_MSG');
-
             } catch (error) {
                 console.log(JSON.stringify(error));
                 switch (error.statusCode) {
@@ -412,7 +426,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegisterBirthdayIntentHandler,
         SayBirthdayIntentHandler,
         RemindBirthdayIntentHandler,
-        CelebrityBirthdayIntentHandler,
+        TodayBirthdaysIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,

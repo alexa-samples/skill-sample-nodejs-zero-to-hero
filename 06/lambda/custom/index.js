@@ -129,7 +129,7 @@ const SayBirthdayIntentHandler = {
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
             speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysUntilBirthday, birthdayData.age + 1);
-            if(birthdayData.daysUntilBirthday === 0) {
+            if(birthdayData.daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
             }
             speechText += requestAttributes.t('OVERWRITE_MSG');
@@ -212,9 +212,7 @@ const RemindBirthdayIntentHandler = {
                 const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
                 // save reminder id in session attributes
                 sessionAttributes['reminderId'] = reminderResponse.alertToken;
-
                 speechText = requestAttributes.t('REMINDER_CREATED_MSG') + requestAttributes.t('HELP_MSG');
-
             } catch (error) {
                 console.log(JSON.stringify(error));
                 switch (error.statusCode) {

@@ -117,7 +117,7 @@ const SayBirthdayIntentHandler = {
             const age = today.diff(wasBorn, 'years');
             const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
             speechText = requestAttributes.t('SAY_MSG', daysUntilBirthday, age + 1);
-            if(daysUntilBirthday === 0) {
+            if(daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = requestAttributes.t('GREET_MSG', age);
             }
             speechText += requestAttributes.t('OVERWRITE_MSG');
