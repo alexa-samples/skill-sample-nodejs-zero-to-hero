@@ -117,6 +117,14 @@ const CelebrityBirthdayIntentHandler = {
         }
         console.log('Got timezone: ' + timezone);
 
+        try {
+            // call the progressive response service
+            await logic.callDirectiveService(handlerInput, requestAttributes.t('PROGRESSIVE_MSG'));
+          } catch (error) {
+            // if it fails we can continue, just the user will wait as if there's no progressive response
+            console.log("Progressive directive error : " + error);
+        }
+
         const dateData = logic.getAdjustedDateData(timezone);
         const response = await logic.fetchBirthdayData(dateData.day, dateData.month, 5);
 
@@ -124,7 +132,7 @@ const CelebrityBirthdayIntentHandler = {
         if(response) {
             console.log(JSON.stringify(response));
             const results = response.results.bindings;
-            speechText = `Hoy ${dateData.day} del ${dateData.month} cumplen años: `;
+            speechText = requestAttributes.t('TODAY_BIRTHDAYS_MSG');
             results.forEach((person, index) => {
                 console.log(person);
                 if(index === Object.keys(results).length - 2)
