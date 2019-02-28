@@ -17,3 +17,10 @@
 2. Persistent attributes
 3. Persistence adapters (S3 and DynamoDB)
 4. Async/await
+
+## Diff
+
+1. *lambda/custom/package.json*: add dependencies for S3 and DynamoDB persistence adapters and for the moment-timezone library
+2. *models/es-ES.json*: add SayBirthdayIntent with slot-less utterances
+3. *lambda/custom/localisation.js*: create this file and put languageStrings here. Improve help message
+4. *lambda/custom/index.js*: add function to get/initialize the persistence adapter - getPersistenceAdapter(). Add require for moment-timezone library. Change languageString to require the localisation.js file. Create getPersistenceAdapter() function. In launch request handler get the session attributes and read day, month, monthId and year (if present say this info to the user, otherwise just issue a standard welcome message). In register birthday intent handler get the session attributes and save all slots values in them. Add say birthday intent handler and get day, month id and year from session attributes. If these attributes are present calculate remaining days to birthday with moments-timezone. If it's the user birthday say happy birthday. If the attributes are not present invite the user to register birthday. Add request interceptor to load the session attributes and a response interceptor to save them. Add to the skill builder:  say birthday intent handler, the new interceptors and the persistence adapter

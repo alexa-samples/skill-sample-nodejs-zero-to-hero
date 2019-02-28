@@ -138,7 +138,7 @@
                     ]
                 },
                 {
-                    "name": "TodayBirthdaysIntent",
+                    "name": "CelebrityBirthdaysIntent",
                     "slots": [],
                     "samples": [
                         "cumples de hoy",

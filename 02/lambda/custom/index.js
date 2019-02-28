@@ -9,7 +9,7 @@ const sprintf = require('i18next-sprintf-postprocessor');
 
 // We create a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME')
+// e.g. requestAttributes.t('WELCOME_MSG')
 const languageStrings = {
   en: {
     translation: {
@@ -40,9 +40,10 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('WELCOME_MSG');
-                          
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -56,9 +57,10 @@ const HelloWorldIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('HELLO_MSG');
-      
+
         return handlerInput.responseBuilder
             .speak(speechText)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
@@ -72,7 +74,8 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
@@ -89,9 +92,10 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('GOODBYE_MSG');
-      
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .getResponse();
@@ -104,7 +108,8 @@ const FallbackIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
@@ -133,8 +138,9 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager, requestEnvelope} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const intentName = requestEnvelope.request.intent.name;
         const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
@@ -152,9 +158,11 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        console.log(`~~~~ Error handled: ${error.message}`);
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const speechText = requestAttributes.t('ERROR_MSG');
+
+        console.log(`~~~~ Error handled: ${error.message}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -188,7 +196,7 @@ const LocalisationRequestInterceptor = {
             const attributes = handlerInput.attributesManager.getRequestAttributes();
             attributes.t = (...args) => t(...args);
         });
-    },
+    }
 };
 
 // This handler acts as the entry point for your skill, routing all request and response

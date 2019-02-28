@@ -55,7 +55,7 @@ module.exports = {
             }
         }
     },
-    fetchBirthdayData(day, month, limit){
+    fetchBirthdaysData(day, month, limit){
         const endpoint = 'https://query.wikidata.org/sparql';
         // List of actors with pictures and date of birth
         const sparqlQuery = 

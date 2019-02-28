@@ -46,12 +46,12 @@ const RegisterBirthdayIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const intent = handlerInput.requestEnvelope.request.intent;
+        const {intent} = requestEnvelope.request;
 
         const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
         const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
 
@@ -59,6 +59,7 @@ const RegisterBirthdayIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
+            .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -133,9 +134,9 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = requestEnvelope.request.intent.name;
         const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
@@ -191,7 +192,7 @@ const LocalisationRequestInterceptor = {
             const attributes = handlerInput.attributesManager.getRequestAttributes();
             attributes.t = (...args) => t(...args);
         });
-    },
+    }
 };
 
 // This handler acts as the entry point for your skill, routing all request and response
@@ -203,6 +204,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegisterBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
+        FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     .addErrorHandlers(

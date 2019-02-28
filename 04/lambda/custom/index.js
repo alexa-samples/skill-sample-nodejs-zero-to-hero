@@ -10,7 +10,7 @@ const moment = require('moment-timezone'); // will help us do all the birthday m
 const i18n = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
 
-// We import language strings object containing all of our strings. 
+// We import a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
 // e.g. requestAttributes.t('WELCOME_MSG')
 const languageStrings = require('./localisation');
@@ -44,15 +44,15 @@ const LaunchRequestHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        
+
         const day = sessionAttributes['day'];
-        const month = sessionAttributes['month'];
+        const month = sessionAttributes['month']; //MM
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
         
         let speechText = requestAttributes.t('WELCOME_MSG');
 
-        if(day && month && year){
+        if(day && monthName && year){
             speechText = requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG');
         }
         
@@ -69,23 +69,25 @@ const RegisterBirthdayIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
+        const {intent} = requestEnvelope.request;
 
         const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
         const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
         
         sessionAttributes['day'] = day;
-        sessionAttributes['month'] = month;
+        sessionAttributes['month'] = month; //MM
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
 
+        const speechText = requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG');
+
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .speak(speechText)
             .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
@@ -102,12 +104,12 @@ const SayBirthdayIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
-        const month = sessionAttributes['month'];
+        const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
         
         let speechText;
         if(day && month && year){    
-            const timezone = 'Europe/Madrid'; // we'll change this later to retrieve the timezone from the device
+            const timezone = 'Europe/Madrid'; // provide yours here. we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
@@ -202,9 +204,9 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = requestEnvelope.request.intent.name;
         const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
@@ -260,7 +262,7 @@ const LocalisationRequestInterceptor = {
             const attributes = handlerInput.attributesManager.getRequestAttributes();
             attributes.t = (...args) => t(...args);
         });
-    },
+    }
 };
 
 const LoadAttributesRequestInterceptor = {
@@ -276,6 +278,7 @@ const LoadAttributesRequestInterceptor = {
 
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
+        if(!response) return; // avoid intercepting calls that have no outgoing response
         const {attributesManager} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession);//is this a session end?
@@ -296,14 +299,17 @@ exports.handler = Alexa.SkillBuilders.custom()
         SayBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
+        FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
-        .addRequestInterceptors(
-            LocalisationRequestInterceptor,
-            LoggingRequestInterceptor,
-            LoadAttributesRequestInterceptor)
-        .addResponseInterceptors(
-            LoggingResponseInterceptor,
-            SaveAttributesResponseInterceptor)
-        .withPersistenceAdapter(persistenceAdapter)
-        .lambda();
+    .addErrorHandlers(
+        ErrorHandler)
+    .addRequestInterceptors(
+        LocalisationRequestInterceptor,
+        LoggingRequestInterceptor,
+        LoadAttributesRequestInterceptor)
+    .addResponseInterceptors(
+        LoggingResponseInterceptor,
+        SaveAttributesResponseInterceptor)
+    .withPersistenceAdapter(persistenceAdapter)
+    .lambda();

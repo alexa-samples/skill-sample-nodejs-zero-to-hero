@@ -21,7 +21,7 @@ const LaunchRequestHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
-        const month = sessionAttributes['month'];
+        const month = sessionAttributes['month']; //MM
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
 
@@ -32,7 +32,7 @@ const LaunchRequestHandler = {
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
-                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions in the skill, no point in intializing the API
+                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
                 if (profileName) { // the user might not have set the name
@@ -49,12 +49,12 @@ const LaunchRequestHandler = {
             }
         }
 
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '.';
 
         let speechText = requestAttributes.t('WELCOME_MSG', name);
 
-        if(day && month && year){
-            speechText = requestAttributes.t('REGISTER_MSG', name?name+'.':'', day, monthName, year) + requestAttributes.t('HELP_MSG');
+        if(day && monthName && year){
+            speechText = requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
@@ -70,24 +70,26 @@ const RegisterBirthdayIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
+        const {intent} = requestEnvelope.request;
 
         const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
         const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
         
         sessionAttributes['day'] = day;
-        sessionAttributes['month'] = month;
+        sessionAttributes['month'] = month; //MM
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '.';
+
+        const speechText = requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('REGISTER_MSG', name?name+'.':'', day, monthName, year) + requestAttributes.t('HELP_MSG'))
+            .speak(speechText)
             .reprompt(requestAttributes.t('HELP_MSG'))
             .getResponse();
     }
@@ -104,9 +106,9 @@ const SayBirthdayIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
-        const month = sessionAttributes['month'];
+        const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '.';
         
         let speechText;
         if(day && month && year){
@@ -115,7 +117,7 @@ const SayBirthdayIntentHandler = {
     
             // let's try to get the timezone via the UPS API
             // (no permissions required but it might not be set up)
-           let timezone;
+            let timezone;
             try {
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 timezone = await upsServiceClient.getSystemTimeZone(deviceId);
@@ -128,7 +130,7 @@ const SayBirthdayIntentHandler = {
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
 
-            speechText = requestAttributes.t('SAY_MSG', name?name+'.':'', birthdayData.daysUntilBirthday, birthdayData.age + 1);
+            speechText = requestAttributes.t('SAY_MSG', name, birthdayData.daysUntilBirthday, birthdayData.age + 1);
             if(birthdayData.daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
             }
@@ -162,6 +164,7 @@ const RemindBirthdayIntentHandler = {
         const message = intent.slots.message.value;
 
         if(intent.confirmationStatus !== 'CONFIRMED') {
+
             return handlerInput.responseBuilder
                 .speak(requestAttributes.t('CANCEL_MSG') + requestAttributes.t('HELP_MSG'))
                 .reprompt(requestAttributes.t('HELP_MSG'))
@@ -192,7 +195,7 @@ const RemindBirthdayIntentHandler = {
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
-                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions in the skill, no point in intializing the API
+                    throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
                 const remindersList = await reminderServiceClient.getReminders();
@@ -263,7 +266,6 @@ const CancelAndStopIntentHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
         const speechText = requestAttributes.t('GOODBYE_MSG', name);
@@ -310,9 +312,9 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = requestEnvelope.request.intent.name;
         const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
@@ -354,15 +356,18 @@ exports.handler = Alexa.SkillBuilders.custom()
         RemindBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
+        FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
-        .addRequestInterceptors(
-            interceptors.LocalisationRequestInterceptor,
-            interceptors.LoggingRequestInterceptor,
-            interceptors.LoadAttributesRequestInterceptor)
-        .addResponseInterceptors(
-            interceptors.LoggingResponseInterceptor,
-            interceptors.SaveAttributesResponseInterceptor)
-        .withPersistenceAdapter(persistence.getPersistenceAdapter())
-        .withApiClient(new Alexa.DefaultApiClient())
-        .lambda();
+    .addErrorHandlers(
+        ErrorHandler)
+    .addRequestInterceptors(
+        interceptors.LocalisationRequestInterceptor,
+        interceptors.LoggingRequestInterceptor,
+        interceptors.LoadAttributesRequestInterceptor)
+    .addResponseInterceptors(
+        interceptors.LoggingResponseInterceptor,
+        interceptors.SaveAttributesResponseInterceptor)
+    .withPersistenceAdapter(persistence.getPersistenceAdapter())
+    .withApiClient(new Alexa.DefaultApiClient())
+    .lambda();
