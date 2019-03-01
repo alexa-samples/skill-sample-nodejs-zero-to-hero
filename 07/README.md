@@ -2,11 +2,17 @@
 
 ## Milestones
 
-1. **Build Tab**: ?
+1. **Build Tab**: add celebrity birthdays intent with utterances to ask for today's birthdays
+2. **Code Tab**: add node-fetch dependency to package.json
+3. **Code Tab**: add code to access external API (with async/await)
+4. **Code Tab**: add progressive response directive and attach to external API call
+5. **Code Tab**: add celebrity birthdays intent handler
+6. **Code Tab**: add new handler to skill builder
 
 ## Concepts
 
-1. ?
+1. Fetch external API (async/await)
+2. Progressive Response
 
 ## Diff
 

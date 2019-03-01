@@ -3,12 +3,16 @@
 ## Milestones
 
 1. **Build Tab**: enable Reminders in Permissions
-2. **Code Tab**: add Reminders permissions
-3. **Code Tab**: 
+2. **Build Tab**: add reminder birthday intent and collect reminder via SearchQuery
+3. **Code Tab**: add Reminders permission constant
+4. **Code Tab**: create Reminders structure (use SCHEDULE_ABSOLUTE)
+5. **Code Tab**: add remind birthday intent handler with support for confirmation
+6. **Code Tab**: add new handler to skill builder
 
 ## Concepts
 
 1. Reminders API
+2. AMAZON.SearchQuery
 
 ## Diff
 
