@@ -59,7 +59,15 @@
                         "{day} del {month}",
                         "en el año {year}",
                         "he nacido en {year}",
+                        "para el {day} de {month}",
+                        "con el {day} de {month}",
+                        "para el {day} de {month} de {year}",
+                        "con el {day} de {month} de {year}",
                         "mi fecha de nacimiento es el {day} de {month} de {year}",
+                        "mi cumpleaños es el {day} de {month} de {year}",
+                        "mi cumple es el {day} de {month} de {year}",
+                        "mi cumpleaños es el {day} de {month}",
+                        "mi cumple es el {day} de {month}",
                         "he nacido el {day} de {month} de {year}",
                         "{day} de {month} de {year}",
                         "cumplo el {day} de {month} de {year}",
@@ -74,6 +82,14 @@
                         "graba mi cumple",
                         "recuerda mi cumple",
                         "registra mi cumpleaños",
+                        "recordar mi cumple",
+                        "recordar mi cumpleaños",
+                        "apunta mi cumple",
+                        "apunta mi cumpleaños",
+                        "toma nota de mi cumple",
+                        "toma nota de mi cumpleaños",
+                        "anota mi cumple",
+                        "anota mi cumpleaños",
                         "graba mi cumpleaños",
                         "recuerda mi cumpleaños"
                     ]
@@ -227,7 +243,7 @@
                                 {
                                     "type": "isLessThan",
                                     "prompt": "Slot.Validation.1253554922892.1358447173887.176185058059",
-                                    "value": "2014"
+                                    "value": "2018"
                                 }
                             ]
                         }
@@ -246,15 +262,15 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "que día cumples?"
+                        "value": "que día cumples años?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "en que día es?"
+                        "value": "en que día es tu cumpleaños?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "dime en que día del mes es"
+                        "value": "dime en que día del mes es tu cumpleaños"
                     }
                 ]
             },
@@ -263,23 +279,19 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "dime ahora el mes en que cumples"
+                        "value": "dime ahora el mes en que cumples años"
                     },
                     {
                         "type": "PlainText",
-                        "value": "en que mes cumples?"
+                        "value": "en que mes cumples años?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "en que mes es?"
+                        "value": "en que mes es tu cumpleaños?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "vale, el día {day} .pero en que mes?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "en que mes?"
+                        "value": "vale, cumples el día {day} .pero en que mes?"
                     }
                 ]
             },
@@ -323,7 +335,7 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "ahora dime el año de nacimiento"
+                        "value": "ahora dime el año de tu nacimiento"
                     },
                     {
                         "type": "PlainText",

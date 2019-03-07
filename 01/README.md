@@ -14,7 +14,7 @@
 2. Lambda Dependencies
 3. Handler as processor of incoming event. Handler structure
 4. Request Types
-5. Skill Builder functions
+5. Skill Builder (custom vs standard) and its functions
 6. Reflector (catch all intent handler)
 7. Out-of-domain utterances (*)
 

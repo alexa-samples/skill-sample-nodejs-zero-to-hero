@@ -1,18 +1,16 @@
 {
-    "name": "hello-world",
-    "version": "0.9.0",
-    "description": "alexa utility for quickly building skills",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Amazon Alexa",
-    "license": "ISC",
-    "dependencies": {
-      "ask-sdk-core": "^2.3.0",
-      "ask-sdk-model": "^1.11.2",
-      "aws-sdk": "^2.404.0",
-      "i18next": "^15.0.4",
-      "i18next-sprintf-postprocessor": "^0.2.2"
-    }
+  "name": "hello-world",
+  "version": "0.9.0",
+  "description": "alexa utility for quickly building skills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amazon Alexa",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-core": "^2.3.0",
+    "ask-sdk-model": "^1.11.2",
+    "i18next": "^15.0.5"
   }
+}

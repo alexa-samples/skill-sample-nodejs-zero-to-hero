@@ -17,7 +17,6 @@ const LaunchRequestHandler = {
     },
     async handle(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
@@ -28,7 +27,7 @@ const LaunchRequestHandler = {
         if(!sessionAttributes['name']){
             // let's try to get the given name via the Customer Profile API
             // don't forget to enable this permission in your skill configuratiuon (Build tab -> Permissions)
-            // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
+            // or you'll get a SessionEndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
@@ -43,23 +42,23 @@ const LaunchRequestHandler = {
             } catch (error) {
                 console.log(JSON.stringify(error));
                 if (error.statusCode === 401 || error.statusCode === 403) {
-                    // the user needs to enable the permissions for given name, let's send a silent permissions card.
+                  // the user needs to enable the permissions for given name, let's send a silent permissions card.
                   handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
                 }
             }
         }
 
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '.';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
 
-        let speechText = requestAttributes.t('WELCOME_MSG', name);
+        let speechText = handlerInput.t('WELCOME_MSG', {name: name});
 
         if(day && monthName && year){
-            speechText = requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG');
+            speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -71,7 +70,6 @@ const RegisterBirthdayIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
@@ -84,13 +82,13 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['month'] = month; //MM
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '.';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
 
-        const speechText = requestAttributes.t('REGISTER_MSG', name, day, monthName, year) + requestAttributes.t('HELP_MSG');
+        const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(requestAttributes.t('HELP_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -101,19 +99,17 @@ const SayBirthdayIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'SayBirthdayIntent';
     },
     async handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '.';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
         
         let speechText;
         if(day && month && year){
-            const serviceClientFactory = handlerInput.serviceClientFactory;
-            const deviceId = handlerInput.requestEnvelope.context.System.device.deviceId;
+            const {requestEnvelope, serviceClientFactory} = handlerInput;
+            const deviceId = requestEnvelope.context.System.device.deviceId;
     
             // let's try to get the timezone via the UPS API
             // (no permissions required but it might not be set up)
@@ -123,25 +119,26 @@ const SayBirthdayIntentHandler = {
                 timezone = await upsServiceClient.getSystemTimeZone(deviceId);
             } catch (error) {
                 return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                    .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
             }
             console.log('Got timezone: ' + timezone);
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
-
-            speechText = requestAttributes.t('SAY_MSG', name, birthdayData.daysUntilBirthday, birthdayData.age + 1);
+            speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: birthdayData.daysUntilBirthday});
+            speechText += handlerInput.t('WILL_TURN_MSG', {count: birthdayData.age + 1});
             if(birthdayData.daysUntilBirthday === 0) { // it's the user's birthday!
-                speechText = requestAttributes.t('GREET_MSG', name, birthdayData.age);
+                speechText = handlerInput.t('GREET_MSG', {name: name});
+                speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
             }
-            speechText += requestAttributes.t('OVERWRITE_MSG');
+            speechText += handlerInput.t('OVERWRITE_MSG');
         } else {
-            speechText = requestAttributes.t('MISSING_MSG');
+            speechText = handlerInput.t('MISSING_MSG');
         }
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(requestAttributes.t('HELP_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -153,7 +150,6 @@ const RemindBirthdayIntentHandler = {
     },
     async handle(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
 
@@ -166,8 +162,8 @@ const RemindBirthdayIntentHandler = {
         if(intent.confirmationStatus !== 'CONFIRMED') {
 
             return handlerInput.responseBuilder
-                .speak(requestAttributes.t('CANCEL_MSG') + requestAttributes.t('HELP_MSG'))
-                .reprompt(requestAttributes.t('HELP_MSG'))
+                .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('HELP_MSG'))
+                .reprompt(handlerInput.t('HELP_MSG'))
                 .getResponse();
         }
         
@@ -182,7 +178,7 @@ const RemindBirthdayIntentHandler = {
                 timezone = await upsServiceClient.getSystemTimeZone(deviceId);
             } catch (error) {
                 return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('NO_TIMEZONE_MSG'))
+                    .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
             }
             console.log('Got timezone: ' + timezone);
@@ -199,12 +195,14 @@ const RemindBirthdayIntentHandler = {
                 const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
                 const remindersList = await reminderServiceClient.getReminders();
+                console.log('Current reminders: ' + JSON.stringify(remindersList));
                 console.log(JSON.stringify(remindersList));
-                const remindersCount = remindersList.totalCount;
                 // delete previous reminder if present
-                if(sessionAttributes['reminderId']){
-                    await reminderServiceClient.deleteReminder(sessionAttributes['reminderId']);
+                const previousReminder = sessionAttributes['reminderId'];
+                if(previousReminder){
+                    await reminderServiceClient.deleteReminder(previousReminder);
                     delete sessionAttributes['reminderId'];
+                    console.log('Deleted previous reminder with token: ' + previousReminder);
                 }
                 // create reminder structure
                 const reminder = logic.createReminderData(
@@ -215,26 +213,29 @@ const RemindBirthdayIntentHandler = {
                 const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
                 // save reminder id in session attributes
                 sessionAttributes['reminderId'] = reminderResponse.alertToken;
-                speechText = requestAttributes.t('REMINDER_CREATED_MSG') + requestAttributes.t('HELP_MSG');
+                console.log('Reminder created with token: ' + reminderResponse.alertToken);
+                speechText = handlerInput.t('REMINDER_CREATED_MSG') + handlerInput.t('HELP_MSG');
             } catch (error) {
                 console.log(JSON.stringify(error));
                 switch (error.statusCode) {
                     case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
                         handlerInput.responseBuilder.withAskForPermissionsConsentCard(REMINDERS_PERMISSION);
-                        speechText = requestAttributes.t('MISSING_PERMISSION_MSG') + requestAttributes.t('HELP_MSG');
+                        speechText = handlerInput.t('MISSING_PERMISSION_MSG') + handlerInput.t('HELP_MSG');
                         break;
                     case 403: // devices such as the simulator do not support reminder management
-                        speechText = requestAttributes.t('UNSUPPORTED_DEVICE_MSG') + requestAttributes.t('HELP_MSG');
+                        speechText = handlerInput.t('UNSUPPORTED_DEVICE_MSG') + handlerInput.t('HELP_MSG');
                         break;
                     default:
-                        speechText = requestAttributes.t('REMINDER_ERROR_MSG') + requestAttributes.t('HELP_MSG');
+                        speechText = handlerInput.t('REMINDER_ERROR_MSG') + handlerInput.t('HELP_MSG');
                 }
             }
+        } else {
+            speechText = handlerInput.t('MISSING_MSG') + handlerInput.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(requestAttributes.t('HELP_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -245,9 +246,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MSG');
+        const speechText = handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -263,12 +262,10 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
 
-        const speechText = requestAttributes.t('GOODBYE_MSG', name);
+        const speechText = handlerInput.t('GOODBYE_MSG', {name: name});
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -282,13 +279,11 @@ const FallbackIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MSG');
+        const speechText = handlerInput.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -312,10 +307,8 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const {attributesManager, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const intentName = requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
+        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -332,15 +325,13 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MSG');
+        const speechText = handlerInput.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };

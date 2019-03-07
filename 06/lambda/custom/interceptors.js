@@ -1,6 +1,6 @@
-// i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
+// i18n dependency
 const i18n = require('i18next');
-const sprintf = require('i18next-sprintf-postprocessor');
+const languageStrings = require('./localisation');
 
 module.exports = {
     // This request interceptor will log all incoming requests to this lambda
@@ -17,32 +17,24 @@ module.exports = {
         }
     },
 
-    // This request interceptor will bind a translation function 't' to the requestAttributes.
+    // This request interceptor will bind a translation function 't' to the handlerInput.
     // Additionally it will handle picking a random value if instead of a string it receives an array
     LocalisationRequestInterceptor: {
         process(handlerInput) {
-            const localisationClient = i18n.use(sprintf).init({
+            const localisationClient = i18n.init({
                 lng: handlerInput.requestEnvelope.request.locale,
-                resources: require('./localisation'),
+                resources: languageStrings,
+                returnObjects: true
             });
             localisationClient.localise = function localise() {
                 const args = arguments;
-                const values = [];
-                for (let i = 1; i < args.length; i += 1) {
-                    values.push(args[i]);
-                }
-                const value = i18n.t(args[0], {
-                    returnObjects: true,
-                    postProcess: 'sprintf',
-                    sprintf: values,
-                });
+                const value = i18n.t(...args);
                 if (Array.isArray(value)) {
                     return value[Math.floor(Math.random() * value.length)];
                 }
                 return value;
             };
-            const attributes = handlerInput.attributesManager.getRequestAttributes();
-            attributes.t = function translate(...args) {
+            handlerInput.t = function translate(...args) {
                 return localisationClient.localise(...args);
             }
         }

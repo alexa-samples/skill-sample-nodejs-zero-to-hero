@@ -3,13 +3,12 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
-// i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
+// i18n dependency
 const i18n = require('i18next');
-const sprintf = require('i18next-sprintf-postprocessor');
 
 // We create a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME_MSG')
+// e.g. handlerInput.t('WELCOME_MSG')
 const languageStrings = {
   en: {
     translation: {
@@ -17,7 +16,7 @@ const languageStrings = {
       HELLO_MSG: 'Hello World!',
       HELP_MSG: 'You can say hello to me! How can I help?',
       GOODBYE_MSG: 'Goodbye!',
-      REFLECTOR_MSG: 'You just triggered %s',
+      REFLECTOR_MSG: 'You just triggered {{intent}}',
       FALLBACK_MSG: 'Sorry, I don\'t know about that. Please try again.',
       ERROR_MSG: 'Sorry, there was an error. Please try again.'
     }
@@ -28,7 +27,7 @@ const languageStrings = {
       HELLO_MSG: 'Hola Mundo!',
       HELP_MSG: 'Puedes decirme hola. Cómo te puedo ayudar?',
       GOODBYE_MSG: 'Hasta luego!',
-      REFLECTOR_MSG: 'Acabas de activar %s',
+      REFLECTOR_MSG: 'Acabas de activar {{intent}}',
       FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
       ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
     }
@@ -40,13 +39,11 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('WELCOME_MSG');
+        const speechText = handlerInput.t('WELCOME_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -57,9 +54,7 @@ const HelloWorldIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELLO_MSG');
+        const speechText = handlerInput.t('HELLO_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -74,9 +69,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MSG');
+        const speechText = handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -92,9 +85,7 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('GOODBYE_MSG');
+        const speechText = handlerInput.t('GOODBYE_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -108,13 +99,11 @@ const FallbackIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MSG');
+        const speechText = handlerInput.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -138,10 +127,8 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const {attributesManager, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const intentName = requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
+        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -158,15 +145,13 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MSG');
+        const speechText = handlerInput.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -185,16 +170,14 @@ const LoggingResponseInterceptor = {
     }
 };
 
-// This request interceptor will bind a translation function 't' to the requestAttributes.
+// This request interceptor will bind a translation function 't' to the handlerInput.
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
-        i18n.use(sprintf).init({
+        i18n.init({
             lng: handlerInput.requestEnvelope.request.locale,
-            resources: languageStrings,
-            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+            resources: languageStrings
         }).then((t) => {
-            const attributes = handlerInput.attributesManager.getRequestAttributes();
-            attributes.t = (...args) => t(...args);
+            handlerInput.t = (...args) => t(...args);
         });
     }
 };

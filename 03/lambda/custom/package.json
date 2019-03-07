@@ -11,8 +11,6 @@
   "dependencies": {
     "ask-sdk-core": "^2.3.0",
     "ask-sdk-model": "^1.11.2",
-    "aws-sdk": "^2.404.0",
-    "i18next": "^15.0.4",
-    "i18next-sprintf-postprocessor": "^0.2.2"
+    "i18next": "^15.0.5"
   }
 }

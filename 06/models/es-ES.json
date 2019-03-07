@@ -59,7 +59,15 @@
                         "{day} del {month}",
                         "en el año {year}",
                         "he nacido en {year}",
+                        "para el {day} de {month}",
+                        "con el {day} de {month}",
+                        "para el {day} de {month} de {year}",
+                        "con el {day} de {month} de {year}",
                         "mi fecha de nacimiento es el {day} de {month} de {year}",
+                        "mi cumpleaños es el {day} de {month} de {year}",
+                        "mi cumple es el {day} de {month} de {year}",
+                        "mi cumpleaños es el {day} de {month}",
+                        "mi cumple es el {day} de {month}",
                         "he nacido el {day} de {month} de {year}",
                         "{day} de {month} de {year}",
                         "cumplo el {day} de {month} de {year}",
@@ -74,6 +82,14 @@
                         "graba mi cumple",
                         "recuerda mi cumple",
                         "registra mi cumpleaños",
+                        "recordar mi cumple",
+                        "recordar mi cumpleaños",
+                        "apunta mi cumple",
+                        "apunta mi cumpleaños",
+                        "toma nota de mi cumple",
+                        "toma nota de mi cumpleaños",
+                        "anota mi cumple",
+                        "anota mi cumpleaños",
                         "graba mi cumpleaños",
                         "recuerda mi cumpleaños"
                     ]
@@ -91,6 +107,11 @@
                         "cuanto falta",
                         "cuanto falta para mi cumpleaños",
                         "cuanto falta para mi cumple",
+                        "cuanto queda",
+                        "cuanto queda para mi cumpleaños",
+                        "cuanto queda para mi cumple",
+                        "tiempo restante para mi cumpleaños",
+                        "tiempo restante para mi cumple",
                         "dame mi cumpleaños",
                         "dame mi cumple",
                         "mi cumpleaños",
@@ -100,7 +121,17 @@
                         "cuando es mi cumpleaños",
                         "cuando es mi cumple",
                         "dime mi cumpleaños",
-                        "dime mi cumple"
+                        "dime mi cumple",
+                        "dime cuando cumplo años",
+                        "dime cuando cumplo",
+                        "dime cuanto falta",
+                        "dime cuanto falta para mi cumpleaños",
+                        "dime cuanto falta para mi cumple",
+                        "dime cuanto queda",
+                        "dime cuanto queda para mi cumpleaños",
+                        "dime cuanto queda para mi cumple",
+                        "dime cuando es mi cumpleaños",
+                        "dime cuando es mi cumple"
                     ]
                 },
                 {
@@ -119,6 +150,14 @@
                         "configura un recordatorio",
                         "pon un recordatorio",
                         "crea un recordatorio",
+                        "recordatorio para mi cumpleaños",
+                        "configura un recordatorio para mi cumpleaños",
+                        "pon un recordatorio para mi cumpleaños",
+                        "crea un recordatorio para mi cumpleaños",
+                        "recordatorio para mi cumple",
+                        "configura un recordatorio para mi cumple",
+                        "pon un recordatorio para mi cumple",
+                        "crea un recordatorio para mi cumple",
                         "recordatorio con el texto {message}",
                         "configura un recordatorio con el texto {message}",
                         "pon un recordatorio con el texto {message}",
@@ -282,7 +321,7 @@
                                 {
                                     "type": "isLessThan",
                                     "prompt": "Slot.Validation.1253554922892.1358447173887.176185058059",
-                                    "value": "2014"
+                                    "value": "2018"
                                 }
                             ]
                         }
@@ -319,15 +358,15 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "que día cumples?"
+                        "value": "que día cumples años?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "en que día es?"
+                        "value": "en que día es tu cumpleaños?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "dime en que día del mes es"
+                        "value": "dime en que día del mes es tu cumpleaños"
                     }
                 ]
             },
@@ -336,23 +375,19 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "dime ahora el mes en que cumples"
+                        "value": "dime ahora el mes en que cumples años"
                     },
                     {
                         "type": "PlainText",
-                        "value": "en que mes cumples?"
+                        "value": "en que mes cumples años?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "en que mes es?"
+                        "value": "en que mes es tu cumpleaños?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "vale, el día {day} .pero en que mes?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "en que mes?"
+                        "value": "vale, cumples el día {day} .pero en que mes?"
                     }
                 ]
             },
@@ -396,7 +431,7 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "ahora dime el año de nacimiento"
+                        "value": "ahora dime el año de tu nacimiento"
                     },
                     {
                         "type": "PlainText",

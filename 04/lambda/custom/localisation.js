@@ -1,15 +1,19 @@
 module.exports = {
     es: {
         translation: {
-            WELCOME_MSG: 'Bienvenido! Dime. Cuando es tu fecha de cumpleaños? ',
-            REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s. ',
-            SAY_MSG: 'Quedan %s días para que cumplas %s años. ',
-            GREET_MSG: 'Feliz cumpleaños! Hoy cumples %s! ',
-            MISSING_MSG: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. ',
-            OVERWRITE_MSG: 'Si quieres cambiar la fecha solo di, registra mi cumpleaños',
-            HELP_MSG: 'Puedes decir, cuanto falta para mi cumpleaños? . O registar la fecha diciendo, registra mi cumpleaños. ',
+            WELCOME_MSG: 'Hola! Dime. Cuando es tu fecha de cumpleaños? ',
+            REGISTER_MSG: 'Tu fecha de cumpleaños es el {{day}} de {{month}} de {{year}}. ',
+            DAYS_LEFT_MSG: 'Queda {{count}} día ',
+            DAYS_LEFT_MSG_plural: 'Quedan {{count}} días ',
+            WILL_TURN_MSG: 'para que cumplas {{count}} año. ',
+            WILL_TURN_MSG_plural: 'para que cumplas {{count}} años. ',
+            GREET_MSG: 'Feliz cumpleaños! Hoy cumples {{count}} año! ',
+            GREET_MSG_plural: 'Feliz cumpleaños! Hoy cumples {{count}} años! ',
+            MISSING_MSG: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
+            OVERWRITE_MSG: 'Si quieres cambiar la fecha puedes decir, registra mi cumpleaños. o decirme directamente una fecha. ',
+            HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. O decirte cuanto falta para que cumplas. ',
             GOODBYE_MSG: 'Hasta luego! ',
-            REFLECTOR_MSG: 'Acabas de activar %s ',
+            REFLECTOR_MSG: 'Acabas de activar {{intent}}',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
             ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez. '
         }

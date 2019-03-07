@@ -8,7 +8,7 @@
 4. **Code Tab**: add timezone retrieval code to SayBirthdayIntentHandler
 5. **Code Tab**: add speechcon and sound from audio bank to birthday greeting
 6. **Code Tab**: add extra variable on strings to pass given name
-7. **Code Tab**: add API client to exports
+7. **Code Tab**: add API client to exports (because we're using a custom builder). See: https://developer.amazon.com/blogs/alexa/post/a47f25e9-3e87-4afd-b632-ff3b86febcd4/skill-builder-objects-to-customize-or-not-to-customize
 
 ## Concepts
 

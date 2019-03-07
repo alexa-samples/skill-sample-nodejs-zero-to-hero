@@ -6,13 +6,12 @@ var persistenceAdapter = getPersistenceAdapter();
 
 const moment = require('moment-timezone'); // will help us do all the birthday math
 
-// i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
+// i18n dependency
 const i18n = require('i18next');
-const sprintf = require('i18next-sprintf-postprocessor');
 
 // We import a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
-// e.g. requestAttributes.t('WELCOME_MSG')
+// e.g. handlerInput.t('WELCOME_MSG')
 const languageStrings = require('./localisation');
 
 function getPersistenceAdapter() {
@@ -41,24 +40,22 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
         
-        let speechText = requestAttributes.t('WELCOME_MSG');
+        let speechText = handlerInput.t('WELCOME_MSG');
 
         if(day && monthName && year){
-            speechText = requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG');
+            speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
         }
         
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -70,7 +67,6 @@ const RegisterBirthdayIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
@@ -84,11 +80,11 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
 
-        const speechText = requestAttributes.t('REGISTER_MSG', day, monthName, year) + requestAttributes.t('HELP_MSG');
+        const speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(requestAttributes.t('HELP_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -99,9 +95,7 @@ const SayBirthdayIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'SayBirthdayIntent';
     },
     async handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
@@ -118,18 +112,19 @@ const SayBirthdayIntentHandler = {
             }
             const age = today.diff(wasBorn, 'years');
             const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
-            speechText = requestAttributes.t('SAY_MSG', daysUntilBirthday, age + 1);
+            speechText = handlerInput.t('DAYS_LEFT_MSG', {count: daysUntilBirthday});
+            speechText += handlerInput.t('WILL_TURN_MSG', {count: age + 1});
             if(daysUntilBirthday === 0) { // it's the user's birthday!
-                speechText = requestAttributes.t('GREET_MSG', age);
+                speechText = handlerInput.t('GREET_MSG', {count: age});
             }
-            speechText += requestAttributes.t('OVERWRITE_MSG');
+            speechText += handlerInput.t('OVERWRITE_MSG');
         } else {
-            speechText = requestAttributes.t('MISSING_MSG');
+            speechText = handlerInput.t('MISSING_MSG');
         }
         
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(requestAttributes.t('HELP_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -140,9 +135,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('HELP_MSG');
+        const speechText = handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -158,9 +151,7 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('GOODBYE_MSG');
+        const speechText = handlerInput.t('GOODBYE_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -174,13 +165,11 @@ const FallbackIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('FALLBACK_MSG');
+        const speechText = handlerInput.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -204,10 +193,8 @@ const IntentReflectorHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const {attributesManager, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const intentName = requestEnvelope.request.intent.name;
-        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
+        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -224,15 +211,13 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('ERROR_MSG');
+        const speechText = handlerInput.t('ERROR_MSG');
 
         console.log(`~~~~ Error handled: ${error.message}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -251,16 +236,14 @@ const LoggingResponseInterceptor = {
     }
 };
 
-// This request interceptor will bind a translation function 't' to the requestAttributes.
+// This request interceptor will bind a translation function 't' to the handlerInput.
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
-        i18n.use(sprintf).init({
+        i18n.init({
             lng: handlerInput.requestEnvelope.request.locale,
-            resources: languageStrings,
-            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+            resources: languageStrings
         }).then((t) => {
-            const attributes = handlerInput.attributesManager.getRequestAttributes();
-            attributes.t = (...args) => t(...args);
+            handlerInput.t = (...args) => t(...args);
         });
     }
 };
