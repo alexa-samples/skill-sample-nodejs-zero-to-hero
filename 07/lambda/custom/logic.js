@@ -3,7 +3,6 @@ const fetch = require('node-fetch');
 
 module.exports = {
     getAdjustedDateData(timezone) {
-        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your timezone and remove if testing on a real device
         const today = moment().tz(timezone).startOf('day');
 
         return {
@@ -29,7 +28,6 @@ module.exports = {
         }
     },
     createReminderData(daysUntilBirthday, timezone, locale, message) {
-        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your timezone and remove if testing on a real device
         moment.locale(locale);
         const now = moment().tz(timezone);
         const scheduled = now.startOf('day').add(daysUntilBirthday, 'days');
@@ -58,7 +56,7 @@ module.exports = {
     fetchBirthdaysData(day, month, limit){
         const endpoint = 'https://query.wikidata.org/sparql';
         // List of actors with pictures and date of birth
-        const sparqlQuery = 
+        const sparqlQuery =
         `SELECT ?human ?humanLabel ?picture ?date_of_birth WHERE {
         ?human wdt:P31 wd:Q5.
         ?human wdt:P106 wd:Q33999.
@@ -78,7 +76,7 @@ module.exports = {
             const res = await fetch(url, {headers});
             return await res.json();
         }
-        
+
         return getJsonResponse(url, headers).then((result) => {
             return result;
         }).catch((error) => {
@@ -91,13 +89,13 @@ module.exports = {
         const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
         const requestId = requestEnvelope.request.requestId;
         const {apiEndpoint, apiAccessToken} = requestEnvelope.context.System;
-      
+
         // build the progressive response directive
         const directive = {
           header: {
             requestId,
           },
-          directive:{ 
+          directive:{
               type: 'VoicePlayer.Speak',
               speech: msg
           },

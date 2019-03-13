@@ -4,6 +4,7 @@ const POSITIVE_SOUND = `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui
 // congratulations greeting (speechcon)
 // https://developer.amazon.com/docs/custom-skills/speechcon-reference-interjections-spanish.html
 const GREETING_SPEECHCON = `<say-as interpret-as="interjection">felicidades</say-as>`;
+const DOUBT_SPEECHCON = `<say-as interpret-as="interjection">hmm</say-as>`;
 
 module.exports = {
     es: {
@@ -17,7 +18,7 @@ module.exports = {
             GREET_MSG: POSITIVE_SOUND + GREETING_SPEECHCON + ' {{name}} ',
             NOW_TURN_MSG: 'Hoy cumples {{count}} año! ',
             NOW_TURN_MSG_plural: 'Hoy cumples {{count}} años! ',
-            MISSING_MSG: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
+            MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
             OVERWRITE_MSG: 'Si quieres cambiar la fecha puedes decir, registra mi cumpleaños. o decirme directamente una fecha. ',
             HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. Y decirte cuanto falta para que cumplas. También puedo crear un recordatorio para cuando cumplas. ',
             GOODBYE_MSG: ['Hasta luego {{name}}! ', 'Adios {{name}}! ', 'Hasta pronto {{name}}! ', 'Nos vemos {{name}}! '],

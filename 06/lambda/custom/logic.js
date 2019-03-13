@@ -19,7 +19,6 @@ module.exports = {
         }
     },
     createReminderData(daysUntilBirthday, timezone, locale, message) {
-        timezone = timezone ? timezone : 'Europe/Paris'; // so it works on the simulator, replace with your timezone and remove if testing on a real device
         moment.locale(locale);
         const now = moment().tz(timezone);
         const scheduled = now.startOf('day').add(daysUntilBirthday, 'days');

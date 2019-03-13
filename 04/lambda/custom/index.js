@@ -9,7 +9,7 @@ const moment = require('moment-timezone'); // will help us do all the birthday m
 // i18n dependency
 const i18n = require('i18next');
 
-// We import a language strings object containing all of our strings. 
+// We import a language strings object containing all of our strings.
 // The keys for each string will then be referenced in our code
 // e.g. handlerInput.t('WELCOME_MSG')
 const languageStrings = require('./localisation');
@@ -22,13 +22,13 @@ function getPersistenceAdapter() {
     const tableName = 'happy_birthday_table';
     if(isAlexaHosted()) {
         const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
-        return new S3PersistenceAdapter({ 
+        return new S3PersistenceAdapter({
             bucketName: process.env.S3_PERSISTENCE_BUCKET
         });
     } else {
         // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
         const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
-        return new DynamoDbPersistenceAdapter({ 
+        return new DynamoDbPersistenceAdapter({
             tableName: tableName,
             createTable: true
         });
@@ -46,13 +46,13 @@ const LaunchRequestHandler = {
         const month = sessionAttributes['month']; //MM
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
-        
+
         let speechText = handlerInput.t('WELCOME_MSG');
 
         if(day && monthName && year){
             speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
         }
-        
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
@@ -74,7 +74,7 @@ const RegisterBirthdayIntentHandler = {
         const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
         const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         const year = intent.slots.year.value;
-        
+
         sessionAttributes['day'] = day;
         sessionAttributes['month'] = month; //MM
         sessionAttributes['monthName'] = monthName;
@@ -100,9 +100,9 @@ const SayBirthdayIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
-        
+
         let speechText;
-        if(day && month && year){    
+        if(day && month && year){
             const timezone = 'Europe/Madrid'; // provide yours here. we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
@@ -121,7 +121,7 @@ const SayBirthdayIntentHandler = {
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
-        
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
@@ -180,7 +180,7 @@ const SessionEndedRequestHandler = {
     },
     handle(handlerInput) {
         // Any cleanup logic goes here.
-        return handlerInput.responseBuilder.getResponse();
+        return handlerInput.responseBuilder.getResponse(); // notice we send an empty response
     }
 };
 
@@ -250,22 +250,22 @@ const LocalisationRequestInterceptor = {
 
 const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
-        if(handlerInput.requestEnvelope.session['new']){ //is this a new session?
-            const {attributesManager} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
+        if(requestEnvelope.session['new']){ //is this a new session?
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
             //copy persistent attribute to session attributes
-            handlerInput.attributesManager.setSessionAttributes(persistentAttributes);
+            attributesManager.setSessionAttributes(persistentAttributes);
         }
     }
 };
 
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
-        if(!response) return; // avoid intercepting calls that have no outgoing response
-        const {attributesManager} = handlerInput;
+        if(!response) return; // avoid intercepting calls that have no outgoing response due to errors
+        const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession);//is this a session end?
-        if(shouldEndSession || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out            
+        const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
+        if(shouldEndSession || requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out
             attributesManager.setPersistentAttributes(sessionAttributes);
             await attributesManager.savePersistentAttributes();
         }
