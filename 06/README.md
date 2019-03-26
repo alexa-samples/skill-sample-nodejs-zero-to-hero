@@ -21,3 +21,5 @@
 3. *lambda/custom/localisation.js*: add all messages related to reminders. Improve help message
 4. *models/es-ES.json*: add remind birthday intent, slot-less utterances and utterances to collect a message slot (SearchQuery). Use auto-delegate to collect the slot if not present. Add prompts. Add intent confirmation.
 5. *lambda/custom/index.js*: replace moment library require with a require for logic.js. Add constant with reminders permission. Replace birthday logic in say birthday intent with calls to logic.js. Add remind birthday intent handler. Verify intent was confirmed. Create reminder using timezone info (put creation of reminder structure in logic.js). Add new handler to skill builder
+
+Warning: the simulator might return inconsistent timezone results such your geographical timezone by API but a different time (not consistent with your timezone). It can also return no time zone at all. In order to see the reminders demo working properly please try it on a physical device
