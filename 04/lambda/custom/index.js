@@ -1,6 +1,3 @@
-// This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
-// Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
-// session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 var persistenceAdapter = getPersistenceAdapter();
 
@@ -47,10 +44,11 @@ const LaunchRequestHandler = {
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
 
-        let speechText = handlerInput.t('WELCOME_MSG');
+        let speechText = handlerInput.t('WELCOME_MSG') + handlerInput.t('HELP_MSG');
 
-        if(day && monthName && year){
-            speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
+        const dateAvailable = day && monthName && year;
+        if(dateAvailable){
+            speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
         }
 
         return handlerInput.responseBuilder
@@ -80,7 +78,7 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['monthName'] = monthName;
         sessionAttributes['year'] = year;
 
-        const speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
+        const speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -102,7 +100,8 @@ const SayBirthdayIntentHandler = {
         const year = sessionAttributes['year'];
 
         let speechText;
-        if(day && month && year){
+        const dateAvailable = day && month && year;
+        if(dateAvailable){
             const timezone = 'Europe/Madrid'; // provide yours here. we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
@@ -117,7 +116,7 @@ const SayBirthdayIntentHandler = {
             if(daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {count: age});
             }
-            speechText += handlerInput.t('OVERWRITE_MSG');
+            speechText += handlerInput.t('SHORT_HELP_MSG');
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }

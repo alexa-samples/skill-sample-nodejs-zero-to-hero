@@ -35,7 +35,11 @@ module.exports = {
             PROGRESSIVE_MSG: 'Espera un momento mientras busco algunos cumpleaños de hoy. ',
             CONJUNCTION_MSG: ' y ',
             CELEBRITY_BIRTHDAYS_MSG: 'En esta fecha cumplen años: ',
-            ALSO_TODAY_MSG: 'También hoy cumplen: '
+            ALSO_TODAY_MSG: 'También hoy cumplen: ',
+            LAUNCH_HEADER_MSG: 'Feliz Cumpleaños',
+            LAUNCH_TEXT_FILLED_MSG: 'Tu cumple: {{day}}/{{month}}/{{year}}. ',
+            LAUNCH_TEXT_EMPTY_MSG: 'Aún no sé tu fecha de cumpleaños :(',
+            LAUNCH_HINT_MSG: ['cuanto falta para mi cumpleaños?', 'quién cumple años hoy?', 'crea un recordatorio para mi cumpleaños', 'registra mi fecha de cumpleaños']
         }
     }
 }

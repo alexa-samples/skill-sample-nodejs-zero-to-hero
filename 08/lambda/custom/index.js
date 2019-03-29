@@ -3,6 +3,7 @@ const persistence = require('./persistence');
 const interceptors = require('./interceptors');
 const logic = require('./logic');
 const constants = require('./constants');
+const util = require('./util');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -24,11 +25,39 @@ const LaunchRequestHandler = {
         if(dateAvailable){
             speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
         } else {
-            handlerInput.responseBuilder.addDelegateDirective({
-                name: 'RegisterBirthdayIntent',
-                confirmationStatus: 'NONE',
-                slots: {}
-            })
+            // we have to do this unfortunately as right now sending Dialog and APL directives together is not supported
+            if (util.supportsAPL(handlerInput)) {
+                speechText += handlerInput.t('MISSING_MSG'); //won't trigger the registration multi-turn
+            } else {
+                // we use intent chaining to trigger the birthday registration multi-turn
+                handlerInput.responseBuilder.addDelegateDirective({
+                    name: 'RegisterBirthdayIntent',
+                    confirmationStatus: 'NONE',
+                    slots: {}
+                })
+            }
+        }
+
+        if (util.supportsAPL(handlerInput)) {
+            handlerInput.responseBuilder.addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                version: '1.0',
+                document: constants.APLDocs.launch,
+                datasources: {
+                    launchData: {
+                        type: 'object',
+                        properties: {
+                            headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
+                            mainText: dateAvailable ? handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}) : handlerInput.t('LAUNCH_TEXT_EMPTY_MSG'),
+                            hintString: handlerInput.t('LAUNCH_HINT_MSG'),
+                        },
+                        transformers: [{
+                            inputPath: 'hintString',
+                            transformer: 'textToHint',
+                        }]
+                    },
+                },
+            });
         }
 
         return handlerInput.responseBuilder

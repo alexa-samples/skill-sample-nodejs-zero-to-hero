@@ -1,0 +1,407 @@
+{
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.0.0"
+        },
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        },
+        {
+            "name": "alexa-styles",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Sauce boss background image assets",
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "strings": {
+                "backgroundBottom": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-bottom-smHub.png",
+                "backgroundLeft": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-left-smHub.png",
+                "backgroundRight": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-right-smHub.png",
+                "backgroundSecret": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-secret-smHub.png"
+            }
+        },
+        {
+            "description": "Sauce boss background image assets",
+            "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge}",
+            "strings": {
+                "backgroundBottom": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-bottom-Hub.png",
+                "backgroundLeft": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-left-Hub.png",
+                "backgroundRight": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-right-Hub.png",
+                "backgroundSecret": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-secret-Hub.png"
+            }
+        },
+        {
+            "description": "Sauce boss background image assets",
+            "when": "${@viewportProfile == @tvLandscapeXLarge}",
+            "strings": {
+                "backgroundBottom": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-bottom-TV.png",
+                "backgroundLeft": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-left-TV.png",
+                "backgroundRight": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-right-TV.png",
+                "backgroundSecret": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/sauceBoss-background-secret-TV.png"
+            }
+        },
+        {
+            "description": "Sauce boss image assets",
+            "strings": {
+                "bbq": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/bbq-sauce-500x500.png",
+                "cranberry": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/cranberry-sauce-500x500.png",
+                "honeyMustard": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/honey-mustard-sauce-500x500.png",
+                "pesto": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/pesto-sauce-500x500.png",
+                "pizza": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/pizza-sauce-500x500.png",
+                "secretSauce": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/secret-sauce-500x500.png",
+                "tartar": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/tartar-sauce-500x500.png",
+                "thousandIsland": "https://s3.amazonaws.com/ask-samples-resources/images/sauce-boss/thousand-island-sauce-500x500.png",
+                "skillIcon": "https://s3.amazonaws.com/ask-samples-resources/icons/sauce-boss-icon.png"
+            }
+        }
+    ],
+    "styles": {
+        "hintListItem": {
+            "values": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "fontSize": "11vw",
+                    "fontFamily": "Bookerly",
+                    "fontStyle": "italic",
+                    "fontWeight": "200",
+                    "textAlign": "center",
+                    "color": "#FFFFFF"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "fontSize": "4vw",
+                    "fontFamily": "Bookerly",
+                    "fontStyle": "italic",
+                    "fontWeight": "200",
+                    "color": "#FFFFFF"
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "direction": "column",
+                "items": [
+                    {
+                        "type": "Image",
+                        "source": "@backgroundBottom",
+                        "scale": "best-fill",
+                        "width": "100vw",
+                        "height": "100vh"
+                    },
+                    {
+                        "type": "Container",
+                        "position": "absolute",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "direction": "column",
+                        "items": [
+                            {
+                                "type": "AlexaHeader",
+                                "headerTitle": "HELP",
+                                "headerAttributionImage": "@skillIcon"
+                            },
+                            {
+                                "when": "${@viewportProfile == @hubRoundSmall}",
+                                "type": "ScrollView",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "item": {
+                                    "type": "Container",
+                                    "direction": "column",
+                                    "alignItems": "center",
+                                    "paddingBottom": 200,
+                                    "items": [
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "35vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make BBQ sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "bbq"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "50vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make cranberry sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "cranberry"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "50vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make honey mustard?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "honeyMustard"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "40vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make pesto?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "pesto"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "40vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make pizza sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "pizza"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "40vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make tartar sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "tartar"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "50vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make thousand island?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "thousandIsland"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "80vw",
+                                            "height": "35vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make secret sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "secretSauce"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                                "type": "ScrollView",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "item": {
+                                    "type": "Container",
+                                    "direction": "column",
+                                    "paddingLeft": 60,
+                                    "paddingRight": 30,
+                                    "paddingBottom": 150,
+                                    "items": [
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make BBQ sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "bbq"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make cranberry sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "cranberry"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make honey mustard?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "honeyMustard"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make pesto?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "pesto"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make pizza sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "pizza"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make tartar sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "tartar"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make thousand island?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "thousandIsland"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "TouchWrapper",
+                                            "width": "100vw",
+                                            "height": "15vh",
+                                            "item": {
+                                                "type": "Text",
+                                                "text": "How do I make secret sauce?",
+                                                "style": "hintListItem"
+                                            },
+                                            "onPress": {
+                                                "type": "SendEvent",
+                                                "arguments": [
+                                                    "secretSauce"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

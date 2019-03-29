@@ -1,6 +1,3 @@
-// This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
-// Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
-// session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 const persistence = require('./persistence');
 const interceptors = require('./interceptors');
@@ -13,8 +10,8 @@ const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
-    async handle(handlerInput) {
-        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
@@ -25,8 +22,15 @@ const LaunchRequestHandler = {
 
         let speechText = handlerInput.t('WELCOME_MSG', {name: name+'.'});
 
-        if(day && monthName && year){
-            speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
+        const dateAvailable = day && monthName && year;
+        if(dateAvailable){
+            speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
+        } else {
+            handlerInput.responseBuilder.addDelegateDirective({
+                name: 'RegisterBirthdayIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            })
         }
 
         return handlerInput.responseBuilder
@@ -57,7 +61,7 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['year'] = year;
         const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
 
-        const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('HELP_MSG');
+        const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -83,7 +87,8 @@ const SayBirthdayIntentHandler = {
         let timezone = requestAttributes['timezone'];
 
         let speechText;
-        if(day && month && year){
+        const dateAvailable = day && month && year;
+        if(dateAvailable){
             if(!timezone){
                 //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
@@ -98,7 +103,7 @@ const SayBirthdayIntentHandler = {
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
             }
-            speechText += handlerInput.t('OVERWRITE_MSG');
+            speechText += handlerInput.t('SHORT_HELP_MSG');
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
@@ -131,7 +136,7 @@ const RemindBirthdayIntentHandler = {
         if(intent.confirmationStatus !== 'CONFIRMED') {
 
             return handlerInput.responseBuilder
-                .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('HELP_MSG'))
+                .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('SHORT_HELP_MSG'))
                 .reprompt(handlerInput.t('HELP_MSG'))
                 .getResponse();
         }
@@ -176,24 +181,24 @@ const RemindBirthdayIntentHandler = {
                 // save reminder id in session attributes
                 sessionAttributes['reminderId'] = reminderResponse.alertToken;
                 console.log('Reminder created with token: ' + reminderResponse.alertToken);
-                speechText = handlerInput.t('REMINDER_CREATED_MSG') + handlerInput.t('HELP_MSG');
+                speechText = handlerInput.t('REMINDER_CREATED_MSG') + handlerInput.t('SHORT_HELP_MSG');
             } catch (error) {
                 console.log(JSON.stringify(error));
                 switch (error.statusCode) {
                     case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
                         handlerInput.responseBuilder.withAskForPermissionsConsentCard(REMINDERS_PERMISSION);
-                        speechText = handlerInput.t('MISSING_PERMISSION_MSG') + handlerInput.t('HELP_MSG');
+                        speechText = handlerInput.t('MISSING_PERMISSION_MSG') + handlerInput.t('SHORT_HELP_MSG');
                         break;
                     case 403: // devices such as the simulator do not support reminder management
-                        speechText = handlerInput.t('UNSUPPORTED_DEVICE_MSG') + handlerInput.t('HELP_MSG');
+                        speechText = handlerInput.t('UNSUPPORTED_DEVICE_MSG') + handlerInput.t('SHORT_HELP_MSG');
                         break;
                     //case 405: METHOD_NOT_ALLOWED, please contact the Alexa team
                     default:
-                        speechText = handlerInput.t('REMINDER_ERROR_MSG') + handlerInput.t('HELP_MSG');
+                        speechText = handlerInput.t('REMINDER_ERROR_MSG') + handlerInput.t('SHORT_HELP_MSG');
                 }
             }
         } else {
-            speechText = handlerInput.t('MISSING_MSG') + handlerInput.t('HELP_MSG');
+            speechText = handlerInput.t('MISSING_MSG') + handlerInput.t('SHORT_HELP_MSG');
         }
 
         return handlerInput.responseBuilder

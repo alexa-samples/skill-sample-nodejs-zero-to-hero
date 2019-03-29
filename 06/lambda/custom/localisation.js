@@ -9,7 +9,7 @@ const DOUBT_SPEECHCON = `<say-as interpret-as="interjection">hmm</say-as>`;
 module.exports = {
     es: {
         translation: {
-            WELCOME_MSG: 'Hola {{name}} Dime. Cuando es tu fecha de cumpleaños? ',
+            WELCOME_MSG: 'Te doy la bienvenida {{name}}! ',
             REGISTER_MSG: '{{name}} Tu fecha de cumpleaños es el {{day}} de {{month}} de {{year}}. ',
             DAYS_LEFT_MSG: '{{name}} Queda {{count}} día ',
             DAYS_LEFT_MSG_plural: '{{name}} Quedan {{count}} días ',
@@ -19,8 +19,8 @@ module.exports = {
             NOW_TURN_MSG: 'Hoy cumples {{count}} año! ',
             NOW_TURN_MSG_plural: 'Hoy cumples {{count}} años! ',
             MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
-            OVERWRITE_MSG: 'Si quieres cambiar la fecha puedes decir, registra mi cumpleaños. o decirme directamente una fecha. ',
             HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. Y decirte cuanto falta para que cumplas. También puedo crear un recordatorio para cuando cumplas. ',
+            SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro. ',
             GOODBYE_MSG: ['Hasta luego {{name}}! ', 'Adios {{name}}! ', 'Hasta pronto {{name}}! ', 'Nos vemos {{name}}! '],
             REFLECTOR_MSG: 'Acabas de activar {{intent}}',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
