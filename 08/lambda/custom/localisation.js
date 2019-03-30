@@ -20,7 +20,7 @@ module.exports = {
             NOW_TURN_MSG_plural: 'Hoy cumples {{count}} años! ',
             MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
             HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. Y decirte cuanto falta para que cumplas. También puedo crear un recordatorio para cuando cumplas o decirte quién cumple años hoy. ',
-            SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro. ',
+            SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro o, para, si quieres salir. ',
             GOODBYE_MSG: ['Hasta luego {{name}}! ', 'Adios {{name}}! ', 'Hasta pronto {{name}}! ', 'Nos vemos {{name}}! '],
             REFLECTOR_MSG: 'Acabas de activar {{intent}}',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',
@@ -37,7 +37,7 @@ module.exports = {
             CELEBRITY_BIRTHDAYS_MSG: 'En esta fecha cumplen años: ',
             ALSO_TODAY_MSG: 'También hoy cumplen: ',
             LAUNCH_HEADER_MSG: 'Feliz Cumpleaños',
-            LAUNCH_TEXT_FILLED_MSG: 'Tu cumple: {{day}}/{{month}}/{{year}}. ',
+            LAUNCH_TEXT_FILLED_MSG: '{{day}}/{{month}}/{{year}}',
             LAUNCH_TEXT_EMPTY_MSG: 'Aún no sé tu fecha de cumpleaños :(',
             LAUNCH_HINT_MSG: ['cuanto falta para mi cumpleaños?', 'quién cumple años hoy?', 'crea un recordatorio para mi cumpleaños', 'registra mi fecha de cumpleaños']
         }

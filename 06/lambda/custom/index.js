@@ -163,13 +163,19 @@ const RemindBirthdayIntentHandler = {
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
                 const remindersList = await reminderServiceClient.getReminders();
                 console.log('Current reminders: ' + JSON.stringify(remindersList));
-                console.log(JSON.stringify(remindersList));
                 // delete previous reminder if present
                 const previousReminder = sessionAttributes['reminderId'];
                 if(previousReminder){
-                    await reminderServiceClient.deleteReminder(previousReminder);
+                    try {
+                        if(remindersList.totalCount !== "0")
+                            await reminderServiceClient.deleteReminder(previousReminder);
+                    } catch (error) {
+                        // fail silently as this means the reminder does not exist or there was a problem with deletion
+                        // either way, we can move on and create the new reminder
+                        console.log('Failed to delete reminder: ' + previousReminder + ' via ' + JSON.stringify(error));
+                    }
                     delete sessionAttributes['reminderId'];
-                    console.log('Deleted previous reminder with token: ' + previousReminder);
+                    console.log('Deleted previous reminder token: ' + previousReminder);
                 }
                 // create reminder structure
                 const reminder = logic.createReminderData(

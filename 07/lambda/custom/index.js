@@ -102,7 +102,7 @@ const SayBirthdayIntentHandler = {
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
 
                 const dateData = logic.getAdjustedDateData(timezone);
-                const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, 5);
+                const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, constants.MAX_BIRTHDAYS);
 
                 if(response) { // if the API call fails we just don't append today's birthdays
                     console.log(JSON.stringify(response));
@@ -177,13 +177,19 @@ const RemindBirthdayIntentHandler = {
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
                 const remindersList = await reminderServiceClient.getReminders();
                 console.log('Current reminders: ' + JSON.stringify(remindersList));
-                console.log(JSON.stringify(remindersList));
                 // delete previous reminder if present
                 const previousReminder = sessionAttributes['reminderId'];
                 if(previousReminder){
-                    await reminderServiceClient.deleteReminder(previousReminder);
+                    try {
+                        if(remindersList.totalCount !== "0")
+                            await reminderServiceClient.deleteReminder(previousReminder);
+                    } catch (error) {
+                        // fail silently as this means the reminder does not exist or there was a problem with deletion
+                        // either way, we can move on and create the new reminder
+                        console.log('Failed to delete reminder: ' + previousReminder + ' via ' + JSON.stringify(error));
+                    }
                     delete sessionAttributes['reminderId'];
-                    console.log('Deleted previous reminder with token: ' + previousReminder);
+                    console.log('Deleted previous reminder token: ' + previousReminder);
                 }
                 // create reminder structure
                 const reminder = logic.createReminderData(
@@ -251,7 +257,7 @@ const CelebrityBirthdaysIntentHandler = {
         }
 
         const dateData = logic.getAdjustedDateData(timezone);
-        const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, 5); //fetch 5 entries
+        const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, constants.MAX_BIRTHDAYS);
 
         let speechText = handlerInput.t('API_ERROR_MSG');
         if(response) {

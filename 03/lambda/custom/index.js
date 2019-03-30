@@ -159,7 +159,7 @@ const LoggingRequestInterceptor = {
 // This response interceptor will log all outgoing responses of this lambda
 const LoggingResponseInterceptor = {
     process(handlerInput, response) {
-      console.log(`Outgoing response: ${JSON.stringify(response)}`);
+        console.log(`Outgoing response: ${JSON.stringify(response)}`);
     }
 };
 

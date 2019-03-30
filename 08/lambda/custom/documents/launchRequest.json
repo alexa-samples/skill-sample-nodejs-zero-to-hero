@@ -43,16 +43,11 @@
             "strings": {
                 "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/full_icon_108.png"
             }
-        },
-        {
-            "dimensions": {
-                "myTextTopPadding": "60dp"
-            }
         }
     ],
     "layouts": {
         "LaunchScreen": {
-            "description": "A basic launch screen with a text and a logo",
+            "description": "A basic launch screen with a text and logo",
             "parameters": [
                 {
                     "name": "mainText",
@@ -82,7 +77,9 @@
                             "type": "Text",
                             "text": "${mainText}",
                             "style": "textStyleDisplay5",
-                            "paddingTop": "@myTextTopPadding"
+                            "paddingTop": "60dp",
+                            "paddingLeft": "50dp",
+                            "color": "white"
                         }
                     ]
                 }
@@ -143,6 +140,7 @@
                                 "justifyContent": "center",
                                 "items": [
                                             {
+                                                "type": "LaunchScreen",
                                                 "mainText": "${payload.launchData.properties.mainText}",
                                                 "logo": "@skillIcon"
                                             }
