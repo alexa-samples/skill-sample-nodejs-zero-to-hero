@@ -21,27 +21,27 @@
             "description": "Background image assets",
             "when": "${@viewportProfile == @hubRoundSmall}",
             "strings": {
-                "background": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/confetti_480x480.png"
+                "background": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/confetti_dark_480x480.png"
             }
         },
         {
             "description": "Background image assets",
             "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge}",
             "strings": {
-                "background": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/confetti_1280x800.png"
+                "background": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/confetti_dark_1280x800.png"
             }
         },
         {
             "description": "Background image assets",
             "when": "${@viewportProfile == @tvLandscapeXLarge}",
             "strings": {
-                "background": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/confetti_1920x1080.png"
+                "background": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/confetti_dark_1920x1080.png"
             }
         },
         {
             "description": "Image assets",
             "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/full_icon_108.png"
+                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/full_icon_512.png"
             }
         }
     ],
@@ -76,9 +76,8 @@
                         {
                             "type": "Text",
                             "text": "${mainText}",
-                            "style": "textStyleDisplay5",
-                            "paddingTop": "60dp",
-                            "paddingLeft": "50dp",
+                            "style": "textStyleDisplay4",
+                            "paddingTop": "30dp",
                             "color": "white"
                         }
                     ]
@@ -117,7 +116,7 @@
                                 "when": "${@viewportProfile == @hubRoundSmall}",
                                 "type": "Container",
                                 "width": "100vw",
-                                "height": "70vh",
+                                "height": "60vh",
                                 "position": "relative",
                                 "alignItems": "center",
                                 "justifyContent": "center",

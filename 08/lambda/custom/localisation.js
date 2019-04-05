@@ -18,7 +18,7 @@ module.exports = {
             GREET_MSG: POSITIVE_SOUND + GREETING_SPEECHCON + ' {{name}} ',
             NOW_TURN_MSG: 'Hoy cumples {{count}} año! ',
             NOW_TURN_MSG_plural: 'Hoy cumples {{count}} años! ',
-            MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
+            MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. ',
             HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. Y decirte cuanto falta para que cumplas. También puedo crear un recordatorio para cuando cumplas o decirte quién cumple años hoy. ',
             SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro o, para, si quieres salir. ',
             GOODBYE_MSG: ['Hasta luego {{name}}! ', 'Adios {{name}}! ', 'Hasta pronto {{name}}! ', 'Nos vemos {{name}}! '],
@@ -31,14 +31,14 @@ module.exports = {
             UNSUPPORTED_DEVICE_MSG: 'Este dispositivo no soporta la operación que estás intentando realizar. ',
             CANCEL_MSG: 'Vale. Lo cancelamos. ',
             MISSING_PERMISSION_MSG: 'Parece que no has autorizado el envío de recordatorios. Te he enviado una tarjeta a la app Alexa para que lo habilites. ',
-            API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a API externa. Por favor inténtalo otra vez. ',
-            PROGRESSIVE_MSG: 'Espera un momento mientras busco algunos cumpleaños de hoy. ',
+            API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a la API externa. Por favor inténtalo otra vez. ',
+            PROGRESSIVE_MSG: `<audio src='https://s3-eu-west-1.amazonaws.com/fartsounds-alexa/all_my_farts/0.mp3'/>`,
             CONJUNCTION_MSG: ' y ',
             CELEBRITY_BIRTHDAYS_MSG: 'En esta fecha cumplen años: ',
             ALSO_TODAY_MSG: 'También hoy cumplen: ',
             LAUNCH_HEADER_MSG: 'Feliz Cumpleaños',
             LAUNCH_TEXT_FILLED_MSG: '{{day}}/{{month}}/{{year}}',
-            LAUNCH_TEXT_EMPTY_MSG: 'Aún no sé tu fecha de cumpleaños :(',
+            LAUNCH_TEXT_EMPTY_MSG: '¿Cuándo cumples?',
             LAUNCH_HINT_MSG: ['cuanto falta para mi cumpleaños?', 'quién cumple años hoy?', 'crea un recordatorio para mi cumpleaños', 'registra mi fecha de cumpleaños']
         }
     }

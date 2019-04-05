@@ -1,0 +1,9 @@
+{
+    "launchData": {
+        "properties": {
+            "headerTitle": "Feliz Cumpleaños",
+            "mainText": "Aún no me has dicho la fecha",
+            "hintString": "cuando cumplo años?"
+        }
+    }
+}

@@ -11,7 +11,7 @@ module.exports = {
             GREET_MSG_plural: 'Feliz cumpleaños! Hoy cumples {{count}} años! ',
             MISSING_MSG: 'Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
             HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. O decirte cuanto falta para que cumplas. ',
-            SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro o, para, si quieres salir. ',
+            SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro, o. para, si quieres salir. ',
             GOODBYE_MSG: 'Hasta luego! ',
             REFLECTOR_MSG: 'Acabas de activar {{intent}}',
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez. ',

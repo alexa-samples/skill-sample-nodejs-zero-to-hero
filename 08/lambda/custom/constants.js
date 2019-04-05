@@ -7,7 +7,6 @@ module.exports = {
     MAX_BIRTHDAYS: 5,
     // APL documents
     APLDocs: {
-        launch: require('./documents/launchRequest.json'),
-        intent: require('./documents/celebrityBirthdaysIntent.json')
+        launch: require('./documents/launchScreen.json')
     }
 }

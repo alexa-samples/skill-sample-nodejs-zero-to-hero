@@ -88,7 +88,6 @@ module.exports = {
         const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
         const requestId = requestEnvelope.request.requestId;
         const {apiEndpoint, apiAccessToken} = requestEnvelope.context.System;
-
         // build the progressive response directive
         const directive = {
           header: {

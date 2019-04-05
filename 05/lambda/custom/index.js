@@ -106,10 +106,10 @@ const SayBirthdayIntentHandler = {
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: age});
             }
-            speechText += handlerInput.t('SHORT_HELP_MSG');
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
+        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)

@@ -1,10 +1,6 @@
-const Alexa = require('ask-sdk-core');
-const persistence = require('./persistence');
-const interceptors = require('./interceptors');
 const logic = require('./logic');
-
-// these are the permissions needed to send reminders
-const REMINDERS_PERMISSION = ['alexa::alerts:reminders:skill:readwrite'];
+const constants = require('./constants');
+const util = require('./util');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -23,9 +19,12 @@ const LaunchRequestHandler = {
         let speechText = handlerInput.t('WELCOME_MSG', {name: name+'.'});
 
         const dateAvailable = day && monthName && year;
-        if(dateAvailable){
-            speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
+
+        if(dateAvailable) {
+            return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
+            speechText += handlerInput.t('MISSING_MSG');
+            // we use intent chaining to trigger the birthday registration multi-turn
             handlerInput.responseBuilder.addDelegateDirective({
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
@@ -63,6 +62,29 @@ const RegisterBirthdayIntentHandler = {
 
         const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
 
+        if (util.supportsAPL(handlerInput)) {
+            handlerInput.responseBuilder.addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                version: '1.0',
+                document: constants.APL.launchDoc,
+                datasources: {
+                    launchData: {
+                        type: 'object',
+                        properties: {
+                            headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
+                            mainText: handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}),
+                            hintString: handlerInput.t('LAUNCH_HINT_MSG'),
+                            backgroundBaseUrl: 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/garlands_dark'
+                        },
+                        transformers: [{
+                            inputPath: 'hintString',
+                            transformer: 'textToHint',
+                        }]
+                    },
+                },
+            });
+        }
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
@@ -86,7 +108,7 @@ const SayBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
         let timezone = requestAttributes['timezone'];
 
-        let speechText;
+        let speechText, isBirthday = false;
         const dateAvailable = day && month && year;
         if(dateAvailable){
             if(!timezone){
@@ -97,16 +119,58 @@ const SayBirthdayIntentHandler = {
             }
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
+            sessionAttributes['age'] = birthdayData.age;
+            sessionAttributes['daysLeft'] = birthdayData.daysUntilBirthday;
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: birthdayData.daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: birthdayData.age + 1});
-            if(birthdayData.daysUntilBirthday === 0) { // it's the user's birthday!
+            isBirthday = birthdayData.daysUntilBirthday === 0;
+            if(isBirthday) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
+
+                const dateData = logic.getAdjustedDateData(timezone);
+                const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, constants.MAX_BIRTHDAYS);
+
+                if(response) { // if the API call fails we just don't append today's birthdays
+                    console.log(JSON.stringify(response));
+                    const results = response.results.bindings;
+                    speechText += handlerInput.t('ALSO_TODAY_MSG');
+                    results.forEach((person, index) => {
+                        console.log(person);
+                        if(index === Object.keys(results).length - 2)
+                            speechText += person.humanLabel.value + handlerInput.t('CONJUNCTION_MSG');
+                        else
+                            speechText += person.humanLabel.value + '. '
+                    });
+                }
             }
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
         speechText += handlerInput.t('SHORT_HELP_MSG');
+
+        if (util.supportsAPL(handlerInput)) {
+            handlerInput.responseBuilder.addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                version: '1.0',
+                document: constants.APL.launchDoc,
+                datasources: {
+                    launchData: {
+                        type: 'object',
+                        properties: {
+                            headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
+                            mainText: isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
+                            hintString: handlerInput.t('LAUNCH_HINT_MSG'),
+                            backgroundBaseUrl: isBirthday ? 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/cake' : 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/papers_dark'
+                        },
+                        transformers: [{
+                            inputPath: 'hintString',
+                            transformer: 'textToHint',
+                        }]
+                    },
+                },
+            });
+        }
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -192,7 +256,7 @@ const RemindBirthdayIntentHandler = {
                 console.log(JSON.stringify(error));
                 switch (error.statusCode) {
                     case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
-                        handlerInput.responseBuilder.withAskForPermissionsConsentCard(REMINDERS_PERMISSION);
+                        handlerInput.responseBuilder.withAskForPermissionsConsentCard(constants.REMINDERS_PERMISSION);
                         speechText = handlerInput.t('MISSING_PERMISSION_MSG');
                         break;
                     case 403: // devices such as the simulator do not support reminder management
@@ -205,6 +269,59 @@ const RemindBirthdayIntentHandler = {
             }
         } else {
             speechText = handlerInput.t('MISSING_MSG');
+        }
+        speechText += handlerInput.t('SHORT_HELP_MSG');
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
+            .getResponse();
+    }
+};
+
+const CelebrityBirthdaysIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'CelebrityBirthdaysIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes()
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const {requestEnvelope, serviceClientFactory} = handlerInput;
+        let timezone = requestAttributes['timezone'];
+
+        if(!timezone){
+           //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+           return handlerInput.responseBuilder
+             .speak(handlerInput.t('NO_TIMEZONE_MSG'))
+             .getResponse();
+        }
+
+        try {
+            // call the progressive response service
+            await logic.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
+          } catch (error) {
+            // if it fails we can continue, but the user will wait without progressive response
+            console.log("Progressive directive error : " + error);
+        }
+
+        const dateData = logic.getAdjustedDateData(timezone);
+        const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, constants.MAX_BIRTHDAYS);
+
+        let speechText = handlerInput.t('API_ERROR_MSG');
+        if(response) {
+            console.log(JSON.stringify(response));
+            const results = response.results.bindings;
+            speechText = handlerInput.t('CELEBRITY_BIRTHDAYS_MSG');
+            results.forEach((person, index) => {
+                console.log(person);
+                if(index === Object.keys(results).length - 2)
+                    speechText += person.humanLabel.value + handlerInput.t('CONJUNCTION_MSG');
+                else
+                    speechText += person.humanLabel.value + '. '
+            });
         }
         speechText += handlerInput.t('SHORT_HELP_MSG');
 
@@ -311,31 +428,16 @@ const ErrorHandler = {
     }
 };
 
-// This handler acts as the entry point for your skill, routing all request and response
-// payloads to the handlers above. Make sure any new handlers or interceptors you've
-// defined are included below. The order matters - they're processed top to bottom.
-exports.handler = Alexa.SkillBuilders.custom()
-    .addRequestHandlers(
-        LaunchRequestHandler,
-        RegisterBirthdayIntentHandler,
-        SayBirthdayIntentHandler,
-        RemindBirthdayIntentHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler,
-        FallbackIntentHandler,
-        SessionEndedRequestHandler,
-        IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
-    .addErrorHandlers(
-        ErrorHandler)
-    .addRequestInterceptors(
-        interceptors.LocalisationRequestInterceptor,
-        interceptors.LoggingRequestInterceptor,
-        interceptors.LoadAttributesRequestInterceptor,
-        interceptors.LoadNameRequestInterceptor,
-        interceptors.LoadTimezoneRequestInterceptor)
-    .addResponseInterceptors(
-        interceptors.LoggingResponseInterceptor,
-        interceptors.SaveAttributesResponseInterceptor)
-    .withPersistenceAdapter(persistence.getPersistenceAdapter())
-    .withApiClient(new Alexa.DefaultApiClient())
-    .lambda();
+module.exports = {
+    LaunchRequestHandler,
+    RegisterBirthdayIntentHandler,
+    SayBirthdayIntentHandler,
+    RemindBirthdayIntentHandler,
+    CelebrityBirthdaysIntentHandler,
+    HelpIntentHandler,
+    CancelAndStopIntentHandler,
+    FallbackIntentHandler,
+    SessionEndedRequestHandler,
+    IntentReflectorHandler,
+    ErrorHandler
+}

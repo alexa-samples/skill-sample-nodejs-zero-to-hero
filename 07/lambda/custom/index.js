@@ -117,10 +117,10 @@ const SayBirthdayIntentHandler = {
                     });
                 }
             }
-            speechText += handlerInput.t('SHORT_HELP_MSG');
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
+        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -201,25 +201,26 @@ const RemindBirthdayIntentHandler = {
                 // save reminder id in session attributes
                 sessionAttributes['reminderId'] = reminderResponse.alertToken;
                 console.log('Reminder created with token: ' + reminderResponse.alertToken);
-                speechText = handlerInput.t('REMINDER_CREATED_MSG') + handlerInput.t('SHORT_HELP_MSG');
+                speechText = handlerInput.t('REMINDER_CREATED_MSG');
             } catch (error) {
                 console.log(JSON.stringify(error));
                 switch (error.statusCode) {
                     case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
                         handlerInput.responseBuilder.withAskForPermissionsConsentCard(constants.REMINDERS_PERMISSION);
-                        speechText = handlerInput.t('MISSING_PERMISSION_MSG') + handlerInput.t('SHORT_HELP_MSG');
+                        speechText = handlerInput.t('MISSING_PERMISSION_MSG');
                         break;
                     case 403: // devices such as the simulator do not support reminder management
-                        speechText = handlerInput.t('UNSUPPORTED_DEVICE_MSG') + handlerInput.t('SHORT_HELP_MSG');
+                        speechText = handlerInput.t('UNSUPPORTED_DEVICE_MSG');
                         break;
                     //case 405: METHOD_NOT_ALLOWED, please contact the Alexa team
                     default:
-                        speechText = handlerInput.t('REMINDER_ERROR_MSG') + handlerInput.t('SHORT_HELP_MSG');
+                        speechText = handlerInput.t('REMINDER_ERROR_MSG');
                 }
             }
         } else {
-            speechText = handlerInput.t('MISSING_MSG') + handlerInput.t('SHORT_HELP_MSG');
+            speechText = handlerInput.t('MISSING_MSG');
         }
+        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -272,7 +273,7 @@ const CelebrityBirthdaysIntentHandler = {
                     speechText += person.humanLabel.value + '. '
             });
         }
-        speechText += handlerInput.t('HELP_MSG');
+        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
