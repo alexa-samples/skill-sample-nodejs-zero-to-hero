@@ -8,7 +8,7 @@ const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
 // This request interceptor will log all incoming requests to this lambda
 const LoggingRequestInterceptor = {
     process(handlerInput) {
-        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope.request)}`);
+        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope)}`);
     }
 };
 

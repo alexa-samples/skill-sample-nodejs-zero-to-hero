@@ -16,7 +16,7 @@ module.exports = {
         return s3PreSignedUrl;
     },
     supportsAPL(handlerInput) {
-        const supportedInterfaces = handlerInput.requestEnvelope.context.System.device.supportedInterfaces;
+        const {supportedInterfaces} = handlerInput.requestEnvelope.context.System.device;
         return supportedInterfaces['Alexa.Presentation.APL'] ? true : false;
     }
 }
