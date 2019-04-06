@@ -21,6 +21,7 @@ const LaunchRequestHandler = {
         const dateAvailable = day && monthName && year;
 
         if(dateAvailable) {
+            // we can't use intent chaining because the intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
             speechText += handlerInput.t('MISSING_MSG');

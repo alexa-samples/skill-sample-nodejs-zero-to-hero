@@ -1,5 +1,5 @@
 const moment = require('moment-timezone'); // will help us do all the birthday math
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 module.exports = {
     getAdjustedDateData(timezone) {
@@ -54,7 +54,7 @@ module.exports = {
     },
     fetchBirthdaysData(day, month, limit){
         const endpoint = 'https://query.wikidata.org/sparql';
-        // List of actors with pictures and date of birth
+        // List of actors with pictures and date of birth for a given day and month
         const sparqlQuery =
         `SELECT ?human ?humanLabel ?picture ?date_of_birth WHERE {
         ?human wdt:P31 wd:Q5.
@@ -67,16 +67,20 @@ module.exports = {
         OPTIONAL { ?human wdt:P569 ?date_of_birth. }
         }
         LIMIT ${limit}`;
-        const url = endpoint + '?query=' + encodeURIComponent( sparqlQuery );
-        const headers = {'Accept': 'application/sparql-results+json'};
+        const url = endpoint + '?query=' + encodeURIComponent(sparqlQuery);
         console.log(url);
 
-        async function getJsonResponse(url, headers){
-            const res = await fetch(url, {headers});
-            return await res.json();
+        var config = {
+            timeout: 7000, // timeout api call before we reach Alexa's 8 sec timeout, or set globally via axios.defaults.timeout
+            headers: {'Accept': 'application/sparql-results+json'}
+        };
+
+        async function getJsonResponse(url, config){
+            const res = await axios.get(url, config);
+            return res.data;
         }
 
-        return getJsonResponse(url, headers).then((result) => {
+        return getJsonResponse(url, config).then((result) => {
             return result;
         }).catch((error) => {
             return null;
