@@ -18,45 +18,17 @@
     ],
     "resources": [
         {
-            "description": "Background image assets",
-            "when": "${@viewportProfile == @hubRoundSmall}",
-            "strings": {
-                "imgSize": "480x480"
-            }
-        },
-        {
-            "description": "Background image assets",
-            "when": "${@viewportProfile == @hubLandscapeMedium}",
-            "strings": {
-                "imgSize": "1024x600"
-            }
-        },
-        {
-            "description": "Background image assets",
-            "when": "${@viewportProfile == @hubLandscapeLarge}",
-            "strings": {
-                "imgSize": "1280x800"
-            }
-        },
-        {
-            "description": "Background image assets",
-            "when": "${@viewportProfile == @tvLandscapeXLarge}",
-            "strings": {
-                "imgSize": "1920x1080"
-            }
-        },
-        {
             "description": "Image assets",
             "when": "${@viewportProfile == @hubRoundSmall}",
             "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/full_icon_108.png"
+                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_108_A2Z.png"
             }
         },
         {
             "description": "Image assets",
             "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
             "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/full_icon_512.png"
+                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_512_A2Z.png"
             }
         }
     ],
@@ -111,7 +83,7 @@
                 "items": [
                     {
                         "type": "Image",
-                        "source": "${payload.launchData.properties.backgroundBaseUrl}_${@imgSize}.png",
+                        "source": "${payload.launchData.properties.backgroundUrl}",
                         "scale": "best-fill",
                         "width": "100vw",
                         "height": "100vh"
@@ -140,7 +112,7 @@
                                     {
                                         "type": "LaunchScreen",
                                         "mainText": "${payload.launchData.properties.mainText}",
-                                        "logo": "@skillIcon"
+                                        "logo": "${payload.launchData.properties.logoUrl}"
                                     }
                                 ]
                             },
@@ -156,7 +128,7 @@
                                     {
                                         "type": "LaunchScreen",
                                         "mainText": "${payload.launchData.properties.mainText}",
-                                        "logo": "@skillIcon"
+                                        "logo": "${payload.launchData.properties.logoUrl}"
                                     }
                                 ]
                             },

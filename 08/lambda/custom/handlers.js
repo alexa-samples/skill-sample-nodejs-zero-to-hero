@@ -64,31 +64,24 @@ const RegisterBirthdayIntentHandler = {
         const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
 
         if (util.supportsAPL(handlerInput)) {
-            handlerInput.responseBuilder.addDirective({
-                type: 'Alexa.Presentation.APL.RenderDocument',
-                version: '1.0',
-                document: constants.APL.launchDoc,
-                datasources: {
-                    launchData: {
-                        type: 'object',
-                        properties: {
-                            headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
-                            mainText: handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}),
-                            hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            backgroundBaseUrl: 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/garlands_dark'
-                        },
-                        transformers: [{
-                            inputPath: 'hintString',
-                            transformer: 'textToHint',
-                        }]
-                    },
-                },
-            });
+            const {Viewport} = handlerInput.requestEnvelope.context;
+            const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
+            util.addLaunchAPLDirective(
+                handlerInput,
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}),
+                handlerInput.t('LAUNCH_HINT_MSG'),
+                Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                util.getS3PreSignedUrl('Media/garlands_dark_'+resolution+'.png'));
         }
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
+            .withStandardCard(
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}),
+                util.getS3PreSignedUrl('Media/garlands_480x480.png'))
             .getResponse();
     }
 };
@@ -151,31 +144,24 @@ const SayBirthdayIntentHandler = {
         speechText += handlerInput.t('SHORT_HELP_MSG');
 
         if (util.supportsAPL(handlerInput)) {
-            handlerInput.responseBuilder.addDirective({
-                type: 'Alexa.Presentation.APL.RenderDocument',
-                version: '1.0',
-                document: constants.APL.launchDoc,
-                datasources: {
-                    launchData: {
-                        type: 'object',
-                        properties: {
-                            headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
-                            mainText: isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
-                            hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            backgroundBaseUrl: isBirthday ? 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/cake' : 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/papers_dark'
-                        },
-                        transformers: [{
-                            inputPath: 'hintString',
-                            transformer: 'textToHint',
-                        }]
-                    },
-                },
-            });
+            const {Viewport} = handlerInput.requestEnvelope.context;
+            const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
+            util.addLaunchAPLDirective(
+                handlerInput,
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
+                handlerInput.t('LAUNCH_HINT_MSG'),
+                Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_dark_'+resolution+'.png'));
         }
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
+            .withStandardCard(
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
+                isBirthday ? util.getS3PreSignedUrl('Media/cake_480x480.png') : util.getS3PreSignedUrl('Media/papers_480x480.png'))
             .getResponse();
     }
 };
