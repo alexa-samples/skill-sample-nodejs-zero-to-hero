@@ -18,7 +18,7 @@ module.exports = {
             nextBirthday.add('years', 1);
         const age = today.diff(wasBorn, 'years');
         const daysAlive = today.diff(wasBorn, 'days');
-        const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
+        const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
 
         return {
             daysAlive: daysAlive,
@@ -29,7 +29,12 @@ module.exports = {
     createReminderData(daysUntilBirthday, timezone, locale, message) {
         moment.locale(locale);
         const now = moment().tz(timezone);
-        const scheduled = now.startOf('day').add(daysUntilBirthday, 'days');
+        let scheduled;
+        if(daysUntilBirthday === 0) {
+            scheduled = now.startOf('day').add(1, 'years'); // reminder created on day of birthday will trigger next year
+        } else {
+            scheduled = now.startOf('day').add(daysUntilBirthday, 'days');
+        }
         console.log('Reminder schedule: ' + scheduled.format('YYYY-MM-DDTHH:mm:00.000'));
 
         return {
@@ -92,6 +97,7 @@ module.exports = {
         const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
         const requestId = requestEnvelope.request.requestId;
         const {apiEndpoint, apiAccessToken} = requestEnvelope.context.System;
+
         // build the progressive response directive
         const directive = {
           header: {

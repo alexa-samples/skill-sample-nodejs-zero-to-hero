@@ -250,7 +250,7 @@ const LocalisationRequestInterceptor = {
 const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
-        if(requestEnvelope.session['new']){ //is this a new session?
+        if(requestEnvelope.session['new']){ //is this a new session? this check is not enough if using auto-delegate
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
             //copy persistent attribute to session attributes
             attributesManager.setSessionAttributes(persistentAttributes);

@@ -64,6 +64,7 @@
                             "type": "Text",
                             "text": "${mainText}",
                             "style": "textStyleDisplay4",
+                            "textAlign": "center",
                             "paddingTop": "30dp",
                             "color": "white"
                         }

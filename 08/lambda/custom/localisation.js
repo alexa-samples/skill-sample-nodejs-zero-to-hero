@@ -32,7 +32,7 @@ module.exports = {
             CANCEL_MSG: 'Vale. Lo cancelamos. ',
             MISSING_PERMISSION_MSG: 'Parece que no has autorizado el envío de recordatorios. Te he enviado una tarjeta a la app Alexa para que lo habilites. ',
             API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a la API externa. Por favor inténtalo otra vez. ',
-            PROGRESSIVE_MSG: 'Espera un momento mientras busco algunos cumpleaños de hoy. ',
+            PROGRESSIVE_MSG: 'Déjame ver quién cumple hoy. ',
             CONJUNCTION_MSG: ' y ',
             CELEBRITY_BIRTHDAYS_MSG: 'En esta fecha cumplen años: ',
             ALSO_TODAY_MSG: 'También hoy cumplen: ',

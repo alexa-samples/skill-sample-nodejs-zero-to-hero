@@ -20,9 +20,12 @@ const LaunchRequestHandler = {
         let speechText = handlerInput.t('WELCOME_MSG', {name: name+'.'});
 
         const dateAvailable = day && monthName && year;
-        if(dateAvailable){
-            speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
+        if(dateAvailable) {
+            // we can't use intent chaining because the intent is not dialog based
+            return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
+            speechText += handlerInput.t('MISSING_MSG');
+            // we use intent chaining to trigger the birthday registration multi-turn
             handlerInput.responseBuilder.addDelegateDirective({
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
@@ -99,7 +102,7 @@ const SayBirthdayIntentHandler = {
                 nextBirthday.add('years', 1);
             }
             const age = today.diff(wasBorn, 'years');
-            const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
+            const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: age + 1});
             if(daysUntilBirthday === 0) { // it's the user's birthday!

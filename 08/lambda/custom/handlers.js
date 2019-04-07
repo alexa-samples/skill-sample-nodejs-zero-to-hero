@@ -63,25 +63,27 @@ const RegisterBirthdayIntentHandler = {
 
         const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
 
+        // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
             const {Viewport} = handlerInput.requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             util.addLaunchAPLDirective(
                 handlerInput,
                 handlerInput.t('LAUNCH_HEADER_MSG'),
-                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}),
+                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
                 handlerInput.t('LAUNCH_HINT_MSG'),
                 Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                 util.getS3PreSignedUrl('Media/garlands_dark_'+resolution+'.png'));
         }
+        // Add card to response
+        handlerInput.responseBuilder.withStandardCard(
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
+                util.getS3PreSignedUrl('Media/garlands_480x480.png'));
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
-            .withStandardCard(
-                handlerInput.t('LAUNCH_HEADER_MSG'),
-                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: month, year: year}),
-                util.getS3PreSignedUrl('Media/garlands_480x480.png'))
             .getResponse();
     }
 };
@@ -143,6 +145,7 @@ const SayBirthdayIntentHandler = {
         }
         speechText += handlerInput.t('SHORT_HELP_MSG');
 
+        // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
             const {Viewport} = handlerInput.requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
@@ -154,14 +157,15 @@ const SayBirthdayIntentHandler = {
                 Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                 isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_dark_'+resolution+'.png'));
         }
+        // Add card to response
+        handlerInput.responseBuilder.withStandardCard(
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
+                isBirthday ? util.getS3PreSignedUrl('Media/cake_480x480.png') : util.getS3PreSignedUrl('Media/papers_480x480.png'));
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('HELP_MSG'))
-            .withStandardCard(
-                handlerInput.t('LAUNCH_HEADER_MSG'),
-                isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
-                isBirthday ? util.getS3PreSignedUrl('Media/cake_480x480.png') : util.getS3PreSignedUrl('Media/papers_480x480.png'))
             .getResponse();
     }
 };
@@ -257,6 +261,25 @@ const RemindBirthdayIntentHandler = {
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
+
+        // Add APL directive to response
+        if (util.supportsAPL(handlerInput)) {
+            const {Viewport} = handlerInput.requestEnvelope.context;
+            const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
+            util.addLaunchAPLDirective(
+                handlerInput,
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                speechText,
+                handlerInput.t('LAUNCH_HINT_MSG'),
+                Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                util.getS3PreSignedUrl('Media/straws_dark_'+resolution+'.png'));
+        }
+        // Add card to response
+        handlerInput.responseBuilder.withStandardCard(
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                speechText,
+                util.getS3PreSignedUrl('Media/straws_480x480.png'));
+
         speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder

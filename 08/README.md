@@ -3,21 +3,30 @@
 ## Milestones
 
 1. *Build Tab*: enable APL interface
-2. *Code Tab*: add APL directives
+2. *Code Tab*: create documents folder. Create images folder. Go to S3 Media folder and add all image files
+3. *Code Tab*: in documents folder create launchScreen.json and leave empty
+4. *Display Tab*: explain the basics. Paste launchScreen.json as template and launchSampleDatasource.json as datasource and explain/play with it.
+5. *Code Tab*: fill documents/launchScreen.json with result from display editor (better leave untouched)
+6. *Code Tab*: locate launch request intent handler and add calls to SayBirthdayIntentHandler (direct) and RegisterBirthdayIntentHandler(via intent chaining directive)
+7. *Code Tab*: locate RegisterBirthdayIntentHandler and add APL directive via util. Add standard card to response builder
+8. *Code Tab*: locate SayBirthdayIntentHandler and add APL directive via util. Add standard card to response builder
 
 ## Concepts
 
-1. APL RenderDocument and APL Integration
+1. APL RenderDocument and APL Directive
 2. APL Databinding
-3. Transformers and Speech Synchronization
-4. Touch Events
+3. APL Styles, Layouts and ViewPorts
+4. APL Transformers
+5. Cards
+6. Media storage in Alexa-hosted Skills
+7. Intent Chaining
+
 
 ## Diff
 
-0. **handlers.js**: create file, refactoring of handlers
-1. **skill.json**: insert APL interface definition
-2. **util.js**: insert supportsAPL() function
-3. **documents**: create folder with launchRequest.json, celebrityBirthdaysIntent.json and helpIntent.json
-4. **constants.js**: create APLDoc structure with requires the files above
-5. **localization.js**: add launch hint message (for APL directive in LaunchRequest)
-6. **index.js**: add APL directive to LaunchRequestHandler
+1. **handlers.js**: create file, refactoring of handlers. Add intent chaining and direct handle() call to LaunchRequestHandler. For RegisterBirthdayIntentHandler, SayBirthdayIntentHandler and RemindBirthdayIntentHandler: Add APL directive, use util.js APL helper and url helper to pass background urls. Add card response.
+2. **skill.json**: insert APL interface definition
+3. **util.js**: insert supportsAPL() function. Insert APL directive helper method (requires ./constants)
+4. **documents**: create folder with launchRequest.json and launchSampleDatasource.json
+5. **constants.js**: create APLDoc structure pointing to to launchRequest.json (for now)
+6. **localization.js**: add hader, full body, empty body and hint strings

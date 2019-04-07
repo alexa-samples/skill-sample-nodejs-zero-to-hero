@@ -18,7 +18,7 @@ module.exports = {
             GREET_MSG: POSITIVE_SOUND + GREETING_SPEECHCON + ' {{name}} ',
             NOW_TURN_MSG: 'Hoy cumples {{count}} año! ',
             NOW_TURN_MSG_plural: 'Hoy cumples {{count}} años! ',
-            MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. Prueba decir, registra mi cumpleaños. o dime directamente una fecha. ',
+            MISSING_MSG: DOUBT_SPEECHCON + '. Parece que aun no me has dicho tu fecha de cumpleaños. ',
             HELP_MSG: 'Puedo recordar tu cumpleaños si me dices una fecha. Y decirte cuanto falta para que cumplas. También puedo crear un recordatorio para cuando cumplas o decirte quién cumple años hoy. ',
             SHORT_HELP_MSG: 'Dime que otra cosa quieres hacer o solo dí, ayuda, si no estas seguro, o, para, si quieres salir. ',
             GOODBYE_MSG: ['Hasta luego {{name}}! ', 'Adios {{name}}! ', 'Hasta pronto {{name}}! ', 'Nos vemos {{name}}! '],
@@ -32,7 +32,7 @@ module.exports = {
             CANCEL_MSG: 'Vale. Lo cancelamos. ',
             MISSING_PERMISSION_MSG: 'Parece que no has autorizado el envío de recordatorios. Te he enviado una tarjeta a la app Alexa para que lo habilites. ',
             API_ERROR_MSG: 'Lo siento, ha habido un problema de acceso a la API externa. Por favor inténtalo otra vez. ',
-            PROGRESSIVE_MSG: 'Espera un momento mientras busco algunos cumpleaños de hoy. ',
+            PROGRESSIVE_MSG: 'Déjame ver quién cumple hoy. ',
             CONJUNCTION_MSG: ' y ',
             CELEBRITY_BIRTHDAYS_MSG: 'En esta fecha cumplen años: ',
             ALSO_TODAY_MSG: 'También hoy cumplen: '

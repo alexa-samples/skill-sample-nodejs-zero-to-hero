@@ -6,7 +6,7 @@ module.exports = {
     // max number of entries to fetch from the external API
     MAX_BIRTHDAYS: 5,
     // APL documents
-    APLDocs: {
-        launch: require('./documents/launchScreen.json')
+    APL: {
+        launchDoc: require('./documents/launchScreen.json')
     }
 }
