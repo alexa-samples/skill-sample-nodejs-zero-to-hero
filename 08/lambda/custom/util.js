@@ -19,28 +19,5 @@ module.exports = {
     supportsAPL(handlerInput) {
         const {supportedInterfaces} = handlerInput.requestEnvelope.context.System.device;
         return supportedInterfaces['Alexa.Presentation.APL'] ? true : false;
-    },
-    addLaunchAPLDirective(handlerInput, title, content, hint, logo, background) {
-        handlerInput.responseBuilder.addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            version: '1.0',
-            document: constants.APL.launchDoc,
-            datasources: {
-                launchData: {
-                    type: 'object',
-                    properties: {
-                        headerTitle: title,
-                        mainText: content,
-                        hintString: hint,
-                        logoUrl: logo,
-                        backgroundUrl: background
-                    },
-                    transformers: [{
-                        inputPath: 'hintString',
-                        transformer: 'textToHint',
-                    }]
-                },
-            },
-        });
     }
 }

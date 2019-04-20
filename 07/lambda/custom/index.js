@@ -31,7 +31,7 @@ const LaunchRequestHandler = {
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
-            })
+            });
         }
 
         return handlerInput.responseBuilder
@@ -87,7 +87,7 @@ const SayBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
         let timezone = requestAttributes['timezone'];
 
-        let speechText;
+        let speechText, isBirthday = false;
         const dateAvailable = day && month && year;
         if(dateAvailable){
             if(!timezone){
@@ -98,9 +98,12 @@ const SayBirthdayIntentHandler = {
             }
 
             const birthdayData = logic.getBirthdayData(day, month, year, timezone);
+            sessionAttributes['age'] = birthdayData.age;
+            sessionAttributes['daysLeft'] = birthdayData.daysUntilBirthday;
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: birthdayData.daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: birthdayData.age + 1});
-            if(birthdayData.daysUntilBirthday === 0) { // it's the user's birthday!
+            isBirthday = birthdayData.daysUntilBirthday === 0;
+            if(isBirthday) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
 

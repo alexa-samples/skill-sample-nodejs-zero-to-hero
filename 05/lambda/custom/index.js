@@ -30,7 +30,7 @@ const LaunchRequestHandler = {
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
-            })
+            });
         }
 
         return handlerInput.responseBuilder
