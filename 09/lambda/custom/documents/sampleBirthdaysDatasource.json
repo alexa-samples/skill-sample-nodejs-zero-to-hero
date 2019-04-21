@@ -1,0 +1,114 @@
+{
+    "head": {
+        "vars": [
+            "human",
+            "humanLabel",
+            "picture",
+            "date_of_birth"
+        ]
+    },
+    "results": {
+        "bindings": [
+            {
+                "human": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q202185"
+                },
+                "picture": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Jay%20Brannan%2C%20Edinburgh%202008%20cropped.jpg"
+                },
+                "date_of_birth": {
+                    "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "type": "literal",
+                    "value": "1982-03-29T00:00:00Z"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Jay Brannan"
+                }
+            },
+            {
+                "human": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q105158"
+                },
+                "picture": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Christophe%20Lambert%20C%C3%A9sar%202016.jpg"
+                },
+                "date_of_birth": {
+                    "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "type": "literal",
+                    "value": "1957-03-29T00:00:00Z"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Christopher Lambert"
+                }
+            },
+            {
+                "human": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q206659"
+                },
+                "picture": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Brendan%20Gleeson.jpg"
+                },
+                "date_of_birth": {
+                    "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "type": "literal",
+                    "value": "1955-03-29T00:00:00Z"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Brendan Gleeson"
+                }
+            },
+            {
+                "human": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q210741"
+                },
+                "picture": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Eric%20Idle%202014.jpg"
+                },
+                "date_of_birth": {
+                    "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "type": "literal",
+                    "value": "1943-03-29T00:00:00Z"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Eric Idle"
+                }
+            },
+            {
+                "human": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q133112"
+                },
+                "picture": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Lucy%20Lawless%20in%202016.jpg"
+                },
+                "date_of_birth": {
+                    "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "type": "literal",
+                    "value": "1968-03-29T00:00:00Z"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Lucy Lawless"
+                }
+            }
+        ]
+    }
+}
