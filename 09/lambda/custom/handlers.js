@@ -84,8 +84,8 @@ const RegisterBirthdayIntentHandler = {
                             inputPath: 'hintString',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
         // Add card to response
@@ -180,8 +180,8 @@ const SayBirthdayIntentHandler = {
                             inputPath: 'hintString',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
         // Add card to response
@@ -239,7 +239,7 @@ const RemindBirthdayIntentHandler = {
             // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!permissions)
+                if(!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
@@ -311,8 +311,8 @@ const RemindBirthdayIntentHandler = {
                             inputPath: 'hintString',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
         // Add card to response
@@ -362,9 +362,11 @@ const CelebrityBirthdaysIntentHandler = {
         const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, constants.MAX_BIRTHDAYS);
 
         let speechText = handlerInput.t('API_ERROR_MSG');
+
+        let results;
         if(response) {
             console.log(JSON.stringify(response));
-            const results = response.results.bindings;
+            results = response.results.bindings;
             speechText = handlerInput.t('CELEBRITY_BIRTHDAYS_MSG');
             results.forEach((person, index) => {
                 console.log(person);
@@ -374,39 +376,44 @@ const CelebrityBirthdaysIntentHandler = {
                     speechText += person.humanLabel.value + '. '
             });
         }
-        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         // Add APL directive to response
-        if (util.supportsAPL(handlerInput)) {
+        if (util.supportsAPL(handlerInput) && results) {
             const {Viewport} = handlerInput.requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
                 version: '1.0',
-                document: constants.APL.launchDoc,
+                document: constants.APL.listDoc,
                 datasources: {
-                    launchData: {
+                    listData: {
                         type: 'object',
                         properties: {
-                            headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
-                            mainText: handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
-                            hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
-                            backgroundUrl: util.getS3PreSignedUrl('Media/garlands_dark_'+resolution+'.png')
+                            config: {
+                                backgroundImage: util.getS3PreSignedUrl('Media/lights_dark_'+resolution+'.png'),
+                                title: handlerInput.t('LIST_HEADER_MSG'),
+                                hintText: handlerInput.t('LIST_HINT_MSG')
+                            },
+                            list: {
+                                listItems: results
+                            }
                         },
                         transformers: [{
-                            inputPath: 'hintString',
+                            inputPath: 'config.hintText',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
+
         // Add card to response
         handlerInput.responseBuilder.withStandardCard(
-                handlerInput.t('LAUNCH_HEADER_MSG'),
-                handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
-                util.getS3PreSignedUrl('Media/garlands_480x480.png'));
+                handlerInput.t('LIST_HEADER_MSG'),
+                speechText,
+                util.getS3PreSignedUrl('Media/lights_480x480.png'));
+
+        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)

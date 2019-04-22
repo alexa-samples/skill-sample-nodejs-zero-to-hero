@@ -112,7 +112,7 @@
                             "position": "absolute",
                             "height": "100vh",
                             "width": "100vw",
-                            "overlayColor": "rgba(0, 0, 0, 0.3)",
+                            "overlayColor": "rgba(0, 0, 0, 0.4)",
                             "source": "${data.picture.value}",
                             "scale": "best-fill"
                         },
@@ -176,7 +176,7 @@
                 "backgroundImage",
                 "title",
                 "hintText",
-                "listData"
+                "list"
             ],
             "items": [
                 {
@@ -188,14 +188,14 @@
                         {
                             "type": "Sequence",
                             "scrollDirection": "horizontal",
-                            "data": "${listData}",
+                            "data": "${list}",
                             "height": "100%",
                             "width": "100%",
                             "numbered": true,
                             "item": [
                                 {
                                     "type": "FullHorizontalListItem",
-                                    "listLength": "${payload.listData.listItems.length}"
+                                    "listLength": "${payload.listData.properties.list.listItems.length}"
                                 }
                             ]
                         }
@@ -224,7 +224,7 @@
                             "scrollDirection": "horizontal",
                             "paddingLeft": "@marginLeft",
                             "paddingRight": "@marginRight",
-                            "data": "${listData}",
+                            "data": "${list}",
                             "height": "70vh",
                             "width": "100%",
                             "numbered": true,
@@ -236,7 +236,7 @@
                         },
                         {
                             "type": "AlexaFooter",
-                            "footerHint": "${payload.listData.hintText}"
+                            "footerHint": "${payload.listData.properties.config.hintText}"
                         }
                     ]
                 }
@@ -250,10 +250,10 @@
         "item": [
             {
                 "type": "ListLayout",
-                "backgroundImage": "${payload.data.backgroundImage}",
-                "title": "${payload.data.title}",
-                "hintText": "${payload.data.hintText}",
-                "listData": "${payload.listData.listItems}"
+                "backgroundImage": "${payload.listData.properties.config.backgroundImage}",
+                "title": "${payload.listData.properties.config.title}",
+                "hintText": "${payload.listData.properties.config.hintText}",
+                "list": "${payload.listData.properties.list.listItems}"
             }
         ]
     }

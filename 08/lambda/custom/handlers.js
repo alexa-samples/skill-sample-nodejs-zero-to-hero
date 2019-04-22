@@ -84,8 +84,8 @@ const RegisterBirthdayIntentHandler = {
                             inputPath: 'hintString',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
         // Add card to response
@@ -180,8 +180,8 @@ const SayBirthdayIntentHandler = {
                             inputPath: 'hintString',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
         // Add card to response
@@ -239,7 +239,7 @@ const RemindBirthdayIntentHandler = {
             // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!permissions)
+                if(!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
@@ -311,8 +311,8 @@ const RemindBirthdayIntentHandler = {
                             inputPath: 'hintString',
                             transformer: 'textToHint',
                         }]
-                    },
-                },
+                    }
+                }
             });
         }
         // Add card to response

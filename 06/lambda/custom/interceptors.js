@@ -82,7 +82,7 @@ const LoadNameRequestInterceptor = {
             // or you'll get a SessionEndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!permissions)
+                if(!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
