@@ -101,38 +101,57 @@
             ],
             "item": [
                 {
-                    "type": "Container",
-                    "height": "100vh",
-                    "width": "100vw",
-                    "alignItems": "center",
-                    "justifyContent": "end",
-                    "items": [
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "id": "mycontainer",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "alignItems": "center",
+                        "justifyContent": "end",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "position": "absolute",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "overlayColor": "rgba(0, 0, 0, 0.4)",
+                                "source": "${data.picture.value}",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.humanLabel.value}",
+                                "style": "textStyleBody",
+                                "maxLines": 1
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.date_of_birth.value}",
+                                "style": "textStyleDetails"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${ordinal} | ${listLength}",
+                                "paddingBottom": "20dp",
+                                "color": "white",
+                                "spacing": "5dp"
+                            }
+                        ]
+                    },
+                    "onPress": [
                         {
-                            "type": "Image",
-                            "position": "absolute",
-                            "height": "100vh",
-                            "width": "100vw",
-                            "overlayColor": "rgba(0, 0, 0, 0.4)",
-                            "source": "${data.picture.value}",
-                            "scale": "best-fill"
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data}"
+                            ]
                         },
                         {
-                            "type": "Text",
-                            "text": "${data.humanLabel.value}",
-                            "style": "textStyleBody",
-                            "maxLines": 1
-                        },
-                        {
-                            "type": "Text",
-                            "text": "${data.date_of_birth.value}",
-                            "style": "textStyleDetails"
-                        },
-                        {
-                            "type": "Text",
-                            "text": "${ordinal} | ${listLength}",
-                            "paddingBottom": "20dp",
-                            "color": "white",
-                            "spacing": "5dp"
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
                         }
                     ]
                 }
@@ -141,31 +160,51 @@
         "HorizontalListItem": {
             "item": [
                 {
-                    "type": "Container",
-                    "maxWidth": 528,
-                    "minWidth": 312,
-                    "paddingLeft": 16,
-                    "paddingRight": 16,
-                    "height": "100%",
-                    "items": [
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "maxWidth": 528,
+                        "minWidth": 312,
+                        "paddingLeft": 16,
+                        "paddingRight": 16,
+                        "height": "100%",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${data.picture.value}",
+                                "height": "50vh",
+                                "width": "50vh",
+                                "scale": "fill",
+                                "align": "left"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "<b>${ordinal}.</b> ${data.humanLabel.value}",
+                                "style": "textStyleSecondary",
+                                "maxLines": 1,
+                                "spacing": 12
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.date_of_birth.value}",
+                                "style": "textStyleDetails",
+                                "spacing": 4
+                            }
+                        ]
+                    },
+                    "onPress": [
                         {
-                            "type": "Image",
-                            "source": "${data.picture.value}",
-                            "height": "50vh",
-                            "width": "50vh"
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data}"
+                            ]
                         },
                         {
-                            "type": "Text",
-                            "text": "<b>${ordinal}.</b> ${data.humanLabel.value}",
-                            "style": "textStyleSecondary",
-                            "maxLines": 1,
-                            "spacing": 12
-                        },
-                        {
-                            "type": "Text",
-                            "text": "${data.date_of_birth.value}",
-                            "style": "textStyleDetails",
-                            "spacing": 4
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
                         }
                     ]
                 }

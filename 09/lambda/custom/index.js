@@ -13,6 +13,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         handlers.SayBirthdayIntentHandler,
         handlers.RemindBirthdayIntentHandler,
         handlers.CelebrityBirthdaysIntentHandler,
+        handlers.TouchIntentHandler,
         handlers.HelpIntentHandler,
         handlers.CancelAndStopIntentHandler,
         handlers.FallbackIntentHandler,

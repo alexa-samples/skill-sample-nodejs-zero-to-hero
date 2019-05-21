@@ -13,7 +13,9 @@
                 },
                 {
                     "name": "AMAZON.StopIntent",
-                    "samples": []
+                    "samples": [
+                        "salir"
+                    ]
                 },
                 {
                     "name": "RegisterBirthdayIntent",

@@ -370,6 +370,8 @@ const CelebrityBirthdaysIntentHandler = {
             speechText = handlerInput.t('CELEBRITY_BIRTHDAYS_MSG');
             results.forEach((person, index) => {
                 console.log(person);
+                const age = logic.convertBirthdateToYearsOld(person, timezone);
+                person.date_of_birth.value = handlerInput.t('LIST_YO_ABBREV_MSG', {count: age});
                 if(index === Object.keys(results).length - 2)
                     speechText += person.humanLabel.value + handlerInput.t('CONJUNCTION_MSG');
                 else
@@ -400,7 +402,7 @@ const CelebrityBirthdaysIntentHandler = {
                         },
                         transformers: [{
                             inputPath: 'config.hintText',
-                            transformer: 'textToHint',
+                            transformer: 'textToHint'
                         }]
                     }
                 }
@@ -412,6 +414,24 @@ const CelebrityBirthdaysIntentHandler = {
                 handlerInput.t('LIST_HEADER_MSG'),
                 speechText,
                 util.getS3PreSignedUrl('Media/lights_480x480.png'));
+
+        speechText += handlerInput.t('SHORT_HELP_MSG');
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
+            .getResponse();
+    }
+};
+
+const TouchIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent';
+    },
+    handle(handlerInput) {
+        //console.log('Arguments: ' + handlerInput.requestEnvelope.request.arguments[0]);
+        let person = handlerInput.requestEnvelope.request.arguments[0];
+        let speechText = handlerInput.t('LIST_PERSON_DETAIL_MSG', {person: person});
 
         speechText += handlerInput.t('SHORT_HELP_MSG');
 
@@ -451,6 +471,7 @@ const CancelAndStopIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
+            .withShouldEndSession(true)
             .getResponse();
     }
 };
@@ -524,6 +545,7 @@ module.exports = {
     SayBirthdayIntentHandler,
     RemindBirthdayIntentHandler,
     CelebrityBirthdaysIntentHandler,
+    TouchIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     FallbackIntentHandler,

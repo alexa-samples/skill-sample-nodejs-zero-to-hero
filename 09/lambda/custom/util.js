@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk');
-const constants = require('./constants');
 
 const s3SigV4Client = new AWS.S3({
     signatureVersion: 'v4'

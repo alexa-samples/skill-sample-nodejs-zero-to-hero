@@ -76,7 +76,7 @@ module.exports = {
         console.log(url);
 
         var config = {
-            timeout: 7000, // timeout api call before we reach Alexa's 8 sec timeout, or set globally via axios.defaults.timeout
+            timeout: 6500, // timeout api call before we reach Alexa's 8 sec timeout, or set globally via axios.defaults.timeout
             headers: {'Accept': 'application/sparql-results+json'}
         };
 

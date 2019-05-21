@@ -412,6 +412,7 @@ const CancelAndStopIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
+            .withShouldEndSession(true)
             .getResponse();
     }
 };

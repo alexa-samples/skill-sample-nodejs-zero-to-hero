@@ -4,7 +4,8 @@
             "human",
             "humanLabel",
             "picture",
-            "date_of_birth"
+            "date_of_birth",
+            "place_of_birthLabel"
         ]
     },
     "results": {
@@ -12,101 +13,126 @@
             {
                 "human": {
                     "type": "uri",
-                    "value": "http://www.wikidata.org/entity/Q202185"
+                    "value": "http://www.wikidata.org/entity/Q17319618"
                 },
                 "picture": {
                     "type": "uri",
-                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Jay%20Brannan%2C%20Edinburgh%202008%20cropped.jpg"
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/%D0%9D%D0%B8%D0%BA%D0%B8%D1%82%D0%B0%20%D0%9F%D1%80%D0%B5%D1%81%D0%BD%D1%8F%D0%BA%D0%BE%D0%B2%20MULTIVERSE%20.jpg"
                 },
                 "date_of_birth": {
                     "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
                     "type": "literal",
-                    "value": "1982-03-29T00:00:00Z"
+                    "value": "1991-05-21T00:00:00Z"
                 },
                 "humanLabel": {
                     "xml:lang": "en",
                     "type": "literal",
-                    "value": "Jay Brannan"
+                    "value": "Nikita Presnyakov"
+                },
+                "place_of_birthLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "London"
                 }
             },
             {
                 "human": {
                     "type": "uri",
-                    "value": "http://www.wikidata.org/entity/Q105158"
+                    "value": "http://www.wikidata.org/entity/Q1896173"
                 },
                 "picture": {
                     "type": "uri",
-                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Christophe%20Lambert%20C%C3%A9sar%202016.jpg"
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Maria%20Minzenti%20-%20Nov%201922%20Shadowland.jpg"
                 },
                 "date_of_birth": {
                     "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
                     "type": "literal",
-                    "value": "1957-03-29T00:00:00Z"
+                    "value": "1898-05-21T00:00:00Z"
                 },
                 "humanLabel": {
                     "xml:lang": "en",
                     "type": "literal",
-                    "value": "Christopher Lambert"
+                    "value": "Maria Mindzenti"
+                },
+                "place_of_birthLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Vienna"
                 }
             },
             {
                 "human": {
                     "type": "uri",
-                    "value": "http://www.wikidata.org/entity/Q206659"
+                    "value": "http://www.wikidata.org/entity/Q1646159"
                 },
                 "picture": {
                     "type": "uri",
-                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Brendan%20Gleeson.jpg"
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Lola%20Lane%20in%20Four%20Daughters%20trailer.jpg"
                 },
                 "date_of_birth": {
                     "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
                     "type": "literal",
-                    "value": "1955-03-29T00:00:00Z"
+                    "value": "1906-05-21T00:00:00Z"
                 },
                 "humanLabel": {
                     "xml:lang": "en",
                     "type": "literal",
-                    "value": "Brendan Gleeson"
+                    "value": "Lola Lane"
+                },
+                "place_of_birthLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Indiana"
                 }
             },
             {
                 "human": {
                     "type": "uri",
-                    "value": "http://www.wikidata.org/entity/Q210741"
+                    "value": "http://www.wikidata.org/entity/Q6048832"
                 },
                 "picture": {
                     "type": "uri",
-                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Eric%20Idle%202014.jpg"
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ayse%20kokcu.jpg"
                 },
                 "date_of_birth": {
                     "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
                     "type": "literal",
-                    "value": "1943-03-29T00:00:00Z"
+                    "value": "1955-05-21T00:00:00Z"
                 },
                 "humanLabel": {
                     "xml:lang": "en",
                     "type": "literal",
-                    "value": "Eric Idle"
+                    "value": "Ayse Kökçü"
+                },
+                "place_of_birthLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Istanbul"
                 }
             },
             {
                 "human": {
                     "type": "uri",
-                    "value": "http://www.wikidata.org/entity/Q133112"
+                    "value": "http://www.wikidata.org/entity/Q589048"
                 },
                 "picture": {
                     "type": "uri",
-                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Lucy%20Lawless%20in%202016.jpg"
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Fabriano-Civita02.jpg"
                 },
                 "date_of_birth": {
                     "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
                     "type": "literal",
-                    "value": "1968-03-29T00:00:00Z"
+                    "value": "1744-05-21T00:00:00Z"
                 },
                 "humanLabel": {
                     "xml:lang": "en",
                     "type": "literal",
-                    "value": "Lucy Lawless"
+                    "value": "Gaspare Pacchierotti"
+                },
+                "place_of_birthLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Fabriano"
                 }
             }
         ]
