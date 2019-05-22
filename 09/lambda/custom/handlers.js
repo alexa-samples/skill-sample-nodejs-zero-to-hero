@@ -429,7 +429,7 @@ const TouchIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent';
     },
     handle(handlerInput) {
-        //console.log('Arguments: ' + handlerInput.requestEnvelope.request.arguments[0]);
+        console.log('Touch event arguments: ' + JSON.stringify(handlerInput.requestEnvelope.request.arguments[0]);
         let person = handlerInput.requestEnvelope.request.arguments[0];
         let speechText = handlerInput.t('LIST_PERSON_DETAIL_MSG', {person: person});
 

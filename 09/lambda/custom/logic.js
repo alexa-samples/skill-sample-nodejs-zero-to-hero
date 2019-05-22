@@ -68,6 +68,7 @@ module.exports = {
           FILTER((DATATYPE(?date_of_birth)) = xsd:dateTime)
           FILTER((MONTH(?date_of_birth)) = ${month})
           FILTER((DAY(?date_of_birth)) = ${day})
+          FILTER (bound(?place_of_birth))
           SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
           OPTIONAL { ?human wdt:P569 ?date_of_birth. }
           OPTIONAL { ?human wdt:P19 ?place_of_birth. }
