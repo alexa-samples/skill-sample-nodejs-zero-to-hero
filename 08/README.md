@@ -17,7 +17,7 @@
 2. APL Databinding
 3. APL Styles, Layouts and ViewPorts
 4. APL Transformers
-5. Cards
+5. Home Cards
 6. Media storage in Alexa-hosted Skills
 
 ## Diff
