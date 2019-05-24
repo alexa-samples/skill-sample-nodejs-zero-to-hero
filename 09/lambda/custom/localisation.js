@@ -41,10 +41,10 @@ module.exports = {
             LAUNCH_TEXT_EMPTY_MSG: '¿Cuándo cumples?',
             LAUNCH_HINT_MSG: ['cuanto falta para mi cumpleaños?', 'quién cumple años hoy?', 'crea un recordatorio para mi cumpleaños', 'registra mi fecha de cumpleaños'],
             LIST_HEADER_MSG: 'Cumpleaños de Hoy',
-            LIST_HINT_MSG: 'selecciona el primero',
+            LIST_HINT_MSG: 'quién cumple años hoy?',
             LIST_YO_ABBREV_MSG: '{{count}} año',
             LIST_YO_ABBREV_MSG_plural: '{{count}} años',
-            LIST_PERSON_DETAIL_MSG: `{{person.humanLabel.value}} tiene {{person.date_of_birth.value}} y nació en <lang xml:lang="en-US">{{person.place_of_birthLabel.value}}</lang>. `
+            LIST_PERSON_DETAIL_MSG: `{{person.humanLabel.value}} nació hace {{person.date_of_birth.value}} en <lang xml:lang="en-US">{{person.place_of_birthLabel.value}}</lang>. `
         }
     }
 }

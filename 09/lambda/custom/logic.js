@@ -62,19 +62,18 @@ module.exports = {
         // List of actors with pictures and date of birth for a given day and month
         const sparqlQuery =
         `SELECT DISTINCT ?human ?humanLabel ?picture ?date_of_birth ?place_of_birthLabel WHERE {
-          ?human wdt:P31 wd:Q5;
+        ?human wdt:P31 wd:Q5;
             wdt:P106 wd:Q33999;
             wdt:P18 ?picture.
-          FILTER((DATATYPE(?date_of_birth)) = xsd:dateTime)
-          FILTER((MONTH(?date_of_birth)) = ${month})
-          FILTER((DAY(?date_of_birth)) = ${day})
-          FILTER (bound(?place_of_birth))
-          SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-          OPTIONAL { ?human wdt:P569 ?date_of_birth. }
-          OPTIONAL { ?human wdt:P19 ?place_of_birth. }
+        FILTER((DATATYPE(?date_of_birth)) = xsd:dateTime)
+        FILTER((MONTH(?date_of_birth)) = ${month})
+        FILTER((DAY(?date_of_birth)) = ${day})
+        FILTER (bound(?place_of_birth))
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+        OPTIONAL { ?human wdt:P569 ?date_of_birth. }
+        OPTIONAL { ?human wdt:P19 ?place_of_birth. }
         }
         LIMIT ${limit}`;
-        
         const url = endpoint + '?query=' + encodeURIComponent(sparqlQuery);
         console.log(url);
 

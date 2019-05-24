@@ -16,22 +16,6 @@
             "version": "1.0.0"
         }
     ],
-    "resources": [
-        {
-            "description": "Image assets",
-            "when": "${@viewportProfile == @hubRoundSmall}",
-            "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_108_A2Z.png"
-            }
-        },
-        {
-            "description": "Image assets",
-            "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
-            "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_512_A2Z.png"
-            }
-        }
-    ],
     "layouts": {
         "LaunchScreen": {
             "description": "A basic launch screen with a text and logo",
