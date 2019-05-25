@@ -1,6 +1,6 @@
 # Part 9 - Alexa Presentation Language (II)
 
-## Milestones
+#   # Milestones
 
 1. *Code Tab*: do the steps in the Diff section up to 5
 2. *VS Code*: show sample data from API (sampleBirthdayResponse) and APL doc (listScreen.json)
