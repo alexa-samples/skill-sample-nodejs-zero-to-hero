@@ -10,8 +10,14 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "sourceDir": "lambda/custom"
-        }
+          "sourceDir": "lambda/custom",
+          "uri": "ask-custom-happy-birthday-default"
+        },
+        "interfaces":[
+          {
+            "type": "ALEXA_PRESENTATION_APL"
+          }
+        ]
       }
     },
     "manifestVersion": "1.0",
