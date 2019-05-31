@@ -50,7 +50,7 @@
         },
         {
             "description": "Image assets",
-            "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+            "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
             "strings": {
                 "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_512_A2Z.png"
             }
