@@ -4,6 +4,12 @@
       "locales": {
         "es-ES": {
           "name": "Feliz Cumpleaños"
+        },
+        "es-MX": {
+          "name": "Feliz Cumpleaños"
+        },
+        "es-US": {
+          "name": "Feliz Cumpleaños"
         }
       }
     },

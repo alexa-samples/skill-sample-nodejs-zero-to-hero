@@ -1,5 +1,8 @@
 # Part 6 - Reminders API
 
+Here we show you how to use the Reminders API to have Alexa say a message on a specific point in time. The user has to grant permission for this so we also show how to send a card to the Alexa app to get this permission.
+Additionally we show you how to use a slot of type AMAZON.SearchQuery to capture arbitrary sentences that the user might say (no predefined slot type).
+
 ## Milestones
 
 1. **Build Tab**: enable Reminders in Permissions

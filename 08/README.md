@@ -1,5 +1,9 @@
 # Part 8 - Alexa Presentation Language (I)
 
+This is where we introduce APL, the Alexa Prersentation Language. In this module we create a simple splash screen APL document that we reuse across several intents.
+We also introduce Home Cards (these cards are typically visble in the Alexa app) and media storage via S3 in your Alexa Hosted Skill space to store the images we need to render.
+The APL document shows a tailored hint (thanks to the testToHint transformer)
+
 ## Milestones
 
 1. *Build Tab*: enable APL interface
@@ -16,7 +20,7 @@
 1. APL RenderDocument and APL Directive
 2. APL Databinding
 3. APL Styles, Layouts and ViewPorts
-4. APL Transformers
+4. APL Transformers (Text to Hint)
 5. Home Cards
 6. Media storage in Alexa-hosted Skills
 

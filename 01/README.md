@@ -1,5 +1,7 @@
 # Part 1 - Alexa-Hosted Skills (preset - Hello World)
 
+In this module we introduce some theory about ASK and then we build an Alexa Hosted Skill from scratch (Hello World template).
+
 ## Milestones
 
 1. **Developer Console**: Build, Code and Test tabs

@@ -1,5 +1,8 @@
 # Part 5 - Accessing ASK APIs
 
+In this module we show how to access internal ASK APIs (in this case the User Profile API to fetch the given name of the user and the Settings API to fetch the timezone of the device).
+We also intriduce some SSML magic to use speechcons and audio files.
+
 ## Milestones
 
 1. **Build Tab**: enable given name permissions in front-end

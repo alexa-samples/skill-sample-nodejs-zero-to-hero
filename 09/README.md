@@ -1,5 +1,8 @@
 # Part 9 - Alexa Presentation Language (II)
 
+In this second APL module we show a slightly more complex APL document. We use the results of the external API (celebrity birthdays) to render a list on screen.
+Ww enable each item shown in the list with touch capability.
+
 #   # Milestones
 
 1. *Code Tab*: do the steps in the Diff section up to 5

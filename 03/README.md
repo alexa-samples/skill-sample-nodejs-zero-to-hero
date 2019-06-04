@@ -1,5 +1,7 @@
 # Part 3 - Slots, Slot Validation and Automatic Dialog Delegation
 
+In this module we strat an Alexa Hosted Skill from scratch and this is the one we'll keep evolving. We show slots (buil;t-in and custom), synonyms, slot validation and dialogs & prompts with AutoDelegate.
+
 ## Milestones
 
 1. **Build Tab**: create Alexa-hosted skill from scratch or overwrite HelloWorld, select/add your locale. 

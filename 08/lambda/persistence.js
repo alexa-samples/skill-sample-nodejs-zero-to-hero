@@ -1,10 +1,9 @@
 module.exports = {
-    getPersistenceAdapter() {
+    getPersistenceAdapter(tableName) {
         // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
         function isAlexaHosted() {
-            return process.env.S3_PERSISTENCE_BUCKET ? true : false;
+            return process.env.S3_PERSISTENCE_BUCKET;
         }
-        const tableName = 'happy_birthday_table';
         if(isAlexaHosted()) {
             const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
             return new S3PersistenceAdapter({ 

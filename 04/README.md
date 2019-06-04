@@ -1,5 +1,8 @@
 # Part 4 - Memory
 
+In this module we show how to store data that lives across sessions (persistence). We use the S3 persistence adapter available in Alexa Hosted Skills.
+We show session attributes and create interceptors that help make them persistent automatically.
+
 ## Milestones
 
 1. **Code Tab**: create isAlexaHosted() function based on process.env.S3_PERSISTENCE_BUCKET variable
