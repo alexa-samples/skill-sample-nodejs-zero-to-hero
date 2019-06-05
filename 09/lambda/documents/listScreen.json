@@ -251,7 +251,8 @@
                             "scale": "best-fill",
                             "width": "100vw",
                             "height": "100vh",
-                            "position": "absolute"
+                            "position": "absolute",
+                            "opacity": "0.3"
                         },
                         {
                             "type": "AlexaHeader",

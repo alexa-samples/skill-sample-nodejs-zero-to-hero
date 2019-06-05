@@ -68,10 +68,11 @@
                 "items": [
                     {
                         "type": "Image",
-                        "source": "${payload.launchData.properties.backgroundUrl}",
+                        "source": "${payload.launchData.properties.backgroundImage}",
                         "scale": "best-fill",
                         "width": "100vw",
-                        "height": "100vh"
+                        "height": "100vh",
+                        "opacity": "0.3"
                     },
                     {
                         "type": "Container",

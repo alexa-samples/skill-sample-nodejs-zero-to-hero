@@ -5,7 +5,7 @@
             "mainText": "Aún no me has dicho la fecha",
             "hintString": "cuando cumplo años?",
             "logoUrl": "https://yourimgurlhere",
-            "backgroundUrl": "https://yourimgurlhere"
+            "backgroundImage": "https://yourimgurlhere"
         }
     }
 }

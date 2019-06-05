@@ -2,7 +2,7 @@
 
 This is where we introduce APL, the Alexa Prersentation Language. In this module we create a simple splash screen APL document that we reuse across several intents.
 We also introduce Home Cards (these cards are typically visble in the Alexa app) and media storage via S3 in your Alexa Hosted Skill space to store the images we need to render.
-The APL document shows a tailored hint (thanks to the testToHint transformer)
+The APL document shows a tailored hint (thanks to the                                       testToHint transformer)
 
 ## Milestones
 
@@ -31,4 +31,4 @@ The APL document shows a tailored hint (thanks to the testToHint transformer)
 3. **util.js**: insert supportsAPL() function. Insert APL directive helper method (requires ./constants)
 4. **documents**: create folder with launchRequest.json and launchSampleDatasource.json
 5. **constants.js**: create APLDoc structure pointing to to launchRequest.json (for now)
-6. **localization.js**: add hader, full body, empty body and hint strings
+6. **localization.js**: add header, full body, empty body and hint strings
