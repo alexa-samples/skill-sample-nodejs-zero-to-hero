@@ -174,7 +174,8 @@ const SayBirthdayIntentHandler = {
                             mainText: isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
                             logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
-                            backgroundImage: isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_'+resolution+'.png')
+                            backgroundImage: isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_'+resolution+'.png'),
+                            backgroundOpacity: isBirthday ? "1" : "0.3"
                         },
                         transformers: [{
                             inputPath: 'hintString',
