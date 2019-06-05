@@ -78,7 +78,8 @@ const RegisterBirthdayIntentHandler = {
                             mainText: handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
                             logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
-                            backgroundImage: util.getS3PreSignedUrl('Media/garlands_'+resolution+'.png')
+                            backgroundImage: util.getS3PreSignedUrl('Media/garlands_'+resolution+'.png'),
+                            backgroundOpacity: "0.5"
                         },
                         transformers: [{
                             inputPath: 'hintString',
@@ -88,6 +89,7 @@ const RegisterBirthdayIntentHandler = {
                 }
             });
         }
+        
         // Add card to response
         handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LAUNCH_HEADER_MSG'),
@@ -173,9 +175,9 @@ const SayBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoUrl: isBirthday ? null : Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_'+resolution+'.png'),
-                            backgroundOpacity: isBirthday ? "1" : "0.3"
+                            backgroundOpacity: isBirthday ? "1" : "0.5"
                         },
                         transformers: [{
                             inputPath: 'hintString',
@@ -185,6 +187,7 @@ const SayBirthdayIntentHandler = {
                 }
             });
         }
+
         // Add card to response
         handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LAUNCH_HEADER_MSG'),
@@ -306,7 +309,8 @@ const RemindBirthdayIntentHandler = {
                             mainText: speechText,
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
                             logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
-                            backgroundImage: util.getS3PreSignedUrl('Media/straws_'+resolution+'.png')
+                            backgroundImage: util.getS3PreSignedUrl('Media/straws_'+resolution+'.png'),
+                            backgroundOpacity: "0.5"
                         },
                         transformers: [{
                             inputPath: 'hintString',
