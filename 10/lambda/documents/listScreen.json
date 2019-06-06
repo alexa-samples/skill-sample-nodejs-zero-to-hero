@@ -40,20 +40,6 @@
                 "marginRight": 60,
                 "marginBottom": 40
             }
-        },
-        {
-            "description": "Image assets",
-            "when": "${@viewportProfile == @hubRoundSmall}",
-            "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_108_A2Z.png"
-            }
-        },
-        {
-            "description": "Image assets",
-            "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
-            "strings": {
-                "skillIcon": "https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/icon_512_A2Z.png"
-            }
         }
     ],
     "styles": {
@@ -214,12 +200,13 @@
             "parameters": [
                 "backgroundImage",
                 "title",
+                "skillIcon",
                 "hintText",
                 "list"
             ],
             "items": [
                 {
-                    "when": "${viewport.shape == 'round'}",
+                    "when": "${@viewportProfile == @hubRoundSmall}",
                     "type": "Container",
                     "height": "100%",
                     "width": "100%",
@@ -241,6 +228,7 @@
                     ]
                 },
                 {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "Container",
                     "height": "100vh",
                     "width": "100vw",
@@ -252,12 +240,12 @@
                             "width": "100vw",
                             "height": "100vh",
                             "position": "absolute",
-                            "opacity": "0.3"
+                            "opacity": "0.5"
                         },
                         {
                             "type": "AlexaHeader",
                             "headerTitle": "${title}",
-                            "headerAttributionImage": "@skillIcon"
+                            "headerAttributionImage": "${skillIcon}"
                         },
                         {
                             "type": "Sequence",
@@ -292,6 +280,7 @@
                 "type": "ListLayout",
                 "backgroundImage": "${payload.listData.properties.config.backgroundImage}",
                 "title": "${payload.listData.properties.config.title}",
+                "skillIcon": "${payload.listData.properties.config.skillIcon}",
                 "hintText": "${payload.listData.properties.config.hintText}",
                 "list": "${payload.listData.properties.list.listItems}"
             }

@@ -77,7 +77,7 @@ const RegisterBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoImage: Viewport.pixelWidth > 960 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: util.getS3PreSignedUrl('Media/garlands_'+resolution+'.png'),
                             backgroundOpacity: "0.5"
                         },
@@ -89,7 +89,7 @@ const RegisterBirthdayIntentHandler = {
                 }
             });
         }
-        
+
         // Add card to response
         handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LAUNCH_HEADER_MSG'),
@@ -175,7 +175,7 @@ const SayBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoUrl: isBirthday ? null : Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoImage: isBirthday ? null : Viewport.pixelWidth > 960 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_'+resolution+'.png'),
                             backgroundOpacity: isBirthday ? "1" : "0.5"
                         },
@@ -308,7 +308,7 @@ const RemindBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: speechText,
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoUrl: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoImage: Viewport.pixelWidth > 960 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: util.getS3PreSignedUrl('Media/straws_'+resolution+'.png'),
                             backgroundOpacity: "0.5"
                         },
@@ -399,6 +399,7 @@ const CelebrityBirthdaysIntentHandler = {
                             config: {
                                 backgroundImage: util.getS3PreSignedUrl('Media/lights_'+resolution+'.png'),
                                 title: handlerInput.t('LIST_HEADER_MSG'),
+                                skillIcon: util.getS3PreSignedUrl('Media/full_icon_108.png'),
                                 hintText: handlerInput.t('LIST_HINT_MSG')
                             },
                             list: {
@@ -435,7 +436,7 @@ const TouchIntentHandler = {
     },
     handle(handlerInput) {
         console.log('Touch event arguments: ' + JSON.stringify(handlerInput.requestEnvelope.request.arguments[0]));
-        let person = handlerInput.requestEnvelope.request.arguments[0];
+        let person = JSON.parse(handlerInput.requestEnvelope.request.arguments[0]);
         let speechText = handlerInput.t('LIST_PERSON_DETAIL_MSG', {person: person});
 
         speechText += handlerInput.t('SHORT_HELP_MSG');

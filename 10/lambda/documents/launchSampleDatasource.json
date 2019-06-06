@@ -4,9 +4,9 @@
             "headerTitle": "Feliz Cumpleaños",
             "mainText": "Aún no me has dicho la fecha",
             "hintString": "cuando cumplo años?",
-            "logoUrl": "https://yourimgurlhere",
+            "logoImage": "https://yourimgurlhere",
             "backgroundImage": "https://yourimgurlhere",
-            "backgroundOpacity": "0.3"
+            "backgroundOpacity": "0.5"
         }
     }
 }

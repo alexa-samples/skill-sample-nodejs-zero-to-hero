@@ -3,8 +3,9 @@
         "type": "object",
         "properties": {
             "config": {
-                "backgroundImage": "https://d2o906d8ln7ui1.cloudfront.net/images/LT2_Background.png",
+                "backgroundImage": "https://yourbackgroundimageurlhere",
                 "title": "Cumples de Hoy",
+                "skillIcon" : "https://yourskilliconurlhere",
                 "hintText": "Alexa, cuando falta para mi cumple?"
             },
             "list": {
