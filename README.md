@@ -37,3 +37,7 @@ Support code for ASK ES Video series for Spanish locales. This is progressive co
 ## Part 9 - Alexa Presentation Language (II)
 
 [Source code](./08)
+
+## License
+
+This library is licensed under the Amazon Software License
