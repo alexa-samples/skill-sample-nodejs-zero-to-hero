@@ -32,11 +32,11 @@ Support code for ASK ES Video series for Spanish locales. This is progressive co
 
 ## Part 8 - Alexa Presentation Language (I)
 
-[Source code](./07)
+[Source code](./08)
 
 ## Part 9 - Alexa Presentation Language (II)
 
-[Source code](./08)
+[Source code](./09)
 
 ## License
 
