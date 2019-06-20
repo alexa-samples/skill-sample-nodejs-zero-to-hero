@@ -1,4 +1,4 @@
-// i18n dependency
+const Alexa = require('ask-sdk-core');
 const i18n = require('i18next');
 const languageStrings = require('./localisation');
 const constants = require('./constants');
@@ -22,7 +22,7 @@ const LoggingResponseInterceptor = {
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         const localisationClient = i18n.init({
-            lng: handlerInput.requestEnvelope.request.locale,
+            lng: handlerInput.getLocale(),
             resources: languageStrings,
             returnObjects: true
         });
@@ -44,7 +44,7 @@ const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        if(requestEnvelope.session['new'] || !sessionAttributes['loaded']){ //is this a new session? not loaded from db?
+        if(handlerInput.isNewSession() || !sessionAttributes['loaded']){ //is this a new session? not loaded from db?
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
             console.log('Loading from persistent storage: ' + JSON.stringify(persistentAttributes));
             persistentAttributes['loaded'] = true;
@@ -108,7 +108,7 @@ const LoadTimezoneRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const deviceId = requestEnvelope.context.System.device.deviceId;
+        const deviceId = handlerInput.getDeviceId();
 
         if(!requestAttributes['timezone']){
             // let's try to get the timezone via the UPS API
@@ -128,6 +128,19 @@ const LoadTimezoneRequestInterceptor = {
                 console.log(JSON.stringify(error));
                 delete requestAttributes['timezone'];
             }
+        }
+    }
+};
+
+const SDKUtilitiesRequestInterceptor = {
+    process(handlerInput) {
+        for (const method of ["getLocale", "getRequestType", "getIntentName", "getAccountLinkingAccessToken", "getApiAccessToken", "getDeviceId", "getUserId", "getDialogState", "getSupportedInterfaces", "isNewSession", "getSlot", "getSlotValue", "getViewportOrientation", "getViewportProfile"]) {
+            handlerInput[method] = function(...args) {
+                return Alexa[method](handlerInput.requestEnvelope, ...args);
+            }
+        }
+        for (const method of ["escapeXmlCharacters", "getViewportSizeGroup", "getViewportDpiGroup"]) {
+            handlerInput[method] = Alexa[method].bind(Alexa);
         }
     }
 };

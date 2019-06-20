@@ -1,10 +1,11 @@
+const Alexa = require('ask-sdk-core');
 const logic = require('./logic');
 const constants = require('./constants');
 const util = require('./util');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+        return handlerInput.getRequestType() === 'LaunchRequest';
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
@@ -41,18 +42,18 @@ const LaunchRequestHandler = {
 
 const RegisterBirthdayIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'RegisterBirthdayIntent';
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && handlerInput.getIntentName() === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
-        const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
-        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        const year = intent.slots.year.value;
+        const day = handlerInput.getSlotValue('day');
+        const month = handlerInput.getSlot('month').resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
+        const monthName = handlerInput.getSlot('month').resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        const year = handlerInput.getSlotValue('year');
 
         sessionAttributes['day'] = day;
         sessionAttributes['month'] = month; //MM
@@ -64,7 +65,7 @@ const RegisterBirthdayIntentHandler = {
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
-            const {Viewport} = handlerInput.requestEnvelope.context;
+            const {Viewport} = requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
@@ -77,7 +78,7 @@ const RegisterBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: handlerInput.t('LAUNCH_TEXT_FILLED_MSG', {day: day, month: parseInt(month, 10), year: year}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoImage: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoImage: !handlerInput.getViewportProfle().endsWith('-SMALL') ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: util.getS3PreSignedUrl('Media/garlands_'+resolution+'.png'),
                             backgroundOpacity: "0.5"
                         },
@@ -105,11 +106,11 @@ const RegisterBirthdayIntentHandler = {
 
 const SayBirthdayIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'SayBirthdayIntent';
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && handlerInput.getIntentName() === 'SayBirthdayIntent';
     },
     async handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {requestEnvelope, attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
 
@@ -162,7 +163,7 @@ const SayBirthdayIntentHandler = {
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
-            const {Viewport} = handlerInput.requestEnvelope.context;
+            const {Viewport} = requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
@@ -175,7 +176,7 @@ const SayBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoImage: isBirthday ? null : Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoImage: isBirthday ? null : !handlerInput.getViewportProfle().endsWith('-SMALL') ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: isBirthday ? util.getS3PreSignedUrl('Media/cake_'+resolution+'.png') : util.getS3PreSignedUrl('Media/papers_'+resolution+'.png'),
                             backgroundOpacity: isBirthday ? "1" : "0.5"
                         },
@@ -202,21 +203,21 @@ const SayBirthdayIntentHandler = {
 
 const RemindBirthdayIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'RemindBirthdayIntent';
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && handlerInput.getIntentName() === 'RemindBirthdayIntent';
     },
     async handle(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
+        const {intent} = requestEnvelope.request;
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
         const year = sessionAttributes['year'];
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         let timezone = requestAttributes['timezone'];
-        const message = intent.slots.message.value;
+        const message = handlerInput.getSlotValue(message);
 
         if(intent.confirmationStatus !== 'CONFIRMED') {
 
@@ -266,7 +267,7 @@ const RemindBirthdayIntentHandler = {
                 const reminder = logic.createReminderData(
                     birthdayData.daysUntilBirthday,
                     timezone,
-                    requestEnvelope.request.locale,
+                    handlerInput.getLocale(),
                     message);
                 const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
                 // save reminder id in session attributes
@@ -294,7 +295,7 @@ const RemindBirthdayIntentHandler = {
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
-            const {Viewport} = handlerInput.requestEnvelope.context;
+            const {Viewport} = requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
@@ -307,7 +308,7 @@ const RemindBirthdayIntentHandler = {
                             headerTitle: handlerInput.t('LAUNCH_HEADER_MSG'),
                             mainText: speechText,
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
-                            logoImage: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
+                            logoImage: !handlerInput.getViewportProfle().endsWith('-SMALL') ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
                             backgroundImage: util.getS3PreSignedUrl('Media/straws_'+resolution+'.png'),
                             backgroundOpacity: "0.5"
                         },
@@ -336,15 +337,14 @@ const RemindBirthdayIntentHandler = {
 
 const CelebrityBirthdaysIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'CelebrityBirthdaysIntent';
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && handlerInput.getIntentName() === 'CelebrityBirthdaysIntent';
     },
     async handle(handlerInput) {
-        const {attributesManager} = handlerInput;
+        const {requestEnvelope, serviceClientFactory, attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes()
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
-        const {requestEnvelope, serviceClientFactory} = handlerInput;
         let timezone = requestAttributes['timezone'];
 
         if(!timezone){
@@ -385,7 +385,7 @@ const CelebrityBirthdaysIntentHandler = {
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput) && results) {
-            const {Viewport} = handlerInput.requestEnvelope.context;
+            const {Viewport} = requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
@@ -430,7 +430,7 @@ const CelebrityBirthdaysIntentHandler = {
 
 const TouchIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent';
+        return handlerInput.getRequestType() === 'Alexa.Presentation.APL.UserEvent';
     },
     handle(handlerInput) {
         console.log('Touch event arguments: ' + JSON.stringify(handlerInput.requestEnvelope.request.arguments[0]));
@@ -448,8 +448,8 @@ const TouchIntentHandler = {
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && handlerInput.getIntentName() === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
         const speechText = handlerInput.t('HELP_MSG');
@@ -463,9 +463,9 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-                || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && (handlerInput.getIntentName() === 'AMAZON.CancelIntent'
+                || handlerInput.getIntentName() === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
@@ -482,8 +482,8 @@ const CancelAndStopIntentHandler = {
 
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
+        return handlerInput.getRequestType() === 'IntentRequest'
+            && handlerInput.getIntentName() === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
         const speechText = handlerInput.t('FALLBACK_MSG');
@@ -497,7 +497,7 @@ const FallbackIntentHandler = {
 
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+        return handlerInput.getRequestType() === 'SessionEndedRequest';
     },
     handle(handlerInput) {
         // Any cleanup logic goes here.
@@ -511,10 +511,10 @@ const SessionEndedRequestHandler = {
 // handler chain below.
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest';
+        return handlerInput.getRequestType() === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = handlerInput.getIntentName();
         const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder

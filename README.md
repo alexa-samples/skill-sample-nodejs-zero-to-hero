@@ -1,6 +1,6 @@
 # ASK ES Video Series
 
-Support code for ASK ES Video series for Spanish locales. This is progressive code that starts from scratch and adds features on each module. The source code is suitable for teaching how to code Alexa skills (see the README file on each module for instructions on ow to evolve the code departing from the previous module).
+Support code for ASK ES Video series for Spanish locales. This is progressive code that starts from scratch and adds features on each module. The source code is suitable for teaching how to code Alexa skills (see the README file on each module for instructions on how to evolve the code departing from the previous module).
 
 ## Part 1 - Alexa-Hosted Skills (preset - Hello World)
 
