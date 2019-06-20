@@ -1,42 +1,43 @@
-# Feliz Cumplea√os - ASK Developer Training Course in Spanish
+# Feliz Cumplea√±os: Construye una Skill de Alexa Atractiva
+## ASK Developer Training Course in Spanish
 
-Support code for ASK Developer Training Course for Spanish Alexa locales. This is progressive code that starts from scratch and adds features on each module. The source code is suitable for teaching how to code Alexa skills (see the README file on each module for instructions on how to evolve the code departing from the previous module).
+Support code for ASK Developer Training Course for Spanish Alexa locales. This is progressive code that starts from scratch and adds features on each module. The Learn more is suitable for teaching how to code Alexa skills (see the README file on each module for instructions on how to evolve the code departing from the previous module).
 
 ## Part 1 - Alexa-Hosted Skills (preset - Hello World)
 
-[Source code](./01)
+[Learn more](./01)
 
 ## Part 2 - Skill Internationalization (i18n) and Interceptors
 
-[Source code](./02)
+[Learn more](./02)
 
 ## Part 3 - Slots, Slot Validation and Automatic Dialog Delegation
 
-[Source code](./03)
+[Learn more](./03)
 
 ## Part 4 - Memory
 
-[Source code](./04)
+[Learn more](./04)
 
 ## Part 5 - Accessing ASK APIs
 
-[Source code](./05)
+[Learn more](./05)
 
 ## Part 6 - Reminders API
 
-[Source code](./06)
+[Learn more](./06)
 
 ## Part 7 - Accessing External APIs
 
-[Source code](./07)
+[Learn more](./07)
 
 ## Part 8 - Alexa Presentation Language (I)
 
-[Source code](./08)
+[Learn more](./08)
 
 ## Part 9 - Alexa Presentation Language (II)
 
-[Source code](./09)
+[Learn more](./09)
 
 ## License
 
