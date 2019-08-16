@@ -68,29 +68,29 @@ module.exports = {
         }
 
         return getJsonResponse(url, config).then((result) => {
-                return result;
-            }).catch((error) => {
-                return null;
-            });
+            return result;
+        }).catch((error) => {
+            return null;
+        });
     },
     convertBirthdaysResponse(handlerInput, response, withAge, timezone){
         let speechResponse = '';
         // if the API call failed we just don't append today's birthdays to the response
-        if(!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) 
+        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) 
             return speechResponse;
         const results = response.results.bindings;
         speechResponse += handlerInput.t('ALSO_TODAY_MSG');
         results.forEach((person, index) => {
             console.log(person);
-            if(index === Object.keys(results).length - 2){
+            if (index === Object.keys(results).length - 2){
                 speechResponse += person.humanLabel.value;
-                if(withAge && timezone && person.date_of_birth.value)
+                if (withAge && timezone && person.date_of_birth.value)
                     speechResponse += handlerInput.t('TURNING_MSG', {count: ymodule.exports.convertBirthdateToYearsOld(person, timezone)});
                 speechResponse += handlerInput.t('CONJUNCTION_MSG');
             }
             else {
                 speechResponse += person.humanLabel.value;
-                if(withAge && timezone && person.date_of_birth.value)
+                if (withAge && timezone && person.date_of_birth.value)
                     speechResponse += handlerInput.t('TURNING_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
                 speechResponse += '. ';
             }

@@ -17,7 +17,7 @@ const LoggingResponseInterceptor = {
     }
 };
 
-// This request interceptor will bind a translation function 't' to the handlerInput.
+// This request interceptor will bind a translation function 't' to the handlerInput
 // Additionally it will handle picking a random value if instead of a string it receives an array
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
@@ -44,7 +44,7 @@ const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        if(handlerInput.isNewSession() || !sessionAttributes['loaded']){ //is this a new session? not loaded from db?
+        if (handlerInput.isNewSession() || !sessionAttributes['loaded']){ //is this a new session? not loaded from db?
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
             console.log('Loading from persistent storage: ' + JSON.stringify(persistentAttributes));
             persistentAttributes['loaded'] = true;
@@ -56,12 +56,12 @@ const LoadAttributesRequestInterceptor = {
 
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
-        if(!response) return; // avoid intercepting calls that have no outgoing response due to errors
+        if (!response) return; // avoid intercepting calls that have no outgoing response due to errors
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
         const loadedThisSession = sessionAttributes['loaded'];
-        if((shouldEndSession || requestEnvelope.request.type === 'SessionEndedRequest') && loadedThisSession) { // skill was stopped or timed out
+        if ((shouldEndSession || requestEnvelope.request.type === 'SessionEndedRequest') && loadedThisSession) { // skill was stopped or timed out
             delete sessionAttributes['loaded'];
             console.log('Saving to persistent storage:' + JSON.stringify(sessionAttributes));
             attributesManager.setPersistentAttributes(sessionAttributes);
@@ -74,13 +74,13 @@ const LoadNameRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        if(!sessionAttributes['name']){
+        if (!sessionAttributes['name']){
             // let's try to get the given name via the Customer Profile API
             // don't forget to enable this permission in your skill configuratiuon (Build tab -> Permissions)
             // or you'll get a SessionEndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!(permissions && permissions.consentToken))
+                if (!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
@@ -110,7 +110,7 @@ const LoadTimezoneRequestInterceptor = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const deviceId = handlerInput.getDeviceId();
 
-        if(!requestAttributes['timezone']){
+        if (!requestAttributes['timezone']){
             // let's try to get the timezone via the UPS API
             // (no permissions required but it might not be set up)
             try {

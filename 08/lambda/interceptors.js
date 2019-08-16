@@ -1,3 +1,4 @@
+const Alexa = require('ask-sdk-core');
 // i18n dependency
 const i18n = require('i18next');
 const languageStrings = require('./localisation');
@@ -17,12 +18,12 @@ const LoggingResponseInterceptor = {
     }
 };
 
-// This request interceptor will bind a translation function 't' to the handlerInput.
+// This request interceptor will bind a translation function 't' to the handlerInput
 // Additionally it will handle picking a random value if instead of a string it receives an array
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         const localisationClient = i18n.init({
-            lng: handlerInput.requestEnvelope.request.locale,
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
             resources: languageStrings,
             returnObjects: true
         });
@@ -44,25 +45,34 @@ const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        if(requestEnvelope.session['new'] || !sessionAttributes['loaded']){ //is this a new session? not loaded from db?
+        // the "loaded" check is because the "new" session flag is lost if there's a one shot utterance that hits an intent with auto-delegate
+        if (Alexa.isNewSession(requestEnvelope) || !sessionAttributes['loaded']){ //is this a new session? not loaded from db?
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
             console.log('Loading from persistent storage: ' + JSON.stringify(persistentAttributes));
             persistentAttributes['loaded'] = true;
             //copy persistent attribute to session attributes
-            attributesManager.setSessionAttributes(persistentAttributes);
+            attributesManager.setSessionAttributes(persistentAttributes); // ALL persistent attributtes are now session attributes
         }
     }
 };
 
+// If you disable the skill and reenable it the userId might change and you loose the persistent attributes saved below as userId is the primary key
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
-        if(!response) return; // avoid intercepting calls that have no outgoing response due to errors
+        if (!response) return; // avoid intercepting calls that have no outgoing response due to errors
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
+        // the "loaded" check is because the session "new" flag is lost if there's a one shot utterance that hits an intent with auto-delegate
         const loadedThisSession = sessionAttributes['loaded'];
-        if((shouldEndSession || requestEnvelope.request.type === 'SessionEndedRequest') && loadedThisSession) { // skill was stopped or timed out
-            delete sessionAttributes['loaded'];
+        if ((shouldEndSession || Alexa.getRequestType(requestEnvelope) === 'SessionEndedRequest') && loadedThisSession) { // skill was stopped or timed out
+            // we increment a persistent session counter here
+            sessionAttributes['sessionCounter'] = sessionAttributes['sessionCounter'] ? sessionAttributes['sessionCounter'] + 1 : 1;
+            // limiting save of session attributes to the ones we want to make persistent
+            for (var key in sessionAttributes) {
+                if (!constants.PERSISTENT_ATTRIBUTES_NAMES.includes(key))
+                    delete sessionAttributes[key];
+            }
             console.log('Saving to persistent storage:' + JSON.stringify(sessionAttributes));
             attributesManager.setPersistentAttributes(sessionAttributes);
             await attributesManager.savePersistentAttributes();
@@ -70,34 +80,31 @@ const SaveAttributesResponseInterceptor = {
     }
 };
 
+// If you disable the skill and reenable it the userId might change and the user will have to grant the permission to access the name again
 const LoadNameRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        if(!sessionAttributes['name']){
+        if (!sessionAttributes['name']){
             // let's try to get the given name via the Customer Profile API
             // don't forget to enable this permission in your skill configuratiuon (Build tab -> Permissions)
             // or you'll get a SessionEndedRequest with an ERROR of type INVALID_RESPONSE
+            // Per our policies you can't make personal data persistent so we limit "name" to session attributes
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!(permissions && permissions.consentToken))
+                if (!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
                 if (profileName) { // the user might not have set the name
-                    //save to session and persisten attributes
+                    //save to session attributes
                     sessionAttributes['name'] = profileName;
-                    attributesManager.setSessionAttributes(sessionAttributes);
-                } else {
-                    delete sessionAttributes['name'];
                 }
             } catch (error) {
                 console.log(JSON.stringify(error));
-                delete sessionAttributes['name'];
                 if (error.statusCode === 401 || error.statusCode === 403) {
-                    // the user needs to enable the permissions for given name, let's send a silent permissions card.
-                    handlerInput.responseBuilder
-                    .withAskForPermissionsConsentCard(constants.GIVEN_NAME_PERMISSION);
+                    // the user needs to enable the permissions for given name, let's append a permissions card to the response.
+                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(constants.GIVEN_NAME_PERMISSION);
                 }
             }
         }
@@ -107,10 +114,10 @@ const LoadNameRequestInterceptor = {
 const LoadTimezoneRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const deviceId = requestEnvelope.context.System.device.deviceId;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const deviceId = Alexa.getDeviceId(requestEnvelope);
 
-        if(!requestAttributes['timezone']){
+        if (!sessionAttributes['timezone']){
             // let's try to get the timezone via the UPS API
             // (no permissions required but it might not be set up)
             try {
@@ -119,14 +126,10 @@ const LoadTimezoneRequestInterceptor = {
                 if (timezone) { // the user might not have set the timezone yet
                     console.log('Got timezone from device: ' + timezone);
                     //save to session and persisten attributes
-                    requestAttributes['timezone'] = timezone;
-                    attributesManager.setRequestAttributes(requestAttributes);
-                } else {
-                    delete requestAttributes['timezone'];
+                    sessionAttributes['timezone'] = timezone;
                 }
             } catch (error) {
                 console.log(JSON.stringify(error));
-                delete requestAttributes['timezone'];
             }
         }
     }

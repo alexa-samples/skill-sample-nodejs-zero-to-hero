@@ -20,7 +20,7 @@ module.exports = {
         function isAlexaHosted() {
             return process.env.S3_PERSISTENCE_BUCKET;
         }
-        if(isAlexaHosted()) {
+        if (isAlexaHosted()) {
             const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
             return new S3PersistenceAdapter({ 
                 bucketName: process.env.S3_PERSISTENCE_BUCKET
@@ -33,6 +33,46 @@ module.exports = {
                 createTable: true
             });
         }
+    },
+    createReminder(requestMoment, scheduledMoment, timezone, locale, message) {
+        return {
+            requestTime: requestMoment.format('YYYY-MM-DDTHH:mm:00.000'),
+            trigger: {
+                type: 'SCHEDULED_ABSOLUTE',
+                scheduledTime: scheduledMoment.format('YYYY-MM-DDTHH:mm:00.000'),
+                timeZoneId: timezone
+            },
+            alertInfo: {
+                spokenInfo: {
+                    content: [{
+                        locale: locale,
+                        text: message
+                    }]
+                }
+            },
+            pushNotification: {
+                status: 'ENABLED'
+            }
+        }
+    },
+    callDirectiveService(handlerInput, msg) {
+        // Call Alexa Directive Service.
+        const {requestEnvelope} = handlerInput;
+        const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
+        const requestId = requestEnvelope.request.requestId;
+        const {apiEndpoint, apiAccessToken} = requestEnvelope.context.System;
+        // build the progressive response directive
+        const directive = {
+            header: {
+                requestId
+            },
+            directive:{
+                type: 'VoicePlayer.Speak',
+                speech: msg
+            }
+        };
+        // send directive
+        return directiveServiceClient.enqueue(directive, apiEndpoint, apiAccessToken);
     },
     supportsAPL(handlerInput) {
         const {supportedInterfaces} = handlerInput.requestEnvelope.context.System.device;

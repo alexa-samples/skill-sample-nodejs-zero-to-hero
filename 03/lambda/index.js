@@ -1,12 +1,11 @@
 const Alexa = require('ask-sdk-core');
-
-// i18n dependency
+// i18n library dependency, we use it below in a localisation interceptor
 const i18n = require('i18next');
 
 /* *
  * We create a language strings object containing all of our strings.
- * The keys for each string will then be referenced in our code
- * e.g. handlerInput.t('WELCOME_MSG') 
+ * The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
+ * Later we'll move these string to a separate file to avoid polluting index.js 
  * */
 const languageStrings = {
     en: {
@@ -65,7 +64,7 @@ const RegisterBirthdayIntentHandler = {
 
         let speechText = handlerInput.t('REJECTED_MSG');
 
-        if(intent.confirmationStatus === 'CONFIRMED') {
+        if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
             const month = Alexa.getSlotValue(requestEnvelope, 'month');
@@ -195,7 +194,7 @@ const LoggingResponseInterceptor = {
     }
 };
 
-// This request interceptor will bind a translation function 't' to the handlerInput.
+// This request interceptor will bind a translation function 't' to the handlerInput
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({

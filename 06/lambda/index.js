@@ -19,7 +19,7 @@ const LaunchRequestHandler = {
         let speechText = handlerInput.t('WELCOME_MSG', {name: name});
 
         const dateAvailable = day && monthName && year;
-        if(dateAvailable) {
+        if (dateAvailable) {
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
@@ -51,7 +51,7 @@ const RegisterBirthdayIntentHandler = {
 
         let speechText = handlerInput.t('REJECTED_MSG');
 
-        if(intent.confirmationStatus === 'CONFIRMED') {
+        if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
             const monthName = Alexa.getSlotValue(requestEnvelope, 'month');
@@ -88,8 +88,8 @@ const SayBirthdayIntentHandler = {
 
         let speechText;
         const dateAvailable = day && month && year;
-        if(dateAvailable){
-            if(!timezone){
+        if (dateAvailable){
+            if (!timezone){
                 //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
@@ -101,7 +101,7 @@ const SayBirthdayIntentHandler = {
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: birthdayData.daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: birthdayData.age + 1});
             const isBirthday = birthdayData.daysUntilBirthday === 0;
-            if(isBirthday) { // it's the user's birthday!
+            if (isBirthday) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
             }
@@ -140,7 +140,7 @@ const RemindBirthdayIntentHandler = {
         let timezone = sessionAttributes['timezone'];
         const message = Alexa.getSlotValue(requestEnvelope, 'message');
 
-        if(intent.confirmationStatus !== 'CONFIRMED') {
+        if (intent.confirmationStatus !== 'CONFIRMED') {
             return handlerInput.responseBuilder
                 .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('REPROMPT_MSG'))
                 .reprompt(handlerInput.t('REPROMPT_MSG'))
@@ -149,8 +149,8 @@ const RemindBirthdayIntentHandler = {
 
         let speechText;
         const dateAvailable = day && month && year;
-        if(dateAvailable){
-            if(!timezone){
+        if (dateAvailable){
+            if (!timezone){
                 //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
@@ -164,7 +164,7 @@ const RemindBirthdayIntentHandler = {
             // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!(permissions && permissions.consentToken))
+                if (!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
@@ -172,9 +172,9 @@ const RemindBirthdayIntentHandler = {
                 console.log('Current reminders: ' + JSON.stringify(remindersList));
                 // delete previous reminder if present
                 const previousReminder = sessionAttributes['reminderId'];
-                if(previousReminder){
+                if (previousReminder){
                     try {
-                        if(remindersList.totalCount !== "0") {
+                        if (remindersList.totalCount !== "0") {
                             await reminderServiceClient.deleteReminder(previousReminder);
                             delete sessionAttributes['reminderId'];
                             console.log('Deleted previous reminder token: ' + previousReminder);

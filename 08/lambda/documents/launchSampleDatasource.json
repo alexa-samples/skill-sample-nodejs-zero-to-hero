@@ -1,9 +1,9 @@
 {
     "launchData": {
         "properties": {
-            "headerTitle": "Feliz Cumpleaños",
-            "mainText": "Aún no me has dicho la fecha",
-            "hintString": "cuando cumplo años?",
+            "headerTitle": "Happy Birthday",
+            "mainText": "When is your birthday?",
+            "hintString": "register my birthday",
             "logoImage": "https://yourimgurlhere",
             "backgroundImage": "https://yourimgurlhere",
             "backgroundOpacity": "0.5"

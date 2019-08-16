@@ -1,6 +1,6 @@
 # Part 1 - Alexa-Hosted Skills (preset - Hello World)
 
-In this module we introduce some theory about ASK and then we build an Alexa Hosted Skill from scratch (Hello World template).
+In this module we introduce some theory about ASK and then we build an Alexa Hosted Skill from scratch (Hello World template) with no localization (out-of-the-box experience). When using the console we introduce the basic tabs (Build, Code, Test, etc)
 
 ## Milestones
 
@@ -20,4 +20,4 @@ In this module we introduce some theory about ASK and then we build an Alexa Hos
 6. Reflector (catch all intent handler)
 7. Out-of-domain utterances (*)
 
-* (only in locales that support AMAZON.FallbackIntent)
+* (only in locales that support AMAZON.FallbackIntent) otherwise explain that the handler on the back-end side does not affect the operation (we can keep it)

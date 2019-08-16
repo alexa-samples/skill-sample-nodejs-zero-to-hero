@@ -19,7 +19,7 @@ const LaunchRequestHandler = {
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
 
         const dateAvailable = day && monthName && year;
-        if(dateAvailable) {
+        if (dateAvailable) {
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
@@ -51,7 +51,7 @@ const RegisterBirthdayIntentHandler = {
 
         let speechText = handlerInput.t('REJECTED_MSG');
 
-        if(intent.confirmationStatus === 'CONFIRMED') {
+        if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
             const monthName = Alexa.getSlotValue(requestEnvelope, 'month');
@@ -88,8 +88,8 @@ const SayBirthdayIntentHandler = {
 
         let speechText;
         const dateAvailable = day && month && year;
-        if(dateAvailable){
-            if(!timezone){
+        if (dateAvailable){
+            if (!timezone){
                 //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
@@ -98,14 +98,14 @@ const SayBirthdayIntentHandler = {
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-            if(today.isAfter(nextBirthday)){
+            if (today.isAfter(nextBirthday)){
                 nextBirthday.add(1, 'years');
             }
             const age = today.diff(wasBorn, 'years');
             const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: age + 1});
-            if(daysUntilBirthday === 0) { // it's the user's birthday!
+            if (daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: age});
             }

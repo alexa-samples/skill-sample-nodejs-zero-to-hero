@@ -19,7 +19,7 @@ const LaunchRequestHandler = {
         let speechText = handlerInput.t('WELCOME_MSG', {name: name+'.'});
 
         const dateAvailable = day && monthName && year;
-        if(dateAvailable) {
+        if (dateAvailable) {
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
@@ -121,8 +121,8 @@ const SayBirthdayIntentHandler = {
 
         let speechText, isBirthday = false;
         const dateAvailable = day && month && year;
-        if(dateAvailable){
-            if(!timezone){
+        if (dateAvailable){
+            if (!timezone){
                 //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
@@ -135,20 +135,20 @@ const SayBirthdayIntentHandler = {
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: birthdayData.daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: birthdayData.age + 1});
             isBirthday = birthdayData.daysUntilBirthday === 0;
-            if(isBirthday) { // it's the user's birthday!
+            if (isBirthday) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
 
                 const dateData = logic.getAdjustedDateData(timezone);
                 const response = await logic.fetchBirthdaysData(dateData.day, dateData.month, constants.MAX_BIRTHDAYS);
 
-                if(response) { // if the API call fails we just don't append today's birthdays
+                if (response) { // if the API call fails we just don't append today's birthdays
                     console.log(JSON.stringify(response));
                     const results = response.results.bindings;
                     speechText += handlerInput.t('ALSO_TODAY_MSG');
                     results.forEach((person, index) => {
                         console.log(person);
-                        if(index === Object.keys(results).length - 2)
+                        if (index === Object.keys(results).length - 2)
                             speechText += person.humanLabel.value + handlerInput.t('CONJUNCTION_MSG');
                         else
                             speechText += person.humanLabel.value + '. '
@@ -219,7 +219,7 @@ const RemindBirthdayIntentHandler = {
         let timezone = requestAttributes['timezone'];
         const message = intent.slots.message.value;
 
-        if(intent.confirmationStatus !== 'CONFIRMED') {
+        if (intent.confirmationStatus !== 'CONFIRMED') {
 
             return handlerInput.responseBuilder
                 .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('REPROMPT_MSG'))
@@ -228,8 +228,8 @@ const RemindBirthdayIntentHandler = {
         }
 
         let speechText;
-        if(day && month && year){
-            if(!timezone){
+        if (day && month && year){
+            if (!timezone){
                 //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
@@ -243,7 +243,7 @@ const RemindBirthdayIntentHandler = {
             // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
             try {
                 const {permissions} = requestEnvelope.context.System.user;
-                if(!(permissions && permissions.consentToken))
+                if (!(permissions && permissions.consentToken))
                     throw { statusCode: 401, message: 'No permissions available' }; // there are zero permissions, no point in intializing the API
                 const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
                 // reminders are retained for 3 days after they 'remind' the customer before being deleted
@@ -251,9 +251,9 @@ const RemindBirthdayIntentHandler = {
                 console.log('Current reminders: ' + JSON.stringify(remindersList));
                 // delete previous reminder if present
                 const previousReminder = sessionAttributes['reminderId'];
-                if(previousReminder){
+                if (previousReminder){
                     try {
-                        if(remindersList.totalCount !== "0")
+                        if (remindersList.totalCount !== "0")
                             await reminderServiceClient.deleteReminder(previousReminder);
                     } catch (error) {
                         // fail silently as this means the reminder does not exist or there was a problem with deletion
@@ -348,7 +348,7 @@ const CelebrityBirthdaysIntentHandler = {
         const {requestEnvelope, serviceClientFactory} = handlerInput;
         let timezone = requestAttributes['timezone'];
 
-        if(!timezone){
+        if (!timezone){
            //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
             return handlerInput.responseBuilder
                 .speak(handlerInput.t('NO_TIMEZONE_MSG'))
@@ -369,7 +369,7 @@ const CelebrityBirthdaysIntentHandler = {
         let speechText = handlerInput.t('API_ERROR_MSG');
 
         let results;
-        if(response) {
+        if (response) {
             console.log(JSON.stringify(response));
             results = response.results.bindings;
             speechText = handlerInput.t('CELEBRITY_BIRTHDAYS_MSG');
@@ -377,7 +377,7 @@ const CelebrityBirthdaysIntentHandler = {
                 console.log(person);
                 const age = logic.convertBirthdateToYearsOld(person, timezone);
                 person.date_of_birth.value = handlerInput.t('LIST_YO_ABBREV_MSG', {count: age});
-                if(index === Object.keys(results).length - 2)
+                if (index === Object.keys(results).length - 2)
                     speechText += person.humanLabel.value + handlerInput.t('CONJUNCTION_MSG');
                 else
                     speechText += person.humanLabel.value + '. '

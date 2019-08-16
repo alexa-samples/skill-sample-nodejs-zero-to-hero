@@ -20,7 +20,7 @@ module.exports = {
         function isAlexaHosted() {
             return process.env.S3_PERSISTENCE_BUCKET;
         }
-        if(isAlexaHosted()) {
+        if (isAlexaHosted()) {
             const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
             return new S3PersistenceAdapter({ 
                 bucketName: process.env.S3_PERSISTENCE_BUCKET

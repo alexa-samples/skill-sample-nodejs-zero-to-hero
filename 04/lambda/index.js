@@ -3,7 +3,7 @@ const Alexa = require('ask-sdk-core');
 var persistenceAdapter = getPersistenceAdapter();
 // Moments library will help us do all the birthday math
 const moment = require('moment-timezone');
-// i18n dependency
+// i18n library dependency, we use it below in a localisation interceptor
 const i18n = require('i18next');
 // We import a language strings object containing all of our strings.
 // The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
@@ -14,7 +14,7 @@ function getPersistenceAdapter(tableName) {
     function isAlexaHosted() {
         return process.env.S3_PERSISTENCE_BUCKET;
     }
-    if(isAlexaHosted()) {
+    if (isAlexaHosted()) {
         const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
         return new S3PersistenceAdapter({
             bucketName: process.env.S3_PERSISTENCE_BUCKET
@@ -44,7 +44,7 @@ const LaunchRequestHandler = {
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
 
         const dateAvailable = day && monthName && year;
-        if(dateAvailable){
+        if (dateAvailable){
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
@@ -76,7 +76,7 @@ const RegisterBirthdayIntentHandler = {
 
         let speechText = handlerInput.t('REJECTED_MSG');
 
-        if(intent.confirmationStatus === 'CONFIRMED') {
+        if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
             const monthName = Alexa.getSlotValue(requestEnvelope, 'month');
@@ -111,19 +111,19 @@ const SayBirthdayIntentHandler = {
 
         let speechText;
         const dateAvailable = day && month && year;
-        if(dateAvailable){
+        if (dateAvailable){
             const timezone = 'Europe/Madrid'; // provide yours here. we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-            if(today.isAfter(nextBirthday)){
+            if (today.isAfter(nextBirthday)){
                 nextBirthday.add(1, 'years');
             }
             const age = today.diff(wasBorn, 'years');
             const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
             speechText = handlerInput.t('DAYS_LEFT_MSG', {count: daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: age + 1});
-            if(daysUntilBirthday === 0) { // it's the user's birthday!
+            if (daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {count: age});
             }
             speechText += handlerInput.t('POST_SAY_HELP_MSG');
@@ -260,7 +260,7 @@ const LoggingResponseInterceptor = {
     }
 };
 
-// This request interceptor will bind a translation function 't' to the handlerInput.
+// This request interceptor will bind a translation function 't' to the handlerInput
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
@@ -275,7 +275,7 @@ const LocalisationRequestInterceptor = {
 const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
-        if(Alexa.isNewSession(requestEnvelope)){ //is this a new session? this check is not enough if using auto-delegate (more on next module)
+        if (Alexa.isNewSession(requestEnvelope)){ //is this a new session? this check is not enough if using auto-delegate (more on next module)
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
             console.log('Loading from persistent storage: ' + JSON.stringify(persistentAttributes));
             //copy persistent attribute to session attributes
@@ -287,11 +287,11 @@ const LoadAttributesRequestInterceptor = {
 // If you disable the skill and reenable it the userId might change and you loose the persistent attributes saved below as userId is the primary key
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
-        if(!response) return; // avoid intercepting calls that have no outgoing response due to errors
+        if (!response) return; // avoid intercepting calls that have no outgoing response due to errors
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
-        if(shouldEndSession || Alexa.getRequestType(requestEnvelope) === 'SessionEndedRequest') { // skill was stopped or timed out
+        if (shouldEndSession || Alexa.getRequestType(requestEnvelope) === 'SessionEndedRequest') { // skill was stopped or timed out
             // we increment a persistent session counter here
             sessionAttributes['sessionCounter'] = sessionAttributes['sessionCounter'] ? sessionAttributes['sessionCounter'] + 1 : 1;
             // we make ALL session attributes persistent

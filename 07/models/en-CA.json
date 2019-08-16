@@ -159,9 +159,10 @@
                     "name": "CelebrityBirthdaysIntent",
                     "slots": [],
                     "samples": [
-                        "who's birthdays is it today",
+                        "whose birthdays is it today",
                         "who's celebrating a birthday",
-                        "which celebrities celebrate their birthday today",
+                        "who's celebrating a birthday today",
+                        "which celebrities have birthdays today",
                         "today's birthdays",
                         "who has a birthday today",
                         "who turns today",

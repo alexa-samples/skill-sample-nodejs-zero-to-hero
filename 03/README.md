@@ -1,6 +1,6 @@
 # Part 3 - Slots, Slot Validation and Automatic Dialog Delegation
 
-In this module we strat an Alexa Hosted Skill from scratch and this is the one we'll keep evolving. We show slots (buil;t-in and custom), synonyms, slot validation and dialogs & prompts with AutoDelegate.
+In this module we depart from the previous project and overwrite HelloWorldIntent. We show slots (built-in and custom), synonyms, slot validation and dialogs & prompts with AutoDelegate.
 
 ## Milestones
 

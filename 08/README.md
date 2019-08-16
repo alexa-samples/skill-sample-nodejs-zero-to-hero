@@ -6,8 +6,8 @@ The APL document shows a tailored hint (thanks to the                           
 
 ## Milestones
 
-1. *Build Tab*: enable APL interface
-2. *Code Tab*: create documents folder. Create images folder. Go to S3 Media folder and add all image files
+1. *Build Tab*: enable APL interface (and rebuild?)
+2. *Code Tab*: create documents folder. Create images folder. Go to S3 Media folder and add all image files in documents/images
 3. *Code Tab*: in documents folder create launchScreen.json and leave empty
 4. *Display Tab*: explain the basics. Paste launchScreen.json as template and launchSampleDatasource.json as datasource and explain/play with it.
 5. *Code Tab*: fill documents/launchScreen.json with result from display editor (better leave untouched)
@@ -18,7 +18,7 @@ The APL document shows a tailored hint (thanks to the                           
 ## Concepts
 
 1. APL RenderDocument and APL Directive
-2. APL Databinding
+2. APL Databinding and APL Authoring Tool
 3. APL Styles, Layouts and ViewPorts
 4. APL Transformers (Text to Hint)
 5. Home Cards
@@ -29,6 +29,6 @@ The APL document shows a tailored hint (thanks to the                           
 1. **handlers.js**: create file, refactoring of handlers. Add direct handle() call of SayBirthdayIntentHandler to LaunchRequestHandler. For RegisterBirthdayIntentHandler, SayBirthdayIntentHandler and RemindBirthdayIntentHandler: Add APL directive, use util.js APL helper and url helper to pass background urls. Add card response.
 2. **skill.json**: insert APL interface definition
 3. **util.js**: insert supportsAPL() function. Insert APL directive helper method (requires ./constants)
-4. **documents**: create folder with launchRequest.json and launchSampleDatasource.json
+4. **documents**: create folder with launchRequest.json and launchSampleDatasource.json (for the APL athoring tool)
 5. **constants.js**: create APLDoc structure pointing to to launchRequest.json (for now)
 6. **localization.js**: add header, full body, empty body and hint strings
