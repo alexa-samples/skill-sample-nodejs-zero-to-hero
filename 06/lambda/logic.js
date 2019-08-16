@@ -7,7 +7,7 @@ module.exports = {
         const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
         const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
         if (today.isAfter(nextBirthday))
-            nextBirthday.add('years', 1);
+            nextBirthday.add(1, 'years');
         const age = today.diff(wasBorn, 'years');
         const daysAlive = today.diff(wasBorn, 'days');
         const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
