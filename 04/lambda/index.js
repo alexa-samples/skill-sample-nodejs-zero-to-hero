@@ -1,14 +1,12 @@
 const Alexa = require('ask-sdk-core');
+// Get an instance of the persistence adapter
 var persistenceAdapter = getPersistenceAdapter();
-
-const moment = require('moment-timezone'); // will help us do all the birthday math
-
+// Moments library will help us do all the birthday math
+const moment = require('moment-timezone');
 // i18n dependency
 const i18n = require('i18next');
-
 // We import a language strings object containing all of our strings.
-// The keys for each string will then be referenced in our code
-// e.g. handlerInput.t('WELCOME_MSG')
+// The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
 const languageStrings = require('./localisation');
 
 function getPersistenceAdapter(tableName) {
@@ -22,7 +20,7 @@ function getPersistenceAdapter(tableName) {
             bucketName: process.env.S3_PERSISTENCE_BUCKET
         });
     } else {
-        // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
+        // IMPORTANT: don't forget to give DynamoDB access to the role you're using to run this lambda (via IAM policy)
         const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
         return new DynamoDbPersistenceAdapter({
             tableName: tableName,
@@ -33,65 +31,78 @@ function getPersistenceAdapter(tableName) {
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
-        const month = sessionAttributes['month']; //MM
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
+        const sessionCounter = sessionAttributes['sessionCounter'];
 
-        let speechText = handlerInput.t('WELCOME_MSG') + handlerInput.t('HELP_MSG');
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
 
         const dateAvailable = day && monthName && year;
         if(dateAvailable){
-            speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
+            // we can't use intent chaining because the target intent is not dialog based
+            return SayBirthdayIntentHandler.handle(handlerInput);
+        } else {
+            speechText += handlerInput.t('MISSING_MSG');
+            // we use intent chaining to trigger the birthday registration multi-turn
+            handlerInput.responseBuilder.addDelegateDirective({
+                name: 'RegisterBirthdayIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            });
         }
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
 
 const RegisterBirthdayIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'RegisterBirthdayIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
-        const day = intent.slots.day.value;
-        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
-        const monthName = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        const year = intent.slots.year.value;
+        let speechText = handlerInput.t('REJECTED_MSG');
 
-        sessionAttributes['day'] = day;
-        sessionAttributes['month'] = month; //MM
-        sessionAttributes['monthName'] = monthName;
-        sessionAttributes['year'] = year;
+        if(intent.confirmationStatus === 'CONFIRMED') {
+            const day = Alexa.getSlotValue(requestEnvelope, 'day');
+            const year = Alexa.getSlotValue(requestEnvelope, 'year');
+            const monthName = Alexa.getSlotValue(requestEnvelope, 'month');
+            const month = Alexa.getSlot(requestEnvelope, 'month').resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
 
-        const speechText = handlerInput.t('REGISTER_MSG', {day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
+            sessionAttributes['day'] = day;
+            sessionAttributes['month'] = month; //MM
+            sessionAttributes['monthName'] = monthName;
+            sessionAttributes['year'] = year;
+            // we can't use intent chaining because the target intent is not dialog based
+            return SayBirthdayIntentHandler.handle(handlerInput);
+        }
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
 
 const SayBirthdayIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'SayBirthdayIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SayBirthdayIntent';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
@@ -115,22 +126,28 @@ const SayBirthdayIntentHandler = {
             if(daysUntilBirthday === 0) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {count: age});
             }
+            speechText += handlerInput.t('POST_SAY_HELP_MSG');
         } else {
-            speechText = handlerInput.t('MISSING_MSG');
+            speechText += handlerInput.t('MISSING_MSG');
+            // we use intent chaining to trigger the birthday registration multi-turn
+            handlerInput.responseBuilder.addDelegateDirective({
+                name: 'RegisterBirthdayIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            });
         }
-        speechText += handlerInput.t('SHORT_HELP_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
         const speechText = handlerInput.t('HELP_MSG');
@@ -144,9 +161,9 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-                || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
+                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const speechText = handlerInput.t('GOODBYE_MSG');
@@ -156,39 +173,48 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
-
+/* *
+ * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
+ * It must also be defined in the language model (if the locale supports it)
+ * This handler can be safely added but will be ingnored in locales that do not support it yet 
+ * */
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
         const speechText = handlerInput.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
-
+/* *
+ * SessionEndedRequest notifies that a session was ended. This handler will be triggered when a currently open 
+ * session is closed for one of the following reasons: 1) The user says "exit" or "quit". 2) The user does not 
+ * respond or says something that does not match an intent defined in your voice model. 3) An error occurs 
+ * */
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
     },
     handle(handlerInput) {
+        console.log(`~~~~ Session ended: ${JSON.stringify(handlerInput.requestEnvelope)}`);
         // Any cleanup logic goes here.
         return handlerInput.responseBuilder.getResponse(); // notice we send an empty response
     }
 };
-
-// The intent reflector is used for interaction model testing and debugging.
-// It will simply repeat the intent the user said. You can create custom handlers
-// for your intents by defining them above, then also adding them to the request
-// handler chain below.
+/* *
+ * The intent reflector is used for interaction model testing and debugging.
+ * It will simply repeat the intent the user said. You can create custom handlers for your intents 
+ * by defining them above, then also adding them to the request handler chain below 
+ * */
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
     handle(handlerInput) {
         const intentName = handlerInput.requestEnvelope.request.intent.name;
@@ -200,22 +226,22 @@ const IntentReflectorHandler = {
             .getResponse();
     }
 };
-
-// Generic error handling to capture any syntax or routing errors. If you receive an error
-// stating the request handler chain is not found, you have not implemented a handler for
-// the intent being invoked or included it in the skill builder below.
+/**
+ * Generic error handling to capture any syntax or routing errors. If you receive an error
+ * stating the request handler chain is not found, you have not implemented a handler for
+ * the intent being invoked or included it in the skill builder below 
+ * */
 const ErrorHandler = {
     canHandle() {
         return true;
     },
     handle(handlerInput, error) {
         const speechText = handlerInput.t('ERROR_MSG');
-
-        console.log(`~~~~ Error handled: ${error.message}`);
+        console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -238,7 +264,7 @@ const LoggingResponseInterceptor = {
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
-            lng: handlerInput.requestEnvelope.request.locale,
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
             resources: languageStrings
         }).then((t) => {
             handlerInput.t = (...args) => t(...args);
@@ -249,30 +275,37 @@ const LocalisationRequestInterceptor = {
 const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
-        if(requestEnvelope.session['new']){ //is this a new session? this check is not enough if using auto-delegate
+        if(Alexa.isNewSession(requestEnvelope)){ //is this a new session? this check is not enough if using auto-delegate (more on next module)
             const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
+            console.log('Loading from persistent storage: ' + JSON.stringify(persistentAttributes));
             //copy persistent attribute to session attributes
-            attributesManager.setSessionAttributes(persistentAttributes);
+            attributesManager.setSessionAttributes(persistentAttributes); // ALL persistent attributtes are now session attributes
         }
     }
 };
 
+// If you disable the skill and reenable it the userId might change and you loose the persistent attributes saved below as userId is the primary key
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
         if(!response) return; // avoid intercepting calls that have no outgoing response due to errors
         const {attributesManager, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
-        if(shouldEndSession || requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out
+        if(shouldEndSession || Alexa.getRequestType(requestEnvelope) === 'SessionEndedRequest') { // skill was stopped or timed out
+            // we increment a persistent session counter here
+            sessionAttributes['sessionCounter'] = sessionAttributes['sessionCounter'] ? sessionAttributes['sessionCounter'] + 1 : 1;
+            // we make ALL session attributes persistent
+            console.log('Saving to persistent storage:' + JSON.stringify(sessionAttributes));
             attributesManager.setPersistentAttributes(sessionAttributes);
             await attributesManager.savePersistentAttributes();
         }
     }
 };
-
-// This handler acts as the entry point for your skill, routing all request and response
-// payloads to the handlers above. Make sure any new handlers or interceptors you've
-// defined are included below. The order matters - they're processed top to bottom.
+/**
+ * This handler acts as the entry point for your skill, routing all request and response
+ * payloads to the handlers above. Make sure any new handlers or interceptors you've
+ * defined are included below. The order matters - they're processed top to bottom 
+ * */
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
@@ -282,7 +315,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
-        IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+        IntentReflectorHandler)
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(

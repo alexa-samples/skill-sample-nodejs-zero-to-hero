@@ -1,11 +1,12 @@
 const Alexa = require('ask-sdk-core');
-const persistence = require('./persistence');
+const util = require('./util');
 const interceptors = require('./interceptors');
 const handlers = require('./handlers');
-
-// This handler acts as the entry point for your skill, routing all request and response
-// payloads to the handlers above. Make sure any new handlers or interceptors you've
-// defined are included below. The order matters - they're processed top to bottom.
+/**
+ * This handler acts as the entry point for your skill, routing all request and response
+ * payloads to the handlers above. Make sure any new handlers or interceptors you've
+ * defined are included below. The order matters - they're processed top to bottom 
+ * */
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         handlers.LaunchRequestHandler,
@@ -17,18 +18,18 @@ exports.handler = Alexa.SkillBuilders.custom()
         handlers.CancelAndStopIntentHandler,
         handlers.FallbackIntentHandler,
         handlers.SessionEndedRequestHandler,
-        handlers.IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+        handlers.IntentReflectorHandler)
     .addErrorHandlers(
         handlers.ErrorHandler)
     .addRequestInterceptors(
+        interceptors.LoadAttributesRequestInterceptor,
         interceptors.LocalisationRequestInterceptor,
         interceptors.LoggingRequestInterceptor,
-        interceptors.LoadAttributesRequestInterceptor,
         interceptors.LoadNameRequestInterceptor,
         interceptors.LoadTimezoneRequestInterceptor)
     .addResponseInterceptors(
         interceptors.LoggingResponseInterceptor,
         interceptors.SaveAttributesResponseInterceptor)
-    .withPersistenceAdapter(persistence.getPersistenceAdapter())
+    .withPersistenceAdapter(util.getPersistenceAdapter())
     .withApiClient(new Alexa.DefaultApiClient())
     .lambda();

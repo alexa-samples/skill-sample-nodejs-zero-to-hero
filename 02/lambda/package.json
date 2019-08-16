@@ -1,15 +1,15 @@
 {
-  "name": "hello-world",
-  "version": "0.9.0",
-  "description": "alexa utility for quickly building skills",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Amazon Alexa",
-  "dependencies": {
-    "ask-sdk-core": "^2.3.0",
-    "ask-sdk-model": "^1.11.2",
-    "i18next": "^15.0.5"
-  }
+    "name": "hello-world",
+    "version": "0.9.0",
+    "description": "alexa utility for quickly building skills",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Amazon Alexa",
+    "dependencies": {
+        "ask-sdk-core": "^2.7.0",
+        "ask-sdk-model": "^1.18.0",
+        "i18next": "^15.0.5"
+    }
 }

@@ -1,18 +1,18 @@
 {
-  "name": "happy-birthday",
-  "version": "0.9.0",
-  "description": "happy birthday skill",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Amazon Alexa",
-  "dependencies": {
-    "ask-sdk-core": "^2.3.0",
-    "ask-sdk-model": "^1.11.2",
-    "i18next": "^15.0.5",
-    "ask-sdk-s3-persistence-adapter": "^2.3.0",
-    "ask-sdk-dynamodb-persistence-adapter": "^2.3.0",
-    "moment-timezone": "^0.5.23"
-  }
+    "name": "happy-birthday",
+    "version": "0.9.0",
+    "description": "happy birthday skill",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Amazon Alexa",
+    "dependencies": {
+        "ask-sdk-core": "^2.7.0",
+        "ask-sdk-model": "^1.18.0",
+        "i18next": "^15.0.5",
+        "ask-sdk-s3-persistence-adapter": "^2.7.0",
+        "ask-sdk-dynamodb-persistence-adapter": "^2.7.0",
+        "moment-timezone": "^0.5.23"
+    }
 }

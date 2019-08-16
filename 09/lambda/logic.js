@@ -42,18 +42,18 @@ module.exports = {
             trigger: {
                 type: 'SCHEDULED_ABSOLUTE',
                 scheduledTime: scheduled.format('YYYY-MM-DDTHH:mm:00.000'),
-                timeZoneId: timezone,
+                timeZoneId: timezone
             },
             alertInfo: {
-              spokenInfo: {
-                content: [{
-                  locale: locale,
-                  text: message,
-                }],
-              },
+                spokenInfo: {
+                    content: [{
+                        locale: locale,
+                        text: message
+                    }]
+                }
             },
             pushNotification: {
-              status: 'ENABLED',
+                status: 'ENABLED'
             }
         }
     },

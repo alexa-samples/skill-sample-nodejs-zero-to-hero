@@ -10,6 +10,21 @@
         },
         "es-US": {
           "name": "Feliz Cumpleaños"
+        },
+        "en-US": {
+          "name": "Happy Birthday"
+        },
+        "en-AU": {
+          "name": "Happy Birthday"
+        },
+        "en-CA": {
+          "name": "Happy Birthday"
+        },
+        "en-GB": {
+          "name": "Happy Birthday"
+        },
+        "en-IN": {
+          "name": "Happy Birthday"
         }
       }
     },

@@ -1,8 +1,35 @@
-const moment = require('moment-timezone'); // will help us do all the birthday math
+const moment = require('moment-timezone'); // will help us do all the dates math while considering the timezone
+const util = require('./util');
 const axios = require('axios');
 
 module.exports = {
-    getAdjustedDateData(timezone) {
+    getBirthdayData(day, month, year, timezone) {
+        const today = moment().tz(timezone).startOf('day');
+        const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
+        const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
+        if (today.isAfter(nextBirthday))
+            nextBirthday.add('years', 1);
+        const age = today.diff(wasBorn, 'years');
+        const daysAlive = today.diff(wasBorn, 'days');
+        const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
+
+        return {
+            daysAlive: daysAlive, // not used but nice to have :)
+            daysUntilBirthday: daysUntilBirthday,
+            age: age //in years
+        }
+    },
+    createBirthdayReminder(daysUntilBirthday, timezone, locale, message) {
+        moment.locale(locale);
+        const createdMoment = moment().tz(timezone);
+        let triggerMoment = createdMoment.startOf('day').add(daysUntilBirthday, 'days');
+        if (daysUntilBirthday === 0)
+            triggerMoment = createdMoment.startOf('day').add(1, 'years'); // reminder created on the day of birthday will trigger next year
+        console.log('Reminder schedule: ' + triggerMoment.format('YYYY-MM-DDTHH:mm:00.000'));
+
+        return util.createReminder(createdMoment, triggerMoment, timezone, locale, message);
+    },
+    getAdjustedDate(timezone) {
         const today = moment().tz(timezone).startOf('day');
 
         return {
@@ -10,54 +37,7 @@ module.exports = {
             month: today.month() + 1
         }
     },
-    getBirthdayData(day, month, year, timezone) {
-        const today = moment().tz(timezone).startOf('day');
-        const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-        const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-        if(today.isAfter(nextBirthday))
-            nextBirthday.add('years', 1);
-        const age = today.diff(wasBorn, 'years');
-        const daysAlive = today.diff(wasBorn, 'days');
-        const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
-
-        return {
-            daysAlive: daysAlive,
-            daysUntilBirthday: daysUntilBirthday,
-            age: age //in years
-        }
-    },
-    createReminderData(daysUntilBirthday, timezone, locale, message) {
-        moment.locale(locale);
-        const now = moment().tz(timezone);
-        let scheduled;
-        if(daysUntilBirthday === 0) {
-            scheduled = now.startOf('day').add(1, 'years'); // reminder created on day of birthday will trigger next year
-        } else {
-            scheduled = now.startOf('day').add(daysUntilBirthday, 'days');
-        }
-        console.log('Reminder schedule: ' + scheduled.format('YYYY-MM-DDTHH:mm:00.000'));
-
-        return {
-            requestTime: now.format('YYYY-MM-DDTHH:mm:00.000'),
-            trigger: {
-                type: 'SCHEDULED_ABSOLUTE',
-                scheduledTime: scheduled.format('YYYY-MM-DDTHH:mm:00.000'),
-                timeZoneId: timezone,
-            },
-            alertInfo: {
-              spokenInfo: {
-                content: [{
-                  locale: locale,
-                  text: message,
-                }],
-              },
-            },
-            pushNotification: {
-              status: 'ENABLED',
-            }
-        }
-    },
-    fetchBirthdaysData(day, month, limit){
+    fetchBirthdays(day, month, limit){
         const endpoint = 'https://query.wikidata.org/sparql';
         // List of actors with pictures and date of birth for a given day and month
         const sparqlQuery =
@@ -75,7 +55,7 @@ module.exports = {
         }
         LIMIT ${limit}`;
         const url = endpoint + '?query=' + encodeURIComponent(sparqlQuery);
-        console.log(url);
+        console.log(url); // in case you want to try the query in a web browser
 
         var config = {
             timeout: 6500, // timeout api call before we reach Alexa's 8 sec timeout, or set globally via axios.defaults.timeout
@@ -88,29 +68,39 @@ module.exports = {
         }
 
         return getJsonResponse(url, config).then((result) => {
-            return result;
-        }).catch((error) => {
-            return null;
-        });
+                return result;
+            }).catch((error) => {
+                return null;
+            });
     },
-    callDirectiveService(handlerInput, msg) {
-        // Call Alexa Directive Service.
-        const {requestEnvelope} = handlerInput;
-        const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
-        const requestId = requestEnvelope.request.requestId;
-        const {apiEndpoint, apiAccessToken} = requestEnvelope.context.System;
+    convertBirthdaysResponse(handlerInput, response, withAge, timezone){
+        let speechResponse = '';
+        // if the API call failed we just don't append today's birthdays to the response
+        if(!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) 
+            return speechResponse;
+        const results = response.results.bindings;
+        speechResponse += handlerInput.t('ALSO_TODAY_MSG');
+        results.forEach((person, index) => {
+            console.log(person);
+            if(index === Object.keys(results).length - 2){
+                speechResponse += person.humanLabel.value;
+                if(withAge && timezone && person.date_of_birth.value)
+                    speechResponse += handlerInput.t('TURNING_MSG', {count: ymodule.exports.convertBirthdateToYearsOld(person, timezone)});
+                speechResponse += handlerInput.t('CONJUNCTION_MSG');
+            }
+            else {
+                speechResponse += person.humanLabel.value;
+                if(withAge && timezone && person.date_of_birth.value)
+                    speechResponse += handlerInput.t('TURNING_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
+                speechResponse += '. ';
+            }
+        });
 
-        // build the progressive response directive
-        const directive = {
-          header: {
-            requestId,
-          },
-          directive:{
-              type: 'VoicePlayer.Speak',
-              speech: msg
-          },
-        };
-        // send directive
-        return directiveServiceClient.enqueue(directive, apiEndpoint, apiAccessToken);
+        return speechResponse;
+    },
+    convertBirthdateToYearsOld(person, timezone) {
+        const today = moment().tz(timezone).startOf('day');
+        const wasBorn = moment(person.date_of_birth.value).tz(timezone).startOf('day');
+        return today.diff(wasBorn, 'years');
     }
 }

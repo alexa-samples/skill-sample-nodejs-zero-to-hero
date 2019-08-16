@@ -24,15 +24,25 @@
                             "samples": [
                                 "el día {day}",
                                 "{day}",
-                                "el {day}"
+                                "el {day}",
+                                "{day} de {month}",
+                                "el {day} de {month}",
+                                "{day} de {month} de {year}",
+                                "el {day} de {month} de {year}"
                             ]
                         },
                         {
                             "name": "month",
-                            "type": "TipoMes",
+                            "type": "MonthType",
                             "samples": [
                                 "{month}",
-                                "en {month}"
+                                "en {month}",
+                                "mes de {month}",
+                                "el mes de {month}",
+                                "{day} de {month}",
+                                "el {day} de {month}",
+                                "{day} de {month} de {year}",
+                                "el {day} de {month} de {year}"
                             ]
                         },
                         {
@@ -47,7 +57,12 @@
                                 "en el {year}",
                                 "en el año {year}",
                                 "el año {year}",
-                                "{year}"
+                                "del año {year}",
+                                "{year}",
+                                "{day} de {month} de {year}",
+                                "el {day} de {month} de {year}",
+                                "{month} de {year}",
+                                "en {month} de {year}"
                             ]
                         }
                     ],
@@ -184,7 +199,7 @@
             ],
             "types": [
                 {
-                    "name": "TipoMes",
+                    "name": "MonthType",
                     "values": [
                         {
                             "id": "12",
@@ -270,8 +285,10 @@
             "intents": [
                 {
                     "name": "RegisterBirthdayIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.562993077507"
+                    },
                     "slots": [
                         {
                             "name": "day",
@@ -296,7 +313,7 @@
                         },
                         {
                             "name": "month",
-                            "type": "TipoMes",
+                            "type": "MonthType",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
@@ -459,6 +476,19 @@
                     {
                         "type": "PlainText",
                         "value": "No creo que tengas tan pocos años. Inténtalo otra vez"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.562993077507",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "He escuchado {day} de {month} de {year} . es correcto?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Estás seguro que quieres registrar el {day} de {month} de {year} ?"
                     }
                 ]
             },

@@ -8,11 +8,11 @@
   },
   "author": "Amazon Alexa",
   "dependencies": {
-    "ask-sdk-core": "^2.6.0",
-    "ask-sdk-model": "^1.16.0",
+    "ask-sdk-core": "^2.7.0",
+    "ask-sdk-model": "^1.18.0",
     "i18next": "^15.0.5",
-    "ask-sdk-s3-persistence-adapter": "^2.3.0",
-    "ask-sdk-dynamodb-persistence-adapter": "^2.3.0",
+    "ask-sdk-s3-persistence-adapter": "^2.7.0",
+    "ask-sdk-dynamodb-persistence-adapter": "^2.7.0",
     "moment-timezone": "^0.5.23",
     "axios": "^0.18.0"
   }

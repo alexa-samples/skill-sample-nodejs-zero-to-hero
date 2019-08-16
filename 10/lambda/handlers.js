@@ -21,7 +21,7 @@ const LaunchRequestHandler = {
 
         const dateAvailable = day && monthName && year;
         if(dateAvailable) {
-            // we can't use intent chaining because the intent is not dialog based
+            // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         } else {
             speechText += handlerInput.t('MISSING_MSG');
@@ -35,7 +35,7 @@ const LaunchRequestHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -61,7 +61,7 @@ const RegisterBirthdayIntentHandler = {
         sessionAttributes['year'] = year;
         const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
 
-        const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('SHORT_HELP_MSG');
+        const speechText = handlerInput.t('REGISTER_MSG', {name: name, day: day, month: monthName, year: year}) + handlerInput.t('REPROMPT_MSG');
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
@@ -99,7 +99,7 @@ const RegisterBirthdayIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -159,7 +159,7 @@ const SayBirthdayIntentHandler = {
         } else {
             speechText = handlerInput.t('MISSING_MSG');
         }
-        speechText += handlerInput.t('SHORT_HELP_MSG');
+        speechText += handlerInput.t('REPROMPT_MSG');
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput)) {
@@ -196,7 +196,7 @@ const SayBirthdayIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -222,8 +222,8 @@ const RemindBirthdayIntentHandler = {
         if(intent.confirmationStatus !== 'CONFIRMED') {
 
             return handlerInput.responseBuilder
-                .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('SHORT_HELP_MSG'))
-                .reprompt(handlerInput.t('HELP_MSG'))
+                .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('REPROMPT_MSG'))
+                .reprompt(handlerInput.t('REPROMPT_MSG'))
                 .getResponse();
         }
 
@@ -326,11 +326,11 @@ const RemindBirthdayIntentHandler = {
                 speechText,
                 util.getS3PreSignedUrl('Media/straws_480x480.png'));
 
-        speechText += handlerInput.t('SHORT_HELP_MSG');
+        speechText += handlerInput.t('REPROMPT_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -349,15 +349,15 @@ const CelebrityBirthdaysIntentHandler = {
 
         if(!timezone){
            //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
-           return handlerInput.responseBuilder
-             .speak(handlerInput.t('NO_TIMEZONE_MSG'))
-             .getResponse();
+            return handlerInput.responseBuilder
+                .speak(handlerInput.t('NO_TIMEZONE_MSG'))
+                .getResponse();
         }
 
         try {
             // call the progressive response service
             await logic.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
-          } catch (error) {
+        } catch (error) {
             // if it fails we can continue, but the user will wait without progressive response
             console.log("Progressive directive error : " + error);
         }
@@ -419,11 +419,11 @@ const CelebrityBirthdaysIntentHandler = {
                 speechText,
                 util.getS3PreSignedUrl('Media/lights_480x480.png'));
 
-        speechText += handlerInput.t('SHORT_HELP_MSG');
+        speechText += handlerInput.t('REPROMPT_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -437,11 +437,11 @@ const TouchIntentHandler = {
         let person = JSON.parse(handlerInput.requestEnvelope.request.arguments[0]);
         let speechText = handlerInput.t('LIST_PERSON_DETAIL_MSG', {person: person});
 
-        speechText += handlerInput.t('SHORT_HELP_MSG');
+        speechText += handlerInput.t('REPROMPT_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -479,7 +479,11 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
-
+/* *
+ * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
+ * It must also be defined in the language model (if the locale supports it)
+ * This handler can be safely added but will be ingnored in locales that do not support it yet 
+ * */
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.getRequestType() === 'IntentRequest'
@@ -490,25 +494,30 @@ const FallbackIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
-
+/* *
+ * SessionEndedRequest notifies that a session was ended. This handler will be triggered when a currently open 
+ * session is closed for one of the following reasons: 1) The user says "exit" or "quit". 2) The user does not 
+ * respond or says something that does not match an intent defined in your voice model. 3) An error occurs 
+ * */
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.getRequestType() === 'SessionEndedRequest';
     },
     handle(handlerInput) {
+        console.log(`~~~~ Session ended: ${JSON.stringify(handlerInput.requestEnvelope)}`);
         // Any cleanup logic goes here.
         return handlerInput.responseBuilder.getResponse(); // notice we send an empty response
     }
 };
-
-// The intent reflector is used for interaction model testing and debugging.
-// It will simply repeat the intent the user said. You can create custom handlers
-// for your intents by defining them above, then also adding them to the request
-// handler chain below.
+/* *
+ * The intent reflector is used for interaction model testing and debugging.
+ * It will simply repeat the intent the user said. You can create custom handlers for your intents 
+ * by defining them above, then also adding them to the request handler chain below 
+ * */
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
         return handlerInput.getRequestType() === 'IntentRequest';
@@ -523,22 +532,22 @@ const IntentReflectorHandler = {
             .getResponse();
     }
 };
-
-// Generic error handling to capture any syntax or routing errors. If you receive an error
-// stating the request handler chain is not found, you have not implemented a handler for
-// the intent being invoked or included it in the skill builder below.
+/**
+ * Generic error handling to capture any syntax or routing errors. If you receive an error
+ * stating the request handler chain is not found, you have not implemented a handler for
+ * the intent being invoked or included it in the skill builder below 
+ * */
 const ErrorHandler = {
     canHandle() {
         return true;
     },
     handle(handlerInput, error) {
         const speechText = handlerInput.t('ERROR_MSG');
-
-        console.log(`~~~~ Error handled: ${error.message}`);
+        console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };

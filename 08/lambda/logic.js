@@ -42,18 +42,18 @@ module.exports = {
             trigger: {
                 type: 'SCHEDULED_ABSOLUTE',
                 scheduledTime: scheduled.format('YYYY-MM-DDTHH:mm:00.000'),
-                timeZoneId: timezone,
+                timeZoneId: timezone
             },
             alertInfo: {
-              spokenInfo: {
-                content: [{
-                  locale: locale,
-                  text: message,
-                }],
-              },
+                spokenInfo: {
+                    content: [{
+                        locale: locale,
+                        text: message
+                    }]
+                }
             },
             pushNotification: {
-              status: 'ENABLED',
+                status: 'ENABLED'
             }
         }
     },
@@ -102,13 +102,13 @@ module.exports = {
 
         // build the progressive response directive
         const directive = {
-          header: {
-            requestId,
-          },
-          directive:{
-              type: 'VoicePlayer.Speak',
-              speech: msg
-          },
+            header: {
+                requestId
+            },
+            directive:{
+                type: 'VoicePlayer.Speak',
+                speech: msg
+            }
         };
         // send directive
         return directiveServiceClient.enqueue(directive, apiEndpoint, apiAccessToken);
