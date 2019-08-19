@@ -25,14 +25,13 @@ In this module we depart from the previous project and overwrite HelloWorldInten
 
 1. Slot explanation
 2. Built in and custom slot types
-3. Synonyms
+3. Synonyms (minimal, we're not using synonyms, eg. January -> first month)
 4. Required Slots & Prompts
 5. Slot Validation
 6. Auto-Delegate, Dialog Delegation Strategy
 
 ## Diff
 
-1. *lambda/custom/package.json*: change name and description of project to a happy birthday theme
-2. *models/en-US.json*: delete (we'll keep working with i18n support but only providing sdtring for the local language)
-3. *models/es-ES.json*: change invocation name to happy birthday theme. Keep fallback intent if the locale supports it. Change HelloWorldIntent to RegisterBirthdayIntent. Add slots: day (AMAZON.NUMBER), month (custom type with 2 digit month ids) and year (AMAZON.FOUR_DIGIT_NUMBER). Add samples utterances to collect each slot in isolation, day/month and day/month/year. Also add utterances that do not collect slots (e.g. register my birthday). Make all 3 slots mandatory. Add prompts and enable dialog management via auto-delegate. Add validations for all 3 slots
-4. *lambda/custom/index.js*: remove en: section in languageStrings. Replace welcome, hello and helps messages in es: section in languageStrings. Rename HelloWorldIntentHandler to RegisterBirthdayIntentHandler. In that same handler change intent name to RegisterBirthdayIntent and then access the itent to fetch all slots (day, month id, month value and year). Say the birthday back to the user
+1. *lambda/custom/package.json*: change name and description of project to a happy birthday theme (no change in dependencies)
+2. *models/xx-XX.json*: change invocation name to happy birthday theme (eg. happy birthday). Keep fallback intent if the locale supports it (otherwise remove it!). Change HelloWorldIntent to RegisterBirthdayIntent. Add slots: day (AMAZON.Ordinal or AMAZON.NUMBER), month (custom type with 2 digits as month ids) and year (AMAZON.FOUR_DIGIT_NUMBER). In en-* the slot day is AMAZON.Ordinal while in other locales it's AMAZON.NUMBER. Add samples utterances to collect each slot in isolation plus together Also add utterances that do not collect slots (e.g. register my birthday). Make all 3 slots mandatory. Add prompts and enable dialog management via auto-delegate. Add validations for all 3 slots(day between 1 and 31 if NUMBER or in set of 31 days if Ordinal. Month validate as member of the custom value set. Year validate arbitraily as too old or too your (you set the cut years)).
+3. *lambda/custom/index.js*: remove en: section in languageStrings. Replace welcome, hello and helps messages in es: section in languageStrings. Rename HelloWorldIntentHandler to RegisterBirthdayIntentHandler. In that same handler change intent name to RegisterBirthdayIntent and then access the itent to fetch all slots (day, month id, month value and year). Say the birthday back to the user
