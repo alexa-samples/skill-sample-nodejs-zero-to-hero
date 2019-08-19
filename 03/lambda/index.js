@@ -44,7 +44,7 @@ const languageStrings = {
           ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
         }
     },
-    "fr-ca": {
+    "fr-CA": {
         translation: {
             WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
             HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'sauve ma fête\' et je vous guiderai. Quel est votre choix ?',
@@ -172,7 +172,7 @@ const IntentReflectorHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = Alexa.getIntentName(handlerInput.requestEnvelope)
+        const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
         const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
