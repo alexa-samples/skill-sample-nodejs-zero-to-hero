@@ -21,7 +21,7 @@ const languageStrings = {
     },
     it: {
         translation: {
-            WELCOME_MSG: 'Buongiorno! Puoi salutarmi con un ciao, o chiedermi aiuto. Cosa vuoi fare?',
+            WELCOME_MSG: 'Buongiorno! Puoi salutarmi con un ciao, o chiedermi aiuto. Cosa preferisci fare?',
             HELLO_MSG: 'Ciao!',
             HELP_MSG: 'Dimmi ciao e io ti risponderò! Come posso aiutarti?',
             GOODBYE_MSG: 'A presto!',
