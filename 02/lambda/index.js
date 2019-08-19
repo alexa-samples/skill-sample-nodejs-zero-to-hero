@@ -29,7 +29,18 @@ const languageStrings = {
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             ERROR_MSG: 'Lo siento, ha habido un error. Por favor inténtalo otra vez.'
         }
-    }
+    },
+    fr:{
+        translation: {
+          WELCOME_MSG: 'Bienvenue sur le génie des salutations, dites-moi bonjour et je vous répondrai',
+          HELLO_MSG: 'Bonjour à tous!',
+          HELP_MSG: 'Dites-moi bonjour et je vous répondrai!',
+          GOODBYE_MSG: 'Au revoir!',
+          REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
+          FALLBACK_MSG: 'Désolé, je ne sais pas. Pouvez-vous reformuler?',
+          ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
+        }
+      }
 }
 
 const LaunchRequestHandler = {
