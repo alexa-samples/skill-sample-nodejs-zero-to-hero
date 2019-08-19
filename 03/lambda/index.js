@@ -20,6 +20,18 @@ const languageStrings = {
             ERROR_MSG: 'Sorry, there was an error. Please try again.'
         }
     },
+    it: {
+        translation: {
+            WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
+            REGISTER_MSG: 'Il tuo compleanno è il {{day}} di {{month}}, {{year}}.',
+            REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito.',
+            HELP_MSG: `Dimmi la tua data di nascita e me la segnerò. Altrimenti puoi chiedermi di ricordarti il tuo compleanno e ti guido io passo per passo. Come preferisci procedere?`,
+            GOODBYE_MSG: 'A presto!',
+            REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
+            FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
+            ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.'
+        }
+    },    
     es: {
         translation: {
             WELCOME_MSG: 'Te doy la bienvenida a Feliz Cumpleaños. Vamos a divertirnos un poco con tu cumpleaños! ',
