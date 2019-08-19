@@ -19,6 +19,17 @@ const languageStrings = {
             ERROR_MSG: 'Sorry, there was an error. Please try again.'
         }
     },
+    it: {
+        translation: {
+            WELCOME_MSG: 'Buongiorno! Puoi salutarmi con un ciao, o chiedermi aiuto. Cosa vuoi fare?',
+            HELLO_MSG: 'Ciao!',
+            HELP_MSG: 'Dimmi ciao e io ti risponderò! Come posso aiutarti?',
+            GOODBYE_MSG: 'A presto!',
+            REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
+            FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
+            ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.'
+        }
+    },
     es: {
         translation: {
             WELCOME_MSG: 'Bienvenido, puedes decir Hola o Ayuda. Cual prefieres?',
