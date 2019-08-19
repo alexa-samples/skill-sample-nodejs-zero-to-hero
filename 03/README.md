@@ -26,7 +26,7 @@ In this module we depart from the previous project and overwrite HelloWorldInten
 1. Slot explanation
 2. Built in and custom slot types
 3. Synonyms (minimal, we're not using synonyms, eg. January -> first month)
-4. Required Slots & Prompts
+4. Required Slots & Prompt
 5. Slot Validation
 6. Auto-Delegate, Dialog Delegation Strategy
 

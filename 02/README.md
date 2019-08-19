@@ -1,14 +1,14 @@
-# Part 2 - Skill Internationalization (i18n) and Interceptors
+# Part 2 - Skill Internationalization (i18n), Interceptors and Error Handler
 
 In this module we explain how to use i18next to do the i18n of your skill. We got rid of the sprintf module and now we're using plain i18next for string replacement We also introduce interceptors and attributtes. Start with brief intro to i18n. In this module we generate a locale specific Hello World (eg. Spanish, French, etc)
 
 ## Milestones
 
-1. **Developer Console**: adding an extra locale (xx-XX (your own lcoale), departing from the en-US model)
+1. **Developer Console**: adding an extra locale (xx-XX (your own locale), departing from the en-US model)
 2. **Code Tab**: add ASK SDK Utilities to all handlers and interceptors
 3. **Code Tab**: i18next dependency, string replacement with {{}}, languageStrings (embedded for now)
 4. **Code Tab**: Request and Response Interceptors (loggers), Localisation Interceptor (simplest possible for now, no arrays)
-5. **Code Tab**: Attributes Manager, Request Attributes, handlerInput.t and handlerInput.t with parameters (string replacement example in Reflector message)
+5. **Code Tab**: handlerInput.t and handlerInput.t with parameters (string replacement example in Reflector message)
 
 ## Concepts
 
