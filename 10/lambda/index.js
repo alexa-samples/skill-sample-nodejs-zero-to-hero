@@ -23,10 +23,9 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         handlers.ErrorHandler)
     .addRequestInterceptors(
-        interceptors.SDKUtilitiesRequestInterceptor,
+        interceptors.LoadAttributesRequestInterceptor,
         interceptors.LocalisationRequestInterceptor,
         interceptors.LoggingRequestInterceptor,
-        interceptors.LoadAttributesRequestInterceptor,
         interceptors.LoadNameRequestInterceptor,
         interceptors.LoadTimezoneRequestInterceptor)
     .addResponseInterceptors(
