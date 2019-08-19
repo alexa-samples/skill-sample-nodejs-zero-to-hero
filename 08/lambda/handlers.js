@@ -14,8 +14,9 @@ const LaunchRequestHandler = {
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const sessionCounter = sessionAttributes['sessionCounter'];
 
-        let speechText = handlerInput.t('WELCOME_MSG', {name: name});
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
 
         const dateAvailable = day && monthName && year;
         if (dateAvailable) {
@@ -85,11 +86,11 @@ const SayBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name']+',' : '';
         let timezone = sessionAttributes['timezone'];
 
-        let speechText, isBirthday = false;
+        let speechText = '', isBirthday = false;
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
-                //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
@@ -140,6 +141,12 @@ const SayBirthdayIntentHandler = {
                     }
                 });
             }
+
+            // Add home card to response
+            handlerInput.responseBuilder.withStandardCard(
+                handlerInput.t('LAUNCH_HEADER_MSG'),
+                isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
+                isBirthday ? util.getS3PreSignedUrl('Media/cake_480x480.png') : util.getS3PreSignedUrl('Media/papers_480x480.png'));
         } else {
             speechText += handlerInput.t('MISSING_MSG');
             // we use intent chaining to trigger the birthday registration multi-turn
@@ -149,12 +156,6 @@ const SayBirthdayIntentHandler = {
                 slots: {}
             });
         }
-
-        // Add home card to response
-        handlerInput.responseBuilder.withStandardCard(
-                handlerInput.t('LAUNCH_HEADER_MSG'),
-                isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
-                isBirthday ? util.getS3PreSignedUrl('Media/cake_480x480.png') : util.getS3PreSignedUrl('Media/papers_480x480.png'));
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -187,11 +188,11 @@ const RemindBirthdayIntentHandler = {
                 .getResponse();
         }
 
-        let speechText;
+        let speechText = '';
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
-                //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
@@ -316,7 +317,7 @@ const CelebrityBirthdaysIntentHandler = {
         let timezone = sessionAttributes['timezone'];
 
         if (!timezone){
-           //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+           //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
             return handlerInput.responseBuilder
                 .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                 .getResponse();
@@ -340,7 +341,7 @@ const CelebrityBirthdaysIntentHandler = {
         speechText += handlerInput.t('POST_CELEBRITIES_HELP_MSG');
 
         // Add APL directive to response
-        if (util.supportsAPL(handlerInput)) {
+        if (util.supportsAPL(handlerInput) && speechResponse) { // empty speechResponse -> no API results
             const {Viewport} = handlerInput.requestEnvelope.context;
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
@@ -355,7 +356,7 @@ const CelebrityBirthdaysIntentHandler = {
                             mainText: logic.convertBirthdaysResponse(handlerInput, response, false).split(": ")[1],
                             hintString: handlerInput.t('LAUNCH_HINT_MSG'),
                             logoImage: Viewport.pixelWidth > 480 ? util.getS3PreSignedUrl('Media/full_icon_512.png') : util.getS3PreSignedUrl('Media/full_icon_108.png'),
-                            backgroundImage: util.getS3PreSignedUrl('Media/garlands_'+resolution+'.png'),
+                            backgroundImage: util.getS3PreSignedUrl('Media/lights_'+resolution+'.png'),
                             backgroundOpacity: "0.5"
                         },
                         transformers: [{
@@ -365,13 +366,13 @@ const CelebrityBirthdaysIntentHandler = {
                     }
                 }
             });
-        }
 
-        // Add home card to response
-        handlerInput.responseBuilder.withStandardCard(
+            // Add home card to response
+            handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LAUNCH_HEADER_MSG'),
                 speechResponse,
-                util.getS3PreSignedUrl('Media/garlands_480x480.png'));
+                util.getS3PreSignedUrl('Media/lights_480x480.png'));
+        }
 
         return handlerInput.responseBuilder
             .speak(speechText)

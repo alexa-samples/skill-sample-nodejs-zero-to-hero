@@ -82,18 +82,13 @@ module.exports = {
         speechResponse += handlerInput.t('ALSO_TODAY_MSG');
         results.forEach((person, index) => {
             console.log(person);
-            if (index === Object.keys(results).length - 2){
-                speechResponse += person.humanLabel.value;
-                if (withAge && timezone && person.date_of_birth.value)
-                    speechResponse += handlerInput.t('TURNING_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
+            speechResponse += person.humanLabel.value;
+            if (withAge && timezone && person.date_of_birth.value)
+                speechResponse += handlerInput.t('TURNING_YO_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
+            if (index === Object.keys(results).length - 2)
                 speechResponse += handlerInput.t('CONJUNCTION_MSG');
-            }
-            else {
-                speechResponse += person.humanLabel.value;
-                if (withAge && timezone && person.date_of_birth.value)
-                    speechResponse += handlerInput.t('TURNING_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
+            else
                 speechResponse += '. ';
-            }
         });
 
         return speechResponse;

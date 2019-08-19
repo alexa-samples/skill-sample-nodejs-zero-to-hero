@@ -1,6 +1,6 @@
 {
     "type": "APL",
-    "version": "1.0",
+    "version": "1.1",
     "theme": "dark",
     "import": [
         {
@@ -47,7 +47,7 @@
                         {
                             "type": "Text",
                             "text": "${mainText}",
-                            "style": "textStyleDisplay4",
+                            "style": "textStyleDisplay5",
                             "textAlign": "center",
                             "paddingTop": "30dp",
                             "color": "white"

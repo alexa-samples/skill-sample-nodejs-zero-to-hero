@@ -38,7 +38,6 @@ module.exports = {
             ALSO_TODAY_MSG: 'También hoy cumplen: ',
             LAUNCH_HEADER_MSG: 'Feliz Cumpleaños',
             LAUNCH_TEXT_FILLED_MSG: '{{day}}/{{month}}/{{year}}',
-            LAUNCH_TEXT_EMPTY_MSG: '¿Cuándo cumples?',
             LAUNCH_HINT_MSG: ['cuanto falta para mi cumpleaños?', 'quién cumple años hoy?', 'crea un recordatorio para mi cumpleaños', 'registra mi fecha de cumpleaños'],
             LIST_HEADER_MSG: 'Cumpleaños de Hoy',
             LIST_HINT_MSG: 'quién cumple años hoy?',

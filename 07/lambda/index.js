@@ -15,8 +15,9 @@ const LaunchRequestHandler = {
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const sessionCounter = sessionAttributes['sessionCounter'];
 
-        let speechText = handlerInput.t('WELCOME_MSG', {name: name});
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
 
         const dateAvailable = day && monthName && year;
         if (dateAvailable) {
@@ -86,11 +87,11 @@ const SayBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name']+',' : '';
         let timezone = sessionAttributes['timezone'];
 
-        let speechText;
+        let speechText = '';
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
-                //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
@@ -154,11 +155,11 @@ const RemindBirthdayIntentHandler = {
                 .getResponse();
         }
 
-        let speechText;
+        let speechText = '';
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
-                //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
@@ -248,7 +249,7 @@ const CelebrityBirthdaysIntentHandler = {
         let timezone = sessionAttributes['timezone'];
 
         if (!timezone){
-           //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+           //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
             return handlerInput.responseBuilder
                 .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                 .getResponse();

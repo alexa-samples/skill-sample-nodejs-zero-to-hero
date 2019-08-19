@@ -109,10 +109,10 @@ const SayBirthdayIntentHandler = {
         const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
 
-        let speechText;
+        let speechText = '';
         const dateAvailable = day && month && year;
         if (dateAvailable){
-            const timezone = 'Europe/Madrid'; // provide yours here. we'll change this later to retrieve the timezone from the device
+            const timezone = 'Europe/Milan'; // provide yours here. we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');

@@ -120,11 +120,11 @@ const SayBirthdayIntentHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] + '. ' : '';
         let timezone = requestAttributes['timezone'];
 
-        let speechText, isBirthday = false;
+        let speechText = '', isBirthday = false;
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
-                //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
@@ -227,10 +227,10 @@ const RemindBirthdayIntentHandler = {
                 .getResponse();
         }
 
-        let speechText;
+        let speechText = '';
         if (day && month && year){
             if (!timezone){
-                //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();
@@ -348,7 +348,7 @@ const CelebrityBirthdaysIntentHandler = {
         let timezone = requestAttributes['timezone'];
 
         if (!timezone){
-           //timezone = 'Europe/Madrid';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+           //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
             return handlerInput.responseBuilder
                 .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                 .getResponse();

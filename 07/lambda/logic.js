@@ -85,13 +85,13 @@ module.exports = {
             if (index === Object.keys(results).length - 2){
                 speechResponse += person.humanLabel.value;
                 if (withAge && timezone && person.date_of_birth.value)
-                    speechResponse += handlerInput.t('TURNING_MSG', {count: ymodule.exports.convertBirthdateToYearsOld(person, timezone)});
+                    speechResponse += handlerInput.t('TURNING_YO_MSG', {count: ymodule.exports.convertBirthdateToYearsOld(person, timezone)});
                 speechResponse += handlerInput.t('CONJUNCTION_MSG');
             }
             else {
                 speechResponse += person.humanLabel.value;
                 if (withAge && timezone && person.date_of_birth.value)
-                    speechResponse += handlerInput.t('TURNING_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
+                    speechResponse += handlerInput.t('TURNING_YO_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
                 speechResponse += '. ';
             }
         });
