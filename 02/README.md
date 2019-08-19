@@ -5,10 +5,9 @@ In this module we explain how to use i18next to do the i18n of your skill. We go
 ## Milestones
 
 1. **Developer Console**: adding an extra locale (xx-XX (your own locale), departing from the en-US model)
-2. **Code Tab**: add ASK SDK Utilities to all handlers and interceptors
-3. **Code Tab**: i18next dependency, string replacement with {{}}, languageStrings (embedded for now)
-4. **Code Tab**: Request and Response Interceptors (loggers), Localisation Interceptor (simplest possible for now, no arrays)
-5. **Code Tab**: handlerInput.t and handlerInput.t with parameters (string replacement example in Reflector message)
+2. **Code Tab**: i18next dependency, string replacement with {{}}, languageStrings (embedded for now)
+3. **Code Tab**: Request and Response Interceptors (loggers), Localisation Interceptor (simplest possible for now, no arrays)
+4. **Code Tab**: handlerInput.t and handlerInput.t with parameters (string replacement example in Reflector message)
 
 ## Concepts
 
@@ -16,13 +15,13 @@ In this module we explain how to use i18next to do the i18n of your skill. We go
 2. Key/value string resources for i18n
 3. Enriching handlerInput with t function via interceptor
 4. Attribute manager as key/value store
-5. High level attribute types (request(short term), session(mid term), persistent(long term))
+5. High level attribute types (session(short term), persistent(long term))
 6. Changing locale on Build tab and on Test tab (test both locales)
 
 ## Diff
 
 1. *lambda/custom/package.json*: add i18next dependency, we also update all existing dependencies to latest versions
-2. *lambda/custom/index.js*: add i18next require, add languageStrings, get localisation strings via function handlerInput.t, add 3 interceptors (log request, log response and localization interceptor), add them to the exports via Alexa skill builder (bottom of file). Replace all hard coded speech string with handlerIput.t(STRING_KEY). Add detection of request type and intent name to all handlers via ASK SDK Utilities (Alexa.getRequestType() & Alexa.getIntentName()). Add detection of locale to i18n interceptor via ASK SDK Utilities (Alexa.getIntentName())
+2. *lambda/custom/index.js*: add i18next require, add languageStrings, get localisation strings via function handlerInput.t, add 3 interceptors (log request, log response and localization interceptor), add them to the exports via Alexa skill builder (bottom of file). Replace all hard coded speech string with handlerIput.t(STRING_KEY). Add detection of locale to i18n interceptor via ASK SDK Utilities (Alexa.getLocale())
 3. *models/xx-XX.json*: add this file copied from en-US.json and translate (xx-XX is your own locale)
 
 ## Structure

@@ -32,15 +32,15 @@ const languageStrings = {
     },
     fr:{
         translation: {
-          WELCOME_MSG: 'Bienvenue sur le génie des salutations, dites-moi bonjour et je vous répondrai',
-          HELLO_MSG: 'Bonjour à tous!',
-          HELP_MSG: 'Dites-moi bonjour et je vous répondrai!',
-          GOODBYE_MSG: 'Au revoir!',
-          REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
-          FALLBACK_MSG: 'Désolé, je ne sais pas. Pouvez-vous reformuler?',
-          ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
+            WELCOME_MSG: 'Bienvenue sur le génie des salutations, dites-moi bonjour et je vous répondrai',
+            HELLO_MSG: 'Bonjour à tous!',
+            HELP_MSG: 'Dites-moi bonjour et je vous répondrai!',
+            GOODBYE_MSG: 'Au revoir!',
+            REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
+            FALLBACK_MSG: 'Désolé, je ne sais pas. Pouvez-vous reformuler?',
+            ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
         }
-      }
+    }
 }
 
 const LaunchRequestHandler = {
@@ -52,7 +52,7 @@ const LaunchRequestHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -82,7 +82,7 @@ const HelpIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -116,7 +116,7 @@ const FallbackIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -169,7 +169,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };

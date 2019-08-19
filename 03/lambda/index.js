@@ -88,7 +88,7 @@ const HelpIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -122,7 +122,7 @@ const FallbackIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -175,7 +175,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
