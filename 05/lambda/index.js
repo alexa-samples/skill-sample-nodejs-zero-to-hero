@@ -24,7 +24,7 @@ const LaunchRequestHandler = {
 
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
         speechText += handlerInput.t('MISSING_MSG');
-        
+
         // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)

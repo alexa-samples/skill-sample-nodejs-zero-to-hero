@@ -17,7 +17,7 @@ const LaunchRequestHandler = {
         const sessionCounter = sessionAttributes['sessionCounter'];
 
         const dateAvailable = day && monthName && year;
-        if (dateAvailable) {
+        if (dateAvailable){
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         }

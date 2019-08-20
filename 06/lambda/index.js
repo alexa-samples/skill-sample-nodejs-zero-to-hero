@@ -18,17 +18,18 @@ const LaunchRequestHandler = {
         const sessionCounter = sessionAttributes['sessionCounter'];
 
         const dateAvailable = day && monthName && year;
-        if (dateAvailable) {
+        if (dateAvailable){
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         }
 
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
         speechText += handlerInput.t('MISSING_MSG');
-        
+
         // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)
+            // we use intent chaining to trigger the birthday registration multi-turn
             .addDelegateDirective({
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
@@ -45,12 +46,14 @@ const RegisterBirthdayIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
+        // the attributes manager allows us to access session attributes
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
+            // we get the slot instead of the value directly as we also want to fetch the id
             const monthSlot = Alexa.getSlot(requestEnvelope, 'month');
             const monthName = monthSlot.value;
             const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
