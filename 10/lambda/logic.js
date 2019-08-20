@@ -7,8 +7,9 @@ module.exports = {
         const today = moment().tz(timezone).startOf('day');
         const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
         const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-        if (today.isAfter(nextBirthday))
+        if (today.isAfter(nextBirthday)) {
             nextBirthday.add(1, 'years');
+        }
         const age = today.diff(wasBorn, 'years');
         const daysAlive = today.diff(wasBorn, 'days');
         const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
@@ -23,8 +24,9 @@ module.exports = {
         moment.locale(locale);
         const createdMoment = moment().tz(timezone);
         let triggerMoment = createdMoment.startOf('day').add(daysUntilBirthday, 'days');
-        if (daysUntilBirthday === 0)
+        if (daysUntilBirthday === 0) {
             triggerMoment = createdMoment.startOf('day').add(1, 'years'); // reminder created on the day of birthday will trigger next year
+        }
         console.log('Reminder schedule: ' + triggerMoment.format('YYYY-MM-DDTHH:mm:00.000'));
 
         return util.createReminder(createdMoment, triggerMoment, timezone, locale, message);
@@ -76,8 +78,9 @@ module.exports = {
     convertBirthdaysResponse(handlerInput, response, withAge, timezone){
         let speechResponse = '';
         // if the API call failed we just don't append today's birthdays to the response
-        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) 
+        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) {
             return speechResponse;
+        }
         const results = response.results.bindings;
         speechResponse += handlerInput.t('ALSO_TODAY_MSG');
         results.forEach((person, index) => {
@@ -88,10 +91,11 @@ module.exports = {
                 speechResponse += handlerInput.t('TURNING_YO_MSG', {count: age});
                 person.date_of_birth.value = handlerInput.t('LIST_YO_ABBREV_MSG', {count: age});
             }
-            if (index === Object.keys(results).length - 2)
+            if (index === Object.keys(results).length - 2) {
                 speechResponse += handlerInput.t('CONJUNCTION_MSG');
-            else
+            } else {
                 speechResponse += '. ';
+            }
         });
 
         return speechResponse;
