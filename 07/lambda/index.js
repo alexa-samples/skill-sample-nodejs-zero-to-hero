@@ -51,8 +51,9 @@ const RegisterBirthdayIntentHandler = {
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
-            const monthName = Alexa.getSlotValue(requestEnvelope, 'month');
-            const month = Alexa.getSlot(requestEnvelope, 'month').resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
+            const monthSlot = Alexa.getSlot(requestEnvelope, 'month');
+            const monthName = monthSlot.value;
+            const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
 
             sessionAttributes['day'] = day;
             sessionAttributes['month'] = month; //MM
