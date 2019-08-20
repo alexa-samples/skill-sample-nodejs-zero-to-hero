@@ -42,7 +42,7 @@
                         },
                         {
                             "name": "year",
-                            "type": "AMAZON.FOUR_DIGIT_NUMBER",
+                            "type": "AMAZON.NUMBER",
                             "samples": [
                                 "je suis né en {year}",
                                 "mon année de naissance est {year}",
@@ -210,7 +210,7 @@
                         },
                         {
                             "name": "year",
-                            "type": "AMAZON.FOUR_DIGIT_NUMBER",
+                            "type": "AMAZON.NUMBER",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
