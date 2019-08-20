@@ -1,4 +1,4 @@
-# Happy Birthdaay: A skill for our ASK Developer Training Course
+# Happy Birthday: A skill for our ASK Developer Training Course
 
 Support code for ASK Developer Training Course for multiple locales. This is progressive code that starts from scratch and adds features on each module. The Learn more links below are suitable for teaching how to code Alexa skills (see the README file on each module for instructions on how to evolve the code departing from the previous module).
 

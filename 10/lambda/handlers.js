@@ -16,21 +16,20 @@ const LaunchRequestHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         const sessionCounter = sessionAttributes['sessionCounter'];
 
-        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
-
         const dateAvailable = day && monthName && year;
         if (dateAvailable) {
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
-        } else {
-            speechText += handlerInput.t('MISSING_MSG');
-            // we use intent chaining to trigger the birthday registration multi-turn
-            handlerInput.responseBuilder.addDelegateDirective({
-                name: 'RegisterBirthdayIntent',
-                confirmationStatus: 'NONE',
-                slots: {}
-            });
         }
+        
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
+        speechText += handlerInput.t('MISSING_MSG');
+        // we use intent chaining to trigger the birthday registration multi-turn
+        handlerInput.responseBuilder.addDelegateDirective({
+            name: 'RegisterBirthdayIntent',
+            confirmationStatus: 'NONE',
+            slots: {}
+        });
 
         return handlerInput.responseBuilder
             .speak(speechText)

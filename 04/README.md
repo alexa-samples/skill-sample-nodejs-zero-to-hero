@@ -22,6 +22,7 @@ We show session attributes and create interceptors that help make them persisten
 3. Persistence adapters (S3 and DynamoDB) / detect if lambda is Alexa hosted
 4. Copy session attributes to and from persistent attributes via interceptors
 5. Async/await
+6. Session counter (to say eg. "welcome back")
 
 ## Diff
 

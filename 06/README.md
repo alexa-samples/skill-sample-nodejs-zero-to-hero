@@ -19,6 +19,7 @@ Additionally we show you how to use a slot of type AMAZON.SearchQuery to capture
 
 ## Diff
 
+1. *skill.json*: we add reminders permission here but this file is not needed if you use AHS
 1. *lambda/custom/logic.js*: create this file to encapsulate birthday calculation logic (and reminder structure creation). Move moment-timezone require to this file
 2. *skill.json*: add permission to read/write reminders
 3. *lambda/custom/localisation.js*: add all messages related to reminders. Improve help message
