@@ -270,9 +270,11 @@ const LocalisationRequestInterceptor = {
     }
 };
 
-// This is the first time we use async and await ( more info: javascript.info/async-await )
-// It's a way to wrap promises and waait for the result of an external async operation
-// Like getting and saving the persistent attributes
+/* *
+ * Below we use async and await ( more info: javascript.info/async-await )
+ * It's a way to wrap promises and waait for the result of an external async operation
+ * Like getting and saving the persistent attributes
+ * */
 const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
