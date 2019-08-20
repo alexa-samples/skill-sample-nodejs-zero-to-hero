@@ -70,7 +70,7 @@ module.exports = {
     fr: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
-            GREETING_SPEECHCON: `<say-as interpret-as="interjection">Eureka</say-as>`,
+            GREETING_SPEECHCON: `<say-as interpret-as="interjection">Cocorico</say-as>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">Hmmm</say-as>`,
             WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires {{name}}! ',
             WELCOME_BACK_MSG: 'Content de vous revoir {{name}}! ',
