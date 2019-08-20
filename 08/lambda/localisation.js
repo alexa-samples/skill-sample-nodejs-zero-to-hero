@@ -116,6 +116,7 @@ module.exports = {
             MISSING_PERMISSION_MSG: 'Je n\'ai pas accès à la création de rappels. Veuillez accéder à votre application Alexa et suivez les instructions depuis la card que je vous ai envoyé. ',
             POST_REMINDER_HELP_MSG: `Pour connaître quand votre rappel se déclenchera, il suffit de me dire "combien de jours reste-t-il avant mon anniversaire". Que voulez-vous faire ?`,
             PROGRESSIVE_MSG: 'Je recherche des célébrités nées aujourd\'hui... ',
+            API_ERROR_MSG: `Désolé, je n'arrive pas à me connecter à l'API externe pour obtenir des résultats. Veuillez réessayer plus tard. `,
             CONJUNCTION_MSG: ' et ',
             TURNING_YO_MSG: [' qui vient d\'avoir {{count}} an', ' avec {{count}} an'],
             TURNING_YO_MSG_plural: [' qui vient d\'avoir {{count}} ans', ' avec {{count}} ans'],

@@ -171,7 +171,7 @@ const RemindBirthdayIntentHandler = {
     async handle(handlerInput) {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
+        const {intent} = requestEnvelope.request;
 
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
