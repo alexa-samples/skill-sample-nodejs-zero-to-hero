@@ -14,28 +14,24 @@ const LaunchRequestHandler = {
         const day = sessionAttributes['day'];
         const monthName = sessionAttributes['monthName'];
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] || '';
         const sessionCounter = sessionAttributes['sessionCounter'];
-
-        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
 
         const dateAvailable = day && monthName && year;
         if (dateAvailable) {
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
-        } else {
-            speechText += handlerInput.t('MISSING_MSG');
-            // we use intent chaining to trigger the birthday registration multi-turn
-            handlerInput.responseBuilder.addDelegateDirective({
+        }
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
+        speechText += handlerInput.t('MISSING_MSG');
+        // we use intent chaining to trigger the birthday registration multi-turn
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .addDelegateDirective({
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
-            });
-        }
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            })
             .getResponse();
     }
 };
@@ -144,7 +140,7 @@ const RemindBirthdayIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] || '';
         let timezone = sessionAttributes['timezone'];
         const message = Alexa.getSlotValue(requestEnvelope, 'message');
 
@@ -245,7 +241,7 @@ const CelebrityBirthdaysIntentHandler = {
     },
     async handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] || '';
         let timezone = sessionAttributes['timezone'];
 
         if (!timezone){
@@ -268,8 +264,9 @@ const CelebrityBirthdaysIntentHandler = {
         // below we convert the API response to text that Alexa can read
         const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, true, timezone);
         let speechText = handlerInput.t('API_ERROR_MSG');
-        if (speechResponse)
+        if (speechResponse) {
             speechText = speechResponse;
+        }
         speechText += handlerInput.t('POST_CELEBRITIES_HELP_MSG');
 
         return handlerInput.responseBuilder
@@ -302,7 +299,7 @@ const CancelAndStopIntentHandler = {
     },
     handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] || '';
         const speechText = handlerInput.t('GOODBYE_MSG', {name: name});
 
         return handlerInput.responseBuilder
@@ -354,7 +351,7 @@ const IntentReflectorHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
         const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
