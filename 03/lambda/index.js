@@ -43,6 +43,24 @@ const languageStrings = {
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
         }
+    },
+    fr:{
+        translation: {
+            WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires! ',
+            REGISTER_MSG: 'Votre date de naissance est le {{day}} {{month}} {{year}}.',
+            REJECTED_MSG: 'D\'accord, je ne vais pas prendre en compte cette date. Dites-moi une autre date pour que je puisse l\'enregistrer.',
+            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'"enregistre mon anniversaire"\' et je vous guiderai. Quel est votre choix ?',
+            GOODBYE_MSG: 'Au revoir!',
+            REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
+            FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?.',
+            ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
+        }
+    },
+    "fr-CA": {
+        translation: {
+            WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
+            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'sauve ma fête\' et je vous guiderai. Quel est votre choix ?',
+        }
     }
 }
 
@@ -71,7 +89,7 @@ const RegisterBirthdayIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const {requestEnvelope} = handlerInput;
+        const {requestEnvelope, responseBuilder} = handlerInput;
         const {intent} = requestEnvelope.request;
 
         let speechText = handlerInput.t('REJECTED_MSG');
@@ -82,9 +100,12 @@ const RegisterBirthdayIntentHandler = {
             const month = Alexa.getSlotValue(requestEnvelope, 'month');
 
             speechText = handlerInput.t('REGISTER_MSG', {day: day, month: month, year: year}); // we'll save these values in the next module
+        } else {
+            const repromptText = handlerInput.t('HELP_MSG');
+            responseBuilder.reprompt(repromptText);
         }
         
-        return handlerInput.responseBuilder
+        return responseBuilder
             .speak(speechText)
             .getResponse();
     }
@@ -100,7 +121,7 @@ const HelpIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -163,7 +184,7 @@ const IntentReflectorHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
         const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
@@ -217,7 +238,7 @@ const LocalisationRequestInterceptor = {
         });
     }
 };
-/**
+/* *
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
  * defined are included below. The order matters - they're processed top to bottom 

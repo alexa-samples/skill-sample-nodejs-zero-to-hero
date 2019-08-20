@@ -41,25 +41,24 @@ const LaunchRequestHandler = {
         const year = sessionAttributes['year'];
         const sessionCounter = sessionAttributes['sessionCounter'];
 
-        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
-
         const dateAvailable = day && monthName && year;
         if (dateAvailable){
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
-        } else {
-            speechText += handlerInput.t('MISSING_MSG');
+        }
+
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
+        speechText += handlerInput.t('MISSING_MSG');
+        
+        // we use intent chaining to trigger the birthday registration multi-turn
+        return handlerInput.responseBuilder
+            .speak(speechText)
             // we use intent chaining to trigger the birthday registration multi-turn
-            handlerInput.responseBuilder.addDelegateDirective({
+            .addDelegateDirective({
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
-            });
-        }
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            })
             .getResponse();
     }
 };
@@ -71,16 +70,17 @@ const RegisterBirthdayIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
+        // the attributes manager allows us to access session attributes
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
-
-        let speechText = handlerInput.t('REJECTED_MSG');
 
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
-            const monthName = Alexa.getSlotValue(requestEnvelope, 'month');
-            const month = Alexa.getSlot(requestEnvelope, 'month').resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
+            // we get the slot instead of the value directly as we also want to fetch the id
+            const monthSlot = Alexa.getSlot(requestEnvelope, 'month');
+            const monthName = monthSlot.value;
+            const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
 
             sessionAttributes['day'] = day;
             sessionAttributes['month'] = month; //MM
@@ -91,7 +91,7 @@ const RegisterBirthdayIntentHandler = {
         }
 
         return handlerInput.responseBuilder
-            .speak(speechText)
+            .speak(handlerInput.t('REJECTED_MSG'))
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
@@ -217,7 +217,7 @@ const IntentReflectorHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
         const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
@@ -272,6 +272,11 @@ const LocalisationRequestInterceptor = {
     }
 };
 
+/* *
+ * Below we use async and await ( more info: javascript.info/async-await )
+ * It's a way to wrap promises and waait for the result of an external async operation
+ * Like getting and saving the persistent attributes
+ * */
 const LoadAttributesRequestInterceptor = {
     async process(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;

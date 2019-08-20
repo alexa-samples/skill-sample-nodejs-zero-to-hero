@@ -1,8 +1,3 @@
-// Alexa Sound Library
-// https://developer.amazon.com/docs/custom-skills/ask-soundlibrary.html
-// Speechcons
-// https://developer.amazon.com/docs/custom-skills/speechcon-reference-interjections-english-us.html
-
 module.exports = {
     en: {
         translation: {
@@ -57,13 +52,13 @@ module.exports = {
         }
     },
 	it: {
-	    POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
+	          POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
             GREETING_SPEECHCON: `<say-as interpret-as="interjection">hip hip hurrà</say-as>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
             WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
             WELCOME_BACK_MSG: 'Ciao di nuovo, {{name}}!',
             REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito.',
-	    DAYS_LEFT_MSG: `Manca un giorno`,
+	          DAYS_LEFT_MSG: `Manca un giorno`,
             DAYS_LEFT_MSG_plural: 'Mancano {{count}} giorni',
             WILL_TURN_MSG: `a quando compierai un anno. `,
             WILL_TURN_MSG_plural: `a quando compierai {{count}} anni `,
@@ -78,12 +73,12 @@ module.exports = {
             REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
             FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
             ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.',
-	    NO_TIMEZONE_MSG: 'Non ho potuto determinare il tuo fuso orario. Verifica la configurazione del tuo dispositivo, e riprova.'
+	          NO_TIMEZONE_MSG: 'Non ho potuto determinare il tuo fuso orario. Verifica la configurazione del tuo dispositivo, e riprova.'
 	},
     fr: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
-            GREETING_SPEECHCON: `<say-as interpret-as="interjection">Eureka</say-as>`,
+            GREETING_SPEECHCON: `<say-as interpret-as="interjection">Cocorico</say-as>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">Hmmm</say-as>`,
             WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires {{name}}! ',
             WELCOME_BACK_MSG: 'Content de vous revoir {{name}}! ',

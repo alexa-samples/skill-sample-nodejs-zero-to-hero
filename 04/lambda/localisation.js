@@ -43,10 +43,10 @@ module.exports = {
     },
     it: {
         translation: {
-	    WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
+	          WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
             WELCOME_BACK_MSG: 'Ciao di nuovo!',
             REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito.',
-	    DAYS_LEFT_MSG: `Manca {{count}} giorno`,
+	          DAYS_LEFT_MSG: `Manca {{count}} giorno`,
             DAYS_LEFT_MSG_plural: 'Mancano {{count}} giorni',
             WILL_TURN_MSG: `a quando compierai {{count}} anno. `,
             WILL_TURN_MSG_plural: `a quando compierai {{count}} anni `,
@@ -62,4 +62,34 @@ module.exports = {
             ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.'
         }
     },
+    fr: {
+        translation: {
+            WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires! ',
+            WELCOME_BACK_MSG: 'Content de vous revoir ! ',
+            REJECTED_MSG: 'D\'accord, je ne vais pas prendre en compte cette date. Dites-moi une autre date pour que je puisse l\'enregistrer.',
+            DAYS_LEFT_MSG: 'Il vous reste {{count}} jour ',
+            DAYS_LEFT_MSG_plural: 'Il vous reste {{count}} jours ',
+            WILL_TURN_MSG: 'avant d\'avoir {{count}} an. ',
+            WILL_TURN_MSG_plural: 'avant d\'avoir {{count}} ans. ',
+            GREET_MSG: 'Joyeux Anniversaire! Aujourd\'hui, vous avez {{count}} an!',
+            GREET_MSG_plural: 'Joyeux Anniversaire! Aujourd\'hui, vous avez {{count}} ans! ',
+            MISSING_MSG: 'Il me semble que vous ne m\'avez pas encore dit votre date de naissance. ',
+            POST_SAY_HELP_MSG: `Si vous souhaitez changez votre date de naissance, dites simplement "enregistre mon anniversaire" ou bien dites moi directement votre date de naissance. Quel est votre choix ?`,
+            HELP_MSG: 'Je peux me souvenir de votre anniversaire et vous dire le nombre de jours restant avant de le fêter. Quel est votre choix ?',
+            REPROMPT_MSG: `Pour obtenir plus d'informations sur ce que je peux faire pour vous, demandez-moi de l'aide. Si vous voulez quitter la Skill, dites simplement "stop". Quel est votre choix ?`,
+            GOODBYE_MSG: 'Au revoir! ',
+            REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
+            FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?. ',
+            ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler? '
+        }
+    },
+    "fr-CA" : {
+        translation: {
+            WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
+            GREET_MSG: 'Bonne fête! Aujourd\'hui, vous avez {{count}} an!',
+            GREET_MSG_plural: 'Bonne fête! Aujourd\'hui, vous avez {{count}} ans! ',
+            POST_SAY_HELP_MSG: `Si vous souhaitez changez votre date de naissance, dites simplement "sauve ma fête" ou bien dites moi directement votre date de naissance. Quel est votre choix ?`,
+            HELP_MSG: 'Je peux me souvenir de votre fête et vous dire le nombre de jours restant avant de le célébrer. Quel est votre choix ?'
+        }
+    }
 }
