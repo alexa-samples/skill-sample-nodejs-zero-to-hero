@@ -1,0 +1,486 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "bonne fête",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "RegisterBirthdayIntent",
+                    "slots": [
+                        {
+                            "name": "day",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{day}",
+                                "le {day}",
+                                "le {day} {month}",
+                                "le {day} {month} {year}",
+                                "je suis né le {day} {month}",
+                                "je suis né le {day} {month} {year}"
+                            ]
+                        },
+                        {
+                            "name": "month",
+                            "type": "MonthSlotType",
+                            "samples": [
+                                "mon mois de naissance est {month}",
+                                "je suis né le mois de {month}",
+                                "{month}",
+                                "en {month}"
+                            ]
+                        },
+                        {
+                            "name": "year",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "je suis né en {year}",
+                                "mon année de naissance est {year}",
+                                "en {year}",
+                                "l'année {year}",
+                                "l'an {year}",
+                                "{year}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "le {day} {month} {year}",
+                        "le {day} {month}",
+                        "le {day} du mois de {month}",
+                        "le {day} du mois d' {month}",
+                        "le {day} {month} de l'année {year}",
+                        "sauve ma date de naissance",
+                        "sauver ma date de naissance",
+                        "sauver ma fête",
+                        "sauve ma fête",
+                        "enregistre ma date de naissance",
+                        "enregistre ma fête",
+                        "enregistrer ma date de naissance",
+                        "enregistrer ma fête",
+                        "ma fête est le {day} {month} {year}",
+                        "ma fête est le {day} {month}",
+                        "ma date de naissance est le {day} {month} {year}",
+                        "ma date de naissance est le {day} {month}",
+                        "je suis né un {day} {month} {year}",
+                        "je suis né un {day} {month} ",
+                        "je suis né le {day} {month} {year}",
+                        "je suis né le {day} {month}",
+                        "je suis né en {month} {year}",
+                        "je suis né en {year}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "SayBirthdayIntent",
+                    "slots": [],
+                    "samples": [
+                        "me dire le nombre de jours avant ma fête",
+                        "dis-moi combien de temps reste-t-il avant ma fête",
+                        "dis-moi quand est ma fête",
+                        "quand a lieu ma fête",
+                        "quand est ma fête",
+                        "Il reste combien de temps avant ma fête",
+                        "Il reste combien de jours avant ma fête",
+                        "combien de temps reste-t-il",
+                        "combien de temps reste-t-il avant ma fête",
+                        "combien de jours reste-t-il",
+                        "combien de jours reste-t-il avant ma fête",
+                        "combien de jours avant ma fête",
+                        "nombre de jours restant",
+                        "nombre de jours restant avant ma fête",
+                        "nombre de jours avant ma fête",
+                        "fête"
+                    ]
+                },
+                {
+                    "name": "RemindBirthdayIntent",
+                    "slots": [
+                        {
+                            "name": "message",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{message}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "créer un rappel avec le message {message}",
+                        "créer un rappel avec le message suivant {message}",
+                        "créer un rappel avec le texte {message}",
+                        "créer un rappel avec le texte suivant {message}",
+                        "créer un rappel",
+                        "crée un rappel",
+                        "crée un rappel avec le message {message}",
+                        "crée un rappel avec le message suivant {message}",
+                        "crée un rappel avec le texte {message}",
+                        "crée un rappel avec le texte suivant {message}",
+                        "rappelle-moi ma fête",
+                        "rappelle-moi ma fête avec le message {message}",
+                        "rappelle-moi ma fête avec le message suivant {message}",
+                        "rappelle-moi ma fête avec le texte {message}",
+                        "rappelle-moi ma fête avec le texte suivant {message}",
+                        "mets un rappel pour ma fête",
+                        "mets un rappel ",
+                        "mets un rappel avec le message {message}",
+                        "mets un rappel avec le message suivant {message}",
+                        "mets un rappel avec le texte {message}",
+                        "mets un rappel avec le texte suivant {message}"
+                    ]
+                },
+                {
+                    "name": "CelebrityBirthdaysIntent",
+                    "slots": [],
+                    "samples": [
+                        "c'est la fête de qui aujourd'hui",
+                        "me dire qui est né aujourd'hui",
+                        "quelles sont les célébrités nées aujourd'hui",
+                        "trouve-moi des célébrités nées aujourd'hui",
+                        "quelles sont les vedettes nées aujourd'hui",
+                        "trouve-moi des vedettes nées aujourd'hui",
+                        "quelles sont les stars nées aujourd'hui",
+                        "trouve-moi des stars nées aujourd'hui",
+                        "qui est né aujourd'hui",
+                        "me dire qui est né ce jour"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "MonthSlotType",
+                    "values": [
+                        {
+                            "id": "12",
+                            "name": {
+                                "value": "décembre"
+                            }
+                        },
+                        {
+                            "id": "11",
+                            "name": {
+                                "value": "novembre"
+                            }
+                        },
+                        {
+                            "id": "10",
+                            "name": {
+                                "value": "octobre"
+                            }
+                        },
+                        {
+                            "id": "09",
+                            "name": {
+                                "value": "septembre"
+                            }
+                        },
+                        {
+                            "id": "08",
+                            "name": {
+                                "value": "août"
+                            }
+                        },
+                        {
+                            "id": "07",
+                            "name": {
+                                "value": "juillet"
+                            }
+                        },
+                        {
+                            "id": "06",
+                            "name": {
+                                "value": "juin"
+                            }
+                        },
+                        {
+                            "id": "05",
+                            "name": {
+                                "value": "mai"
+                            }
+                        },
+                        {
+                            "id": "04",
+                            "name": {
+                                "value": "avril"
+                            }
+                        },
+                        {
+                            "id": "03",
+                            "name": {
+                                "value": "mars"
+                            }
+                        },
+                        {
+                            "id": "02",
+                            "name": {
+                                "value": "février"
+                            }
+                        },
+                        {
+                            "id": "01",
+                            "name": {
+                                "value": "janvier",
+                                "synonyms": [
+                                    "premier mois de l'année"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "RegisterBirthdayIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.746177723927"
+                    },
+                    "slots": [
+                        {
+                            "name": "day",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.653974572406.1040382425372"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isGreaterThanOrEqualTo",
+                                    "prompt": "Slot.Validation.190694681136.1424851421300.1030431910159",
+                                    "value": "1"
+                                },
+                                {
+                                    "type": "isLessThanOrEqualTo",
+                                    "prompt": "Slot.Validation.190694681136.1424851421300.837658517617",
+                                    "value": "31"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "month",
+                            "type": "MonthSlotType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.282358190483.487594834711"
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.190694681136.463018349705.1461889218555"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "year",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1253554922892.1358447173887"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isGreaterThan",
+                                    "prompt": "Slot.Validation.1253554922892.1358447173887.1026742417738",
+                                    "value": "1900"
+                                },
+                                {
+                                    "type": "isLessThan",
+                                    "prompt": "Slot.Validation.1253554922892.1358447173887.176185058059",
+                                    "value": "2018"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "RemindBirthdayIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.556115415325"
+                    },
+                    "slots": [
+                        {
+                            "name": "message",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.556115415325.557149889298"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.653974572406.1040382425372",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Quel est votre jour de naissance ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel jour êtes-vous né ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Dites-moi votre jour de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.282358190483.487594834711",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Vous êtes né le {day} de quel mois ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel est votre mois de naissance ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel mois êtes-vous né ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Vous êtes né quel mois ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Dites-moi votre mois de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.190694681136.1424851421300.1030431910159",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{day} n'est pas un jour valide. Dites-moi un jour plus grand que zéro?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.190694681136.1424851421300.837658517617",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Un mois a au maximum trente et un jours, {day} n'est pas possible. Quel est votre jour de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.190694681136.463018349705.1461889218555",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{month} n'est pas un mois. Quel est votre mois de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1253554922892.1358447173887",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Vous êtes né le {day} {month} de quelle année ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quelle est votre année de naissance ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Vous êtes né en quelle année ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Dites-moi votre année de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.1253554922892.1358447173887.1026742417738",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Je ne crois pas que vous êtes si agé. Quelle est votre véritable année de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.1253554922892.1358447173887.176185058059",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Je ne crois pas vous êtes si jeune. Quelle est votre véritable année de naissance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.746177723927",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "le {day} {month} {year} , c'est bien ça?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Voulez-vous enregistrer le {day} {month} {year} comme votre date de naissance?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.556115415325.557149889298",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Dites-moi le message à vous rappeler pour votre fête ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel message dois-je vous lire pour votre fête ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel est le message que vous voulez que je vous rappelle ?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.556115415325",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Je vous enverrais le message suivant pour votre fête. {message} . Etes-vous d'accord ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Le message {message} vous sera envoyé pour votre fête. Est-ce que vous me le confirmer ?"
+                    }
+                ]
+            }
+        ]
+    }
+}
