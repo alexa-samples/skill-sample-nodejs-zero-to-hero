@@ -7,7 +7,7 @@ module.exports = {
     en: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
-            GREETING_SPEECHCON: `<say-as interpret-as="interjection">eureka</say-as>`,
+            GREETING_SPEECHCON: `<say-as interpret-as="interjection">bravo</say-as>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
             WELCOME_MSG: `Welcome to Happy Birthday {{name}}. Let's have some fun with your birthday! `,
             WELCOME_BACK_MSG: 'Welcome back {{name}}! ',
@@ -33,7 +33,7 @@ module.exports = {
     es: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
-            GREETING_SPEECHCON: `<say-as interpret-as="interjection">eureka</say-as>`,
+            GREETING_SPEECHCON: `<say-as interpret-as="interjection">felicidades</say-as>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
             WELCOME_MSG: 'Te doy la bienvenida a Feliz Cumpleaños {{name}}. Vamos a divertirnos un poco con tu cumpleaños! ',
             WELCOME_BACK_MSG: 'Te doy la bienvenida otra vez {{name}}! ',

@@ -18,9 +18,10 @@ In this module we depart from the previous project and overwrite HelloWorldInten
 12. **Build Tab**: mark year as required, add prompts (including prompts that refer to other slots)
 13. **Build Tab**: add an arbitrary slot validation to year (eg > 1900 & < 2014) to catch people too young or too old
 14. **Build Tab**: explain dialog delegation strategy (fallback to skill, enable, disable) in intent now that prompts have been created. explain conditional validation requires a mixed slot validation approach not covered here: https://developer.amazon.com/docs/custom-skills/delegate-dialog-to-alexa.html#auto-delegate-json (validation for coffee <> validation for tea)
-15. **Code Tab**: Modify help and welcome messages to guide for new utterances (not hello world)
-16. **Code Tab**: add intent chaining to birthday registration intent in launch request
-17. **Code Tab**: add intent confirmation to register birthday intent
+15. **Build Tab**: show Utterance Profiler (how slots are collected)
+16. **Code Tab**: Modify help and welcome messages to guide for new utterances (not hello world)
+17. **Code Tab**: add intent chaining to birthday registration intent in launch request
+18. **Code Tab**: add intent confirmation to register birthday intent
 
 ## Concepts
 
@@ -30,8 +31,9 @@ In this module we depart from the previous project and overwrite HelloWorldInten
 4. Required Slots & Prompts
 5. Slot Validation
 6. Auto-Delegate, Dialog Delegation Strategy
-7. Intent Confirmation
-8. Basic Intent Chaining
+7. Utterance Profiler
+8. Intent Confirmation
+9. Basic Intent Chaining
 
 ## Diff
 

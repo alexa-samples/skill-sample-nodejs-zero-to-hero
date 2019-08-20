@@ -46,14 +46,14 @@ const languageStrings = {
     },
     fr:{
         translation: {
-          WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires! ',
-          REGISTER_MSG: 'Votre date de naissance est le {{day}} {{month}} {{year}}.',
-          REJECTED_MSG: 'D\'accord, je ne vais pas prendre en compte cette date. Dites-moi une autre date pour que je puisse l\'enregistrer.',
-          HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'"enregistre mon anniversaire"\' et je vous guiderai. Quel est votre choix ?',
-          GOODBYE_MSG: 'Au revoir!',
-          REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
-          FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?.',
-          ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
+            WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires! ',
+            REGISTER_MSG: 'Votre date de naissance est le {{day}} {{month}} {{year}}.',
+            REJECTED_MSG: 'D\'accord, je ne vais pas prendre en compte cette date. Dites-moi une autre date pour que je puisse l\'enregistrer.',
+            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'"enregistre mon anniversaire"\' et je vous guiderai. Quel est votre choix ?',
+            GOODBYE_MSG: 'Au revoir!',
+            REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
+            FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?.',
+            ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
         }
     },
     "fr-CA": {
