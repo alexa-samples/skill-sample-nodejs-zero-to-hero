@@ -43,10 +43,10 @@ module.exports = {
     },
     it: {
         translation: {
-	          WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
+            WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
             WELCOME_BACK_MSG: 'Ciao di nuovo!',
             REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito.',
-	          DAYS_LEFT_MSG: `Manca {{count}} giorno`,
+            DAYS_LEFT_MSG: `Manca {{count}} giorno`,
             DAYS_LEFT_MSG_plural: 'Mancano {{count}} giorni',
             WILL_TURN_MSG: `a quando compierai {{count}} anno. `,
             WILL_TURN_MSG_plural: `a quando compierai {{count}} anni `,
