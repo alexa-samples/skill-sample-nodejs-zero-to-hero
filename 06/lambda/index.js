@@ -22,9 +22,10 @@ const LaunchRequestHandler = {
             // we can't use intent chaining because the target intent is not dialog based
             return SayBirthdayIntentHandler.handle(handlerInput);
         }
-        
+
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
         speechText += handlerInput.t('MISSING_MSG');
+        
         // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)

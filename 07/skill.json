@@ -25,6 +25,12 @@
                 },
                 "en-IN": {
                     "name": "Happy Birthday"
+                },
+                "fr-FR": {
+                    "name": "Joyeux Anniversaire"
+                },
+                "fr-CA": {
+                    "name": "Bonne Fête"
                 }
             }
         },
