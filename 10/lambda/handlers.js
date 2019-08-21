@@ -49,8 +49,6 @@ const RegisterBirthdayIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
-        let speechText = handlerInput.t('REJECTED_MSG');
-
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
@@ -67,7 +65,7 @@ const RegisterBirthdayIntentHandler = {
         }
 
         return handlerInput.responseBuilder
-            .speak(speechText)
+            .speak(handlerInput.t('REJECTED_MSG'))
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
