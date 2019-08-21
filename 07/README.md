@@ -1,6 +1,6 @@
 # Part 7 - Accessing External APIs
 
-In this module we show how to acess any eternal API (3rd party REST service) with the Axios library (you might use other libraries similarly, like e.g. node-fetch). We use async/await to wait for a response from the service.
+In this module we show how to access an external API (3rd party REST service) with the Axios library (you might use other libraries similarly, like e.g. node-fetch). We use async/await to wait for a response from the service.
 We set up a connection timeout so the call comes back in time before we run out of time during an Alexa conversation turn (typically 8 seconds).
 We use the Progressive Response API before doing the call so Alexa gives the user a nice waiting message if the connection takes a few seconds to return.
 

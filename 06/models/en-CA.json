@@ -481,11 +481,11 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "Great! Now please tell me what message you want in the reminder"
+                        "value": "Great. Now please tell me what message you want in the reminder"
                     },
                     {
                         "type": "PlainText",
-                        "value": "Ok! Now please say the message for the reminder"
+                        "value": "Ok. Now please say the message for the reminder"
                     }
                 ]
             },

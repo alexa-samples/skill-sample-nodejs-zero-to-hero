@@ -344,7 +344,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Mhh, non penso tu abbia cosi tanti anni. Prova di nuovo!"
+                        "value": "Mhh, non penso tu abbia cosi tanti anni. Prova di nuovo"
                     }
                 ]
             },
@@ -353,7 +353,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Mhh, non credo che tu abbia cosi pochi anni. Prova di nuovo!"
+                        "value": "Mhh, non credo che tu abbia cosi pochi anni. Prova di nuovo"
                     }
                 ]
             },
