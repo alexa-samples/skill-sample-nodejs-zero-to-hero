@@ -1,0 +1,12 @@
+{
+    "launchData": {
+        "properties": {
+            "headerTitle": "Buon Compleanno",
+            "mainText": "Non so ancora la tua data di nascita",
+            "hintString": "quando è il tuo compleanno?",
+            "logoImage": "https://yourimgurlhere",
+            "backgroundImage": "https://yourimgurlhere",
+            "backgroundOpacity": "0.5"
+        }
+    }
+}
