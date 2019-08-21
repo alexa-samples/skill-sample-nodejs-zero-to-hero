@@ -100,7 +100,7 @@ module.exports = {
             MISSING_MSG: `Non mi hai ancora detto quando compi gli anni. `,
             POST_SAY_HELP_MSG: `Puoi cambiare la data dandomene una nuova oppure posso impostare un nuovo promemoria. Cosa vuoi fare? `,
             HELP_MSG: 'Posso ricordarmi il tuo compleanno se mi dici la tua data di nascita. Posso anche dirti tra quanti giorni compi gli anni e fissare un promemoria. Cosa vuoi fare? ',
-            REPROMPT_MSG: `Se non sai cosa fare, prova a chiedermi aiuto. Se vuoi uscire dimmmi pure stop. Cosa vuoi fare?`,
+            REPROMPT_MSG: `Se non sai cosa fare, prova a chiedermi aiuto. Se vuoi uscire dimmi pure stop. Cosa vuoi fare?`,
             GOODBYE_MSG: ['A presto, {{name}}! ', 'Ciao {{name}}! ', 'Arrivederci {{name}}! ', 'A dopo {{name}}! '],
             REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
             FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
