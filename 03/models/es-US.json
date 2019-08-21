@@ -388,7 +388,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "{day} de {month} de {year} . es correcto?"
+                        "value": "Entonces el {day} de {month} de {year} . es correcto?"
                     },
                     {
                         "type": "PlainText",

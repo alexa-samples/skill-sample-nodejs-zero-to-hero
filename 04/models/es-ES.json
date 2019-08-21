@@ -424,11 +424,11 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Has dicho {day} de {month} de {year} . es correcto?"
+                        "value": "Entonces el {day} de {month} de {year} . es correcto?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "Estás seguro que quieres registrar {day} de {month} de {year} ?"
+                        "value": "Estás seguro que quieres registrar el {day} de {month} de {year} ?"
                     }
                 ]
             }

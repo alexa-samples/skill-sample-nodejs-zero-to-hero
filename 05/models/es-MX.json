@@ -424,7 +424,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "He escuchado {day} de {month} de {year} . es correcto?"
+                        "value": "Entonces el {day} de {month} de {year} . es correcto?"
                     },
                     {
                         "type": "PlainText",

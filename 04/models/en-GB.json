@@ -405,7 +405,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "You said {month} {day} {year} , did I get that right?"
+                        "value": "That's {month} {day} {year} , did I get that right?"
                     },
                     {
                         "type": "PlainText",

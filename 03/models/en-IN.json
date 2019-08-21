@@ -383,7 +383,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "{month} {day} {year} , did I get that right?"
+                        "value": "That's {month} {day} {year} , did I get that right?"
                     },
                     {
                         "type": "PlainText",
