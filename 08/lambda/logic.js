@@ -9,7 +9,7 @@ module.exports = {
         const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
         if (today.isAfter(nextBirthday)) {
             nextBirthday.add(1, 'years');
-        } 
+        }
         const age = today.diff(wasBorn, 'years');
         const daysAlive = today.diff(wasBorn, 'days');
         const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
@@ -78,15 +78,17 @@ module.exports = {
     convertBirthdaysResponse(handlerInput, response, withAge, timezone){
         let speechResponse = '';
         // if the API call failed we just don't append today's birthdays to the response
-        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) 
+        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0)
             return speechResponse;
         const results = response.results.bindings;
         speechResponse += handlerInput.t('ALSO_TODAY_MSG');
         results.forEach((person, index) => {
             console.log(person);
             speechResponse += person.humanLabel.value;
-            if (withAge && timezone && person.date_of_birth.value)
-                speechResponse += handlerInput.t('TURNING_YO_MSG', {count: module.exports.convertBirthdateToYearsOld(person, timezone)});
+            if (withAge && timezone && person.date_of_birth.value) {
+                const age = module.exports.convertBirthdateToYearsOld(person, timezone);
+                speechResponse += handlerInput.t('TURNING_YO_MSG', {count: age});
+            }
             if (index === Object.keys(results).length - 2)
                 speechResponse += handlerInput.t('CONJUNCTION_MSG');
             else

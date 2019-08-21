@@ -28,6 +28,7 @@ const LaunchRequestHandler = {
         // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)
+            // we use intent chaining to trigger the birthday registration multi-turn
             .addDelegateDirective({
                 name: 'RegisterBirthdayIntent',
                 confirmationStatus: 'NONE',
@@ -44,12 +45,14 @@ const RegisterBirthdayIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
+        // the attributes manager allows us to access session attributes
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
+            // we get the slot instead of the value directly as we also want to fetch the id
             const monthSlot = Alexa.getSlot(requestEnvelope, 'month');
             const monthName = monthSlot.value;
             const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
@@ -407,7 +410,7 @@ const CancelAndStopIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .withShouldEndSession(true) // session can reamin open if APL doc was rendered
+            .withShouldEndSession(true) // session can remain open if APL doc was rendered
             .getResponse();
     }
 };

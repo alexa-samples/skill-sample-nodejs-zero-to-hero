@@ -23,6 +23,7 @@ In this second APL module we show a slightly more complex APL document. We use t
 3. **index.js**: add handlers.TouchIntentHandler to handlers
 4. **localisation.js**: add LIST_* related strings at the bottom of the file
 5. **util.js**: add convertBirthdateToYearsOld() function
-6. **listSampleDatasource.json**: add (not used, just to test in the APL authoring tool)
-7. **sampleBirthdayResponse.json**: add and show, place on designer
-8. **listScreen.json**: add to project and show on APL authoring tool, explain it
+6. **logic.js**: add line to put age in actor's list response (we modify the API response formaat to better suit our APL doc)
+7. **listSampleDatasource.json**: add (not used, just to test in the APL authoring tool)
+8. **sampleBirthdayResponse.json**: add and show, place on designer
+9. **listScreen.json**: add to project and show on APL authoring tool, explain it

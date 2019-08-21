@@ -78,9 +78,8 @@ module.exports = {
     convertBirthdaysResponse(handlerInput, response, withAge, timezone){
         let speechResponse = '';
         // if the API call failed we just don't append today's birthdays to the response
-        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0) {
+        if (!response || !response.results || !response.results.bindings || !Object.keys(response.results.bindings).length > 0)
             return speechResponse;
-        }
         const results = response.results.bindings;
         speechResponse += handlerInput.t('ALSO_TODAY_MSG');
         results.forEach((person, index) => {
@@ -91,11 +90,10 @@ module.exports = {
                 speechResponse += handlerInput.t('TURNING_YO_MSG', {count: age});
                 person.date_of_birth.value = handlerInput.t('LIST_YO_ABBREV_MSG', {count: age});
             }
-            if (index === Object.keys(results).length - 2) {
+            if (index === Object.keys(results).length - 2)
                 speechResponse += handlerInput.t('CONJUNCTION_MSG');
-            } else {
+            else
                 speechResponse += '. ';
-            }
         });
 
         return speechResponse;
