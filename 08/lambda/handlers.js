@@ -120,7 +120,7 @@ const SayBirthdayIntentHandler = {
                 const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
                 handlerInput.responseBuilder.addDirective({
                     type: 'Alexa.Presentation.APL.RenderDocument',
-                    version: '1.0',
+                    version: '1.1',
                     document: constants.APL.launchDoc,
                     datasources: {
                         launchData: {
@@ -262,7 +262,7 @@ const RemindBirthdayIntentHandler = {
                 const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
                 handlerInput.responseBuilder.addDirective({
                     type: 'Alexa.Presentation.APL.RenderDocument',
-                    version: '1.0',
+                    version: '1.1',
                     document: constants.APL.launchDoc,
                     datasources: {
                         launchData: {
@@ -347,7 +347,7 @@ const CelebrityBirthdaysIntentHandler = {
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
-                version: '1.0',
+                version: '1.1',
                 document: constants.APL.launchDoc,
                 datasources: {
                     launchData: {
