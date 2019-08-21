@@ -39,7 +39,7 @@ module.exports = {
             LAUNCH_HEADER_MSG: 'Happy Birthday',
             LAUNCH_HINT_MSG: ['how many days until my birthday?', 'which celebrities have birthdays today?', 'set up a reminder for my birthday', 'register my birthday'],
             LIST_HEADER_MSG: `Today's Birthdays`,
-            LIST_HINT_MSG: 'who celebrates a birthday today?',
+            LIST_HINT_MSG: 'who was born today?',
             LIST_YO_ABBREV_MSG: '{{count}} year',
             LIST_YO_ABBREV_MSG_plural: '{{count}} years',
             LIST_PERSON_DETAIL_MSG: `{{person.humanLabel.value}} was born {{person.date_of_birth.value}} ago in {{person.place_of_birthLabel.value}}. `,
