@@ -16,7 +16,7 @@ module.exports = {
             DAYS_LEFT_MSG_plural: '{{name}} There are {{count}} days left ',
             WILL_TURN_MSG: `until you're {{count}} year old. `,
             WILL_TURN_MSG_plural: `until you're {{count}} years old. `,
-            GREET_MSG: '$t(POSITIVE_SOUND) $tGREETING_SPEECHCON) +  {{name}} ',
+            GREET_MSG: '$t(POSITIVE_SOUND) $t(GREETING_SPEECHCON) {{name}} ',
             NOW_TURN_MSG: `You're now {{count}} year old! `,
             NOW_TURN_MSG_plural: `You're now {{count}} years old! `,
             MISSING_MSG: `$t(DOUBT_SPEECHCON). It looks like you haven't told me your birthday yet. `,
