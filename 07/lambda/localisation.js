@@ -28,7 +28,7 @@ module.exports = {
             CANCEL_MSG: `Ok. Let's cancel that. `,
             MISSING_PERMISSION_MSG: `It looks like you haven't granted permissions for reminders. I have just sent you a card to your Alexa app so you can quickly enable this. `,
             POST_REMINDER_HELP_MSG: `If you want to know when your reminder will trigger, you can say, how many days until my birthday. Or maybe you prefer to check for today's birthdays. What would you like to do next?`,
-            API_ERROR_MSG: `I'm sorry, I'm having trouble accessing the external A.P.I. Please try again later. `,
+            API_ERROR_MSG: `I'm sorry, I'm having trouble accessing the external A.P.I., Please try again later. `,
             PROGRESSIVE_MSG: 'Let me check other birthdays {{name}}. ',
             CONJUNCTION_MSG: ' and ',
             TURNING_YO_MSG: ' turning {{count}}',
