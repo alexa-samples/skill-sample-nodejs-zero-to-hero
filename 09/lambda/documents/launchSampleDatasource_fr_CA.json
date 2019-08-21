@@ -1,0 +1,12 @@
+{
+    "launchData": {
+        "properties": {
+            "headerTitle": "Bonne Fête",
+            "mainText": "Vous ne n'avez pas encore dit votre date de naissance",
+            "hintString": "quand est ma fête ?",
+            "logoImage": "https://yourimgurlhere",
+            "backgroundImage": "https://yourimgurlhere",
+            "backgroundOpacity": "0.5"
+        }
+    }
+}
