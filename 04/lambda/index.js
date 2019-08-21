@@ -49,7 +49,7 @@ const LaunchRequestHandler = {
 
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
         speechText += handlerInput.t('MISSING_MSG');
-        
+
         // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -112,7 +112,7 @@ const SayBirthdayIntentHandler = {
         let speechText = '';
         const dateAvailable = day && month && year;
         if (dateAvailable){
-            const timezone = 'Europe/Milan'; // provide yours here. we'll change this later to retrieve the timezone from the device
+            const timezone = 'Europe/Rome'; // provide yours here. we'll change this later to retrieve the timezone from the device
             const today = moment().tz(timezone).startOf('day');
             const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
             const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');

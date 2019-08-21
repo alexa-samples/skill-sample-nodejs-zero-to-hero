@@ -90,7 +90,7 @@ const SayBirthdayIntentHandler = {
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
-                //timezone = 'Europe/Milan';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                //timezone = 'Europe/Rome';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
                 return handlerInput.responseBuilder
                     .speak(handlerInput.t('NO_TIMEZONE_MSG'))
                     .getResponse();

@@ -6,8 +6,8 @@ We use the Progressive Response API before doing the call so Alexa gives the use
 
 ## Milestones
 
-1. **Build Tab**: add celebrity birthdays intent with utterances to ask for today's birthdays
-2. **Code Tab**: add node-fetch dependency to package.json
+1. **Build Tab**: add celebrity birthdays intent with utterances to ask for today's birthdays (no slots)
+2. **Code Tab**: add axios dependency to package.json
 3. **Code Tab**: add code to access external API (with async/await)
 4. **Code Tab**: add progressive response directive and attach to external API call
 5. **Code Tab**: add celebrity birthdays intent handler
