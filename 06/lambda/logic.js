@@ -23,8 +23,9 @@ module.exports = {
         moment.locale(locale);
         const createdMoment = moment().tz(timezone);
         let triggerMoment = createdMoment.startOf('day').add(daysUntilBirthday, 'days');
-        if (daysUntilBirthday === 0)
+        if (daysUntilBirthday === 0) {
             triggerMoment = createdMoment.startOf('day').add(1, 'years'); // reminder created on the day of birthday will trigger next year
+        }
         console.log('Reminder schedule: ' + triggerMoment.format('YYYY-MM-DDTHH:mm:00.000'));
 
         return util.createReminder(createdMoment, triggerMoment, timezone, locale, message);

@@ -1,8 +1,3 @@
-// Alexa Sound Library
-// https://developer.amazon.com/docs/custom-skills/ask-soundlibrary.html
-// Speechcons
-// https://developer.amazon.com/docs/custom-skills/speechcon-reference-interjections-english-us.html
-
 module.exports = {
     en: {
         translation: {
