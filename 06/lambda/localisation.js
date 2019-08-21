@@ -62,6 +62,37 @@ module.exports = {
             POST_REMINDER_HELP_MSG: 'Si quieres saber cuando se aactivará tu recordatorio puedes decir, cuanto falta para mi cumpleaños. Qué quieres hacer ahora?'
         }
     },
+    it: {
+        translation: {
+            POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/> `,
+            GREETING_SPEECHCON: `<say-as interpret-as="interjection">hip hip hurrà</say-as> `,
+            DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as> `,
+            WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
+            WELCOME_BACK_MSG: 'Ciao di nuovo, {{name}}! ',
+            REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito. ',
+            DAYS_LEFT_MSG: `Manca un giorno `,
+            DAYS_LEFT_MSG_plural: 'Mancano {{count}} giorni ',
+            WILL_TURN_MSG: `a quando farai un anno. `,
+            WILL_TURN_MSG_plural: ` a quando farai {{count}} anni. `,
+            GREET_MSG: `$t(POSITIVE_SOUND) $t(GREETING_SPEECHCON) {{name}} `,
+            NOW_TURN_MSG: `Hai compiuto un anno `,
+            NOW_TURN_MSG_plural: `Hai compiuto {{count}} anni! `,
+            MISSING_MSG: `Non mi hai ancora detto quando compi gli anni. `,
+            POST_SAY_HELP_MSG: `Puoi cambiare la data dandomene una nuova oppure posso impostare un nuovo promemoria. Cosa vuoi fare? `,
+            HELP_MSG: 'Posso ricordarmi il tuo compleanno se mi dici la tua data di nascita. Posso anche dirti tra quanti giorni compi gli anni e fissare un promemoria. Cosa vuoi fare? ',
+            REPROMPT_MSG: `Se non sai cosa fare, prova a chiedermi aiuto. Se vuoi uscire dimmmi pure stop. Cosa vuoi fare?`,
+            GOODBYE_MSG: ['A presto, {{name}}! ', 'Ciao {{name}}! ', 'Arrivederci {{name}}! ', 'A dopo {{name}}! '],
+            REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
+            FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
+            ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.',
+            NO_TIMEZONE_MSG: 'Non ho potuto determinare il tuo fuso orario. Verifica la configurazione del tuo dispositivo, e riprova.',
+            REMINDER_ERROR_MSG: 'Si è verificato un errore nel creare il promemoria',
+            UNSUPPORTED_DEVICE_MSG: `Questa funzionalità non è disponibile su questo dispositivo. `,
+            CANCEL_MSG: `Ok, annullato. `,
+            MISSING_PERMISSION_MSG: `Non mi ha ancora dato accesso a creare promemoria. Ti ho appena inviato una card alla tua app. `,
+            POST_REMINDER_HELP_MSG: `Se vuoi sapere quanto manca al tuo promemoria, chiedimi quanti giorni mancano al tuo compleanno. Come vuoi procedere? `
+       },
+    },
     fr: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
