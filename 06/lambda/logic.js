@@ -6,8 +6,9 @@ module.exports = {
         const today = moment().tz(timezone).startOf('day');
         const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
         const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
-        if (today.isAfter(nextBirthday))
+        if (today.isAfter(nextBirthday)) {
             nextBirthday.add(1, 'years');
+        }
         const age = today.diff(wasBorn, 'years');
         const daysAlive = today.diff(wasBorn, 'days');
         const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same day returns 0
@@ -22,8 +23,9 @@ module.exports = {
         moment.locale(locale);
         const createdMoment = moment().tz(timezone);
         let triggerMoment = createdMoment.startOf('day').add(daysUntilBirthday, 'days');
-        if (daysUntilBirthday === 0)
+        if (daysUntilBirthday === 0) {
             triggerMoment = createdMoment.startOf('day').add(1, 'years'); // reminder created on the day of birthday will trigger next year
+        }
         console.log('Reminder schedule: ' + triggerMoment.format('YYYY-MM-DDTHH:mm:00.000'));
 
         return util.createReminder(createdMoment, triggerMoment, timezone, locale, message);

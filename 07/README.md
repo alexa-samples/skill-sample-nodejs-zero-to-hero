@@ -20,7 +20,7 @@ We use the Progressive Response API before doing the call so Alexa gives the use
 
 ## Diff
 
-1. *lambda/custom/constants.js*: create this file to encapsulate constants like e.g. permissions
+1. *lambda/custom/constants.js*: add max birthdays to this file
 2. *lambda/custom/package.json*: add axios dependency
 3. *lambda/custom/localisation.js*: add all messages related to API access
 4. *models/xx-XX.json*: add celebrity birthdays intent with utterances to ask for today's birthdays

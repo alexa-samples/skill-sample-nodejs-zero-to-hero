@@ -1,8 +1,3 @@
-// Alexa Sound Library
-// https://developer.amazon.com/docs/custom-skills/ask-soundlibrary.html
-// Speechcons
-// https://developer.amazon.com/docs/custom-skills/speechcon-reference-interjections-english-us.html
-
 module.exports = {
     en: {
         translation: {
@@ -44,7 +39,7 @@ module.exports = {
             LAUNCH_HEADER_MSG: 'Happy Birthday',
             LAUNCH_HINT_MSG: ['how many days until my birthday?', 'which celebrities have birthdays today?', 'set up a reminder for my birthday', 'register my birthday'],
             LIST_HEADER_MSG: `Today's Birthdays`,
-            LIST_HINT_MSG: 'who celebrates a birthday today?',
+            LIST_HINT_MSG: 'who was born today?',
             LIST_YO_ABBREV_MSG: '{{count}} year',
             LIST_YO_ABBREV_MSG_plural: '{{count}} years',
             LIST_PERSON_DETAIL_MSG: `{{person.humanLabel.value}} was born {{person.date_of_birth.value}} ago in {{person.place_of_birthLabel.value}}. `,
@@ -142,8 +137,8 @@ module.exports = {
             LAUNCH_HINT_MSG: ['combien de temps reste-t-il avant mon anniversaire ?', 'qui est né aujourd\'hui?', 'rappelle-moi mon anniversaire', 'enregistre ma date de naissance'],
             LIST_HEADER_MSG: 'Anniversaires du jour',
             LIST_HINT_MSG: 'quelles sont les célébrités nées aujourd\'hui ?',
-            LIST_YO_ABBREV_MSG: '{{count}} year',
-            LIST_YO_ABBREV_MSG_plural: '{{count}} years',
+            LIST_YO_ABBREV_MSG: '{{count}} an',
+            LIST_YO_ABBREV_MSG_plural: '{{count}} ans',
             LIST_PERSON_DETAIL_MSG: `{{person.humanLabel.value}} est né il y a {{person.date_of_birth.value}} ans à <lang xml:lang="en-US">{{person.place_of_birthLabel.value}}</lang>. `,
             POST_TOUCH_HELP_MSG: `N'hésitez pas à sélectionner une autre célébrité pour obtenir des détails à son sujet. Vous pouvez aussi connaître le nombre de jours avant votre anniversaire ou bien enregistrer un rappel: quel est votre choix ?`
         }

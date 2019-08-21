@@ -26,15 +26,14 @@ const LaunchRequestHandler = {
         speechText += handlerInput.t('MISSING_MSG');
 
         // we use intent chaining to trigger the birthday registration multi-turn
-        handlerInput.responseBuilder.addDelegateDirective({
-            name: 'RegisterBirthdayIntent',
-            confirmationStatus: 'NONE',
-            slots: {}
-        });
-
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            // we use intent chaining to trigger the birthday registration multi-turn
+            .addDelegateDirective({
+                name: 'RegisterBirthdayIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            })
             .getResponse();
     }
 };
@@ -46,12 +45,14 @@ const RegisterBirthdayIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager, requestEnvelope} = handlerInput;
+        // the attributes manager allows us to access session attributes
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
 
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
+            // we get the slot instead of the value directly as we also want to fetch the id
             const monthSlot = Alexa.getSlot(requestEnvelope, 'month');
             const monthName = monthSlot.value;
             const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
@@ -119,7 +120,7 @@ const SayBirthdayIntentHandler = {
                 const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
                 handlerInput.responseBuilder.addDirective({
                     type: 'Alexa.Presentation.APL.RenderDocument',
-                    version: '1.0',
+                    version: '1.1',
                     document: constants.APL.launchDoc,
                     datasources: {
                         launchData: {
@@ -176,7 +177,7 @@ const RemindBirthdayIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month'];
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] || '';
         let timezone = sessionAttributes['timezone'];
         const message = Alexa.getSlotValue(requestEnvelope, 'message');
 
@@ -261,7 +262,7 @@ const RemindBirthdayIntentHandler = {
                 const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
                 handlerInput.responseBuilder.addDirective({
                     type: 'Alexa.Presentation.APL.RenderDocument',
-                    version: '1.0',
+                    version: '1.1',
                     document: constants.APL.launchDoc,
                     datasources: {
                         launchData: {
@@ -337,7 +338,7 @@ const CelebrityBirthdaysIntentHandler = {
         let speechText = handlerInput.t('API_ERROR_MSG');
         if (speechResponse) {
             speechText = speechResponse;
-        }      
+        }
 
         // Add APL directive to response
         if (util.supportsAPL(handlerInput) && speechResponse) { // empty speechResponse -> no API results
@@ -346,7 +347,7 @@ const CelebrityBirthdaysIntentHandler = {
             const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
-                version: '1.0',
+                version: '1.1',
                 document: constants.APL.listDoc,
                 datasources: {
                     listData: {
@@ -433,7 +434,7 @@ const CancelAndStopIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .withShouldEndSession(true) // session can reamin open if APL doc was rendered
+            .withShouldEndSession(true) // session can remain open if APL doc was rendered
             .getResponse();
     }
 };

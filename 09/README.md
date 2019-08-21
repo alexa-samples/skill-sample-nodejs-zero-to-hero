@@ -14,15 +14,17 @@ In this second APL module we show a slightly more complex APL document. We use t
 1. APL Display Designer
 2. APL Layouts & Sequences
 3. APL Transformers (Text to Hint)
-4. APL Touch Events
+4. APL Touch Wrapper
 
 ## Diff
 
-1. **constants.js**: add reference to listScreen doc (the APL doc with the celebrity list)
-2. **handler.js**: in CelebrityBirthdaysIntentHandler add calculation of age in results loop, APL doc rendering directive (explain datasource) and home card. Add TouchIntentHandler code and add it to module.exports. [Add celebrities as dynamic entities + voice navigation]
-3. **index.js**: add handlers.TouchIntentHandler to handlers
-4. **localisation.js**: add LIST_* related strings at the bottom of the file
-5. **util.js**: add convertBirthdateToYearsOld() function
-6. **listSampleDatasource.json**: add (not used, just to test in the APL authoring tool)
-7. **sampleBirthdayResponse.json**: add and show, place on designer
-8. **listScreen.json**: add to project and show on APL authoring tool, explain it
+1. **index.js**: add TouchIntentHandler to exports
+2. **documents/listScreen.json**: create, paste doc and show on APL authoring tool, explain it
+3. **constants.js**: add reference to listScreen doc (the APL doc with the celebrity list)
+4. **handles.js**: Change APL doc to listScreen in CelebrityBirthdaysIntent handler. Add TouchIntentHandler code and add it to module.exports. [TODO: Add celebrities as dynamic entities + voice navigation]
+5. **index.js**: add handlers.TouchIntentHandler to handlers
+6. **localisation.js**: add LIST_* related strings at the bottom of the file
+7. **util.js**: add convertBirthdateToYearsOld() function
+8. **logic.js**: in convertBirthdaysResponse function where you can see the calculation of age in results loop you need to add a line to put age in actor's list response (we modify the API response format to better suit our APL doc)
+9. **documents/listSampleDatasource.json**: add (not used, just to test in the APL authoring tool)
+10. **documents/sampleBirthdayResponse.json**: added only as reference to show what an API response looks like (not used)
