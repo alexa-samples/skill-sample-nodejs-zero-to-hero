@@ -160,13 +160,11 @@
                     "slots": [],
                     "samples": [
                         "whose birthdays is it today",
-                        "who's celebrating a birthday",
-                        "who's celebrating a birthday today",
+                        "who is celebrating a birthday",
+                        "who is celebrating a birthday today",
                         "which celebrities have birthdays today",
                         "today's birthdays",
-                        "who has a birthday today",
-                        "who turns today",
-                        "who's turning today"
+                        "who has a birthday today"
                     ]
                 },
                 {
