@@ -6,13 +6,13 @@ The APL document shows a tailored hint (thanks to the testToHint transformer)
 
 ## Milestones
 
-1. *Build Tab*: enable APL interface (and rebuild?)
+1. *Build Tab*: enable APL interface
 2. *Code Tab*: create documents folder. Go to S3 Media folder and add all image files in the project's documents/images
 3. *Code Tab*: in documents folder create launchScreen.json and leave empty
 4. *Code Tab*: add handlers.js file, move all handlers here, index.js becomes very small
 4. *Display Tab*: open APL authoring tool to explain the basics. Paste launchScreen.json as doc and launchSampleDatasource.json as datasource and explain/play with it.
 5. *Code Tab*: fill documents/launchScreen.json with result from APL authoring tool (better just copy paste the original)
-6. *Code Tab*: locate RegisterBirthdayIntentHandler and add APL directive via util. Add standard card to response builder
+6. *Code Tab*: locate RemindBirthdayIntentHandler and add APL directive via util. Add standard card to response builder
 7. *Code Tab*: locate SayBirthdayIntentHandler and add APL directive via util. Add standard card to response builder
 8. *Code Tab*: locate CelebrityBirthdaysIntentHandler and add APL directive via util. Add standard card to response builder
 
@@ -30,6 +30,6 @@ The APL document shows a tailored hint (thanks to the testToHint transformer)
 1. **handlers.js**: create file, put handlers here. For SayBirthdayIntentHandler, RemindBirthdayIntentHandler and CelebrityVirthdaysIntenteHandler: Add APL directive, use util.js APL helper and AHS url helper to pass background urls. Add card responses too.
 2. **skill.json**: insert APL interface definition for reference (not used in the project)
 3. **util.js**: insert supportsAPL() function
-4. **documents**: create folder with launchScreen.json and launchSampleDatasource.json (for the APL athoring tool)
+4. **documents**: create folder and create inside launchScreen.json and launchSampleDatasource.json (for the APL authoring tool)
 5. **constants.js**: create APLDoc structure pointing to to launchScreen.json (for now)
-6. **localization.js**: add strings for launch header and launch hint
+6. **localisation.js**: add strings for launch header and launch hint
