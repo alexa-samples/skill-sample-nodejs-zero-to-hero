@@ -14,7 +14,7 @@ Support code for ASK Developer Training Course for multiple locales. This is pro
 
 [Learn more](./03)
 
-## Part 4 - Memory
+## Part 4 - Persistence
 
 [Learn more](./04)
 
