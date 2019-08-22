@@ -3,47 +3,47 @@
         "privacyAndCompliance": {
             "locales": {
               "en-US": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.com/privacy",
                 "termsOfUseUrl": ""
               },
               "fr-FR": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.fr/privacy",
                 "termsOfUseUrl": ""
               },
               "fr-CA": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.ca/privacy",
                 "termsOfUseUrl": ""
               },
               "es-MX": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.es/privacy",
                 "termsOfUseUrl": ""
               },
               "es-US": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.es/privacy",
                 "termsOfUseUrl": ""
               },
               "es-ES": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.es/privacy",
                 "termsOfUseUrl": ""
               },
               "en-AU": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.com.au/privacy",
                 "termsOfUseUrl": ""
               },
               "en-GB": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.co.uk/privacy",
                 "termsOfUseUrl": ""
               },
               "en-CA": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.ca/privacy",
                 "termsOfUseUrl": ""
               },
               "en-IN": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.in/privacy",
                 "termsOfUseUrl": ""
               },
               "it-IT": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.it/privacy",
                 "termsOfUseUrl": ""
               }
             },
