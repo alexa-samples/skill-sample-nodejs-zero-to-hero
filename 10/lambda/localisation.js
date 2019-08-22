@@ -41,8 +41,8 @@ module.exports = {
             LAUNCH_HINT_MSG: ['how many days until my birthday?', 'which celebrities have birthdays today?', 'set up a reminder for my birthday', 'register my birthday'],
             LIST_HEADER_MSG: `Today's Birthdays`,
             LIST_HINT_MSG: 'who was born today?',
-            LIST_YO_ABBREV_MSG: '{{count}} year',
-            LIST_YO_ABBREV_MSG_plural: '{{count}} years',
+            LIST_YO_ABBREV_MSG: '{{count}} year old',
+            LIST_YO_ABBREV_MSG_plural: '{{count}} years old',
             LIST_PERSON_DETAIL_MSG: `{{person.humanLabel.value}} was born {{person.date_of_birth.value}} ago in {{person.place_of_birthLabel.value}}. `,
             POST_TOUCH_HELP_MSG: `Try tapping on other celebrities to get more information. If you're done, you can try to check on the remaining days until your birthday, or set a reminder for it. What would you like to do?`
         }

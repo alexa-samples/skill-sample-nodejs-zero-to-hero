@@ -1,6 +1,6 @@
 {
     "name": "happy-birthday",
-    "version": "0.3.0",
+    "version": "0.5.1",
     "description": "happy birthday skill",
     "main": "index.js",
     "scripts": {
@@ -10,6 +10,9 @@
     "dependencies": {
         "ask-sdk-core": "^2.7.0",
         "ask-sdk-model": "^1.18.0",
-        "i18next": "^15.0.5"
+        "i18next": "^15.0.5",
+        "ask-sdk-s3-persistence-adapter": "^2.7.0",
+        "ask-sdk-dynamodb-persistence-adapter": "^2.7.0",
+        "moment-timezone": "^0.5.23"
     }
 }
