@@ -3,47 +3,47 @@
         "privacyAndCompliance": {
             "locales": {
               "en-US": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.com/privacy",
                 "termsOfUseUrl": ""
               },
               "fr-FR": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.fr/privacy",
                 "termsOfUseUrl": ""
               },
               "fr-CA": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.ca/privacy",
                 "termsOfUseUrl": ""
               },
               "es-MX": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.es/privacy",
                 "termsOfUseUrl": ""
               },
               "es-US": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.es/privacy",
                 "termsOfUseUrl": ""
               },
               "es-ES": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.es/privacy",
                 "termsOfUseUrl": ""
               },
               "en-AU": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.com.au/privacy",
                 "termsOfUseUrl": ""
               },
               "en-GB": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.co.uk/privacy",
                 "termsOfUseUrl": ""
               },
               "en-CA": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.ca/privacy",
                 "termsOfUseUrl": ""
               },
               "en-IN": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.in/privacy",
                 "termsOfUseUrl": ""
               },
               "it-IT": {
-                "privacyPolicyUrl": "",
+                "privacyPolicyUrl": "https://amazon.it/privacy",
                 "termsOfUseUrl": ""
               }
             },
@@ -59,16 +59,16 @@
             "name": "Buon Compleanno",
             "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
             "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+            "summary": "Scopri quali attori sono nati oggi o dimmi la tua data di nascita per avere un promemoria.",
+            "description": "Posso ricordarmi il tuo compleanno e dirti quanti giorni mancano al tuo copmleanno.\nSe vuoi un avviso quando sarà il tuo compleanno posso creare un promemoria!\nInoltre posso fornirti dettagli su celebrità nate oggi.\nQuesta skill è ottimizzata per dispositivi dotati di schermo.\n\nEcco un paio di frasi esempio per provare la skill:\n- Per memorizzare il tuo compleanno, basta dire: \"Alexa, chiedi a Buon compleanno di ricordarsi il mio compleanno\"\n- Se vuoi sapere quanto manca al tuo compleanno, basta dire: \"Alexa, chiedi a Buon Compleanno di creare un promemoria\"\n- Per avere dettagli su persone famose nate oggi, basta dire: \"Alexa, chiedi a Buon Compleanno chi è nato oggi\"",
             "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
+                "Alexa, apri Buon Compleanno",
+                "Alexa, chiedi a Buon Birthday chi compie gli anni oggi"
             ],
             "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
+                "compleanno",
+                "promemoria",
+                "celebrità"
             ]
             },
             "en-US": {

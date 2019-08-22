@@ -94,7 +94,7 @@ module.exports = {
             NOW_TURN_MSG: `Hai compiuto un anno `,
             NOW_TURN_MSG_plural: `Hai compiuto {{count}} anni! `,
             MISSING_MSG: `Non mi hai ancora detto quando compi gli anni. `,
-            POST_SAY_HELP_MSG: `Puoi cambiare la data dandomene una nuova oppure posso impostare un nuovo promemoria. Cosa vuoi fare? `,
+            POST_SAY_HELP_MSG: `Puoi cambiare la data con una nuova oppure posso impostare un nuovo promemoria. Cosa vuoi fare? `,
             HELP_MSG: 'Posso ricordarmi il tuo compleanno se mi dici la tua data di nascita. Posso anche dirti tra quanti giorni compi gli anni e fissare un promemoria. Cosa vuoi fare? ',
             REPROMPT_MSG: `Se non sai cosa fare, prova a chiedermi aiuto. Se vuoi uscire dimmi pure stop. Cosa vuoi fare?`,
             GOODBYE_MSG: ['A presto, {{name}}! ', 'Ciao {{name}}! ', 'Arrivederci {{name}}! ', 'A dopo {{name}}! '],
