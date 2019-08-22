@@ -393,8 +393,10 @@ const TouchIntentHandler = {
     },
     handle(handlerInput) {
         const {request} = handlerInput.requestEnvelope;
-        console.log('Touch event arguments: ' + JSON.stringify(request.arguments[0]));
         let person = request.arguments[0];
+        // Test Simulator is sending JSON while device will send String
+        try { person = JSON.parse(person); } catch (e) {}
+        console.log('Touch event arguments: ' + JSON.stringify(person));
         let speechText = handlerInput.t('LIST_PERSON_DETAIL_MSG', {person: person});
 
         speechText += handlerInput.t('POST_TOUCH_HELP_MSG');
