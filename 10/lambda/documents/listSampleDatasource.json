@@ -3,10 +3,10 @@
         "type": "object",
         "properties": {
             "config": {
-                "backgroundImage": "https://yourbackgroundimageurlhere",
-                "title": "Cumples de Hoy",
-                "skillIcon" : "https://yourskilliconurlhere",
-                "hintText": "Alexa, cuando falta para mi cumple?"
+                "backgroundImage": "https://i.imgur.com/Y21B9Y5.jpg",
+                "title": "Today's Birthdays",
+                "skillIcon" : "https://i.imgur.com/ZJJtcRT.png",
+                "hintText": "Alexa, how many days until my birthday?"
             },
             "list": {
                 "listItems": [
