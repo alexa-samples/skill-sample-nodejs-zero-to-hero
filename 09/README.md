@@ -11,7 +11,7 @@ In this second APL module we show a slightly more complex APL document. We use t
 
 ## Concepts
 
-1. APL Display Designer
+1. APL Authoring Tool
 2. APL Layouts & Sequences
 3. APL Transformers (Text to Hint)
 4. APL Touch Wrapper

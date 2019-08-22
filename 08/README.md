@@ -33,3 +33,4 @@ The APL document shows a tailored hint (thanks to the testToHint transformer)
 4. **documents**: create folder and create inside launchScreen.json and launchSampleDatasource.json (for the APL authoring tool)
 5. **constants.js**: create APLDoc structure pointing to to launchScreen.json (for now)
 6. **localisation.js**: add strings for launch header and launch hint
+7. **index.js**: index is now shorter as it gets rid of the handlers
