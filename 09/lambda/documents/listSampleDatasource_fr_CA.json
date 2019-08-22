@@ -3,9 +3,9 @@
         "type": "object",
         "properties": {
             "config": {
-                "backgroundImage": "https://yourbackgroundimageurlhere",
+                "backgroundImage": "https://i.imgur.com/Y21B9Y5.jpg",
                 "title": "Fêtes du jour",
-                "skillIcon" : "https://yourskilliconurlhere",
+                "skillIcon" : "https://i.imgur.com/ZJJtcRT.png",
                 "hintText": "Alexa, quand a lieu ma fête ?"
             },
             "list": {
