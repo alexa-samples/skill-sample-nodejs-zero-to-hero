@@ -24,7 +24,6 @@ In this second APL module we show a slightly more complex APL document. We use t
 4. **handles.js**: Change APL doc to listScreen in CelebrityBirthdaysIntent handler. Add TouchIntentHandler code and add it to module.exports. [TODO: Add celebrities as dynamic entities + voice navigation]
 5. **index.js**: add handlers.TouchIntentHandler to handlers
 6. **localisation.js**: add LIST_* related strings at the bottom of the file
-7. **util.js**: add convertBirthdateToYearsOld() function
-8. **logic.js**: in convertBirthdaysResponse function where you can see the calculation of age in results loop you need to add a line to put age in actor's list response (we modify the API response format to better suit our APL doc)
-9. **documents/listSampleDatasource.json**: add (not used, just to test in the APL authoring tool)
-10. **documents/sampleBirthdayResponse.json**: added only as reference to show what an API response looks like (not used)
+7. **logic.js**: add convertBirthdateToYearsOld() function. in convertBirthdaysResponse function where you can see the calculation of age in results loop you need to add a line to put age in actor's list response (we modify the API response format to better suit our APL doc)
+8. **documents/listSampleDatasource.json**: add (not used, just to test in the APL authoring tool)
+9. **documents/sampleBirthdayResponse.json**: added only as reference to show what an API response looks like (not used)
