@@ -1,9 +1,9 @@
 {
     "launchData": {
         "properties": {
-            "headerTitle": "Joyeux Anniversaire",
-            "mainText": "Vous ne n'avez pas encore dit votre date de naissance",
-            "hintString": "quand est mon anniversaire ?",
+            "headerTitle": "Buon Compleanno",
+            "mainText": "Quando è il tuo compleanno?",
+            "hintString": "Alexa, chi compie gli anni oggi?",
             "logoImage": "https://i.imgur.com/ZJJtcRT.png",
             "backgroundImage": "https://i.imgur.com/Y21B9Y5.jpg",
             "backgroundOpacity": "0.5"

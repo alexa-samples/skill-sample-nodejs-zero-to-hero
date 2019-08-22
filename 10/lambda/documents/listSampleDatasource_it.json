@@ -4,9 +4,9 @@
         "properties": {
             "config": {
                 "backgroundImage": "https://i.imgur.com/Y21B9Y5.jpg",
-                "title": "Anniversaires du jour",
+                "title": "I compleanni di oggi",
                 "skillIcon" : "https://i.imgur.com/ZJJtcRT.png",
-                "hintText": "Alexa, quand a lieu mon anniversaire"
+                "hintText": "Alexa, quando compio gli anni?"
             },
             "list": {
                 "listItems": [
