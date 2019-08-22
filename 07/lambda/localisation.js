@@ -102,7 +102,7 @@ module.exports = {
             FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
             ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.',
             NO_TIMEZONE_MSG: 'Non ho potuto determinare il tuo fuso orario. Verifica la configurazione del tuo dispositivo, e riprova.',
-            REMINDER_CREATED_MSG: '{{name}} your reminder has been created successfully. ',
+            REMINDER_CREATED_MSG: '{{name}}, il promemoria è stato creato con successo. ',
             REMINDER_ERROR_MSG: 'Si è verificato un errore nel creare il promemoria',
             UNSUPPORTED_DEVICE_MSG: `Questa funzionalità non è disponibile su questo dispositivo. `,
             CANCEL_MSG: `Ok, annullato. `,
