@@ -137,10 +137,6 @@
                         "configure a reminder for my birthday",
                         "put a reminder for my birthday",
                         "create a reminder for my birthday",
-                        "reminder con el texto {message}",
-                        "configure a reminder con el texto {message}",
-                        "put a reminder con el texto {message}",
-                        "create a reminder con el texto {message}",
                         "reminder with the message {message}",
                         "configure a reminder with the message {message}",
                         "put a reminder with the message {message}",
@@ -148,11 +144,7 @@
                         "reminder with the text {message}",
                         "configure a reminder with the text {message}",
                         "put a reminder with the text {message}",
-                        "create a reminder with the text {message}",
-                        "reminder with the message {message}",
-                        "configure a reminder with the message {message}",
-                        "put a reminder with the message {message}",
-                        "create a reminder with the message {message}"
+                        "create a reminder with the text {message}"
                     ]
                 },
                 {
