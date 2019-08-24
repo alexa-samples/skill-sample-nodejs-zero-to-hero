@@ -23,7 +23,7 @@ function getPersistenceAdapter(tableName) {
         // IMPORTANT: don't forget to give DynamoDB access to the role you're using to run this lambda (via IAM policy)
         const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
         return new DynamoDbPersistenceAdapter({
-            tableName: tableName,
+            tableName: tableName || 'happy_birthday',
             createTable: true
         });
     }
