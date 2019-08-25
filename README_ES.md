@@ -44,8 +44,7 @@ Como el código ha ido evolucionando y ha sido restructurado, a continuación pr
 
 [alexa.design/es-videos-code10](https://alexa.design/es-videos-code10)
 
-Enlaces a archivos descargables con el estado exacto en el video de cada proyecto también disponible [aquí].
-(https://github.com/germanviscuso/ASKVideoSeries/tags)
+Enlaces a archivos descargables con el estado exacto en el video de cada proyecto también disponible [aquí](https://github.com/germanviscuso/ASKVideoSeries/tags)
 
 ## Licencia
 
