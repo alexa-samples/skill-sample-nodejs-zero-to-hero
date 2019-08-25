@@ -2,7 +2,7 @@
 
 Este repositiorio contiene el código de soporte para el Curso de Desarrollo Completo de Skills Alexa publicado en KeepCoding: (https://alexa.design/es-videos)
 
-Como el código ha ido evolucionando y ha sido restructurado, a continuación proveemos los enlaces al estado del código fuente del momento justo en que se grabó cada video
+Como el código ha ido evolucionando y ha sido restructurado, a continuación proveemos los enlaces al estado del código fuente del momento justo en que se grabó cada video.
 
 ## Parte 1 - Alexa-Hosted Skills (Hello World)
 
@@ -43,6 +43,9 @@ Como el código ha ido evolucionando y ha sido restructurado, a continuación pr
 ## Parte 10 - Interfaz de Línea de Comandos ASK (ASK CLI)
 
 [alexa.design/es-videos-code10](https://alexa.design/es-videos-code10)
+
+Enlaces a archivos descargables con el estado exacto en el video de cada proyecto también disponible [aquí].
+(https://github.com/germanviscuso/ASKVideoSeries/tags)
 
 ## Licencia
 
