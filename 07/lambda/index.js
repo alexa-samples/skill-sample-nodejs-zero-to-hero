@@ -84,7 +84,7 @@ const SayBirthdayIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name']+',' : '';
+        const name = sessionAttributes['name'] || '';
         let timezone = sessionAttributes['timezone'];
 
         let speechText = '', isBirthday = false;

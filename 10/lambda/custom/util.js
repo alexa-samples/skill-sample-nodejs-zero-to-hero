@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const constants = require('./constants'); // constants such as specific service permissions go here
 
 const s3SigV4Client = new AWS.S3({
     signatureVersion: 'v4'
@@ -7,12 +8,20 @@ const s3SigV4Client = new AWS.S3({
 module.exports = {
     getS3PreSignedUrl(s3ObjectKey) {
         const bucketName = process.env.S3_PERSISTENCE_BUCKET;
+        if(!bucketName){ // Not an Alexa Hosted Skill
+            // Make sure you have uploaded the project's image
+            // to a public S3 bucket and inside a Media directory
+            // Also make sure to provide the S3 base url in constants.js
+            const fixedUrl = constants.BASE_S3_URL + '/' + s3ObjectKey;
+            console.log(`util.s3PreSignedUrl: Fixed_Url URL ${fixedUrl}`);
+            return fixedUrl;
+        }
         const s3PreSignedUrl = s3SigV4Client.getSignedUrl('getObject', {
             Bucket: bucketName,
             Key: s3ObjectKey,
-            Expires: 60*1 // the Expires is capped for 1 minute
+            Expires: 60*1 // the Expires is capped for 1 minute (no effect changing this)
         });
-        console.log(`Util.s3PreSignedUrl: ${s3ObjectKey} URL ${s3PreSignedUrl}`);
+        console.log(`util.s3PreSignedUrl: ${s3ObjectKey} URL ${s3PreSignedUrl}`);
         return s3PreSignedUrl;
     },
     getPersistenceAdapter(tableName) {

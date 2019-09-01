@@ -83,7 +83,7 @@ const SayBirthdayIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] ? sessionAttributes['name']+',' : '';
+        const name = sessionAttributes['name'] || '';
         let timezone = sessionAttributes['timezone'];
 
         let speechText = '', isBirthday = false;
@@ -104,6 +104,7 @@ const SayBirthdayIntentHandler = {
             if (isBirthday) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
+                speechText += `<audio src="${util.getS3PreSignedUrl('Media/happy_birthday.mp3').replace(/&/g,'&amp;')}"/>`;
                 const adjustedDate = logic.getAdjustedDate(timezone);
                 // we'll now fetch celebrity birthdays from an external API
                 const response = await logic.fetchBirthdays(adjustedDate.day, adjustedDate.month, constants.MAX_BIRTHDAYS);
@@ -143,6 +144,8 @@ const SayBirthdayIntentHandler = {
             }
 
             // Add home card to response
+            // If you're using an Alexa Hosted Skill the images below will expire
+            // and could not be shown in the card. You should replace them with static images
             handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LAUNCH_HEADER_MSG'),
                 isBirthday ? sessionAttributes['age'] : handlerInput.t('DAYS_LEFT_MSG', {name: '', count: sessionAttributes['daysLeft']}),
@@ -285,6 +288,8 @@ const RemindBirthdayIntentHandler = {
             }
 
             // Add home card to response
+            // If you're using an Alexa Hosted Skill the images below will expire
+            // and could not be shown in the card. You should replace them with static images
             handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LAUNCH_HEADER_MSG'),
                 handlerInput.t('REMINDER_CREATED_MSG', {name: name}),
@@ -372,6 +377,8 @@ const CelebrityBirthdaysIntentHandler = {
             });
 
             // Add home card to response
+            // If you're using an Alexa Hosted Skill the images below will expire
+            // and could not be shown in the card. You should replace them with static images
             handlerInput.responseBuilder.withStandardCard(
                 handlerInput.t('LIST_HEADER_MSG'),
                 speechResponse,

@@ -2,50 +2,50 @@
     "manifest": {
         "privacyAndCompliance": {
             "locales": {
-              "en-US": {
-                "privacyPolicyUrl": "https://amazon.com/privacy",
-                "termsOfUseUrl": ""
-              },
-              "fr-FR": {
-                "privacyPolicyUrl": "https://amazon.fr/privacy",
-                "termsOfUseUrl": ""
-              },
-              "fr-CA": {
-                "privacyPolicyUrl": "https://amazon.ca/privacy",
-                "termsOfUseUrl": ""
-              },
-              "es-MX": {
-                "privacyPolicyUrl": "https://amazon.es/privacy",
-                "termsOfUseUrl": ""
-              },
-              "es-US": {
-                "privacyPolicyUrl": "https://amazon.es/privacy",
-                "termsOfUseUrl": ""
-              },
-              "es-ES": {
-                "privacyPolicyUrl": "https://amazon.es/privacy",
-                "termsOfUseUrl": ""
-              },
-              "en-AU": {
-                "privacyPolicyUrl": "https://amazon.com.au/privacy",
-                "termsOfUseUrl": ""
-              },
-              "en-GB": {
-                "privacyPolicyUrl": "https://amazon.co.uk/privacy",
-                "termsOfUseUrl": ""
-              },
-              "en-CA": {
-                "privacyPolicyUrl": "https://amazon.ca/privacy",
-                "termsOfUseUrl": ""
-              },
-              "en-IN": {
-                "privacyPolicyUrl": "https://amazon.in/privacy",
-                "termsOfUseUrl": ""
-              },
-              "it-IT": {
-                "privacyPolicyUrl": "https://amazon.it/privacy",
-                "termsOfUseUrl": ""
-              }
+                "en-US": {
+                    "privacyPolicyUrl": "https://amazon.com/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "fr-FR": {
+                    "privacyPolicyUrl": "https://amazon.fr/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "fr-CA": {
+                    "privacyPolicyUrl": "https://amazon.ca/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "es-MX": {
+                    "privacyPolicyUrl": "https://amazon.es/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "es-US": {
+                    "privacyPolicyUrl": "https://amazon.es/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "es-ES": {
+                    "privacyPolicyUrl": "https://amazon.es/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "en-AU": {
+                    "privacyPolicyUrl": "https://amazon.com.au/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "en-GB": {
+                    "privacyPolicyUrl": "https://amazon.co.uk/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "en-CA": {
+                    "privacyPolicyUrl": "https://amazon.ca/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "en-IN": {
+                    "privacyPolicyUrl": "https://amazon.in/privacy",
+                    "termsOfUseUrl": ""
+                },
+                "it-IT": {
+                    "privacyPolicyUrl": "https://amazon.it/privacy",
+                    "termsOfUseUrl": ""
+                }
             },
             "allowsPurchases": false,
             "usesPersonalInfo": true,
@@ -54,190 +54,190 @@
             "containsAds": false
         },
         "publishingInformation": {
-        "locales": {
-            "it-IT": {
-            "name": "Buon Compleanno",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
-            "summary": "Scopri quali attori sono nati oggi o dimmi la tua data di nascita per avere un promemoria.",
-            "description": "Posso ricordarmi il tuo compleanno e dirti quanti giorni mancano al tuo copmleanno.\nSe vuoi un avviso quando sarà il tuo compleanno posso creare un promemoria!\nInoltre posso fornirti dettagli su celebrità nate oggi.\nQuesta skill è ottimizzata per dispositivi dotati di schermo.\n\nEcco un paio di frasi esempio per provare la skill:\n- Per memorizzare il tuo compleanno, basta dire: \"Alexa, chiedi a Buon compleanno di ricordarsi il mio compleanno\"\n- Se vuoi sapere quanto manca al tuo compleanno, basta dire: \"Alexa, chiedi a Buon Compleanno di creare un promemoria\"\n- Per avere dettagli su persone famose nate oggi, basta dire: \"Alexa, chiedi a Buon Compleanno chi è nato oggi\"",
-            "examplePhrases": [
-                "Alexa, apri Buon Compleanno",
-                "Alexa, chiedi a Buon Birthday chi compie gli anni oggi"
-            ],
-            "keywords": [
-                "compleanno",
-                "promemoria",
-                "celebrità"
-            ]
+            "locales": {
+                "it-IT": {
+                    "name": "Buon Compleanno",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
+                    "summary": "Scopri quali attori sono nati oggi o dimmi la tua data di nascita per avere un promemoria.",
+                    "description": "Posso ricordarmi il tuo compleanno e dirti quanti giorni mancano al tuo copmleanno.\nSe vuoi un avviso quando sarà il tuo compleanno posso creare un promemoria!\nInoltre posso fornirti dettagli su celebrità nate oggi.\nQuesta skill è ottimizzata per dispositivi dotati di schermo.\n\nEcco un paio di frasi esempio per provare la skill:\n- Per memorizzare il tuo compleanno, basta dire: \"Alexa, chiedi a Buon compleanno di ricordarsi il mio compleanno\"\n- Se vuoi sapere quanto manca al tuo compleanno, basta dire: \"Alexa, chiedi a Buon Compleanno di creare un promemoria\"\n- Per avere dettagli su persone famose nate oggi, basta dire: \"Alexa, chiedi a Buon Compleanno chi è nato oggi\"",
+                    "examplePhrases": [
+                        "Alexa, apri Buon Compleanno",
+                        "Alexa, chiedi a Buon Birthday chi compie gli anni oggi"
+                    ],
+                    "keywords": [
+                        "compleanno",
+                        "promemoria",
+                        "celebrità"
+                    ]
+                },
+                "en-US": {
+                    "name": "Happy Birthday",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "en-CA": {
+                    "name": "Happy Birthday",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "en-IN": {
+                    "name": "Happy Birthday",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "en-AU": {
+                    "name": "Happy Birthday",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "es-ES": {
+                    "name": "Feliz Cumpleaños",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "es-US": {
+                    "name": "Feliz Cumpleaños",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "fr-FR": {
+                    "name": "Joyeux Anniversaire",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6c34/ab2c3f983c2248209a21c670d26f7207/APP_ICON?versionId=bhSj5OTdhyskSz2LozNrehrYgho17igh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ffbef0429ad31621f92f754d40d30e473862de69d9437a2fd50f23744be12675",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/b7a0/3263b87f7ed242cb91e6453b762145a2/APP_ICON_LARGE?versionId=0FqTB7BECFL3su8p6.nLgpqQOpx2mqBe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=889490d213e163a2f78e95a92d8a999baa694a927d11f0eaeb938c0902fb938a",
+                    "summary": "Obtenez des infos sur des Célébrités nées aujourd'hui et enregistrez votre date de naissance pour obtenir un rappel !",
+                    "description": "Je peux me souvenir de votre date de naissance et vous dire le nombre de jours restant avant votre prochain anniversaire.\nVous pouvez aussi me demander de créer un rappel pour être sûr de ne pas oublier votre anniversaire!\nEt pour les fans de Célébrités, vous pourrez obtenir des détails à leur sujet.\nCette Skill est optimisée pour les appareils avec écran.\n\nVoice quelques exemples d'utterances pour utiliser cette Skill:\n\n- Pour enregistrer votre date de naissance, dites-moi: \n\"Alexa, demande à Joyeux Anniversaire d'enregistrer ma date de naissance\"\n\n- Pour connaître le nombre de jours restant avant votre prochain anniversaire, dites-moi:\n\"Alexa, demande à Joyeux Anniversaire le nombre de jours restant avant mon anniversaire\"\n\n- Pour créer un rappel pour votre prochain anniversaire, dites-moi:\n\"Alexa, demande à Joyeux Anniversaire de créer un rappel\"\n\n- Pour obtenir des détails sur des Célébrités nées aujourd'hui, dites-moi:\n\"Alexa, demande à Joyeux Anniversaire qui est né aujourd'hui\"",
+                    "examplePhrases": [
+                        "Alexa, ouvre Joyeux Anniversaire",
+                        "Alexa, demande à Joyeux Anniversaire qui est né aujourd'hui"
+                    ],
+                    "keywords": [
+                        "anniversaire",
+                        "naissance",
+                        "rappel",
+                        "célébrités"
+                    ]
+                },
+                "en-GB": {
+                    "name": "Happy Birthday",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                },
+                "fr-CA": {
+                    "name": "Bonne Fête",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6c34/ab2c3f983c2248209a21c670d26f7207/APP_ICON?versionId=bhSj5OTdhyskSz2LozNrehrYgho17igh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ffbef0429ad31621f92f754d40d30e473862de69d9437a2fd50f23744be12675",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/b7a0/3263b87f7ed242cb91e6453b762145a2/APP_ICON_LARGE?versionId=0FqTB7BECFL3su8p6.nLgpqQOpx2mqBe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b8923ffa3c3c034b5e4f39cd85200c4ef640bf43c5817ee4d82eaeccc505706b",
+                    "summary": "Obtenez des infos sur des Célébrités nées aujourd'hui et enregistrez votre date de naissance pour obtenir un rappel !",
+                    "description": "Je peux me souvenir de votre date de naissance et vous dire le nombre de jours restant avant votre prochaine fête.\nVous pouvez aussi me demander de créer un rappel pour être sûr de ne pas oublier votre fête!\nEt pour les fans de Célébrités, vous pourrez obtenir des détails à leur sujet.\nCette Skill est optimisée pour les appareils avec écran.\n\nVoice quelques exemples d'utterances pour utiliser cette Skill:\n\n- Pour enregistrer votre date de naissance, dites-moi: \n\"Alexa, demande à Bonne Fête de sauver ma date de naissance\"\n\n- Pour connaître le nombre de jours restant avant votre prochaine fête, dites-moi:\n\"Alexa, demande à Bonne Fête le nombre de jours restant avant ma fête\"\n\n- Pour créer un rappel pour votre prochaine fête, dites-moi:\n\"Alexa, demande à Bonne Fête de créer un rappel\"\n\n- Pour obtenir des détails sur des Célébrités nées aujourd'hui, dites-moi:\n\"Alexa, demande à Bonne Fête qui est né aujourd'hui\"",
+                    "examplePhrases": [
+                        "Alexa, ouvre Bonne Fête",
+                        "Alexa, demande à Bonne Fête qui est né aujourd'hui"
+                    ],
+                    "keywords": [
+                        "anniversaire",
+                        "naissance",
+                        "rappel",
+                        "célébrités"
+                    ]
+                },
+                "es-MX": {
+                    "name": "Feliz Cumpleaños",
+                    "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
+                    "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
+                    "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
+                    "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
+                    "examplePhrases": [
+                        "Alexa, open Happy Birthday",
+                        "Alexa, ask Happy Birthday who was born today"
+                    ],
+                    "keywords": [
+                        "birthday",
+                        "reminder",
+                        "celebrities"
+                    ]
+                }
             },
-            "en-US": {
-            "name": "Happy Birthday",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "en-CA": {
-            "name": "Happy Birthday",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a15e1a4a1790dcd86d660707428f6d9968371d8c65c570c363f155fb86485495",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140842Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fbde48d4118c19b09cc4224df666339dd674a458eeef84825931796fe146b3f0",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "en-IN": {
-            "name": "Happy Birthday",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "en-AU": {
-            "name": "Happy Birthday",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "es-ES": {
-            "name": "Feliz Cumpleaños",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "es-US": {
-            "name": "Feliz Cumpleaños",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "fr-FR": {
-            "name": "Joyeux Anniversaire",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6c34/ab2c3f983c2248209a21c670d26f7207/APP_ICON?versionId=bhSj5OTdhyskSz2LozNrehrYgho17igh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ffbef0429ad31621f92f754d40d30e473862de69d9437a2fd50f23744be12675",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/b7a0/3263b87f7ed242cb91e6453b762145a2/APP_ICON_LARGE?versionId=0FqTB7BECFL3su8p6.nLgpqQOpx2mqBe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=889490d213e163a2f78e95a92d8a999baa694a927d11f0eaeb938c0902fb938a",
-            "summary": "Obtenez des infos sur des Célébrités nées aujourd'hui et enregistrez votre date de naissance pour obtenir un rappel !",
-            "description": "Je peux me souvenir de votre date de naissance et vous dire le nombre de jours restant avant votre prochain anniversaire.\nVous pouvez aussi me demander de créer un rappel pour être sûr de ne pas oublier votre anniversaire!\nEt pour les fans de Célébrités, vous pourrez obtenir des détails à leur sujet.\nCette Skill est optimisée pour les appareils avec écran.\n\nVoice quelques exemples d'utterances pour utiliser cette Skill:\n\n- Pour enregistrer votre date de naissance, dites-moi: \n\"Alexa, demande à Joyeux Anniversaire d'enregistrer ma date de naissance\"\n\n- Pour connaître le nombre de jours restant avant votre prochain anniversaire, dites-moi:\n\"Alexa, demande à Joyeux Anniversaire le nombre de jours restant avant mon anniversaire\"\n\n- Pour créer un rappel pour votre prochain anniversaire, dites-moi:\n\"Alexa, demande à Joyeux Anniversaire de créer un rappel\"\n\n- Pour obtenir des détails sur des Célébrités nées aujourd'hui, dites-moi:\n\"Alexa, demande à Joyeux Anniversaire qui est né aujourd'hui\"",
-            "examplePhrases": [
-                "Alexa, ouvre Joyeux Anniversaire",
-                "Alexa, demande à Joyeux Anniversaire qui est né aujourd'hui"
-            ],
-            "keywords": [
-                "anniversaire",
-                "naissance",
-                "rappel",
-                "célébrités"
-            ]
-            },
-            "en-GB": {
-            "name": "Happy Birthday",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            },
-            "fr-CA": {
-            "name": "Bonne Fête",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6c34/ab2c3f983c2248209a21c670d26f7207/APP_ICON?versionId=bhSj5OTdhyskSz2LozNrehrYgho17igh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ffbef0429ad31621f92f754d40d30e473862de69d9437a2fd50f23744be12675",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/b7a0/3263b87f7ed242cb91e6453b762145a2/APP_ICON_LARGE?versionId=0FqTB7BECFL3su8p6.nLgpqQOpx2mqBe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b8923ffa3c3c034b5e4f39cd85200c4ef640bf43c5817ee4d82eaeccc505706b",
-            "summary": "Obtenez des infos sur des Célébrités nées aujourd'hui et enregistrez votre date de naissance pour obtenir un rappel !",
-            "description": "Je peux me souvenir de votre date de naissance et vous dire le nombre de jours restant avant votre prochaine fête.\nVous pouvez aussi me demander de créer un rappel pour être sûr de ne pas oublier votre fête!\nEt pour les fans de Célébrités, vous pourrez obtenir des détails à leur sujet.\nCette Skill est optimisée pour les appareils avec écran.\n\nVoice quelques exemples d'utterances pour utiliser cette Skill:\n\n- Pour enregistrer votre date de naissance, dites-moi: \n\"Alexa, demande à Bonne Fête de sauver ma date de naissance\"\n\n- Pour connaître le nombre de jours restant avant votre prochaine fête, dites-moi:\n\"Alexa, demande à Bonne Fête le nombre de jours restant avant ma fête\"\n\n- Pour créer un rappel pour votre prochaine fête, dites-moi:\n\"Alexa, demande à Bonne Fête de créer un rappel\"\n\n- Pour obtenir des détails sur des Célébrités nées aujourd'hui, dites-moi:\n\"Alexa, demande à Bonne Fête qui est né aujourd'hui\"",
-            "examplePhrases": [
-                "Alexa, ouvre Bonne Fête",
-                "Alexa, demande à Bonne Fête qui est né aujourd'hui"
-            ],
-            "keywords": [
-                "anniversaire",
-                "naissance",
-                "rappel",
-                "célébrités"
-            ]
-            },
-            "es-MX": {
-            "name": "Feliz Cumpleaños",
-            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fb7c/8bd2b69f64344aa9b12c084a8bb5f6ff/APP_ICON?versionId=_SggtnU.79JMst1xcwlDqX3d2ZGd732s&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f6fde38d8a2620026f51fa92f36e1048848687085a4005094581ab6c086c6cba",
-            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3860/2ef47fa928b34e3fa692e1111ae94adb/APP_ICON_LARGE?versionId=Kx_k7hyRLif2SDDYISy4M8.Ghl6xyZ8a&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190822T140843Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=321a3d13e12a97a8a018ca4ac881c61fd11e478c198efff3ba89601f1562e799",
-            "summary": "Get info about Celebrities born today or register your birthday to get a reminder, your choice!",
-            "description": "I can register your birthdate and let you know how many days are left before your next birthday.\nTo be sure you won't forget about it, I can create a reminder for you!\nAdditionally I can provide you about details concerning Celebrities born today.\nThis Skill is optimized for devices with screen.\n\nHere are a few one-shot utterances samples to enjoy this Skill:\n- To register your birthdate, just say: \"Alexa, ask Happy Birthday to record my birthday\"\n- To know how many day before your next birthday, just say: \"Alexa, ask Happy Birthday how many days left\"\n- To create a reminder for your next birthday, just say: \"Alexa, ask Happy Birthday to set a reminder\"\n- To get details about Celebrities born today, just say: \"Alexa, ask Happy Birthday who was born today\"",
-            "examplePhrases": [
-                "Alexa, open Happy Birthday",
-                "Alexa, ask Happy Birthday who was born today"
-            ],
-            "keywords": [
-                "birthday",
-                "reminder",
-                "celebrities"
-            ]
-            }
-        },
-        "isAvailableWorldwide": true,
-        "testingInstructions": "Simply invoke the Skill",
-        "category": "EDUCATION_AND_REFERENCE",
-        "distributionCountries": []
+            "isAvailableWorldwide": true,
+            "testingInstructions": "Simply invoke the Skill",
+            "category": "EDUCATION_AND_REFERENCE",
+            "distributionCountries": []
         },
         "apis": {
             "custom": {

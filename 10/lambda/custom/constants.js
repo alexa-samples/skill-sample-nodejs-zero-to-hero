@@ -11,5 +11,7 @@ module.exports = {
     APL: {
         launchDoc: require('./documents/launchScreen.json'),
         listDoc: require('./documents/listScreen.json')
-    }
+    },
+    // only necessary if you didn't deploy this project as an Alexa Hosted Skill
+    BASE_S3_URL: 'Replace this with your S3 base url with images (no subdirectories)'
 }
