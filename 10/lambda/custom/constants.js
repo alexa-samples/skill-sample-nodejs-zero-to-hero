@@ -13,5 +13,5 @@ module.exports = {
         listDoc: require('./documents/listScreen.json')
     },
     // only necessary if you didn't deploy this project as an Alexa Hosted Skill
-    BASE_S3_URL: 'Replace this with your S3 base url with images (no subdirectories)'
+    BASE_S3_URL: 'Replace this with your S3 base url with images (skip the Media directory here, end it in .com)'
 }

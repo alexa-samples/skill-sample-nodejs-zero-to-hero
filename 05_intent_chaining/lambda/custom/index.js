@@ -93,14 +93,14 @@ const RegisterBirthdayTodayIntentHandler = {
         }
         
         let day, month, year;
-        const today = moment().tz(timezone).locale(locale).startOf('day');console.log(new Error().lineNumber);
+        const today = moment().tz(timezone).locale(locale).startOf('day');
         // user turns "age" today, so we also derive the year of birth and do intent chaining
         const wasBorn = today.subtract(age, 'years');
         day = wasBorn.date();
         month = wasBorn.format('MMMM').toLowerCase();
         year = wasBorn.year();
         // trick to fill in the month entity id for the next intent (no ER is done by intent chaining)
-        sessionAttributes['month'] = moment().tz(timezone).locale(locale).month(month).format("M");console.log(new Error().lineNumber);
+        sessionAttributes['month'] = moment().tz(timezone).locale(locale).month(month).format("M");
         
         handlerInput.responseBuilder.addDelegateDirective({
             name: 'RegisterBirthdayIntent',
