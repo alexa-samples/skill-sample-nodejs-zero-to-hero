@@ -1,0 +1,289 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 23,
+                "textSizeDetails": 20,
+                "textSizeSecondaryHint": 25
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 60,
+                "marginRight": 60,
+                "marginBottom": 40
+            }
+        }
+    ],
+    "styles": {
+        "textStylePrimary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "textStyleSecondary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "100",
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStyleBody": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
+        },
+        "textStyleDetails": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "500",
+                "fontSize": "@textSizeDetails"
+            }
+        }
+    },
+    "layouts": {
+        "FullHorizontalListItem": {
+            "parameters": [
+                "listLength"
+            ],
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "id": "mycontainer",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "alignItems": "center",
+                        "justifyContent": "end",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "position": "absolute",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "overlayColor": "rgba(0, 0, 0, 0.4)",
+                                "source": "${data.picture.value}",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.humanLabel.value}",
+                                "style": "textStyleBody",
+                                "maxLines": 1
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.date_of_birth.value}",
+                                "style": "textStyleDetails"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${ordinal} | ${listLength}",
+                                "paddingBottom": "20dp",
+                                "color": "white",
+                                "spacing": "5dp"
+                            }
+                        ]
+                    },
+                    "onPress": [
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data}"
+                            ]
+                        },
+                        {
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "HorizontalListItem": {
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": {
+                        "type": "Container",
+                        "maxWidth": 528,
+                        "minWidth": 312,
+                        "paddingLeft": 16,
+                        "paddingRight": 16,
+                        "height": "100%",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${data.picture.value}",
+                                "height": "50vh",
+                                "width": "50vh",
+                                "scale": "fill",
+                                "align": "left"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "<b>${ordinal}.</b> ${data.humanLabel.value}",
+                                "style": "textStyleSecondary",
+                                "maxLines": 1,
+                                "spacing": 12
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.date_of_birth.value}",
+                                "style": "textStyleDetails",
+                                "spacing": 4
+                            }
+                        ]
+                    },
+                    "onPress": [
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data}"
+                            ]
+                        },
+                        {
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "ListLayout": {
+            "parameters": [
+                "backgroundImage",
+                "title",
+                "skillIcon",
+                "hintText",
+                "list"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "Container",
+                    "height": "100%",
+                    "width": "100%",
+                    "items": [
+                        {
+                            "type": "Sequence",
+                            "scrollDirection": "horizontal",
+                            "data": "${list}",
+                            "height": "100%",
+                            "width": "100%",
+                            "numbered": true,
+                            "item": [
+                                {
+                                    "type": "FullHorizontalListItem",
+                                    "listLength": "${payload.listData.properties.list.listItems.length}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${backgroundImage}",
+                            "scale": "best-fill",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "position": "absolute",
+                            "opacity": "0.5"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "${title}",
+                            "headerAttributionImage": "${skillIcon}"
+                        },
+                        {
+                            "type": "Sequence",
+                            "scrollDirection": "horizontal",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "data": "${list}",
+                            "height": "70vh",
+                            "width": "100%",
+                            "numbered": true,
+                            "item": [
+                                {
+                                    "type": "HorizontalListItem"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "footerHint": "${payload.listData.properties.config.hintText}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": [
+            {
+                "type": "ListLayout",
+                "backgroundImage": "${payload.listData.properties.config.backgroundImage}",
+                "title": "${payload.listData.properties.config.title}",
+                "skillIcon": "${payload.listData.properties.config.skillIcon}",
+                "hintText": "${payload.listData.properties.config.hintText}",
+                "list": "${payload.listData.properties.list.listItems}"
+            }
+        ]
+    }
+}
