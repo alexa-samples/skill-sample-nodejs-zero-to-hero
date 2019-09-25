@@ -63,7 +63,7 @@
                         "{day} of {month}",
                         "in the year {year}",
                         "I was born in {year}",
-                        "birn in {year}",
+                        "born in {year}",
                         "for the {day} of {month}",
                         "for {month} {day}",
                         "with the {day} of {month}",
@@ -123,6 +123,14 @@
                             "samples": [
                                 "{message}"
                             ]
+                        },
+                        {
+                            "name": "time",
+                            "type": "AMAZON.TIME",
+                            "samples": [
+                                "at {time}",
+                                "{time}"
+                            ]
                         }
                     ],
                     "samples": [
@@ -144,7 +152,18 @@
                         "reminder with the text {message}",
                         "configure a reminder with the text {message}",
                         "put a reminder with the text {message}",
-                        "create a reminder with the text {message}"
+                        "create a reminder with the text {message}",
+                        "reminder at {time}",
+                        "birthday reminder at {time}",
+                        "remind me my birthday at {time}",
+                        "configure a reminder at {time}",
+                        "set a reminder at {time}",
+                        "create a reminder at {time}",
+                        "put a reminder at {time}",
+                        "reminder for my birthday at {time}",
+                        "configure a reminder for my birthday at {time}",
+                        "put a reminder for my birthday at {time}",
+                        "create a reminder for my birthday at {time}"
                     ]
                 },
                 {
@@ -478,6 +497,15 @@
                             "prompts": {
                                 "elicitation": "Elicit.Slot.556115415325.557149889298"
                             }
+                        },
+                        {
+                            "name": "time",
+                            "type": "AMAZON.TIME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1131592923064.1050971807683"
+                            }
                         }
                     ]
                 },
@@ -667,11 +695,11 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "The message. {message} .will be sent as a reminder on your birthday. Is it correct?"
+                        "value": "The message. {message} .will be sent as a reminder on that birthday. Is it correct?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "On your birthday I will send you a reminder with this message. {message} . Ok?"
+                        "value": "On that birthday I will send you a reminder with this message. {message} . Ok?"
                     }
                 ]
             },
@@ -699,6 +727,19 @@
                     {
                         "type": "PlainText",
                         "value": "which product should I refund?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1131592923064.1050971807683",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what time do you want the reminder?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what time do you want the reminder to trigger?"
                     }
                 ]
             }
