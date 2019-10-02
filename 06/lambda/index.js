@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-const util = require('./util');
+const util = require('./util'); // utility functions
 const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
 const constants = require('./constants'); // constants such as specific service permissions go here

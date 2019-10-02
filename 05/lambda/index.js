@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-const util = require('./util');
+const util = require('./util'); // utility functions
 const interceptors = require('./interceptors');
 const moment = require('moment-timezone'); // will help us do all the birthday math
 
