@@ -32,4 +32,5 @@ exports.handler = Alexa.SkillBuilders.custom()
         interceptors.SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(util.getPersistenceAdapter())
     .withApiClient(new Alexa.DefaultApiClient())
+    .withCustomUserAgent('sample/happy-birthday/mod8')
     .lambda();

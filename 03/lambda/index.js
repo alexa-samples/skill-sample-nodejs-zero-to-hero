@@ -259,4 +259,5 @@ exports.handler = Alexa.SkillBuilders.custom()
         LoggingRequestInterceptor)
     .addResponseInterceptors(
         LoggingResponseInterceptor)
+    .withCustomUserAgent('sample/happy-birthday/mod3')
     .lambda();
