@@ -1,6 +1,6 @@
 # Feliz Cumpleaños: una skill para nuestro curso de entrenamiento en ASK
 
-Este repositiorio contiene el código de soporte para el Curso de Desarrollo Completo de Skills Alexa publicado en KeepCoding: (https://alexa.design/es-videos)
+Este repositiorio contiene el código de soporte para el Curso de Desarrollo Completo de Skills Alexa disponible aquí: (https://alexa.design/es-course)
 
 Como el código ha ido evolucionando y ha sido restructurado, a continuación proveemos los enlaces al estado del código fuente del momento justo en que se grabó cada video.
 
