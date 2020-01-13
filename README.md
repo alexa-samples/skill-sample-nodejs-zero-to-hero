@@ -1,8 +1,8 @@
-# Happy Birthday: A skill for our ASK Developer Training Course
+# Zero to Hero: A comprehensive course to building an Alexa Skill
 
-Support code for ASK Developer Training Course for multiple locales. This is progressive code that starts from scratch and adds features on each module. The Learn more links below are suitable for teaching how to code Alexa skills (see the README file on each module for instructions on how to evolve the code departing from the previous module).
+Support code for Zero-to-Hero ASK Training Course for multiple locales. This is progressive code that starts from scratch and adds features on each module. The Learn more links below are suitable for teaching how to code Alexa skills (see the README file on each module for instructions on how to evolve the code departing from the previous module).
 
-## Part 1 - Alexa-Hosted Skills (preset - Hello World)
+## Part 1 - Alexa Skills Kit Overview
 
 1. Development and Production Lambda Stages (AHS branches)
 2. Lambda Dependencies (package.json, requires in code)
@@ -14,7 +14,7 @@ Support code for ASK Developer Training Course for multiple locales. This is pro
 
 [Learn more](./01)
 
-## Part 2 - Skill Internationalization (i18n) and Interceptors
+## Part 2 - Skill Internationalization (i18n), Interceptors & Error Handling
 
 1. Multiple models per locale
 2. Key/value string resources for i18n
@@ -25,7 +25,7 @@ Support code for ASK Developer Training Course for multiple locales. This is pro
 
 [Learn more](./02)
 
-## Part 3 - Slots, Slot Validation and Automatic Dialog Delegation
+## Part 3 - Slots, Slot Validation & Automatic Dialog Delegation
 
 1. Slots explanation
 2. Built in and custom slot types
@@ -75,7 +75,7 @@ Support code for ASK Developer Training Course for multiple locales. This is pro
 
 [Learn more](./07)
 
-## Part 8 - Alexa Presentation Language (I)
+## Part 8 - Alexa Presentation Language (APL), Part 1
 
 1. APL RenderDocument and APL Directive
 2. APL Databinding and APL Authoring Tool
@@ -86,7 +86,7 @@ Support code for ASK Developer Training Course for multiple locales. This is pro
 
 [Learn more](./08)
 
-## Part 9 - Alexa Presentation Language (II)
+## Part 9 - Alexa Presentation Language (APL), Part 2
 
 1. APL Authoring Tool
 2. APL Layouts & Sequences
@@ -95,7 +95,7 @@ Support code for ASK Developer Training Course for multiple locales. This is pro
 
 [Learn more](./09)
 
-## Part 10 - ASK Command Line Interface (CLI)
+## Part 10 - The ASK Command Line Interface (CLI)
 
 1. Configuring the ASK-CLI with personal AWS account support
 2. Cloning an Alexa Hosted Skill
