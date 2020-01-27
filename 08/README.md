@@ -34,3 +34,7 @@ The APL document shows a tailored hint (thanks to the testToHint transformer)
 5. **constants.js**: create APLDoc structure pointing to to launchScreen.json (for now)
 6. **localisation.js**: add strings for launch header and launch hint
 7. **index.js**: index is now shorter as it gets rid of the handlers
+
+## Videos
+
+[ENG](https://alexa.design/zerotohero8) / [FR](https://alexa.design/fr_zerotohero8) / [ITA](https://alexa.design/it_zerotohero8) / [SPA](../README_ES.md)

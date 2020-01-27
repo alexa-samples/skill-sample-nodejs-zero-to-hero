@@ -29,3 +29,7 @@ We also intriduce some SSML magic to use speechcons and audio files.
 4. *lambda/custom/localisation.js*: modify messages to include given name as replacement string. Modify goodbye message to include an array of goodbyes. Add message to say timezone could not be retrieved. Add sound and speechcon to birthday greeting message.
 5. *lambda/custom/index.js*: add requires for persistence.js and interceptors.js. Remove requires for localisation and i18next. Remove all interceptors above skill builder (they all go to interceptors.js)
 6. *lambda/custom/util.js*: move getPersistanceAdapter() function here from index.js
+
+## Videos
+
+[SPA](https://alexa.design/es_zerotohero11)

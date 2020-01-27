@@ -19,3 +19,7 @@
 2. **.ask/config**: this new file now includes deployment data
 3. **skill.json**: this file now includes deployment data (+uri)
 
+## Videos
+
+[ENG](https://alexa.design/zerotohero10) / [FR](https://alexa.design/fr_zerotohero10) / [ITA](https://alexa.design/it_zerotohero10) / [SPA](../README_ES.md)
+

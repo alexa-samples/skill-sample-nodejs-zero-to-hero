@@ -22,7 +22,6 @@ In this module we introduce some theory about ASK and then we build an Alexa Hos
 
 * (only in locales that support AMAZON.FallbackIntent) otherwise explain that including the handler on the back-end side does not affect the operation (we can keep it but should clarify to avoid confusion)
 
-## Structure
+## Videos
 
-1. 10 min: Theory, backed by slides
-2. 10 min: Hands on, create Hello World skill, explain code based on all above. Test "hello" on real device
+[ENG](https://alexa.design/zerotohero1) / [FR](https://alexa.design/fr_zerotohero1) / [ITA](https://alexa.design/it_zerotohero1) / [SPA](../README_ES.md)

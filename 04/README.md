@@ -30,3 +30,7 @@ We show session attributes and create interceptors that help make them persisten
 2. *lambda/custom/package.json*: add dependencies for S3 and DynamoDB persistence adapters and for the moment-timezone library
 3. *lambda/custom/localisation.js*: create this file and put languageStrings here
 4. *lambda/custom/index.js*: add function to get/initialize the persistence adapter - getPersistenceAdapter(). Add require for moment-timezone library. Change languageString to require the localisation.js file. Create getPersistenceAdapter() function. In launch request handler get the session attributes and read day, month, monthId and year (if present call the say intent handler, otherwise call the register handler via intent chaining). In register birthday intent handler get all slot values and put them on session attributes (then call say intent handler). Add say birthday intent handler and get day, month id and year from session attributes. If these attributes are present calculate remaining days to birthday with moments-timezone. If it's the user birthday say happy birthday. If the attributes are not present use intent chaining to point to register birthday. Add request interceptor to load the session attributes and a response interceptor to save them. Add to the skill builder: say birthday intent handler, the new interceptors and the persistence adapter
+
+## Videos
+
+[ENG](https://alexa.design/zerotohero4) / [FR](https://alexa.design/fr_zerotohero4) / [ITA](https://alexa.design/it_zerotohero4) / [SPA](../README_ES.md)

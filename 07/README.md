@@ -27,3 +27,7 @@ We use the Progressive Response API before doing the call so Alexa gives the use
 5. *lambda/custom/logic.js*: add functions to return current date info and to call external API
 6. *lambda/custom/util*: add function to create progressive response directive (callDirectiveService)
 7. *lambda/custom/index.js*: Extend birthday greeting to mention celebrity birthdays. Add celebrity birthdays intent handler and fetch the birthdays from the API. Add new handler to skill builder
+
+## Videos
+
+[ENG](https://alexa.design/zerotohero7) / [FR](https://alexa.design/fr_zerotohero7) / [ITA](https://alexa.design/it_zerotohero7) / [SPA](../README_ES.md)

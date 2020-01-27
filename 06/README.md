@@ -31,3 +31,7 @@ Additionally we show you how to use a slot of type AMAZON.SearchQuery to capture
 8. *lambda/custom/util.js*: add create reminder function
 
 Warning: the simulator might return inconsistent timezone results such your geographical timezone by API but a different time (not consistent with your timezone). It can also return no time zone at all. In order to see the reminders demo working properly please try it on a physical device
+
+## Videos
+
+[ENG](https://alexa.design/zerotohero6) / [FR](https://alexa.design/fr_zerotohero6) / [ITA](https://alexa.design/it_zerotohero6) / [SPA](../README_ES.md)

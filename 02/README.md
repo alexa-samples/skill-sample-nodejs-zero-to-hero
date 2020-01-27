@@ -24,7 +24,6 @@ In this module we explain how to use i18next to do the i18n of your skill. We go
 2. *lambda/custom/index.js*: add i18next require, add languageStrings, get localisation strings via function handlerInput.t, add 3 interceptors (log request, log response and localization interceptor), add them to the exports via Alexa skill builder (bottom of file). Replace all hard coded speech string with handlerIput.t(STRING_KEY). Add detection of locale to i18n interceptor via ASK SDK Utilities (Alexa.getLocale())
 3. *models/xx-XX.json*: add this file copied from en-US.json and translate (xx-XX is your own locale)
 
-## Structure
+## Videos
 
-1. 5 min. Theory, intro to i18n backed by slides
-2. 15 min. Update the skill based on the above. Test on real device changing lang to the target locale
+[ENG](https://alexa.design/zerotohero2) / [FR](https://alexa.design/fr_zerotohero2) / [ITA](https://alexa.design/it_zerotohero2) / [SPA](../README_ES.md)
