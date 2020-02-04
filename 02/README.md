@@ -26,4 +26,5 @@ In this module we explain how to use i18next to do the i18n of your skill. We go
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero2) / [FR](https://alexa.design/fr_zerotohero2) / [ITA](https://alexa.design/it_zerotohero2) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero2)/[DE](https://alexa.design/de_zerotohero2)/[FR](https://alexa.design/fr_zerotohero2)/[IT](https://alexa.design/it_zerotohero2)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

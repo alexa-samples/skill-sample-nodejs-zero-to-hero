@@ -7,52 +7,52 @@ Como el código ha ido evolucionando y ha sido restructurado, a continuación pr
 ## De Cero a Héroe, Parte 1
 ### Introducción a ASK y Alexa-Hosted Skills
 
-[Código Fuente](https://alexa.design/ES_Z2H1) / [Video](https://alexa.design/es_zerotohero1)
+[Código](https://alexa.design/ES_Z2H1) / [Video](https://alexa.design/es_zerotohero1)
 
 ## De Cero a Héroe, Parte 2
 ### Internacionalización de Skills, Interceptores y Manejo de Errores
 
-[Código Fuente](https://alexa.design/ES_Z2H2) / [Video](https://alexa.design/es_zerotohero2)
+[Código](https://alexa.design/ES_Z2H2) / [Video](https://alexa.design/es_zerotohero2)
 
 ## De Cero a Héroe, Parte 3
 ### Manejo de Diálogos y Validación de Slots
 
-[Código Fuente](https://alexa.design/ES_Z2H3) / [Video](https://alexa.design/es_zerotohero3)
+[Código](https://alexa.design/ES_Z2H3) / [Video](https://alexa.design/es_zerotohero3)
 
 ## De Cero a Héroe, Parte 4
 ### Persistencia
 
-[Código Fuente](https://alexa.design/ES_Z2H4) / [Video](https://alexa.design/es_zerotohero4)
+[Código](https://alexa.design/ES_Z2H4) / [Video](https://alexa.design/es_zerotohero4)
 
 ## De Cero a Héroe, Parte 5
 ### Acceso a APIs de ASK
 
-[Código Fuente](https://alexa.design/ES_Z2H5) / [Video](https://alexa.design/es_zerotohero5)
+[Código](https://alexa.design/ES_Z2H5) / [Video](https://alexa.design/es_zerotohero5)
 
 ## De Cero a Héroe, Parte 6
 ### API de Recordatorios
 
-[Código Fuente](https://alexa.design/ES_Z2H6) / [Video](https://alexa.design/es_zerotohero6)
+[Código](https://alexa.design/ES_Z2H6) / [Video](https://alexa.design/es_zerotohero6)
 
 ## De Cero a Héroe, Parte 7
 ### Acceso a APIs Externas y Respuesta Progresiva
 
-[Código Fuente](https://alexa.design/ES_Z2H7) / [Video](https://alexa.design/es_zerotohero7)
+[Código](https://alexa.design/ES_Z2H7) / [Video](https://alexa.design/es_zerotohero7)
 
 ## De Cero a Héroe, Parte 8
 ### Introducción a APL: Alexa Presentation Language
 
-[Código Fuente](https://alexa.design/ES_Z2H8) / [Video](https://alexa.design/es_zerotohero8)
+[Código](https://alexa.design/ES_Z2H8) / [Video](https://alexa.design/es_zerotohero8)
 
 ## De Cero a Héroe, Parte 9
 ### Profundizando con APL: Alexa Presentation Language
 
-[Código Fuente](https://alexa.design/ES_Z2H9) / [Video](https://alexa.design/es_zerotohero9)
+[Código](https://alexa.design/ES_Z2H9) / [Video](https://alexa.design/es_zerotohero9)
 
 ## De Cero a Héroe, Parte 10
 ### Desarrollo Rápido con el ASK-CLI
 
-[Código Fuente](https://alexa.design/ES_Z2H10) / [Video](https://alexa.design/es_zerotohero10)
+[Código](https://alexa.design/ES_Z2H10) / [Video](https://alexa.design/es_zerotohero10)
 
 Enlaces a archivos descargables con el estado exacto en el video de cada proyecto también disponible [aquí](https://github.com/alexa/skill-sample-nodejs-zero-to-hero/tags)
 
@@ -63,22 +63,22 @@ Estos 4 módulos complementan el curso en español con algunos temas más avanza
 ## De Cero a Héroe, Parte 11
 ### Intent Chaining
 
-[Código Fuente](https://alexa.design/ES_Z2H11) / [Video](https://alexa.design/es_zerotohero11)
+[Código](https://alexa.design/ES_Z2H11) / [Video](https://alexa.design/es_zerotohero11)
 
 ## De Cero a Héroe, Parte 12
 ### In-Skill Purchasing
 
-[Código Fuente](https://alexa.design/ES_Z2H12) / [Video](https://alexa.design/es_zerotohero12)
+[Código](https://alexa.design/ES_Z2H12) / [Video](https://alexa.design/es_zerotohero12)
 
 ## De Cero a Héroe, Parte 13
 ### Proactive Events Notifications
 
-[Código Fuente](https://alexa.design/ES_Z2H13) / [Video](https://alexa.design/es_zerotohero13)
+[Código](https://alexa.design/ES_Z2H13) / [Video](https://alexa.design/es_zerotohero13)
 
 ## De Cero a Héroe, Parte 14
 ### Dynamic Entities
 
-[Código Fuente](https://alexa.design/ES_Z2H14) / [Video](https://alexa.design/es_zerotohero14)
+[Código](https://alexa.design/ES_Z2H14) / [Video](https://alexa.design/es_zerotohero14)
 
 # Licencia
 

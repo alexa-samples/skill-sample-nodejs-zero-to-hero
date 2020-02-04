@@ -43,4 +43,5 @@ In this module we depart from the previous project and overwrite HelloWorldInten
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero3) / [FR](https://alexa.design/fr_zerotohero3) / [ITA](https://alexa.design/it_zerotohero3) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero3)/[DE](https://alexa.design/de_zerotohero3)/[FR](https://alexa.design/fr_zerotohero3)/[IT](https://alexa.design/it_zerotohero3)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

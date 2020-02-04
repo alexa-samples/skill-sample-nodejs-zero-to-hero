@@ -33,4 +33,5 @@ We show session attributes and create interceptors that help make them persisten
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero4) / [FR](https://alexa.design/fr_zerotohero4) / [ITA](https://alexa.design/it_zerotohero4) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero4)/[DE](https://alexa.design/de_zerotohero4)/[FR](https://alexa.design/fr_zerotohero4)/[IT](https://alexa.design/it_zerotohero4)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

@@ -32,4 +32,5 @@ We also intriduce some SSML magic to use speechcons and audio files.
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero5) / [FR](https://alexa.design/fr_zerotohero5) / [ITA](https://alexa.design/it_zerotohero5) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero5)/[DE](https://alexa.design/de_zerotohero5)/[FR](https://alexa.design/fr_zerotohero5)/[IT](https://alexa.design/it_zerotohero5)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

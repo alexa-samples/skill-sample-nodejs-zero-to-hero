@@ -21,5 +21,6 @@
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero10) / [FR](https://alexa.design/fr_zerotohero10) / [ITA](https://alexa.design/it_zerotohero10) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero10)/[DE](https://alexa.design/de_zerotohero10)/[FR](https://alexa.design/fr_zerotohero10)/[IT](https://alexa.design/it_zerotohero10)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)
 

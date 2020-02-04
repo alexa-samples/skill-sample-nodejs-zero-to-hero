@@ -34,4 +34,5 @@ Warning: the simulator might return inconsistent timezone results such your geog
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero6) / [FR](https://alexa.design/fr_zerotohero6) / [ITA](https://alexa.design/it_zerotohero6) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero6)/[DE](https://alexa.design/de_zerotohero6)/[FR](https://alexa.design/fr_zerotohero6)/[IT](https://alexa.design/it_zerotohero6)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

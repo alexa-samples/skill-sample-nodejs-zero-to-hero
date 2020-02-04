@@ -37,4 +37,5 @@ The APL document shows a tailored hint (thanks to the testToHint transformer)
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero8) / [FR](https://alexa.design/fr_zerotohero8) / [ITA](https://alexa.design/it_zerotohero8) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero8)/[DE](https://alexa.design/de_zerotohero8)/[FR](https://alexa.design/fr_zerotohero8)/[IT](https://alexa.design/it_zerotohero8)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

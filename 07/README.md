@@ -30,4 +30,5 @@ We use the Progressive Response API before doing the call so Alexa gives the use
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero7) / [FR](https://alexa.design/fr_zerotohero7) / [ITA](https://alexa.design/it_zerotohero7) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero7)/[DE](https://alexa.design/de_zerotohero7)/[FR](https://alexa.design/fr_zerotohero7)/[IT](https://alexa.design/it_zerotohero7)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)

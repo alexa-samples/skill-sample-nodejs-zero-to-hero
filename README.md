@@ -109,7 +109,8 @@ Support code for "Zero to Hero: A comprehensive course to building an Alexa Skil
 2. Skill metadata for publication
 3. Submitting a skill for certification
 
-[EN](https://alexa.design/zerotohero11)/[FR](https://alexa.design/fr_zerotohero11)/[IT](https://alexa.design/it_zerotohero11)
+[EN](https://alexa.design/zerotohero11)/[DE](https://alexa.design/de_zerotohero11)/[FR](https://alexa.design/fr_zerotohero11)/[IT](https://alexa.design/it_zerotohero11)
+(EN version includes the following subtitles: EN, DE, PT)
 
 ## License
 

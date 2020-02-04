@@ -32,4 +32,4 @@ We also intriduce some SSML magic to use speechcons and audio files.
 
 ## Videos
 
-[SPA](https://alexa.design/es_zerotohero11)
+[ES](https://alexa.design/es_zerotohero11)

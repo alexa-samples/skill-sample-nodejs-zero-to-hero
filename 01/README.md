@@ -24,4 +24,5 @@ In this module we introduce some theory about ASK and then we build an Alexa Hos
 
 ## Videos
 
-[ENG](https://alexa.design/zerotohero1) / [FR](https://alexa.design/fr_zerotohero1) / [ITA](https://alexa.design/it_zerotohero1) / [SPA](../README_ES.md)
+[EN](https://alexa.design/zerotohero1)/[DE](https://alexa.design/de_zerotohero1)/[FR](https://alexa.design/fr_zerotohero1)/[IT](https://alexa.design/it_zerotohero1)/[ES](../README_ES.md)
+(EN version includes the following subtitles: EN, DE, PT)
