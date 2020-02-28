@@ -51,6 +51,17 @@ const languageStrings = {
             FALLBACK_MSG: 'Désolé, je ne sais pas. Pouvez-vous reformuler?',
             ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
         }
+    },
+    'pt':{
+        translation: {
+            WELCOME_MSG: 'Olá, você pode dizer olá ou ajuda. Quais deles voce deseja testar?',
+            HELLO_MSG: 'Olá!',
+            HELP_MSG: 'Você pode dizer olá para mim! Como posso ajudar?',
+            GOODBYE_MSG: 'Até logo!',
+            REFLECTOR_MSG: 'Você acaba de iniciar {{intent}}',
+            FALLBACK_MSG: 'Desculpe, não sei nada sobre isso. Por favor tente novamente.',
+            ERROR_MSG: 'Desculpe, occoreu um erro. Por favor tente novamtne.'
+        }
     }
 }
 
