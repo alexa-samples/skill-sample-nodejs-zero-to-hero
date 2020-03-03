@@ -61,6 +61,18 @@ const languageStrings = {
             WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
             HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'sauve ma fête\' et je vous guiderai. Quel est votre choix ?',
         }
+    },
+    'pt':{
+        translation: {
+            WELCOME_MSG: `Bem vindo ao Feliz Aniversário. Vamos nos divertir com seu aniversário! `,
+            REGISTER_MSG: 'Seu aniversário é {{month}} {{day}} {{year}}.',
+            REJECTED_MSG: 'Sem problemas. Por favor, fale novamente a data para que eu possa entender.',
+            HELP_MSG: `Você pode me contar sua data de aniversário que eu vou anotar. Você pode apenas dizer, grave meu aniverário que eu vou guiar você. Por onde que começar?`,
+            GOODBYE_MSG: 'Adeus!',
+            REFLECTOR_MSG: 'Você acabou de acionar {{intent}}',
+            FALLBACK_MSG: 'Desulpe, eu não sei nada sobre isto. Por favor, tente novamente.',
+            ERROR_MSG: 'Desulpe, ocorreu um error. Por favor, tente novamente.'
+        }
     }
 }
 
