@@ -1,0 +1,53 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "es-ES": {
+          "name": "Feliz Cumpleaños"
+        },
+        "es-MX": {
+          "name": "Feliz Cumpleaños"
+        },
+        "es-US": {
+          "name": "Feliz Cumpleaños"
+        },
+        "en-US": {
+          "name": "Happy Birthday"
+        },
+        "en-AU": {
+          "name": "Happy Birthday"
+        },
+        "en-CA": {
+          "name": "Happy Birthday"
+        },
+        "en-GB": {
+          "name": "Happy Birthday"
+        },
+        "en-IN": {
+          "name": "Happy Birthday"
+        },
+        "fr-FR": {
+          "name": "Joyeux Anniversaire"
+        },
+        "fr-CA": {
+          "name": "Bonne Fête"
+        },
+        "it-IT": {
+          "name": "Buon Compleanno"
+        }
+      }
+    },
+    "apis": {
+      "custom": {}
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::profile:given_name:read"
+      },
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ]
+  }
+}
