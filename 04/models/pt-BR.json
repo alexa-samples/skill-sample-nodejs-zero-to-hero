@@ -26,9 +26,9 @@
                                 "no dia {day}",
                                 "dia {day}",
                                 "{day} de {month}",
+                                "{day} de {month} de {year}",
                                 "em {day} de {month} de {year}",
                                 "{day} {month} {year}",
-                                "{day} de {month} de {year}",
                                 "no dia {day} de {month} de {year}",
                                 "em {day} de {month} de {year}"
                             ]
@@ -40,9 +40,9 @@
                                 "{month}",
                                 "em {month}",
                                 "em {month} de {year}",
+                                "{day} de {month} de {year}",
                                 "{day} de {month} ",
                                 "{day} {month} {year}",
-                                "{day} de {month} de {year}",
                                 "no dia {day} de {month} de {year}",
                                 "em {day} de {month} de {year}"
                             ]
@@ -102,6 +102,29 @@
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
                 },
+                {
+                    "name": "SayBirthdayIntent",
+                    "slots": [],
+                    "samples": [
+                        "meu próximo aniversário",
+                        "próximo aniversário",
+                        "quando é meu aniversário",
+                        "quando é meu próximo aniversário",
+                        "meu aniversário",
+                        "dias restantes até o meu aniversário",
+                        "dias até o meu aniversário",
+                        "dias restantes",
+                        "quantos dias até o meu aniversário",
+                        "Quantos dias faltam",
+                        "me diga meu aniversário",
+                        "aniversário",
+                        "me dê meu aniversário",
+                        "informação de aniversário",
+                        "diga-me os dias restantes até o meu aniversário",
+                        "quantos dias"
+                    ]
+                },
+
                 {
                     "name": "AMAZON.FallbackIntent",
                     "samples": []
@@ -370,7 +393,7 @@
                     },
                     {
                         "type": "PlainText",
-                        "value": "Em que ano você nasceu"
+                        "value": "Em que ano você nasceu?"
                     }
                 ]
             },
@@ -379,7 +402,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "É velho demais para ser verdade. Por favor, tente novamente"
+                        "value": "É velho demais para ser verdade. Por favor, tente novamente."
                     }
                 ]
             },
@@ -388,7 +411,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "É jovem demais para ser verdade. Por favor, tente novamente"
+                        "value": "É jovem demais para ser verdade. Por favor, tente novamente."
                     }
                 ]
             },

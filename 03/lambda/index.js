@@ -60,7 +60,7 @@ const languageStrings = {
         translation: {
             WELCOME_MSG: 'Bem vindo, você pode dizer olá ou ajuda. Quais deles você deseja testar?',
             REGISTER_MSG: 'Seu aniversário é no dia {{day}} de {{month}} de {{year}}.',
-            REJECTED_MSG: 'Sem problema. Fale a daa novamente para que eu possa corrigir.',
+            REJECTED_MSG: 'Sem problema. Fale a data novamente para que eu possa corrigir.',
             HELLO_MSG: 'Olá mundo!',
             HELP_MSG: 'Você pode dizer olá para mim! Como posso ajudar?',
             GOODBYE_MSG: 'Até logo!',
