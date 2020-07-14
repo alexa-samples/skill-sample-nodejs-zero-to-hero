@@ -75,6 +75,9 @@
                         "eu nasci em {year}",
                         "eu nasci no dia {day} de {month} de {year}",
                         "eu nasci no dia {day} de {month}",
+                        "nasci em {year}",
+                        "nasci no dia {day} de {month} de {year}",
+                        "nasci no dia {day} de {month}",
                         "para o dia {day} de {month}",
                         "para {day} de {month}",
                         "para o dia {day} de {month} de {year}",
@@ -82,6 +85,7 @@
                         "em {day}",
                         "em {month}",
                         "em {year}",
+                        "em {month} de {year}",
                         "em {day} de {month} de {year}",
                         "no dia {day}",
                         "no mês de {month}",
@@ -89,12 +93,14 @@
                         "no dia {day} de {month}",
                         "no dia {day} de {month} de {year}",
                         "meu aniversário é no dia {day} de {month}",
-                        "meu aniversário é no dia {day} de {month} de {year}",
                         "nasci em {year}",
-                        "a data do meu aniversário é no dia {day} de {month} de {year}",
+                        "a data do meu aniversário é no dia {day} de {month}",
+                        "registre meu nascimento",
                         "registre meu aniversário",
                         "grave meu aniversário",
+                        "grave meu nascimento",
                         "lembre do meu aniversário",
+                        "registre a data do meu nascimento",
                         "registre a data do meu aniversário"
                     ]
                 },
@@ -392,11 +398,19 @@
                     },
                     {
                         "type": "PlainText",
+                        "value": "Por favor, me diga em que mês que você nasceu"
+                    },
+                    {
+                        "type": "PlainText",
                         "value": "Certo, mas em que mês exatamente?"
                     },
                     {
                         "type": "PlainText",
                         "value": "Em que mês é o seu aniversário?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Em que mês você nasceu?"
                     },
                     {
                         "type": "PlainText",
@@ -470,7 +484,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "em {day} de {month} de {year} , estou correta?"
+                        "value": "Você nasceu em {day} de {month} de {year} , estou correta?"
                     },
                     {
                         "type": "PlainText",

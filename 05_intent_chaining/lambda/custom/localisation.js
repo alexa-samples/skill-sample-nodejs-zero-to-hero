@@ -117,7 +117,7 @@ module.exports = {
             WILL_TURN_MSG_plural: `até seus {{count}} anos. `,
             GREET_MSG: '$t(POSITIVE_SOUND) $t(GREETING_SPEECHCON) {{name}}.', 
             NOW_TURN_MSG: `Você agore tem {{count}} ano! `,
-            NOW_TURN_MSG_plural: `Você agore tem {{count}} anos! `,
+            NOW_TURN_MSG_plural: `Você agora tem {{count}} anos! `,
             MISSING_MSG: `$t(DOUBT_SPEECHCON). Parece que você ainda não me contou a data de seu nascimento.`,
             POST_SAY_HELP_MSG: `Se você quiser alterar a data, tente dizer, registre meu aniversário. Ou apenas diga a data diretamente. O que você gostaria de fazer?`,
             HELP_MSG: 'Lembro-me do seu aniversário se você me disser a data do seu nascimento. Ou posso dizer-lhe os dias restantes até o seu próximo aniversário. Qual você gostaria de experimentar?',
