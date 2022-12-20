@@ -236,7 +236,6 @@
       },
       "isAvailableWorldwide": true,
       "testingInstructions": "Simply invoke the Skill",
-      "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },
     "apis": {
