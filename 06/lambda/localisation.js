@@ -30,7 +30,7 @@ module.exports = {
             MISSING_PERMISSION_MSG: `It looks like you haven't granted permissions for reminders. I have just sent you a card to your Alexa app so you can quickly enable this. `,
             POST_REMINDER_HELP_MSG: `If you want to know when your reminder will trigger, you can say, how many days until my birthday. What would you like to do next?`
         }
-    },
+    }, 
     es: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
@@ -125,6 +125,38 @@ module.exports = {
             CANCEL_MSG: 'Ok, J\'ai annulé la demande de rappel. ',
             MISSING_PERMISSION_MSG: 'Je n\'ai pas accès à la création de rappels. Veuillez accéder à votre application Alexa et suivez les instructions depuis la card que je vous ai envoyé. ',
             POST_REMINDER_HELP_MSG: `Pour connaître quand votre rappel se déclenchera, il suffit de me dire "combien de jours reste-t-il avant mon anniversaire". Que voulez-vous faire ?`
+        }
+    },
+    pt:{
+        translation: {
+            POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
+            GREETING_SPEECHCON: `<say-as interpret-as="interjection">Parabéns</say-as>`,
+            DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
+            WELCOME_MSG: `Bem vindo ao feliz aniversário {{name}}. Vamos nos divertir.`,
+            WELCOME_BACK_MSG: `Bem vindo novamente {{name}}! `,
+            REJECTED_MSG: 'Sem problema. Fale a data novamente para que eu possa corrigir.',
+            DAYS_LEFT_MSG: `{{name}}, Falta {{count}} dia`,
+            DAYS_LEFT_MSG_plural: `{{name}}, Faltam {{count}} dias `,
+            WILL_TURN_MSG: `até seu {{count}} ano. `,
+            WILL_TURN_MSG_plural: `até seus {{count}} anos. `,
+            GREET_MSG: '$t(POSITIVE_SOUND) $t(GREETING_SPEECHCON) {{name}}.', 
+            NOW_TURN_MSG: `Você agore tem {{count}} ano! `,
+            NOW_TURN_MSG_plural: `Você agora tem {{count}} anos! `,
+            MISSING_MSG: `$t(DOUBT_SPEECHCON). Parece que você ainda não me contou a data de seu nascimento.`,
+            POST_SAY_HELP_MSG: `Se você quiser alterar a data, tente dizer, registre meu aniversário. Ou apenas diga a data diretamente. O que você gostaria de fazer?`,
+            HELP_MSG: 'Lembro-me do seu aniversário se você me disser a data do seu nascimento. Ou posso dizer-lhe os dias restantes até o seu próximo aniversário. Qual você gostaria de experimentar?',
+            REPROMPT_MSG: `Se você não tiver certeza do que fazer a seguir, tente pedir ajuda. Se você quiser sair, basta dizer para. O que você gostaria de fazer? `,
+            GOODBYE_MSG: ['Até logo {{name}}! ', 'Até mais {{name}}! ', 'Tchau {{name}}! ', 'Adeus {{name}}! '],
+            REFLECTOR_MSG: 'Você acaba de iniciar {{intent}}',
+            FALLBACK_MSG: 'Desculpe, não sei nada sobre isso. Por favor tente novamente.',
+            ERROR_MSG: 'Desculpe, occoreu um erro. Por favor tente novamente.',
+            NO_TIMEZONE_MSG: `Não consigo determinar seu fuso horário. Verifique as configurações do seu dispositivo e verifique se um fuso horário foi selecionado. Depois disso, reabra a habilidade e tente novamente!`,
+            REMINDER_CREATED_MSG: '{{name}} seu lembrete foi criado com sucesso. ',
+            REMINDER_ERROR_MSG: 'Desculpe, Ocorreu um erro ao criar seu lembrete. ',
+            UNSUPPORTED_DEVICE_MSG: `Esse dispositivo não suporta essa operação. `,
+            CANCEL_MSG: `Certo. Vamos cancelar. `,
+            MISSING_PERMISSION_MSG: `Parece que você não concedeu permissões para lembretes. Acabei de enviar um cartão para o seu aplicativo Alexa para que você possa habilitá-lo rapidamente.`,
+            POST_REMINDER_HELP_MSG: `Se você quiser saber quando seu lembrete será acionado, poderá dizer quantos dias até meu aniversário. O que você gostaria de fazer?`
         }
     },
     "fr-CA" : {

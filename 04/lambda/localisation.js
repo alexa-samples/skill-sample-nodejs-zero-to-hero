@@ -83,6 +83,27 @@ module.exports = {
             ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler? '
         }
     },
+    pt:{
+        translation: {
+            WELCOME_MSG: 'Bem vindo ao feliz aniversário. Vamos nos divertir',
+            WELCOME_BACK_MSG: 'Bem vindo novamente! ',
+            REJECTED_MSG: 'Sem problema. Fale a data novamente para que eu possa corrigir.',
+            DAYS_LEFT_MSG: `Falta {{count}} dia`,
+            DAYS_LEFT_MSG_plural: 'Faltam {{count}} dias ',
+            WILL_TURN_MSG: `até seu {{count}} ano. `,
+            WILL_TURN_MSG_plural: `até seus {{count}} anos. `,
+            GREET_MSG: `Feliz aniversário! Você tem agora {{count}} ano! `,
+            GREET_MSG_plural: `Feliz aniversário! Você tem agora {{count}} anos! `,
+            MISSING_MSG: `Parece que você ainda não me contou a data de seu nascimento.`,
+            POST_SAY_HELP_MSG: `Se você quiser alterar a data, tente dizer, registre meu aniversário. Ou apenas diga a data diretamente. O que você gostaria de fazer?`,
+            HELP_MSG: 'Lembro-me do seu aniversário se você me disser a data do seu nascimento. Ou posso dizer-lhe os dias restantes até o seu próximo aniversário. Qual você gostaria de experimentar?',
+            REPROMPT_MSG: `Se você não tiver certeza do que fazer a seguir, tente pedir ajuda. Se você quiser sair, basta dizer para. O que você gostaria de fazer? `,
+            GOODBYE_MSG: 'Até logo!',
+            REFLECTOR_MSG: 'Você acaba de iniciar {{intent}}',
+            FALLBACK_MSG: 'Desculpe, não sei nada sobre isso. Por favor tente novamente.',
+            ERROR_MSG: 'Desculpe, occoreu um erro. Por favor tente novamente.',
+        }
+    },
     "fr-CA" : {
         translation: {
             WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
